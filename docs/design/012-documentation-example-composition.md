@@ -1,25 +1,16 @@
-# Decision 012 · Documentation examples are cohesive compositions
+# 012 — Documentation example composition
 
-**Status:** Accepted
+**Статус:** принято
 
-## Context
+## Решение
 
-Detached code panels visually broke the relationship between a live component preview and its source. External syntax-highlighting dependencies would also add weight and lifecycle ownership to the core documentation.
+Live preview и source code оформляются как одна composition из двух public components:
 
-## Decision
+- `Example` связывает preview и source в одном bordered объекте;
+- `CodeBlock` отвечает за language label, copy action, source geometry и syntax colors.
 
-RepUI provides two small public documentation components:
+`CodeBlock` использует небольшой встроенный HTML highlighter. Unsupported languages остаются читаемым plain text, а исходный текст сохраняется для copy.
 
-- `rui-example` binds preview and source regions into one bordered object;
-- `rui-code-block` owns the language label, copy action, source geometry, and token colors.
+## Ограничения
 
-The runtime includes a deliberately narrow HTML highlighter. Unsupported languages remain readable plain text. The original text is retained for copying.
-
-## Consequences
-
-Examples read as a single composition, theme tokens control their appearance, and HTML highlighting works without Prism, Highlight.js, or Shiki. The highlighter is not a general parser and must remain intentionally small.
-
-
-## 0.8.2.1 refinement
-
-`rui-code-block` is a code surface rather than a toolbar card. Language and copy controls overlay the surface. When embedded, the owner component controls the external border, clipping, and corner radius. Vertical scrolling is the default; disabling it means content-height expansion while horizontal overflow protection remains active.
+`CodeBlock` не является general-purpose parser. При встраивании внешний border, clipping и corner radius контролирует владелец `Example`; vertical scrolling включён по умолчанию.

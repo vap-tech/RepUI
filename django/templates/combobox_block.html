@@ -1,0 +1,10 @@
+<div class="rui-combobox" data-rui-combobox {{ html_attrs }}>
+  <input data-rui-value type="hidden" name="{{ name }}" value="{{ value }}">
+  <div class="rui-control">
+    <input class="rui-input rui-combobox__input" data-rui-input value="{{ selected_label }}" placeholder="{{ placeholder }}" autocomplete="off">
+  </div>
+  <div class="rui-combobox__content" data-rui-popup hidden>
+    <div class="rui-combobox__list">{{ body_html }}</div>
+    <p class="rui-combobox__empty" data-rui-combobox-empty hidden>{{ empty_text }}</p>
+  </div>
+</div>

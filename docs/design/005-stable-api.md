@@ -1,3 +1,9 @@
-# Decision 005 — Stable public surface
+# 005 — Stable public API
 
-Public HTML uses `rui-*` classes and `data-rui-*` behavior hooks. Public events use `rui:*`. Private DOM structure may evolve, but documented attributes, events and methods require a changelog entry before changing.
+**Статус:** принято
+
+## Решение
+
+Публичный HTML использует `rui-*` classes и `data-rui-*` behavior hooks. Публичные события используют namespace `rui:*`.
+
+Private DOM structure может меняться. Изменение задокументированных attributes, events или methods требует записи в changelog и обновления component docs.

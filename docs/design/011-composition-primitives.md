@@ -1,5 +1,11 @@
-# Decision 011 — Composition primitives own anatomy, not content
+# 011 — Composition primitives
 
-**Status:** Accepted for 0.8.1
+**Статус:** принято
 
-Hero and Card provide optional semantic regions and component-owned typography. They do not require a fixed child count, prescribe application content, or introduce JavaScript behavior. Documentation uses the same public classes as consumers.
+## Решение
+
+`Hero` и `Card` владеют собственной anatomy и typography, но не содержимым.
+
+Они предоставляют optional semantic regions, не требуют фиксированного количества children, не навязывают application content и не добавляют JavaScript behavior.
+
+В документации используются те же public classes, что и у consumers.

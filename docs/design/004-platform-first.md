@@ -1,3 +1,9 @@
-# Decision 004 — Platform first
+# 004 — Platform first
 
-Use browser primitives before introducing infrastructure. Native form submission, hidden inputs, Constraint Validation, Unicode, CSS custom properties and ES modules are preferred over framework-specific abstractions.
+**Статус:** принято
+
+## Решение
+
+Перед собственной infrastructure используются browser primitives: native form submission, hidden inputs, Constraint Validation, Unicode, CSS custom properties и ES modules.
+
+Framework-specific abstraction добавляется только тогда, когда browser primitive не покрывает публичный контракт компонента.

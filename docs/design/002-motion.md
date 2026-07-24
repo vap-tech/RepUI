@@ -1,3 +1,9 @@
-# Decision 002 — Motion is progressive enhancement
+# 002 — Motion
 
-Motion uses the shared duration and easing tokens. Every animation must remain understandable when reduced to 1 ms under `prefers-reduced-motion`. Motion communicates state; it must never delay input or navigation.
+**Статус:** принято
+
+## Решение
+
+Motion использует общие duration и easing tokens. Любая animation должна оставаться понятной при сведении длительности к 1 ms через `prefers-reduced-motion`.
+
+Motion сообщает об изменении состояния, но не задерживает input, navigation или selection.

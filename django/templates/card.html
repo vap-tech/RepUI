@@ -1,0 +1,9 @@
+<article class="rui-card" {{ html_attrs }}>
+  {% if title or description %}
+    <header class="rui-card__header">
+      {% if title %}<h2 class="rui-card__title">{{ title }}</h2>{% endif %}
+      {% if description %}<p class="rui-card__description">{{ description }}</p>{% endif %}
+    </header>
+  {% endif %}
+  <div class="rui-card__body">{{ body|default:'' }}</div>
+</article>

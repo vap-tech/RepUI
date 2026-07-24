@@ -1,14 +1,16 @@
-# Decision 001 — Unicode symbols
+# 001 — Unicode symbols
 
-**Status:** Accepted · **Since:** 0.5.3.4 · **Review:** after 1.0
+**Статус:** принято
 
-RepUI uses Unicode symbols for small system affordances such as `⌄`, `✓`, `×`, `…` and arrows.
+## Решение
 
-## Why
+Для небольших системных affordance RepUI использует Unicode-символы: `⌄`, `✓`, `×`, `…` и стрелки.
 
-- no runtime, sprite, font or licensing dependency;
-- native rendering on desktop and mobile platforms;
-- predictable fallback in Django templates;
-- tiny markup and excellent compatibility.
+## Почему
 
-Content-specific pictograms may use emoji. A dedicated authored icon set is intentionally postponed until the visual language is stable.
+- не нужны runtime, sprite, icon font и лицензия на набор иконок;
+- символы работают в desktop и mobile-браузерах;
+- их удобно использовать в Django templates;
+- markup остаётся маленьким и переносимым.
+
+Content-specific pictograms могут быть emoji. Собственный icon set появится только после стабилизации visual language.
