@@ -1,18 +1,29 @@
-/* RepUI Sheet / Drawer — polished structure (0.3.3)
-   Recommended: .rui-sheet__header + .rui-sheet__body + .rui-sheet__footer.
-   Legacy unstructured panels remain functional. */
+/* RepUI Sheet / Drawer.
+   Contract: .rui-sheet > .rui-sheet__backdrop + .rui-sheet__panel. */
 .rui-sheet {
   --rui-sheet-size: 26rem;
   --rui-sheet-gutter: clamp(1rem, 2.4vw, 1.5rem);
+  position: fixed;
+  inset: 0;
+  z-index: var(--rui-z-overlay);
+}
+
+.rui-sheet[hidden] {
+  display: none;
 }
 
 .rui-sheet__backdrop {
+  position: absolute;
+  inset: 0;
   background: color-mix(in srgb, var(--rui-color-text) 44%, transparent);
   backdrop-filter: blur(3px) saturate(.9);
   animation: rui-sheet-backdrop-in var(--rui-duration-normal) var(--rui-ease-standard);
 }
 
 .rui-sheet__panel {
+  position: absolute;
+  top: 0;
+  right: 0;
   display: flex;
   flex-direction: column;
   width: min(var(--rui-sheet-size), calc(100vw - 1.25rem));
@@ -24,6 +35,7 @@
   background: var(--rui-color-surface-raised);
   box-shadow: -1.1rem 0 3rem color-mix(in srgb, var(--rui-color-text) 17%, transparent);
   outline: none;
+  animation: rui-sheet-in var(--rui-duration-normal) var(--rui-ease-standard);
 }
 
 .rui-sheet[data-size="sm"] { --rui-sheet-size: 22rem; }
@@ -31,7 +43,12 @@
 .rui-sheet[data-size="xl"] { --rui-sheet-size: 42rem; }
 
 .rui-sheet[data-side="left"] .rui-sheet__panel {
+  top: 0;
+  right: auto;
+  bottom: auto;
+  left: 0;
   box-shadow: 1.1rem 0 3rem color-mix(in srgb, var(--rui-color-text) 17%, transparent);
+  animation-name: rui-sheet-in-left;
 }
 
 .rui-sheet__header,
@@ -110,6 +127,11 @@
   box-shadow: 0 -.65rem 1rem .35rem color-mix(in srgb, var(--rui-color-text) 12%, transparent);
 }
 
+.rui-sheet[data-side="bottom"] .rui-sheet__body::before,
+.rui-sheet[data-side="bottom"] .rui-sheet__body::after {
+  content: none;
+}
+
 .rui-sheet__footer {
   display: flex;
   justify-content: flex-end;
@@ -142,19 +164,21 @@
   --rui-sheet-size: 100%;
 }
 .rui-sheet[data-side="bottom"] .rui-sheet__panel {
+  top: auto;
+  right: 0;
+  bottom: 0;
+  left: 0;
   width: 100%;
   height: auto;
-  max-height: min(88dvh, 48rem);
+  max-height: min(36dvh, 28rem);
   border: 1px solid var(--rui-color-border);
   border-bottom: 0;
   border-radius: 1.35rem 1.35rem 0 0;
   box-shadow: 0 -1rem 3rem color-mix(in srgb, var(--rui-color-text) 18%, transparent);
+  animation-name: rui-sheet-in-bottom;
 }
 .rui-sheet[data-side="bottom"] .rui-sheet__handle { display: block; }
 .rui-sheet[data-side="bottom"] .rui-sheet__header { padding-top: .85rem; }
-
-/* Legacy panels without structured children keep sensible spacing. */
-.rui-sheet__panel:not(:has(.rui-sheet__body)) { overflow-y: auto; padding: var(--rui-sheet-gutter); gap: var(--rui-space-4); }
 
 @media (max-width: 640px) {
   .rui-sheet:not([data-side="bottom"]) .rui-sheet__panel {
@@ -168,7 +192,6 @@
   .rui-sheet__footer { padding-inline: 1rem; }
   .rui-sheet__footer { padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
   .rui-sheet__footer .rui-button { flex: 1 1 0; min-width: 0; }
-  .rui-sheet[data-side="bottom"] .rui-sheet__panel { max-height: 92dvh; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -177,3 +200,6 @@
 }
 
 @keyframes rui-sheet-backdrop-in { from { opacity: 0; } }
+@keyframes rui-sheet-in { from { transform: translateX(100%); } }
+@keyframes rui-sheet-in-left { from { transform: translateX(-100%); } }
+@keyframes rui-sheet-in-bottom { from { transform: translateY(100%); } }

@@ -73,7 +73,15 @@ export function initSheets(root = document) {
     if (!sheet) return;
     trigger.setAttribute('aria-controls', sheet.root.id);
     trigger.setAttribute('aria-expanded', String(!sheet.root.hidden));
-    trigger.addEventListener('click', () => sheet.open(trigger));
+    trigger.addEventListener('click', () => {
+      // В viewport одновременно может находиться только один modal Sheet.
+      // Иначе старая панель и её backdrop останутся поверх новой и создадут
+      // впечатление, что left/bottom geometry не работает.
+      map.forEach((other) => {
+        if (other !== sheet) other.close();
+      });
+      sheet.open(trigger);
+    });
   });
   return map;
 }

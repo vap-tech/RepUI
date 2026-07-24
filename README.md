@@ -57,5 +57,6 @@ python3 -m http.server 8000
 - [Select](docs/components/select.md)
 - [Combobox](docs/components/combobox.md)
 - [Menu](docs/components/menu.md)
+- [Sheet](docs/components/sheet.md)
 
 Историю решений и специализированные соглашения см. в `docs/design/`, `docs/django/` и [карте документации](docs/README.md).

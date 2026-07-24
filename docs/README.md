@@ -8,6 +8,7 @@
 - [Select](components/select.md)
 - [Combobox](components/combobox.md)
 - [Menu](components/menu.md)
+- [Sheet](components/sheet.md)
 
 Каждый component doc следует одной схеме:
 
