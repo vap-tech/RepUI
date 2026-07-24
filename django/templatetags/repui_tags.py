@@ -4,6 +4,8 @@
 и block tags для компонентов со сложным вложенным content.
 """
 
+import re
+
 from django.template import Node, TemplateSyntaxError
 from django.template.loader import render_to_string
 from django.utils.html import conditional_escape
@@ -15,6 +17,7 @@ register = template.Library()
 
 _RESERVED_PREFIXES = ("data-rui-",)
 _RESERVED_NAMES = {"role", "aria-activedescendant", "aria-controls"}
+_MENUITEM_RE = re.compile(r"<[^>]*\bdata-rui-menuitem(?:\s|=|>)", re.IGNORECASE)
 
 
 def _attribute_name(name):
@@ -44,6 +47,23 @@ def render_attrs(attrs):
     return mark_safe(" ".join(rendered))
 
 
+def validate_menu_content(body):
+    """Проверяет, что Dropdown содержит хотя бы один managed menu item.
+
+    `data-rui-menuitem` — не декоративный class, а граница между обычным
+    HTML и state machine `rui-core`. Без него core не увидит item, поэтому
+    меню может выглядеть раскрытым, но не будет иметь navigation и selection.
+    Проверка намеренно выполняется на Django-слое: молчаливый fallback на
+    произвольный HTML маскировал бы ошибку backend-разметки.
+    """
+    if not _MENUITEM_RE.search(body):
+        raise TemplateSyntaxError(
+            "repui_dropdown requires at least one element with "
+            "data-rui-menuitem; do not bypass the menu item contract"
+        )
+    return body
+
+
 @register.inclusion_tag("card.html", takes_context=True)
 def repui_card(context, title=None, description=None, **kwargs):
     """Рендерит простой Card с arbitrary HTML attributes.
@@ -57,6 +77,48 @@ def repui_card(context, title=None, description=None, **kwargs):
         "html_attrs": render_attrs(kwargs),
         "request": context.get("request"),
     }
+
+
+class RepUIDropdownNode(Node):
+    """Рендерит Dropdown и проверяет обязательный menu item contract."""
+
+    def __init__(self, values, nodelist):
+        """Сохраняет compiled kwargs и вложенное содержимое меню."""
+        self.values = values
+        self.nodelist = nodelist
+
+    def render(self, context):
+        """Рендерит body только после проверки `data-rui-menuitem`."""
+        values = {key: value.resolve(context) for key, value in self.values.items()}
+        body = validate_menu_content(self.nodelist.render(context))
+        label = values.pop("label", "")
+        return render_to_string(
+            "dropdown.html",
+            {
+                "label": label,
+                "content": mark_safe(body),
+            },
+            request=context.get("request"),
+        )
+
+
+@register.tag("repui_dropdown")
+def repui_dropdown(parser, token):
+    """Парсит Dropdown block tag с обязательными managed menu items.
+
+    Проверка не отключается флагом: обход оставил бы backend без явного
+    сигнала о том, что его markup больше не подключён к core behavior.
+    """
+    bits = token.split_contents()
+    values = {}
+    for bit in bits[1:]:
+        if "=" not in bit:
+            raise TemplateSyntaxError("repui_dropdown arguments must use key=value")
+        key, value = bit.split("=", 1)
+        values[key] = parser.compile_filter(value)
+    nodelist = parser.parse(("endrepui_dropdown",))
+    parser.delete_first_token()
+    return RepUIDropdownNode(values, nodelist)
 
 
 class RepUIComboboxNode(Node):

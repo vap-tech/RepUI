@@ -52,3 +52,27 @@ Options передаются как объекты с полями:
 ```
 
 Сейчас block API добавлен для Card и Combobox. Для Card header/body/footer пока передаётся обычный body; отдельные anatomy slots добавим следующим шагом.
+
+Для `Dropdown` используйте block tag. Вложенное содержимое обязано содержать хотя бы один элемент с `data-rui-menuitem`:
+
+Dropdown может содержать один или несколько `menuitem`, но каждый `menuitem` должен иметь видимый label или доступное имя через `aria-label`. Технически проверка пропустит:
+
+```html
+<button data-rui-menuitem></button>
+```
+
+Но это плохая разметка: item будет недоступен для пользователя и плохо восприниматься screen reader.
+
+Рабочий вариант примерно такой:
+
+```django
+{% load repui_tags %}
+{% repui_dropdown label="Действия" %}
+  <button data-rui-menuitem data-value="archive">Архивировать</button>
+{% endrepui_dropdown %}
+```
+
+Проверка выполняется намеренно на Django-слое. `data-rui-menuitem` связывает
+HTML с core state machine: без него меню может выглядеть корректно, но не
+получит keyboard navigation, active state и selection. Обходить проверку не
+следует — это скрывает ошибку markup contract.
