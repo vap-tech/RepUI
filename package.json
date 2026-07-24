@@ -6,6 +6,10 @@
   "scripts": {
     "test": "node --test",
     "test:unit": "node --test",
-    "test:dom": "node --test"
+    "test:dom": "node --test",
+    "test:browser": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1"
   }
 }
