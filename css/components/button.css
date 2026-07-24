@@ -1,0 +1,23 @@
+.rui-button { --_bg: var(--rui-color-primary); --_fg: var(--rui-color-primary-contrast); --_border: transparent; display: inline-flex; align-items: center; justify-content: center; gap: .55rem; min-height: 2.65rem; padding: 0 1rem; border: 1px solid var(--_border); border-radius: var(--rui-radius-sm); background: var(--_bg); color: var(--_fg); font-family: var(--rui-font-ui); font-size: var(--rui-text-md); font-weight: 690; line-height: 1; text-decoration: none; cursor: pointer; box-shadow: var(--rui-shadow-xs); transition: transform var(--rui-duration-fast) var(--rui-ease-standard), background var(--rui-duration-fast), border-color var(--rui-duration-fast), opacity var(--rui-duration-fast); }
+.rui-button:hover:not(:disabled) { transform: translateY(-1px); background: var(--rui-color-primary-hover); }
+.rui-button:active:not(:disabled) { transform: translateY(0); }
+.rui-button:disabled, .rui-button[aria-disabled="true"] { opacity: .48; cursor: not-allowed; }
+.rui-button[data-variant="secondary"] { --_bg: var(--rui-color-surface-muted); --_fg: var(--rui-color-text); }
+.rui-button[data-variant="secondary"]:hover:not(:disabled) { background: color-mix(in srgb, var(--rui-color-surface-muted) 78%, var(--rui-color-text) 8%); }
+.rui-button[data-variant="outline"] { --_bg: var(--rui-color-surface); --_fg: var(--rui-color-text); --_border: var(--rui-color-border); }
+.rui-button[data-variant="outline"]:hover:not(:disabled), .rui-button[data-variant="ghost"]:hover:not(:disabled) { background: var(--rui-color-surface-muted); }
+.rui-button[data-variant="ghost"] { --_bg: transparent; --_fg: var(--rui-color-text); box-shadow: none; }
+.rui-button[data-variant="danger"] { --_bg: var(--rui-color-danger); --_fg: #fff; }
+.rui-button[data-size="sm"] { min-height: 2.15rem; padding-inline: .78rem; font-size: .86rem; }
+.rui-button[data-size="lg"] { min-height: 3.15rem; padding-inline: 1.25rem; border-radius: var(--rui-radius-md); }
+.rui-button[data-loading="true"] { pointer-events: none; }
+.rui-button[data-loading="true"]::before { content: ""; width: 1rem; aspect-ratio: 1; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: rui-spin .7s linear infinite; }
+@keyframes rui-spin { to { transform: rotate(1turn); } }
+.rui-button:focus-visible {
+  outline: none;
+  box-shadow: var(--rui-shadow-xs), var(--rui-focus-ring);
+}
+
+.rui-button[data-variant="ghost"]:focus-visible {
+  box-shadow: var(--rui-focus-ring);
+}

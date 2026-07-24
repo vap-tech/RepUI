@@ -1,0 +1,34 @@
+/* Semantic form grouping. Keep the native fieldset/legend relationship. */
+.rui-fieldset {
+  font-family: var(--rui-font-ui);
+  min-width: 0;
+  margin: 0;
+  padding: var(--rui-space-4);
+  border: var(--rui-control-border-width) solid var(--rui-color-border);
+  border-radius: var(--rui-control-radius);
+  background: var(--rui-color-surface);
+}
+
+.rui-fieldset__legend {
+  max-width: 100%;
+  padding-inline: var(--rui-space-2);
+  color: var(--rui-color-text);
+  font-size: var(--rui-text-sm);
+  font-weight: 670;
+  line-height: var(--rui-leading-normal);
+}
+
+.rui-fieldset__description {
+  margin: 0 0 var(--rui-space-3);
+  color: var(--rui-color-text-muted);
+  font-size: var(--rui-text-sm);
+}
+
+.rui-fieldset[data-invalid="true"] {
+  border-color: var(--rui-color-danger);
+}
+
+.rui-fieldset:disabled,
+.rui-fieldset[disabled] {
+  opacity: .6;
+}

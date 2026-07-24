@@ -1,0 +1,16 @@
+<fieldset class="rui-fieldset"{% if invalid %} data-invalid="true"{% endif %}{% if disabled %} disabled{% endif %}{% if describedby %} aria-describedby="{{ describedby }}"{% endif %}>
+  <legend class="rui-fieldset__legend">{{ legend }}</legend>
+  {% if description %}<p class="rui-fieldset__description"{% if description_id %} id="{{ description_id }}"{% endif %}>{{ description }}</p>{% endif %}
+  <div class="rui-choice-group"{% if orientation %} data-orientation="{{ orientation }}"{% endif %}>
+    {% for choice in choices %}
+      <label class="rui-choice">
+        <input type="{{ type|default:'radio' }}" name="{{ name }}" value="{{ choice.value }}"{% if choice.checked %} checked{% endif %}{% if choice.disabled %} disabled{% endif %}>
+        <span class="rui-choice__control" aria-hidden="true"></span>
+        <span class="rui-choice__content">
+          <span class="rui-choice__label">{{ choice.label }}</span>
+          {% if choice.description %}<span class="rui-choice__description">{{ choice.description }}</span>{% endif %}
+        </span>
+      </label>
+    {% endfor %}
+  </div>
+</fieldset>

@@ -1,0 +1,8 @@
+<label class="rui-choice">
+  <input type="{{ type|default:'checkbox' }}" name="{{ name }}"{% if value != None %} value="{{ value }}"{% endif %}{% if checked %} checked{% endif %}{% if disabled %} disabled{% endif %}{% if required %} required{% endif %}{% if describedby %} aria-describedby="{{ describedby }}"{% endif %}>
+  <span class="rui-choice__control" aria-hidden="true"></span>
+  <span class="rui-choice__content">
+    <span class="rui-choice__label">{{ label }}</span>
+    {% if description %}<span class="rui-choice__description">{{ description }}</span>{% endif %}
+  </span>
+</label>

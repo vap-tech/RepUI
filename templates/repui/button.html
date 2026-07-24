@@ -1,0 +1,8 @@
+<button
+  type="{{ type|default:'button' }}"
+  class="rui-button{% if class_name %} {{ class_name }}{% endif %}"
+  {% if variant %}data-variant="{{ variant }}"{% endif %}
+  {% if size %}data-size="{{ size }}"{% endif %}
+  {% if disabled %}disabled{% endif %}
+  {% if attrs %}{{ attrs|safe }}{% endif %}
+>{{ label }}</button>

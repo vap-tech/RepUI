@@ -1,0 +1,6 @@
+<div class="rui-tabs" data-rui-tabs{% if activation %} data-activation="{{ activation }}"{% endif %}>
+  <div class="rui-tabs__list" data-rui-tabs-list role="tablist">
+    {% for tab in tabs %}<button class="rui-tabs__trigger" data-rui-tabs-trigger data-value="{{ tab.value }}" role="tab" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">{{ tab.label }}</button>{% endfor %}
+  </div>
+  {% for tab in tabs %}<section class="rui-tabs__panel" data-rui-tabs-panel role="tabpanel"{% if not forloop.first %} hidden{% endif %}>{{ tab.content|safe }}</section>{% endfor %}
+</div>

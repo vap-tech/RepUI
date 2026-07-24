@@ -1,0 +1,102 @@
+/* Shared form-control contract. Input, textarea and native select intentionally
+   share geometry, typography, states and validation behavior. */
+.rui-field {
+  display: grid;
+  gap: var(--rui-space-2);
+}
+
+.rui-field__label {
+  font-size: var(--rui-text-sm);
+  font-weight: 670;
+}
+
+.rui-field__description,
+.rui-field__message {
+  color: var(--rui-color-text-muted);
+  font-size: var(--rui-text-sm);
+}
+
+:where(.rui-input, .rui-textarea, .rui-native-select, .rui-datetime-input) {
+  width: 100%;
+  min-width: 0;
+  min-height: var(--rui-control-height-md);
+  padding: var(--rui-control-padding-block) var(--rui-control-padding-inline);
+  border: var(--rui-control-border-width) solid var(--rui-color-border);
+  border-radius: var(--rui-control-radius);
+  background: var(--rui-control-background);
+  color: var(--rui-color-text);
+  font-family: var(--rui-font-ui);
+  font-size: var(--rui-text-md);
+  font-weight: 400;
+  line-height: var(--rui-leading-normal);
+  outline: none;
+  transition: var(--rui-control-transition);
+}
+
+/* Single-line controls use a fixed control height and let the browser center the
+   text line. This avoids placeholder drift caused by combining a fixed height
+   with independent block padding in application CSS. */
+:where(.rui-input, .rui-native-select, .rui-datetime-input) {
+  height: var(--rui-control-height-md);
+  padding-block: 0;
+  line-height: 1.25;
+}
+
+:where(.rui-input, .rui-textarea, .rui-native-select, .rui-datetime-input)::placeholder {
+  color: var(--rui-color-text-muted);
+  opacity: 1;
+}
+
+:where(.rui-input, .rui-textarea, .rui-native-select, .rui-datetime-input):hover:not(:disabled) {
+  border-color: var(--rui-color-border-strong);
+}
+
+:where(.rui-input, .rui-textarea, .rui-native-select, .rui-datetime-input):focus-visible {
+  border-color: var(--rui-color-primary);
+  background: var(--rui-control-background-focus);
+  box-shadow: var(--rui-focus-ring);
+}
+
+:where(.rui-input, .rui-textarea, .rui-native-select, .rui-datetime-input):disabled {
+  opacity: .55;
+  cursor: not-allowed;
+}
+
+.rui-textarea {
+  min-height: var(--rui-textarea-min-height);
+  padding-block: var(--rui-control-padding-block);
+  line-height: var(--rui-leading-normal);
+  resize: vertical;
+}
+
+.rui-native-select {
+  appearance: none;
+  padding-inline-end: var(--rui-space-10);
+  background-image:
+    linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position:
+    calc(100% - 1.05rem) 50%,
+    calc(100% - .78rem) 50%;
+  background-size: .32rem .32rem, .32rem .32rem;
+  background-repeat: no-repeat;
+}
+
+.rui-field[data-invalid="true"] :where(.rui-input, .rui-textarea, .rui-native-select, .rui-datetime-input),
+:where(.rui-input, .rui-textarea, .rui-native-select, .rui-datetime-input)[aria-invalid="true"] {
+  border-color: var(--rui-color-danger);
+}
+
+.rui-field[data-valid="true"] :where(.rui-input, .rui-textarea, .rui-native-select, .rui-datetime-input) {
+  border-color: color-mix(in srgb, var(--rui-color-success) 62%, var(--rui-color-border));
+}
+
+.rui-field[data-invalid="true"] .rui-field__message {
+  color: var(--rui-color-danger);
+}
+
+/* Validation messages are present for accessibility but occupy no space while valid. */
+.rui-field__message[hidden],
+.rui-field[data-invalid="false"] .rui-field__message {
+  display: none !important;
+}

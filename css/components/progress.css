@@ -1,0 +1,4 @@
+.rui-progress { display: grid; gap: .45rem; }
+.rui-progress__meta { display: flex; justify-content: space-between; color: var(--rui-color-text-muted); font-size: .8rem; }
+.rui-progress__track { height: .55rem; overflow: hidden; border-radius: var(--rui-radius-pill); background: var(--rui-color-surface-muted); }
+.rui-progress__bar { height: 100%; width: var(--rui-progress, 0%); border-radius: inherit; background: var(--rui-color-primary); transition: width var(--rui-duration-slow) var(--rui-ease-standard); }

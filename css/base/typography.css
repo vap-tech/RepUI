@@ -1,0 +1,9 @@
+body { font-family: var(--rui-font-content); font-size: 15px; font-weight: 400; line-height: 1.55; }
+.rui-display, .rui-h1, .rui-h2, .rui-h3 { margin: 0; font-family: var(--rui-font-display); letter-spacing: -.035em; }
+.rui-display { font-size: clamp(2.6rem, 7vw, 5.8rem); line-height: .98; font-weight: 800; }
+.rui-h1 { font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1.03; font-weight: 780; }
+.rui-h2 { font-size: clamp(1.5rem, 2.3vw, 2.1rem); line-height: 1.12; font-weight: 760; }
+.rui-h3 { font-size: 1.08rem; line-height: 1.25; font-weight: 730; letter-spacing: -.015em; }
+.rui-muted { color: var(--rui-color-text-muted); }
+.rui-label { font-size: .87rem; font-weight: 650; }
+.rui-kicker { color: var(--rui-color-primary); font-size: .78rem; font-weight: 750; letter-spacing: .11em; text-transform: uppercase; }

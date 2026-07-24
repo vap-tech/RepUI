@@ -1,0 +1,11 @@
+.rui-field-error {
+  display: block;
+  color: var(--rui-color-danger);
+  font-size: var(--rui-text-sm);
+  line-height: var(--rui-leading-normal);
+}
+
+.rui-field-error:empty,
+.rui-field-error[hidden] {
+  display: none !important;
+}

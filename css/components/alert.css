@@ -1,0 +1,8 @@
+.rui-alert { --_tone: var(--rui-color-info); --_soft: var(--rui-color-info-soft); display: grid; grid-template-columns: auto 1fr auto; align-items: start; gap: .8rem; padding: .9rem 1rem; border: 1px solid color-mix(in srgb, var(--_tone) 24%, var(--rui-color-border)); border-radius: var(--rui-radius-md); background: var(--_soft); color: var(--rui-color-text); }
+.rui-alert[data-variant="success"] { --_tone: var(--rui-color-success); --_soft: var(--rui-color-success-soft); }
+.rui-alert[data-variant="warning"] { --_tone: var(--rui-color-warning); --_soft: var(--rui-color-warning-soft); }
+.rui-alert[data-variant="danger"] { --_tone: var(--rui-color-danger); --_soft: var(--rui-color-danger-soft); }
+.rui-alert__icon { color: var(--_tone); font-weight: 800; }
+.rui-alert__title { display: block; font-weight: 740; }
+.rui-alert__description { color: color-mix(in srgb, var(--rui-color-text) 78%, var(--rui-color-text-muted)); font-size: .88rem; }
+.rui-alert__close { border: 0; background: transparent; color: var(--rui-color-text-muted); cursor: pointer; }

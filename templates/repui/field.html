@@ -1,0 +1,5 @@
+<label class="rui-field"{% if invalid %} data-invalid="true"{% endif %}>
+  <span class="rui-field__label">{{ label }}</span>
+  <input class="rui-input" name="{{ name }}" value="{{ value|default:'' }}" placeholder="{{ placeholder|default:'' }}"{% if invalid %} aria-invalid="true"{% endif %}>
+  {% if message %}<span class="rui-field__message">{{ message }}</span>{% elif description %}<span class="rui-field__description">{{ description }}</span>{% endif %}
+</label>

@@ -1,0 +1,24 @@
+@import url('./spacing.css');
+@import url('./radius.css');
+@import url('./typography.css');
+@import url('./motion.css');
+@import url('./elevation.css');
+@import url('./layout.css');
+
+:root {
+  --rui-control-height-md: 2.75rem;
+  --rui-control-border-width: 1px;
+  --rui-control-padding-block: var(--rui-space-3);
+  --rui-control-padding-inline: var(--rui-space-3);
+  --rui-control-radius: var(--rui-radius-md);
+  --rui-control-background: var(--rui-color-bg);
+  --rui-control-background-focus: var(--rui-color-surface);
+  --rui-control-transition: border-color var(--rui-duration-fast) var(--rui-ease-standard), box-shadow var(--rui-duration-fast) var(--rui-ease-standard), background-color var(--rui-duration-fast) var(--rui-ease-standard);
+  --rui-textarea-min-height: 8rem;
+  --rui-command-panel-radius: var(--rui-radius-xl);
+  --rui-command-search-gap: var(--rui-space-3);
+  --rui-command-search-padding-block: var(--rui-space-3);
+  --rui-command-search-padding-inline: var(--rui-space-4);
+  --rui-command-input-font-size: var(--rui-text-md);
+  --rui-badge-heading-gap: 0.45rem;
+}

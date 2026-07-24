@@ -1,0 +1,9 @@
+.rui-toast-region { position: fixed; right: 1rem; bottom: 1rem; z-index: var(--rui-z-toast); display: grid; gap: .7rem; width: min(23rem, calc(100vw - 2rem)); pointer-events: none; }
+.rui-toast { position: relative; display: grid; grid-template-columns: auto 1fr auto; align-items: start; gap: .75rem; padding: .9rem; border: 1px solid var(--rui-color-border); border-radius: var(--rui-radius-md); background: var(--rui-color-surface-raised); box-shadow: var(--rui-shadow-md); pointer-events: auto; animation: rui-toast-in var(--rui-duration-normal) var(--rui-ease-standard); }
+.rui-toast__icon { color: var(--rui-color-primary); }
+.rui-toast__title { font-weight: 730; }
+.rui-toast__description { color: var(--rui-color-text-muted); font-size: .82rem; }
+.rui-toast__close { border: 0; background: transparent; color: var(--rui-color-text-muted); cursor: pointer; }
+.rui-toast[data-state="closing"] { animation: rui-toast-out var(--rui-duration-normal) var(--rui-ease-standard) forwards; }
+@keyframes rui-toast-in { from { opacity: 0; transform: translateY(.75rem) scale(.98); } }
+@keyframes rui-toast-out { to { opacity: 0; transform: translateX(1rem) scale(.98); } }

@@ -1,0 +1,10 @@
+.rui-dialog { position: fixed; inset: 0; z-index: var(--rui-z-overlay); display: grid; place-items: center; padding: 1rem; }
+.rui-dialog[hidden] { display: none; }
+.rui-dialog__backdrop { position: absolute; inset: 0; background: var(--rui-color-overlay); backdrop-filter: blur(5px); }
+.rui-dialog__panel { position: relative; width: min(100%, 34rem); max-height: min(85vh, 50rem); overflow: auto; padding: 1.4rem; border: 1px solid var(--rui-color-border); border-radius: var(--rui-radius-xl); background: var(--rui-color-surface-raised); box-shadow: var(--rui-shadow-md); animation: rui-dialog-in var(--rui-duration-normal) var(--rui-ease-standard); }
+.rui-dialog__header { padding-right: 2.5rem; }
+.rui-dialog__close { position: absolute; top: .8rem; right: .8rem; display: grid; place-items: center; width: 2.2rem; height: 2.2rem; border: 0; border-radius: var(--rui-radius-sm); background: transparent; color: var(--rui-color-text-muted); cursor: pointer; }
+.rui-dialog__close:hover { background: var(--rui-color-surface-muted); color: var(--rui-color-text); }
+.rui-dialog__footer { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: .65rem; margin-top: 1.25rem; }
+body[data-rui-scroll-lock="true"] { overflow: hidden; }
+@keyframes rui-dialog-in { from { opacity: 0; transform: translateY(.6rem) scale(.985); } }

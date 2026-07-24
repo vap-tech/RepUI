@@ -1,0 +1,34 @@
+.rui-assistive-text {
+  --rui-assistive-text-color: var(--rui-color-text-muted);
+  --rui-assistive-text-marker: "";
+
+  min-block-size: calc(1em * var(--rui-leading-normal));
+  margin: 0;
+  overflow: hidden;
+  color: var(--rui-assistive-text-color);
+  font-size: var(--rui-text-sm);
+  line-height: var(--rui-leading-normal);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rui-assistive-text[data-state="base"] {
+  --rui-assistive-text-color: var(--rui-color-text-muted);
+}
+
+.rui-assistive-text[data-state="negative"] {
+  --rui-assistive-text-color: var(--rui-color-danger);
+  --rui-assistive-text-marker: "×";
+}
+
+.rui-assistive-text[data-state="positive"] {
+  --rui-assistive-text-color: var(--rui-color-success);
+  --rui-assistive-text-marker: "✓";
+}
+
+.rui-assistive-text[data-state="negative"]::before,
+.rui-assistive-text[data-state="positive"]::before {
+  content: var(--rui-assistive-text-marker);
+  margin-inline-end: var(--rui-space-1);
+  font-weight: 700;
+}

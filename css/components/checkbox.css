@@ -1,0 +1,9 @@
+.rui-checkbox { display: inline-flex; align-items: flex-start; gap: .65rem; cursor: pointer; }
+.rui-checkbox input { position: absolute; opacity: 0; pointer-events: none; }
+.rui-checkbox__box { display: grid; place-items: center; flex: 0 0 1.15rem; width: 1.15rem; height: 1.15rem; margin-top: .16rem; border: 1px solid var(--rui-color-border-strong); border-radius: .32rem; background: var(--rui-color-surface); transition: background var(--rui-duration-fast), border-color var(--rui-duration-fast), box-shadow var(--rui-duration-fast); }
+.rui-checkbox__box::after { content: ""; width: .55rem; height: .3rem; border-left: 2px solid transparent; border-bottom: 2px solid transparent; transform: rotate(-45deg) translateY(-1px); }
+.rui-checkbox input:checked + .rui-checkbox__box { border-color: var(--rui-color-primary); background: var(--rui-color-primary); }
+.rui-checkbox input:checked + .rui-checkbox__box::after { border-color: var(--rui-color-primary-contrast); }
+.rui-checkbox input:focus-visible + .rui-checkbox__box { box-shadow: var(--rui-focus-ring); }
+.rui-checkbox__text { display: grid; gap: .1rem; }
+.rui-checkbox__text small { color: var(--rui-color-text-muted); }

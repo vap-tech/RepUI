@@ -1,0 +1,8 @@
+export class Tabs{
+  constructor(root){this.root=root;this.list=root.querySelector('[data-rui-tabs-list]');this.triggers=[...root.querySelectorAll('[data-rui-tabs-trigger]')];this.panels=[...root.querySelectorAll('[data-rui-tabs-panel]')];this.activation=root.dataset.activation||'automatic';this.bind();this.sync();}
+  bind(){this.triggers.forEach((trigger,index)=>{trigger.addEventListener('click',()=>this.activate(index,true));trigger.addEventListener('keydown',event=>this.onKeydown(event,index));});}
+  onKeydown(event,index){let next=index;if(['ArrowRight','ArrowDown'].includes(event.key))next=(index+1)%this.triggers.length;else if(['ArrowLeft','ArrowUp'].includes(event.key))next=(index-1+this.triggers.length)%this.triggers.length;else if(event.key==='Home')next=0;else if(event.key==='End')next=this.triggers.length-1;else if(['Enter',' '].includes(event.key)&&this.activation==='manual'){event.preventDefault();this.activate(index,true);return}else return;event.preventDefault();this.triggers[next].focus();if(this.activation!=='manual')this.activate(next,true);}
+  activate(index,emit=false){this.triggers.forEach((trigger,i)=>{const active=i===index;trigger.setAttribute('aria-selected',String(active));trigger.tabIndex=active?0:-1;});this.panels.forEach((panel,i)=>panel.hidden=i!==index);if(emit)this.root.dispatchEvent(new CustomEvent('rui:tabschange',{bubbles:true,detail:{index,value:this.triggers[index]?.dataset.value||String(index)}}));}
+  sync(){let index=this.triggers.findIndex(t=>t.getAttribute('aria-selected')==='true');if(index<0)index=0;this.activate(index);}
+}
+export function initTabs(root=document){return[...root.querySelectorAll('[data-rui-tabs]')].map(el=>el.__ruiTabs||(el.__ruiTabs=new Tabs(el)));}

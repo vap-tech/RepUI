@@ -1,0 +1,6 @@
+:root {
+  --rui-shadow-xs: 0 1px 2px rgb(16 24 40 / 5%); --rui-shadow-sm: 0 8px 24px rgb(16 24 40 / 8%);
+  --rui-shadow-md: 0 20px 56px rgb(16 24 40 / 14%); --rui-shadow-lg: 0 32px 96px rgb(16 24 40 / 20%);
+  --rui-z-base: 0; --rui-z-sticky: 100; --rui-z-dropdown: 300; --rui-z-overlay: 500; --rui-z-toast: 700; --rui-z-debug: 900;
+}
+html[data-theme="dark"] { --rui-shadow-xs:0 1px 2px rgb(0 0 0 / 18%); --rui-shadow-sm:0 10px 30px rgb(0 0 0 / 26%); --rui-shadow-md:0 24px 72px rgb(0 0 0 / 42%); --rui-shadow-lg:0 36px 110px rgb(0 0 0 / 58%); }

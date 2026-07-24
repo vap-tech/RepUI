@@ -1,0 +1,5 @@
+.rui-badge { display: inline-flex; align-items: center; gap: .35rem; width: fit-content; min-height: 1.55rem; padding: .15rem .55rem; border: 1px solid var(--rui-color-border); border-radius: var(--rui-radius-pill); background: var(--rui-color-surface-muted); color: var(--rui-color-text); font-size: .74rem; font-weight: 700; line-height: 1; margin-bottom: var(--rui-badge-heading-gap); }
+.rui-badge[data-variant="primary"] { border-color: color-mix(in srgb, var(--rui-color-primary) 28%, transparent); background: var(--rui-color-primary-soft); color: var(--rui-color-primary); }
+.rui-badge[data-variant="success"] { border-color: transparent; background: var(--rui-color-success-soft); color: var(--rui-color-success); }
+.rui-badge[data-variant="warning"] { border-color: transparent; background: var(--rui-color-warning-soft); color: var(--rui-color-warning); }
+.rui-badge[data-variant="danger"] { border-color: transparent; background: var(--rui-color-danger-soft); color: var(--rui-color-danger); }

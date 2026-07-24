@@ -1,0 +1,13 @@
+/* Native date/time control. RepUI styles the field; the browser owns the picker UI. */
+.rui-datetime-input {
+  color-scheme: light dark;
+}
+
+.rui-datetime-input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: .72;
+}
+
+.rui-datetime-input:disabled::-webkit-calendar-picker-indicator {
+  cursor: not-allowed;
+}
