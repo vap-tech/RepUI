@@ -60,6 +60,7 @@
 .rui-command__list {
     max-height: 18rem;
     overflow: auto;
+    scroll-padding-block: 0.2rem;
     overscroll-behavior: contain;
 }
 .rui-option {
@@ -84,7 +85,8 @@
     background: var(--rui-color-primary-soft);
 }
 .rui-combobox[data-input-mode="keyboard"] .rui-option:hover:not([data-active]),
-.rui-combobox__content[data-input-mode="keyboard"] .rui-option:hover:not([data-active]) {
+.rui-combobox__content[data-input-mode="keyboard"]
+    .rui-option:hover:not([data-active]) {
     background: transparent;
 }
 .rui-option[aria-selected="true"] {
@@ -323,8 +325,10 @@
     background: var(--rui-color-primary-soft);
     outline: 0;
 }
-.rui-option-group[data-input-mode="keyboard"] .rui-option:hover:not([data-active]),
-.rui-option-group[data-input-mode="keyboard"] .rui-option:focus-visible:not([data-active]) {
+.rui-option-group[data-input-mode="keyboard"]
+    .rui-option:hover:not([data-active]),
+.rui-option-group[data-input-mode="keyboard"]
+    .rui-option:focus-visible:not([data-active]) {
     background: transparent;
 }
 

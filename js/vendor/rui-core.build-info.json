@@ -5,8 +5,8 @@
   "format": "iife",
   "global": "RUICore",
   "bundle": "rui-core.min.js",
-  "bytes": 64485,
-  "sha256": "d1f9dd51ea504db17c71a8d6e3bfddc5c7116f279b53724b9d5c89fc9b771976",
+  "bytes": 64875,
+  "sha256": "3b8a1d746e9c741019d041d5edea23a617d421d87776d8ff50f569eabd25abba",
   "sizeBudget": {
     "maxBytes": 61440,
     "withinBudget": false
