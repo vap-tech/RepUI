@@ -1,4 +1,4 @@
-import {animateDisclosure} from "../core/motion.js";
+import {animateDisclosure} from "../runtime/motion.js";
 export class Accordion{
   constructor(root){this.root=root;this.multiple=root.hasAttribute('data-multiple');this.items=[...root.querySelectorAll('[data-rui-accordion-item]')];this.bind();this.sync();}
   bind(){this.items.forEach((item,index)=>{const trigger=item.querySelector('[data-rui-accordion-trigger]');trigger?.addEventListener('click',()=>this.toggle(index));trigger?.addEventListener('keydown',e=>this.navigate(e,index));});}

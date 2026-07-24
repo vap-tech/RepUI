@@ -1,4 +1,4 @@
-import { normalize } from '../core/collection.js';
+import { normalize } from '../runtime/collection.js';
 import { Listbox } from './listbox.js';
 
 const NAVIGATION_KEYS = new Set(['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp']);

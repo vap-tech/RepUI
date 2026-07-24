@@ -1,4 +1,4 @@
-import { FloatingLayer } from '../core/floating.js';
+import { FloatingLayer } from '../runtime/floating.js';
 
 export class CoreCombobox {
   constructor(root) {

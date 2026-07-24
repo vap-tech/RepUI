@@ -1,10 +1,10 @@
-import { setDebug, inspectComponent } from "./core/debug.js";
-import { initTheme, setTheme, getTheme } from "./core/theme.js";
-import { initFocusModality, getModality } from "./core/focus.js";
-import { interaction } from "./core/interaction.js";
-import { getInstance, getComponentName, register } from "./core/registry.js";
-import { mountPortal, unmountPortal, isPortaled } from "./core/portal.js";
-import { destroy, emit } from "./core/runtime.js";
+import { setDebug, inspectComponent } from "./runtime/debug.js";
+import { initTheme, setTheme, getTheme } from "./runtime/theme.js";
+import { initFocusModality, getModality } from "./runtime/focus.js";
+import { interaction } from "./runtime/interaction.js";
+import { getInstance, getComponentName, register } from "./runtime/registry.js";
+import { mountPortal, unmountPortal, isPortaled } from "./runtime/portal.js";
+import { destroy, emit } from "./runtime/runtime.js";
 import { initDialogs, Dialog } from "./components/dialog.js";
 import { initToasts, ToastManager } from "./components/toast.js";
 import { initAlerts } from "./components/alert.js";

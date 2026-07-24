@@ -93,7 +93,7 @@ Higher-level components may consume lower-level primitives, but must not expand 
 
 - `css/tokens/` — color, spacing, radius, typography, motion, elevation, and layout.
 - `css/components/` — component styles.
-- `js/core/` — focus, registry, interaction, runtime, portal, floating, overlay, motion, and modality helpers.
+- `js/runtime/` — focus, registry, interaction, runtime, portal, floating, overlay, motion, and modality helpers.
 - `js/components/` — component behavior.
 - `docs/design/` — accepted architectural decisions.
 - `docs/accessibility/` — keyboard and accessibility guidance.

@@ -1,4 +1,4 @@
-import { $, $$, emit, focusable } from '../core/dom.js';
+import { $, $$, emit, focusable } from '../runtime/dom.js';
 let stack = [];
 export class Dialog {
   constructor(root) {

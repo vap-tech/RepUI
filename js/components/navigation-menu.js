@@ -1,4 +1,4 @@
-import { InputModality } from '../core/input-modality.js';
+import { InputModality } from '../runtime/input-modality.js';
 
 export class NavigationMenu {
   constructor(root) {

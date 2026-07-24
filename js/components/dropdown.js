@@ -1,5 +1,5 @@
-import { $$, emit } from '../core/dom.js';
-import { placeFloating } from '../core/overlay.js';
+import { $$, emit } from '../runtime/dom.js';
+import { placeFloating } from '../runtime/overlay.js';
 export class DropdownMenu{
  constructor(root){this.root=root;this.trigger=root.querySelector('[data-rui-menu-trigger]');this.content=root.querySelector('[data-rui-menu-content]');this.items=()=>$$('[role="menuitem"]:not([disabled])',this.content).filter(x=>!x.hidden);this.opened=false;this.onDoc=this.onDoc.bind(this);this.trigger?.addEventListener('click',()=>this.toggle());this.trigger?.addEventListener('keydown',e=>{if(['ArrowDown','Enter',' '].includes(e.key)){e.preventDefault();this.open();this.items()[0]?.focus();}});this.content?.addEventListener('keydown',e=>this.key(e));this.content?.addEventListener('click',e=>{const item=e.target.closest('[role="menuitem"]');if(item&&!item.hasAttribute('data-rui-menu-keep-open')){emit(this.root,'rui:menuselect',{value:item.dataset.value||item.textContent.trim()});this.close();}});}
  open(){if(this.opened)return;this.opened=true;this.content.hidden=false;this.trigger.setAttribute('aria-expanded','true');placeFloating(this.trigger,this.content,{align:this.root.dataset.align||'start'});setTimeout(()=>document.addEventListener('pointerdown',this.onDoc),0);emit(this.root,'rui:menuopen');}

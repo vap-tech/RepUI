@@ -1,4 +1,4 @@
-import { $ } from '../core/dom.js';
+import { $ } from '../runtime/dom.js';
 export class ToastManager {
   constructor(region = $('[data-rui-toast-region]')) {
     this.region = region || this.createRegion();

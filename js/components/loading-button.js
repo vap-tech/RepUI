@@ -1,4 +1,4 @@
-import { $$ } from '../core/dom.js';
+import { $$ } from '../runtime/dom.js';
 export function initLoadingButtons(root = document) {
   $$('[data-rui-demo-loading]', root).forEach((button) => button.addEventListener('click', () => {
     const label = button.textContent;

@@ -1,5 +1,5 @@
-import { $$, emit, focusable } from '../core/dom.js';
-import { lockScroll, unlockScroll, pushLayer, removeLayer, isTopLayer, trapTab } from '../core/overlay.js';
+import { $$, emit, focusable } from '../runtime/dom.js';
+import { lockScroll, unlockScroll, pushLayer, removeLayer, isTopLayer, trapTab } from '../runtime/overlay.js';
 
 export class Sheet {
   constructor(root) {
