@@ -1,0 +1,13 @@
+{
+  "name": "rui-core",
+  "version": "0.2.0",
+  "commit": "abcdef1234567890",
+  "format": "iife",
+  "global": "RUICore",
+  "exports": [
+    "createCollectionController",
+    "createComboboxController",
+    "createPopupController"
+  ],
+  "sha256": "replace-after-build"
+}

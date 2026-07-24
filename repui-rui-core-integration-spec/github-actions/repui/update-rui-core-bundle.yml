@@ -1,0 +1,87 @@
+name: Update bundled rui-core
+on:
+  repository_dispatch:
+    types: [rui-core-released]
+  workflow_dispatch:
+    inputs:
+      tag:
+        required: true
+        type: string
+      sha:
+        required: false
+        type: string
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: update-rui-core
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    env:
+      CORE_REPOSITORY: vap-tech/rui-core
+      CORE_TAG: ${{ github.event.client_payload.tag || inputs.tag }}
+      EXPECTED_SHA: ${{ github.event.client_payload.sha || inputs.sha }}
+      BUNDLE_PATH: js/vendor/rui-core.min.js
+    steps:
+      - name: Validate source
+        if: github.event_name == 'repository_dispatch'
+        run: |
+          test "${{ github.event.client_payload.repository }}" = "$CORE_REPOSITORY"
+          [[ "$CORE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+([.-][0-9A-Za-z.-]+)?$ ]]
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ env.CORE_REPOSITORY }}
+          ref: ${{ env.CORE_TAG }}
+          path: .tmp/rui-core
+          fetch-depth: 0
+      - name: Verify SHA
+        if: env.EXPECTED_SHA != ''
+        run: test "$(git -C .tmp/rui-core rev-parse HEAD)" = "$EXPECTED_SHA"
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .tmp/rui-core/.node-version
+          cache: npm
+          cache-dependency-path: .tmp/rui-core/package-lock.json
+      - working-directory: .tmp/rui-core
+        run: |
+          npm ci
+          npm run lint
+          npm run typecheck
+          npm run test:unit
+          npm run test:dom
+          npm run build:repui
+          npm run verify:exports
+          npm run verify:size
+      - run: npm ci
+      - name: Replace bundle
+        run: |
+          mkdir -p "$(dirname "$BUNDLE_PATH")"
+          cp .tmp/rui-core/dist/repui/rui-core.min.js "$BUNDLE_PATH"
+          node scripts/verify-core-bundle.mjs "$BUNDLE_PATH" "$CORE_TAG"
+      - name: RepUI integration
+        run: |
+          npm run lint
+          npm run test:dom
+          npm run test:browser
+          npm run test:a11y
+          npm run build:demo
+      - name: Create PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BRANCH="automation/rui-core-${CORE_TAG#v}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$BRANCH"
+          git add "$BUNDLE_PATH"
+          git diff --cached --quiet && exit 0
+          git commit -m "chore(deps): update bundled rui-core to $CORE_TAG"
+          git push --force-with-lease origin "$BRANCH"
+          gh pr create --base main --head "$BRANCH" \
+            --title "chore(deps): update bundled rui-core to $CORE_TAG" \
+            --body "Automated core update. Source commit: $(git -C .tmp/rui-core rev-parse HEAD)"

@@ -1,0 +1,11 @@
+{
+  "name": "repui",
+  "private": true,
+  "version": "0.8.2.5",
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "test:unit": "node --test",
+    "test:dom": "node --test"
+  }
+}
