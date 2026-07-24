@@ -7,8 +7,9 @@ export class Combobox {
   constructor(root) {
     // Combobox связывает text input, hidden value, Listbox и floating content.
     this.root = root;
-    this.input = root.querySelector("[data-rui-combobox-input]");
-    this.content = root.querySelector("[data-rui-combobox-content]");
+    // Combobox использует единый актуальный core-style markup contract.
+    this.input = root.querySelector("[data-rui-input]");
+    this.content = root.querySelector("[data-rui-popup]");
     this.list = root.querySelector("[data-rui-combobox-list]") || this.content;
     this.hidden = root.querySelector('input[type="hidden"]');
     this.empty = root.querySelector("[data-rui-combobox-empty]");
