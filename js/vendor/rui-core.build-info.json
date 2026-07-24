@@ -1,12 +1,12 @@
 {
   "name": "rui-core",
   "version": "0.1.2",
-  "commit": "018da68",
+  "commit": "1a8b5c9",
   "format": "iife",
   "global": "RUICore",
   "bundle": "rui-core.min.js",
-  "bytes": 64908,
-  "sha256": "c1c994758a34bf26cd0e92d4e71ff6444882c16e12e6e5ef6969a41d25251d18",
+  "bytes": 65046,
+  "sha256": "d6dc767d32f537317b78b9ac228f02fb9cd856f8b4f9994bc7020520c3d75576",
   "sizeBudget": {
     "maxBytes": 61440,
     "withinBudget": false
