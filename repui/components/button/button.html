@@ -1,0 +1,205 @@
+{% load repui repui_layout %}
+
+{% container %}
+  {% stack spacing="lg" %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h1>Button</h1>
+        <p>
+          Кнопка запускает действие пользователя. Используйте её для отправки
+          формы, подтверждения операции, запуска загрузки или другого явного
+          действия.
+        </p>
+      {% endcard_header %}
+
+      {% card_body %}
+        <dl>
+          <div>
+            <dt>Статус</dt>
+            <dd>Stable</dd>
+          </div>
+          <div>
+            <dt>Использовать</dt>
+            <dd>Для действий, submit и подтверждений.</dd>
+          </div>
+          <div>
+            <dt>Не использовать</dt>
+            <dd>Для обычной навигации или постоянного переключателя состояния.</dd>
+          </div>
+        </dl>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h2>Варианты</h2>
+        <p>Основные визуальные варианты одной и той же кнопки.</p>
+      {% endcard_header %}
+
+      {% card_body %}
+        {% grid columns=3 spacing="md" %}
+          {% container column=1 %}
+            {% button variant="filled" %}Filled{% endbutton %}
+          {% endcontainer %}
+          {% container column=1 %}
+            {% button variant="outlined" %}Outlined{% endbutton %}
+          {% endcontainer %}
+          {% container column=1 %}
+            {% button variant="text" %}Text{% endbutton %}
+          {% endcontainer %}
+        {% endgrid %}
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h2>Цвета</h2>
+        <p>Конкретные оттенки приходят из активной темы.</p>
+      {% endcard_header %}
+
+      {% card_body %}
+        {% grid columns=5 spacing="md" %}
+          {% container column=1 %}
+            {% button variant="filled" color="default" %}Default{% endbutton %}
+          {% endcontainer %}
+          {% container column=1 %}
+            {% button variant="filled" color="primary" %}Primary{% endbutton %}
+          {% endcontainer %}
+          {% container column=1 %}
+            {% button variant="filled" color="success" %}Success{% endbutton %}
+          {% endcontainer %}
+          {% container column=1 %}
+            {% button variant="filled" color="warning" %}Warning{% endbutton %}
+          {% endcontainer %}
+          {% container column=1 %}
+            {% button variant="filled" color="danger" %}Danger{% endbutton %}
+          {% endcontainer %}
+        {% endgrid %}
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h2>Размеры и состояния</h2>
+      {% endcard_header %}
+
+      {% card_body %}
+        {% grid columns=4 spacing="md" %}
+          {% container column=1 %}
+            {% button size="sm" %}Small{% endbutton %}
+          {% endcontainer %}
+          {% container column=1 %}
+            {% button size="md" %}Medium{% endbutton %}
+          {% endcontainer %}
+          {% container column=1 %}
+            {% button size="lg" %}Large{% endbutton %}
+          {% endcontainer %}
+          {% container column=1 %}
+            {% button disabled=True %}Disabled{% endbutton %}
+          {% endcontainer %}
+        {% endgrid %}
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h2>Публичный API</h2>
+      {% endcard_header %}
+
+      {% card_body %}
+        <dl>
+          <div>
+            <dt><code>variant</code></dt>
+            <dd><code>filled</code>, <code>outlined</code> или <code>text</code>.</dd>
+          </div>
+          <div>
+            <dt><code>color</code></dt>
+            <dd>
+              <code>default</code>, <code>primary</code>, <code>success</code>,
+              <code>warning</code> или <code>danger</code>.
+            </dd>
+          </div>
+          <div>
+            <dt><code>size</code></dt>
+            <dd><code>sm</code>, <code>md</code> или <code>lg</code>.</dd>
+          </div>
+          <div>
+            <dt><code>disabled</code></dt>
+            <dd>Отключает действие.</dd>
+          </div>
+        </dl>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h2>Theme tokens</h2>
+      {% endcard_header %}
+
+      {% card_body %}
+        <ul>
+          <li><code>--rui-button-background</code></li>
+          <li><code>--rui-button-foreground</code></li>
+          <li><code>--rui-button-border</code></li>
+          <li><code>--rui-button-radius</code></li>
+          <li><code>--rui-button-shadow</code></li>
+          <li><code>--rui-button-padding-inline</code></li>
+          <li><code>--rui-button-padding-block</code></li>
+          <li><code>--rui-button-gap</code></li>
+          <li><code>--rui-button-transition</code></li>
+        </ul>
+
+        <p>
+          Приоритет: базовые токены темы → токены Button → variant/color →
+          пользовательская тема → локальные custom properties.
+        </p>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h2>Примеры</h2>
+      {% endcard_header %}
+
+      {% card_body %}
+        <h3>Основная кнопка</h3>
+        <pre><code>{% verbatim %}{% button variant="filled" color="primary" %}
+  Сохранить
+{% endbutton %}{% endverbatim %}</code></pre>
+
+        <h3>Вторичное действие</h3>
+        <pre><code>{% verbatim %}{% button variant="outlined" %}
+  Отмена
+{% endbutton %}{% endverbatim %}</code></pre>
+
+        <h3>Отключённая кнопка</h3>
+        <pre><code>{% verbatim %}{% button disabled=True %}
+  Недоступно
+{% endbutton %}{% endverbatim %}</code></pre>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h2>Проверка</h2>
+      {% endcard_header %}
+
+      {% card_body %}
+        {% stack spacing="sm" %}
+          <label><input type="checkbox"> Tab переводит фокус на кнопку.</label>
+          <label><input type="checkbox"> Enter запускает действие.</label>
+          <label><input type="checkbox"> Space запускает действие.</label>
+          <label><input type="checkbox"> Hover визуально различим.</label>
+          <label><input type="checkbox"> Focus хорошо виден.</label>
+          <label><input type="checkbox"> Active визуально различим.</label>
+          <label><input type="checkbox"> Disabled не запускает действие.</label>
+          <label><input type="checkbox"> Light mode выглядит корректно.</label>
+          <label><input type="checkbox"> Dark mode выглядит корректно.</label>
+          <label><input type="checkbox"> После HTMX swap кнопка работает.</label>
+        {% endstack %}
+      {% endcard_body %}
+    {% endcard %}
+
+  {% endstack %}
+{% endcontainer %}

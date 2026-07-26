@@ -6,6 +6,7 @@ from django.template import engines
 
 from .utils import (
     component_template_source,
+    get_component_styles,
     get_component,
     get_components,
 )
@@ -24,11 +25,14 @@ def workbench(
     if component_name and selected is None:
         raise Http404("Unknown RepUI component")
 
+    components = get_components()
+
     return render(
         request,
         "workbench/workbench.html",
         {
-            "components": get_components(),
+            "components": components,
+            "component_styles": get_component_styles(components),
             "selected_component": selected,
         },
     )

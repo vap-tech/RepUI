@@ -1,0 +1,34 @@
+{% load repui repui_layout %}
+
+{% container %}
+  {% card width="full" surface="flat" %}
+    {% card_header %}
+      <h1>RepUI Workbench</h1>
+      <p>
+        Выберите компонент слева, чтобы открыть его демонстрацию,
+        публичный API и список ручных проверок.
+      </p>
+    {% endcard_header %}
+
+    {% card_body %}
+      {% stack %}
+        <section>
+          <h2>Как это работает</h2>
+          <p>
+            Каждый компонент хранит свою Workbench-композицию рядом
+            с исходным кодом.
+          </p>
+        </section>
+
+        <section>
+          <h2>Состояния списка</h2>
+          <p>
+            Активный пункт уже имеет страницу для просмотра.
+            Disabled означает, что компонент найден, но его
+            <code>&lt;name&gt;.html</code> пока не добавлен.
+          </p>
+        </section>
+      {% endstack %}
+    {% endcard_body %}
+  {% endcard %}
+{% endcontainer %}

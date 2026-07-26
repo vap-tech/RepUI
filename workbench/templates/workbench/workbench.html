@@ -12,12 +12,11 @@
   <link rel="stylesheet" href="{% static 'repui/theme/default/theme.css' %}">
   <link rel="stylesheet" href="{% static 'repui/layout/layout.css' %}">
   <link rel="stylesheet" href="{% static 'repui/theme/default/appbar-tokens.css' %}">
-  <link rel="stylesheet" href="{% static 'repui/components/appbar/appbar.css' %}">
   <link rel="stylesheet" href="{% static 'repui/theme/default/panel-tokens.css' %}">
-  <link rel="stylesheet" href="{% static 'repui/components/panel/panel.css' %}">
-  <link rel="stylesheet" href="{% static 'repui/components/page/page.css' %}">
   <link rel="stylesheet" href="{% static 'repui/theme/default/card-tokens.css' %}">
-  <link rel="stylesheet" href="{% static 'repui/components/card/card.css' %}">
+  {% for asset in component_styles %}
+    <link rel="stylesheet" href="{% static asset %}">
+  {% endfor %}
   <link rel="stylesheet" href="{% static 'workbench/docs.css' %}">
   <link rel="stylesheet" href="{% static 'workbench/workbench.css' %}">
   <title>RepUI Workbench</title>
@@ -33,6 +32,7 @@
       >
         RepUI Workbench
       </a>
+      {% include "workbench/partials/theme_mode_select.html" %}
     </div>
   {% endappbar %}
 

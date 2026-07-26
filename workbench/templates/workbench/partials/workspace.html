@@ -4,8 +4,8 @@
     <div hx-get="{% url 'workbench:component-partial' selected_component.name %}"
          hx-trigger="load" hx-swap="outerHTML">Загрузка…</div>
   {% elif selected_component %}
-    <p>{{ selected_component.error }}</p>
+    {% include "workbench/partials/unavailable_component.html" %}
   {% else %}
-    <p>Выберите компонент слева.</p>
+    {% include "workbench/partials/empty_state.html" %}
   {% endif %}
 {% endpanel %}

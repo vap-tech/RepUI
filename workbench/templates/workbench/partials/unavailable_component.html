@@ -1,0 +1,20 @@
+{% load repui repui_layout %}
+
+{% container %}
+  {% card width="full" surface="flat" %}
+    {% card_header %}
+      <h1>{{ selected_component.title }}</h1>
+      <p>Компонент найден, но его Workbench-страница пока не готова.</p>
+    {% endcard_header %}
+
+    {% card_body %}
+      <p>{{ selected_component.error }}</p>
+      <p>
+        Добавьте файл:
+        <code>
+          repui/components/{{ selected_component.name }}/{{ selected_component.name }}.html
+        </code>
+      </p>
+    {% endcard_body %}
+  {% endcard %}
+{% endcontainer %}

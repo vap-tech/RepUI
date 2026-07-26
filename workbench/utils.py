@@ -115,3 +115,23 @@ def get_component(
         ),
         None,
     )
+
+
+def get_component_styles(
+    components: list[dict[str, Any]] | None = None,
+) -> list[str]:
+    """Collect unique component styles in stable discovery order."""
+    styles: list[str] = []
+    seen: set[str] = set()
+
+    for component in components or get_components():
+        declared = component.get("manifest", {}).get("styles", ())
+        if isinstance(declared, str):
+            declared = (declared,)
+
+        for asset in declared:
+            if asset and asset not in seen:
+                seen.add(asset)
+                styles.append(str(asset))
+
+    return styles
