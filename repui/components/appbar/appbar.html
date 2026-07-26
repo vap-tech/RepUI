@@ -1,0 +1,232 @@
+{% load repui repui_layout %}
+
+{% container %}
+  {% stack spacing="lg" %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h2>AppBar</h2>
+        <p>
+          AppBar — полноширинная верхняя область страницы для размещения
+          навигации, меню, поиска, кнопок, карточек состояния и других
+          компонентов.
+        </p>
+      {% endcard_header %}
+
+      {% card_body %}
+        <p>Статус | Stable</p>
+        <p>
+          Использовать | Для верхней области Page, которая либо уезжает вместе
+          со страницей, либо остаётся сверху при прокрутке.
+        </p>
+        <p>
+          Не использовать | Для внутренней раскладки содержимого. Размещение
+          элементов внутри AppBar выполняют Container, Grid, Stack и сами
+          вложенные компоненты.
+        </p>
+        <p>
+          AppBar не показан внутри рабочей области: компонент относится к shell
+          страницы. Элементы ниже управляют AppBar самого Workbench.
+        </p>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Управление AppBar Workbench</h3>
+        <p>Изменения применяются сразу, без перезагрузки страницы.</p>
+      {% endcard_header %}
+
+      {% card_body %}
+        {% stack spacing="md" %}
+          <label>
+            <span>Положение при прокрутке</span>
+            <select
+              onchange="
+                const appbar = document.getElementById('docs-appbar');
+                if (!appbar) return;
+                appbar.dataset.behavior = this.value;
+                appbar.dispatchEvent(new CustomEvent(
+                  'repui:appbarchange',
+                  {
+                    bubbles: true,
+                    detail: {
+                      behavior: appbar.dataset.behavior,
+                      surface: appbar.dataset.surface || 'default'
+                    }
+                  }
+                ));
+              "
+            >
+              <option value="static">Обычная шапка — уезжает при прокрутке</option>
+              <option value="sticky" selected>Закреплённая — остаётся сверху</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Поверхность</span>
+            <select
+              onchange="
+                const appbar = document.getElementById('docs-appbar');
+                if (!appbar) return;
+                appbar.dataset.surface = this.value;
+                appbar.dispatchEvent(new CustomEvent(
+                  'repui:appbarchange',
+                  {
+                    bubbles: true,
+                    detail: {
+                      behavior: appbar.dataset.behavior || 'static',
+                      surface: appbar.dataset.surface
+                    }
+                  }
+                ));
+              "
+            >
+              <option value="default">Default</option>
+              <option value="solid">Solid</option>
+              <option value="transparent">Transparent</option>
+              <option value="glass" selected>Glass</option>
+            </select>
+          </label>
+        {% endstack %}
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Публичный API</h3>
+      {% endcard_header %}
+
+      {% card_body %}
+        <dl>
+          <div>
+            <dt><code>behavior</code></dt>
+            <dd>
+              <code>static</code> — AppBar находится в потоке и уезжает вместе
+              со страницей. <code>sticky</code> — остаётся сверху.
+            </dd>
+          </div>
+          <div>
+            <dt><code>surface</code></dt>
+            <dd>
+              Открытое имя поверхности для темы. Дефолтная тема содержит
+              <code>default</code>, <code>solid</code>,
+              <code>transparent</code> и <code>glass</code>.
+            </dd>
+          </div>
+          <div>
+            <dt><code>id</code></dt>
+            <dd>Нужен, если AppBar должен быть доступен для runtime-управления.</dd>
+          </div>
+          <div>
+            <dt><code>class_name</code> и <code>attrs</code></dt>
+            <dd>Добавляют прикладной класс и обычные HTML-атрибуты.</dd>
+          </div>
+        </dl>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Runtime API</h3>
+      {% endcard_header %}
+
+      {% card_body %}
+        <ul>
+          <li><code>getAppBarState(appbar)</code></li>
+          <li><code>setAppBarBehavior(appbar, behavior)</code></li>
+          <li><code>toggleAppBarBehavior(appbar)</code></li>
+          <li><code>setAppBarSurface(appbar, surface)</code></li>
+          <li><code>mountAppBarControls(root)</code></li>
+        </ul>
+        <p>
+          После изменения AppBar отправляет событие
+          <code>repui:appbarchange</code>. В <code>event.detail</code>
+          находятся актуальные <code>behavior</code> и <code>surface</code>.
+        </p>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Theme tokens</h3>
+      {% endcard_header %}
+
+      {% card_body %}
+        <ul>
+          <li><code>--rui-appbar-background</code></li>
+          <li><code>--rui-appbar-foreground</code></li>
+          <li><code>--rui-appbar-border</code></li>
+          <li><code>--rui-appbar-shadow</code></li>
+          <li><code>--rui-appbar-backdrop-filter</code></li>
+          <li><code>--rui-appbar-padding-block</code></li>
+          <li><code>--rui-appbar-padding-inline</code></li>
+          <li><code>--rui-appbar-z-index</code></li>
+          <li><code>--rui-appbar-sticky-offset</code></li>
+          <li><code>--rui-appbar-transition</code></li>
+        </ul>
+        <p>
+          Приоритет: базовые tokens → активная light/dark theme → surface →
+          пользовательская тема → локальные custom properties.
+        </p>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Примеры</h3>
+      {% endcard_header %}
+
+      {% card_body %}
+        <h4>Обычная шапка страницы</h4>
+        <pre><code>{% verbatim %}{% appbar behavior="static" surface="solid" %}
+  ...
+{% endappbar %}{% endverbatim %}</code></pre>
+
+        <h4>Закреплённая стеклянная область</h4>
+        <pre><code>{% verbatim %}{% appbar
+  id="main-appbar"
+  behavior="sticky"
+  surface="glass"
+%}
+  {% grid columns=4 %}
+    ...
+  {% endgrid %}
+{% endappbar %}{% endverbatim %}</code></pre>
+
+        <h4>Изменение во время работы</h4>
+        <pre><code>import {
+  setAppBarBehavior,
+  setAppBarSurface,
+} from "/static/repui/components/appbar/appbar.js";
+
+const appbar = document.querySelector("#main-appbar");
+
+setAppBarBehavior(appbar, "sticky");
+setAppBarSurface(appbar, "glass");</code></pre>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Проверка</h3>
+      {% endcard_header %}
+
+      {% card_body %}
+        {% stack spacing="sm" %}
+          <label><input type="checkbox"> В режиме static AppBar уезжает при прокрутке страницы.</label>
+          <label><input type="checkbox"> В режиме sticky AppBar остаётся сверху.</label>
+          <label><input type="checkbox"> Переключение behavior не требует перезагрузки.</label>
+          <label><input type="checkbox"> Default читается в light и dark.</label>
+          <label><input type="checkbox"> Solid показывает непрозрачную поверхность.</label>
+          <label><input type="checkbox"> Transparent показывает фон страницы.</label>
+          <label><input type="checkbox"> Glass показывает прозрачность и blur.</label>
+          <label><input type="checkbox"> Переключение surface не меняет геометрию содержимого.</label>
+          <label><input type="checkbox"> После HTMX-монтирования оба select продолжают работать.</label>
+          <label><input type="checkbox"> Событие repui:appbarchange содержит актуальное состояние.</label>
+        {% endstack %}
+      {% endcard_body %}
+    {% endcard %}
+
+  {% endstack %}
+{% endcontainer %}

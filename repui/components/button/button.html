@@ -5,7 +5,7 @@
 
     {% card width="full" %}
       {% card_header %}
-        <h1>Button</h1>
+        <h2>Button</h2>
         <p>
           Кнопка запускает действие пользователя. Используйте её для отправки
           формы, подтверждения операции, запуска загрузки или другого явного
@@ -14,97 +14,56 @@
       {% endcard_header %}
 
       {% card_body %}
-        <dl>
-          <div>
-            <dt>Статус</dt>
-            <dd>Stable</dd>
-          </div>
-          <div>
-            <dt>Использовать</dt>
-            <dd>Для действий, submit и подтверждений.</dd>
-          </div>
-          <div>
-            <dt>Не использовать</dt>
-            <dd>Для обычной навигации или постоянного переключателя состояния.</dd>
-          </div>
-        </dl>
+        <p>Статус | Stable</p>
+        <p>Использовать | Для действий, submit и подтверждений.</p>
+        <p>Не использовать | Для обычной навигации или постоянного переключателя состояния.</p>
       {% endcard_body %}
     {% endcard %}
 
     {% card width="full" %}
       {% card_header %}
-        <h2>Варианты</h2>
+        <h3>Варианты</h3>
         <p>Основные визуальные варианты одной и той же кнопки.</p>
       {% endcard_header %}
 
       {% card_body %}
-        {% grid columns=3 spacing="md" %}
-          {% container column=1 %}
-            {% button variant="filled" %}Filled{% endbutton %}
-          {% endcontainer %}
-          {% container column=1 %}
-            {% button variant="outlined" %}Outlined{% endbutton %}
-          {% endcontainer %}
-          {% container column=1 %}
-            {% button variant="text" %}Text{% endbutton %}
-          {% endcontainer %}
-        {% endgrid %}
+        {% button variant="filled" %}Filled{% endbutton %}
+        {% button variant="outlined" %}Outlined{% endbutton %}
+        {% button variant="text" %}Text{% endbutton %}
       {% endcard_body %}
     {% endcard %}
 
     {% card width="full" %}
       {% card_header %}
-        <h2>Цвета</h2>
+        <h3>Цвета</h3>
         <p>Конкретные оттенки приходят из активной темы.</p>
       {% endcard_header %}
 
       {% card_body %}
-        {% grid columns=5 spacing="md" %}
-          {% container column=1 %}
-            {% button variant="filled" color="default" %}Default{% endbutton %}
-          {% endcontainer %}
-          {% container column=1 %}
-            {% button variant="filled" color="primary" %}Primary{% endbutton %}
-          {% endcontainer %}
-          {% container column=1 %}
-            {% button variant="filled" color="success" %}Success{% endbutton %}
-          {% endcontainer %}
-          {% container column=1 %}
-            {% button variant="filled" color="warning" %}Warning{% endbutton %}
-          {% endcontainer %}
-          {% container column=1 %}
-            {% button variant="filled" color="danger" %}Danger{% endbutton %}
-          {% endcontainer %}
-        {% endgrid %}
+        {% button variant="filled" color="default" %}Default{% endbutton %}
+        {% button variant="filled" color="primary" %}Primary{% endbutton %}
+        {% button variant="filled" color="success" %}Success{% endbutton %}
+        {% button variant="filled" color="warning" %}Warning{% endbutton %}
+        {% button variant="filled" color="danger" %}Danger{% endbutton %}
       {% endcard_body %}
     {% endcard %}
 
     {% card width="full" %}
       {% card_header %}
-        <h2>Размеры и состояния</h2>
+        <h3>Размеры и состояния</h3>
       {% endcard_header %}
 
       {% card_body %}
-        {% grid columns=4 spacing="md" %}
-          {% container column=1 %}
-            {% button size="sm" %}Small{% endbutton %}
-          {% endcontainer %}
-          {% container column=1 %}
-            {% button size="md" %}Medium{% endbutton %}
-          {% endcontainer %}
-          {% container column=1 %}
-            {% button size="lg" %}Large{% endbutton %}
-          {% endcontainer %}
-          {% container column=1 %}
-            {% button disabled=True %}Disabled{% endbutton %}
-          {% endcontainer %}
-        {% endgrid %}
+        {% button size="sm" %}Small{% endbutton %}
+        {% button size="md" %}Medium{% endbutton %}
+        {% button size="lg" %}Large{% endbutton %}
+        {% button disabled=True %}Disabled{% endbutton %}
       {% endcard_body %}
     {% endcard %}
 
     {% card width="full" %}
       {% card_header %}
-        <h2>Публичный API</h2>
+        <h3>Публичный API</h3>
       {% endcard_header %}
 
       {% card_body %}
@@ -134,7 +93,7 @@
 
     {% card width="full" %}
       {% card_header %}
-        <h2>Theme tokens</h2>
+        <h3>Theme tokens</h3>
       {% endcard_header %}
 
       {% card_body %}
@@ -159,7 +118,7 @@
 
     {% card width="full" %}
       {% card_header %}
-        <h2>Примеры</h2>
+        <h3>Примеры</h3>
       {% endcard_header %}
 
       {% card_body %}

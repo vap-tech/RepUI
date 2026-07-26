@@ -1,0 +1,171 @@
+{% load repui repui_layout %}
+
+{% container %}
+  {% stack spacing="lg" %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h2>Card</h2>
+        <p>
+          Card — оформленная поверхность для логической группы содержимого.
+          В отличие от Panel, Card отвечает за внешний вид: скругления,
+          границы, тени и другие декоративные свойства определяются темой.
+        </p>
+      {% endcard_header %}
+
+      {% card_body %}
+        <p><strong>Статус:</strong> Stable</p>
+        <p><strong>Использовать:</strong> для самостоятельных смысловых блоков, настроек, виджетов, карточек товара, секций документации.</p>
+        <p><strong>Не использовать:</strong> как замену Layout или Page.</p>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Пример</h3>
+      {% endcard_header %}
+      {% card_body %}
+        {% card width="full" %}
+          {% card_header %}
+            <h4>Hello, Card</h4>
+            <p>Минимальная композиция Card.</p>
+          {% endcard_header %}
+          {% card_body %}
+            <p>
+              Внутри можно свободно размещать HTML, Button, Stack, Grid,
+              Panel и любые другие публичные компоненты RepUI.
+            </p>
+            {% button variant="filled" %}Действие{% endbutton %}
+          {% endcard_body %}
+        {% endcard %}
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Анатомия</h3>
+      {% endcard_header %}
+      {% card_body %}
+        <ul>
+          <li><code>card_header</code> — заголовок и вспомогательная информация.</li>
+          <li><code>card_body</code> — основное содержимое.</li>
+          <li><code>card_footer</code> — действия и итоговая информация (необязательно).</li>
+        </ul>
+        <p>
+          Все части независимы. Card не требует обязательного наличия Header
+          или Footer.
+        </p>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Публичный API</h3>
+      {% endcard_header %}
+      {% card_body %}
+        <dl>
+          <div>
+            <dt><code>surface</code></dt>
+            <dd>Имя поверхности для темы. По умолчанию <code>default</code>.</dd>
+          </div>
+          <div>
+            <dt><code>width</code> / <code>height</code></dt>
+            <dd><code>content</code> или <code>full</code>.</dd>
+          </div>
+          <div>
+            <dt><code>id</code>, <code>class_name</code>, <code>attrs</code></dt>
+            <dd>Добавляют HTML-атрибуты, не меняя контракт компонента.</dd>
+          </div>
+        </dl>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Что можно размещать внутри</h3>
+      {% endcard_header %}
+      {% card_body %}
+        <ul>
+          <li>обычный HTML;</li>
+          <li>Button, Badge и другие компоненты;</li>
+          <li>Container, Stack и Grid;</li>
+          <li>Panel;</li>
+          <li>другие Card при необходимости.</li>
+        </ul>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>HTMX</h3>
+      {% endcard_header %}
+      {% card_body %}
+        <p>
+          Card не имеет собственного runtime API и безопасно заменяется через
+          <code>innerHTML</code> и <code>outerHTML</code>.
+        </p>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Theme tokens</h3>
+      {% endcard_header %}
+      {% card_body %}
+        <ul>
+          <li><code>--rui-card-background</code></li>
+          <li><code>--rui-card-foreground</code></li>
+          <li><code>--rui-card-border</code></li>
+          <li><code>--rui-card-radius</code></li>
+          <li><code>--rui-card-shadow</code></li>
+          <li><code>--rui-card-padding</code></li>
+        </ul>
+        <p>
+          Приоритет: базовые tokens → light/dark theme → surface →
+          пользовательская тема → локальные custom properties.
+        </p>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Примеры</h3>
+      {% endcard_header %}
+      {% card_body %}
+<pre><code>{% verbatim %}{% card %}
+  {% card_header %}
+    Заголовок
+  {% endcard_header %}
+
+  {% card_body %}
+    Содержимое
+  {% endcard_body %}
+{% endcard %}{% endverbatim %}</code></pre>
+
+<pre><code>{% verbatim %}{% card surface="glass" width="full" %}
+  ...
+{% endcard %}{% endverbatim %}</code></pre>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Проверка</h3>
+      {% endcard_header %}
+      {% card_body %}
+        {% stack spacing="sm" %}
+          <label><input type="checkbox"> Header отображается корректно.</label>
+          <label><input type="checkbox"> Body отображается корректно.</label>
+          <label><input type="checkbox"> Footer (если есть) выравнивается корректно.</label>
+          <label><input type="checkbox"> Light theme читается.</label>
+          <label><input type="checkbox"> Dark theme читается.</label>
+          <label><input type="checkbox"> Пользовательский surface применяется.</label>
+          <label><input type="checkbox"> Вложенные компоненты работают.</label>
+          <label><input type="checkbox"> HTMX innerHTML работает.</label>
+          <label><input type="checkbox"> HTMX outerHTML работает.</label>
+        {% endstack %}
+      {% endcard_body %}
+    {% endcard %}
+
+  {% endstack %}
+{% endcontainer %}

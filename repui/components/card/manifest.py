@@ -7,6 +7,7 @@ COMPONENT = {
     "styles": (
         "repui/components/card/card.css",
     ),
+    "theme_styles": ("repui/theme/default/card-tokens.css",),
     "scripts": (),
     "runtime": False,
     "htmx": {

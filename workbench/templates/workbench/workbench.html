@@ -1,4 +1,4 @@
-{% load static repui repui_theme repui_layout %}
+{% load static repui repui_theme repui_layout repui_css %}
 <!doctype html>
 <html lang="ru" data-rui-theme-mode="system" data-rui-color-scheme="light">
 <head>
@@ -6,17 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="{% static 'workbench/favicon.svg' %}">
   {% repui_theme_head %}
-  <link rel="stylesheet" href="{% static 'repui/foundation/critical.css' %}">
-  <link rel="stylesheet" href="{% static 'repui/theme/default/layers.css' %}">
-  <link rel="stylesheet" href="{% static 'repui/theme/default/metrics.css' %}">
-  <link rel="stylesheet" href="{% static 'repui/theme/default/theme.css' %}">
-  <link rel="stylesheet" href="{% static 'repui/layout/layout.css' %}">
-  <link rel="stylesheet" href="{% static 'repui/theme/default/appbar-tokens.css' %}">
-  <link rel="stylesheet" href="{% static 'repui/theme/default/panel-tokens.css' %}">
-  <link rel="stylesheet" href="{% static 'repui/theme/default/card-tokens.css' %}">
-  {% for asset in component_styles %}
-    <link rel="stylesheet" href="{% static asset %}">
-  {% endfor %}
+  {% repui_css page appbar panel card button %}
   <link rel="stylesheet" href="{% static 'workbench/docs.css' %}">
   <link rel="stylesheet" href="{% static 'workbench/workbench.css' %}">
   <title>RepUI Workbench</title>
@@ -24,7 +14,7 @@
 <body>
 
 {% page %}
-  {% appbar behavior="sticky" surface="glass" %}
+        {% appbar id="docs-appbar" behavior="sticky" surface="glass" %}
     <div class="docs-header">
       <a
         href="{% url 'workbench:home' %}"
@@ -32,6 +22,7 @@
       >
         RepUI Workbench
       </a>
+      {% include "workbench/partials/appbar_controls.html" %}
       {% include "workbench/partials/theme_mode_select.html" %}
     </div>
   {% endappbar %}
@@ -51,5 +42,10 @@
 
 <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
 <script type="module" src="{% static 'repui/theme/default/theme.js' %}"></script>
+<script type="module">
+  import { mountAppBarControls } from "{% static 'repui/components/appbar/appbar.js' %}";
+
+  mountAppBarControls(document);
+</script>
 </body>
 </html>

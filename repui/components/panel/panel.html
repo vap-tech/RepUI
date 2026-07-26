@@ -1,0 +1,240 @@
+{% load repui repui_layout %}
+
+{% container %}
+  {% stack spacing="lg" %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h2>Panel</h2>
+        <p>
+          Panel — базовая поверхность RepUI для размещения содержимого внутри
+          уже выделенной области.
+        </p>
+      {% endcard_header %}
+
+      {% card_body %}
+        <p>Статус | Stable</p>
+        <p>
+          Использовать | Для sidebar, workspace, внутренних областей страницы
+          и других поверхностей без собственного поведения.
+        </p>
+        <p>
+          Не использовать | Как замену Layout. Panel не делит пространство на
+          строки и колонки и не управляет расположением соседних элементов.
+        </p>
+        <p>
+          Panel не имеет JavaScript API, listeners, mount/unmount или
+          собственного runtime-состояния.
+        </p>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Пример</h3>
+        <p>
+          Panel может занимать размер по содержимому или всю доступную область.
+        </p>
+      {% endcard_header %}
+
+      {% card_body %}
+        {% panel surface="default" width="full" %}
+          <h4>Обычная Panel</h4>
+          <p>
+            Внутрь можно помещать обычный HTML, Layout и любые компоненты RepUI.
+          </p>
+          {% button variant="outlined" %}
+            Действие внутри Panel
+          {% endbutton %}
+        {% endpanel %}
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Назначение surface</h3>
+      {% endcard_header %}
+
+      {% card_body %}
+        <p>
+          <code>surface</code> — открытое имя поверхности для Theme. Оно не
+          включает поведение и не ограничено закрытым списком.
+        </p>
+
+        <p>
+          Например, sidebar может использовать
+          <code>surface="sidebar"</code>, а рабочая область —
+          <code>surface="default"</code>.
+        </p>
+
+        <p>
+          Если тема не содержит правила для указанного значения, Panel
+          продолжает использовать базовые токены.
+        </p>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Публичный API</h3>
+      {% endcard_header %}
+
+      {% card_body %}
+        <dl>
+          <div>
+            <dt><code>surface</code></dt>
+            <dd>
+              Открытое имя поверхности для CSS-темы. По умолчанию
+              <code>default</code>.
+            </dd>
+          </div>
+
+          <div>
+            <dt><code>width</code></dt>
+            <dd>
+              <code>content</code> — ширина по содержимому,
+              <code>full</code> — вся доступная ширина.
+            </dd>
+          </div>
+
+          <div>
+            <dt><code>height</code></dt>
+            <dd>
+              <code>content</code> — высота по содержимому,
+              <code>full</code> — вся доступная высота.
+            </dd>
+          </div>
+
+          <div>
+            <dt><code>column</code> и <code>row</code></dt>
+            <dd>
+              Позволяют Panel занять выделенную часть родительского Layout.
+            </dd>
+          </div>
+
+          <div>
+            <dt><code>id</code>, <code>class_name</code>, <code>attrs</code></dt>
+            <dd>
+              Добавляют идентификатор, прикладной класс и обычные
+              HTML-атрибуты.
+            </dd>
+          </div>
+        </dl>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Что можно вкладывать</h3>
+      {% endcard_header %}
+
+      {% card_body %}
+        <ul>
+          <li>обычный семантический HTML;</li>
+          <li>Container, Grid и Stack;</li>
+          <li>Button, Card и другие компоненты;</li>
+          <li>HTMX-фрагменты;</li>
+          <li>другую Panel, если это действительно отдельная поверхность.</li>
+        </ul>
+
+        <p>
+          Размер и расположение вложенных элементов определяют сами элементы
+          и Layout. Panel не навязывает им собственную сетку.
+        </p>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>HTMX</h3>
+      {% endcard_header %}
+
+      {% card_body %}
+        <p>
+          Panel безопасно заменяется через <code>innerHTML</code> и
+          <code>outerHTML</code>.
+        </p>
+        <p>
+          Повторная инициализация и cleanup не нужны: Panel не создаёт
+          обработчики, observers или timers.
+        </p>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Theme tokens</h3>
+      {% endcard_header %}
+
+      {% card_body %}
+        <ul>
+          <li><code>--rui-panel-background</code></li>
+          <li><code>--rui-panel-foreground</code></li>
+          <li><code>--rui-panel-border</code></li>
+          <li><code>--rui-panel-radius</code></li>
+          <li><code>--rui-panel-shadow</code></li>
+          <li><code>--rui-panel-backdrop-filter</code></li>
+          <li><code>--rui-panel-padding</code></li>
+        </ul>
+
+        <p>
+          Приоритет: базовые tokens → активная light/dark theme → surface →
+          пользовательская тема → локальные custom properties.
+        </p>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Примеры</h3>
+      {% endcard_header %}
+
+      {% card_body %}
+        <h4>Обычная поверхность</h4>
+        <pre><code>{% verbatim %}{% panel %}
+  Содержимое
+{% endpanel %}{% endverbatim %}</code></pre>
+
+        <h4>Sidebar</h4>
+        <pre><code>{% verbatim %}{% panel
+  surface="sidebar"
+  width="full"
+  height="full"
+%}
+  ...
+{% endpanel %}{% endverbatim %}</code></pre>
+
+        <h4>Рабочая область</h4>
+        <pre><code>{% verbatim %}{% panel
+  surface="default"
+  width="full"
+  height="full"
+  id="workspace"
+%}
+  ...
+{% endpanel %}{% endverbatim %}</code></pre>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Проверка</h3>
+      {% endcard_header %}
+
+      {% card_body %}
+        {% stack spacing="sm" %}
+          <label><input type="checkbox"> По умолчанию размер следует содержимому.</label>
+          <label><input type="checkbox"> width="full" занимает ширину родителя.</label>
+          <label><input type="checkbox"> height="full" занимает конечную высоту родителя.</label>
+          <label><input type="checkbox"> surface="default" читается в light.</label>
+          <label><input type="checkbox"> surface="default" читается в dark.</label>
+          <label><input type="checkbox"> Пользовательский surface не ломает базовое оформление.</label>
+          <label><input type="checkbox"> Вложенные компоненты сохраняют своё поведение.</label>
+          <label><input type="checkbox"> HTMX innerHTML работает.</label>
+          <label><input type="checkbox"> HTMX outerHTML работает.</label>
+        {% endstack %}
+      {% endcard_body %}
+    {% endcard %}
+
+  {% endstack %}
+{% endcontainer %}

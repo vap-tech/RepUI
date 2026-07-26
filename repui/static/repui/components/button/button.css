@@ -12,6 +12,7 @@
     --rui-button-bg-hover: var(--rui-color-surface-hover);
     --rui-button-bg-pressed: var(--rui-color-surface-pressed);
     --rui-button-fg: var(--rui-color-text);
+    --rui-button-accent: var(--rui-color-text);
     --rui-button-border: var(--rui-color-border);
     --rui-button-border-hover: var(--rui-color-border-strong);
     --rui-button-soft-bg: var(--rui-color-surface-hover);
@@ -109,6 +110,7 @@
     --rui-button-bg-hover: var(--rui-color-primary-hover);
     --rui-button-bg-pressed: var(--rui-color-primary-hover);
     --rui-button-fg: var(--rui-color-on-primary);
+    --rui-button-accent: var(--rui-color-primary);
     --rui-button-border: var(--rui-color-primary);
     --rui-button-border-hover: var(--rui-color-primary-hover);
     --rui-button-soft-bg: var(--rui-color-primary-soft);
@@ -119,6 +121,7 @@
     --rui-button-bg-hover: var(--rui-color-secondary-hover);
     --rui-button-bg-pressed: var(--rui-color-secondary-hover);
     --rui-button-fg: var(--rui-color-on-secondary);
+    --rui-button-accent: var(--rui-color-secondary);
     --rui-button-border: var(--rui-color-secondary);
     --rui-button-border-hover: var(--rui-color-secondary-hover);
     --rui-button-soft-bg: var(--rui-color-secondary-soft);
@@ -129,6 +132,7 @@
     --rui-button-bg-hover: var(--rui-color-success-hover);
     --rui-button-bg-pressed: var(--rui-color-success-hover);
     --rui-button-fg: var(--rui-color-on-success);
+    --rui-button-accent: var(--rui-color-success);
     --rui-button-border: var(--rui-color-success);
     --rui-button-border-hover: var(--rui-color-success-hover);
     --rui-button-soft-bg: var(--rui-color-success-soft);
@@ -139,6 +143,7 @@
     --rui-button-bg-hover: var(--rui-color-warning-hover);
     --rui-button-bg-pressed: var(--rui-color-warning-hover);
     --rui-button-fg: var(--rui-color-on-warning);
+    --rui-button-accent: var(--rui-color-warning);
     --rui-button-border: var(--rui-color-warning);
     --rui-button-border-hover: var(--rui-color-warning-hover);
     --rui-button-soft-bg: var(--rui-color-warning-soft);
@@ -149,6 +154,7 @@
     --rui-button-bg-hover: var(--rui-color-danger-hover);
     --rui-button-bg-pressed: var(--rui-color-danger-hover);
     --rui-button-fg: var(--rui-color-on-danger);
+    --rui-button-accent: var(--rui-color-danger);
     --rui-button-border: var(--rui-color-danger);
     --rui-button-border-hover: var(--rui-color-danger-hover);
     --rui-button-soft-bg: var(--rui-color-danger-soft);
@@ -157,36 +163,36 @@
   /* Variants */
   :where(.rui-button[data-variant="outlined"]) {
     background: transparent;
-    color: var(--rui-button-bg);
+    color: var(--rui-button-accent);
     border-color: var(--rui-button-border);
   }
 
   :where(.rui-button[data-variant="outlined"]:hover:not([disabled]):not([aria-disabled="true"])) {
     background: var(--rui-button-soft-bg);
-    color: var(--rui-button-bg);
+    color: var(--rui-button-accent);
   }
 
   :where(.rui-button[data-variant="text"]) {
     background: transparent;
-    color: var(--rui-button-bg);
+    color: var(--rui-button-accent);
     border-color: transparent;
   }
 
   :where(.rui-button[data-variant="text"]:hover:not([disabled]):not([aria-disabled="true"])) {
     background: var(--rui-button-soft-bg);
-    color: var(--rui-button-bg);
+    color: var(--rui-button-accent);
     border-color: transparent;
   }
 
   :where(.rui-button[data-variant="soft"]) {
     background: var(--rui-button-soft-bg);
-    color: var(--rui-button-bg);
+    color: var(--rui-button-accent);
     border-color: transparent;
   }
 
   :where(.rui-button[data-variant="soft"]:hover:not([disabled]):not([aria-disabled="true"])) {
     background: var(--rui-button-soft-bg);
-    color: var(--rui-button-bg-hover);
+    color: var(--rui-button-accent);
     border-color: transparent;
   }
 
