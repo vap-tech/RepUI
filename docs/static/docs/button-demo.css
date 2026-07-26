@@ -14,15 +14,6 @@
     gap: var(--rui-space-4);
   }
 
-  .example,
-  .component-panel__header,
-  .quality-checklist {
-    border: 1px solid var(--rui-color-border);
-    border-radius: var(--rui-radius-lg);
-    background: var(--rui-color-surface);
-    color: var(--rui-color-text);
-  }
-
   .example__preview {
     padding: var(--rui-space-5);
     border: 1px dashed var(--rui-color-border);

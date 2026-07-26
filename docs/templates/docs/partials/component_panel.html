@@ -1,49 +1,64 @@
+{% load repui %}
 <section class="component-panel" data-component="{{ manifest.name }}">
-  <header class="component-panel__header">
-    <p class="component-panel__eyebrow">{{ manifest.status }}</p>
-    <h2>{{ manifest.title }}</h2>
-    <p>{{ manifest.description }}</p>
-  </header>
+  {% card class_name="component-panel__header" %}
+    {% card_header %}
+      <p class="component-panel__eyebrow">{{ manifest.status }}</p>
+      <h2>{{ manifest.title }}</h2>
+      <p>{{ manifest.description }}</p>
+    {% endcard_header %}
+  {% endcard %}
 
   <section>
     <h3>Примеры</h3>
     {% for example in examples %}
-    <article class="example" id="example-{{ example.slug }}">
-      <h4>{{ example.title }}</h4>
-      <p>{{ example.description }}</p>
-      <div class="example__preview">{{ example.html|safe }}</div>
-      <details>
-        <summary>Код</summary>
-        <pre><code>{{ example.source }}</code></pre>
-      </details>
-    </article>
+    {% card class_name="example" id="example-{{ example.slug }}" %}
+      {% card_header %}
+        <h4>{{ example.title }}</h4>
+        <p>{{ example.description }}</p>
+      {% endcard_header %}
+      {% card_body %}
+        <div class="example__preview">{{ example.html|safe }}</div>
+      {% endcard_body %}
+      {% card_footer %}
+        <details>
+          <summary>Код</summary>
+          <pre><code>{{ example.source }}</code></pre>
+        </details>
+      {% endcard_footer %}
+    {% endcard %}
     {% endfor %}
   </section>
 
   <section>
     <h3>Что проверить</h3>
-    <form class="quality-checklist" data-component="{{ manifest.name }}">
-      {% csrf_token %}
-      {% regroup checks by group as check_groups %}
-      {% for group in check_groups %}
-      <fieldset>
-        <legend>{{ group.grouper }}</legend>
-        {% for check in group.list %}
-        <label class="quality-check">
-          <input type="checkbox" name="checks" value="{{ check.key }}"
-                 data-automated="{{ check.automated|yesno:'true,false' }}">
-          <span>
-            <strong>{{ check.title }}</strong>
-            <small>{{ check.description }}</small>
-          </span>
-          {% if check.automated %}<em>auto</em>{% endif %}
-        </label>
-        {% endfor %}
-      </fieldset>
-      {% endfor %}
-      <button type="button" class="rui-button" data-variant="outlined">
-        Сохранение пока не подключено
-      </button>
-    </form>
+    {% card class_name="quality-checklist" %}
+      {% card_body %}
+        <form data-component="{{ manifest.name }}">
+          {% csrf_token %}
+          {% regroup checks by group as check_groups %}
+          {% for group in check_groups %}
+          <fieldset>
+            <legend>{{ group.grouper }}</legend>
+            {% for check in group.list %}
+            <label class="quality-check">
+              <input type="checkbox" name="checks" value="{{ check.key }}"
+                     data-automated="{{ check.automated|yesno:'true,false' }}">
+              <span>
+                <strong>{{ check.title }}</strong>
+                <small>{{ check.description }}</small>
+              </span>
+              {% if check.automated %}<em>auto</em>{% endif %}
+            </label>
+            {% endfor %}
+          </fieldset>
+          {% endfor %}
+        </form>
+      {% endcard_body %}
+      {% card_footer %}
+        <button type="button" class="rui-button" data-variant="outlined">
+          Сохранение пока не подключено
+        </button>
+      {% endcard_footer %}
+    {% endcard %}
   </section>
 </section>

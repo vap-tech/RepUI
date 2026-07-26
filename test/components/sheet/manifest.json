@@ -1,5 +1,0 @@
-{
-"name":"sheet",
-"entry":"components/sheet/component.js",
-"css":["foundation/css/tokens.css","foundation/css/controls.css","components/sheet/component.css"]
-}

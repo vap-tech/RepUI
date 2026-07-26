@@ -1,5 +1,0 @@
-{
-"name":"combobox",
-"entry":"components/combobox/component.js",
-"css":["foundation/css/tokens.css","foundation/css/controls.css","components/combobox/component.css"]
-}

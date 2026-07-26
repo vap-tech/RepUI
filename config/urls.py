@@ -16,11 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from test.views import component_draft
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('test/', component_draft, name='component-draft'),
     path('docs/', include('docs.urls')),
     path('', include('main.urls')),
 ]

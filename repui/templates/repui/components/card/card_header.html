@@ -1,0 +1,7 @@
+{% load repui_attrs %}
+<header
+  class="rui-card__header{% if class_name %} {{ class_name }}{% endif %}"
+  {% html_attrs attrs %}
+>
+  {{ content|safe }}
+</header>

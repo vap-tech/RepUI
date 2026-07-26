@@ -1,0 +1,47 @@
+@layer repui.theme {
+  :root,
+  [data-rui-color-scheme="light"] {
+    --rui-card-background: var(--rui-color-surface);
+    --rui-card-foreground: var(--rui-color-text);
+    --rui-card-border: 1px solid var(--rui-color-border);
+    --rui-card-radius: var(--rui-radius-lg);
+    --rui-card-shadow:
+      0 0.5rem 1.5rem rgb(0 0 0 / 0.08);
+
+    --rui-card-padding: var(--rui-space-4);
+    --rui-card-gap: var(--rui-space-3);
+    --rui-card-divider: var(--rui-color-border);
+
+    --rui-card-header-padding: var(--rui-card-padding);
+    --rui-card-body-padding: var(--rui-card-padding);
+    --rui-card-footer-padding: var(--rui-card-padding);
+
+    --rui-card-transition: 180ms ease;
+  }
+
+  [data-rui-color-scheme="dark"] {
+    --rui-card-background: var(--rui-color-surface);
+    --rui-card-foreground: var(--rui-color-text);
+    --rui-card-border: 1px solid var(--rui-color-border);
+    --rui-card-shadow:
+      0 0.75rem 2rem rgb(0 0 0 / 0.22);
+  }
+
+  /*
+   * surface остаётся открытым.
+   * Кастомная тема может добавить любое значение.
+   */
+  :where(.rui-card[data-surface="flat"]) {
+    --rui-card-shadow: none;
+  }
+
+  :where(.rui-card[data-surface="glass"]) {
+    --rui-card-background: color-mix(
+      in srgb,
+      var(--rui-color-surface) 82%,
+      transparent
+    );
+    --rui-card-shadow:
+      0 0.75rem 2rem rgb(0 0 0 / 0.14);
+  }
+}

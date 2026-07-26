@@ -1,0 +1,67 @@
+/*
+ * Critical geometry only. This file is loaded before the full theme and
+ * component styles so Page/AppBar/Layout/Panel have their final structure
+ * during the first paint.
+ */
+@layer repui.layout {
+  :where(html, body) {
+    min-block-size: 100%;
+  }
+
+  :where(body) {
+    min-block-size: 100dvh;
+    margin: 0;
+  }
+
+  :where(.rui-page) {
+    box-sizing: border-box;
+    min-block-size: 100dvh;
+    inline-size: 100%;
+    min-inline-size: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  :where(.rui-page__content) {
+    box-sizing: border-box;
+    flex: 1 1 auto;
+    inline-size: 100%;
+    min-inline-size: 0;
+    min-block-size: 0;
+  }
+
+  :where(.rui-appbar) {
+    box-sizing: border-box;
+    inline-size: 100%;
+    min-inline-size: 0;
+  }
+
+  :where(.rui-appbar[data-behavior="sticky"]) {
+    position: sticky;
+    inset-block-start: 0;
+  }
+
+  :where(.rui-container, .rui-grid, .rui-stack) {
+    box-sizing: border-box;
+    inline-size: 100%;
+    block-size: 100%;
+    min-inline-size: 0;
+    min-block-size: 0;
+  }
+
+  :where(.rui-grid) {
+    display: grid;
+    align-items: stretch;
+  }
+
+  :where(.rui-stack) {
+    display: grid;
+    align-items: stretch;
+  }
+
+  :where(.rui-panel) {
+    box-sizing: border-box;
+    min-inline-size: 0;
+    min-block-size: 0;
+  }
+}

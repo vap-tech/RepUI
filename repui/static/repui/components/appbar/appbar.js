@@ -31,6 +31,19 @@ export function mountAppBarControls(root=document, {signal}={}) {
     }
   };
   const onChange = onClick;
+  root.querySelectorAll(
+    "[data-rui-appbar-behavior-target], [data-rui-appbar-surface-target]",
+  ).forEach((control) => {
+    const targetId =
+      control.dataset.ruiAppbarBehaviorTarget ||
+      control.dataset.ruiAppbarSurfaceTarget;
+    const appbar = targetId && document.getElementById(targetId);
+    if (!appbar || !(control instanceof HTMLSelectElement)) return;
+    const state = getAppBarState(appbar);
+    control.value = control.dataset.ruiAppbarBehaviorTarget
+      ? state.behavior
+      : state.surface;
+  });
   root.addEventListener("click", onClick, {signal});
   root.addEventListener("change", onChange, {signal});
   return () => {

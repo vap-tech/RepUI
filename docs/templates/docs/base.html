@@ -8,6 +8,7 @@
 
   {% repui_theme_head %}
 
+  <link rel="stylesheet" href="{% static 'repui/foundation/critical.css' %}">
   <link rel="stylesheet" href="{% static 'repui/theme/default/layers.css' %}">
   <link rel="stylesheet" href="{% static 'repui/theme/default/metrics.css' %}">
   <link rel="stylesheet" href="{% static 'repui/theme/default/theme.css' %}">
@@ -18,6 +19,8 @@
   <link rel="stylesheet" href="{% static 'repui/components/appbar/appbar.css' %}">
   <link rel="stylesheet" href="{% static 'repui/components/button/button.css' %}">
   <link rel="stylesheet" href="{% static 'repui/components/page/page.css' %}">
+  <link rel="stylesheet" href="{% static 'repui/theme/default/card-tokens.css' %}">
+  <link rel="stylesheet" href="{% static 'repui/components/card/card.css' %}">
   {% block repui_component_styles %}{% endblock %}
   <link rel="stylesheet" href="{% static 'docs/docs.css' %}">
   {% block application_theme %}{% endblock %}

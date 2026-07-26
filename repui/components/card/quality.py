@@ -1,0 +1,18 @@
+CHECKS = (
+    ("simple-content", "Card работает без секций"),
+    ("explicit-sections", "Header/Body/Footer появляются только явно"),
+    ("content-size", "По умолчанию Card растёт по содержимому"),
+    ("width-full", 'width="full" занимает ширину родителя'),
+    ("height-full", 'height="full" занимает высоту родителя'),
+    ("overflow-plain", "Без секций прокручивается Surface"),
+    ("overflow-sections", "С секциями прокручивается только Body"),
+    ("header-fixed", "Header остаётся видимым при прокрутке Body"),
+    ("footer-fixed", "Footer остаётся видимым при прокрутке Body"),
+    ("surface-open", "Пользовательский surface работает через тему"),
+    ("light", "Card читается в светлой схеме"),
+    ("dark", "Card читается в тёмной схеме"),
+    ("nested-layout", "Grid/Stack/Container работают внутри Card"),
+    ("nested-components", "Button/Panel и другие компоненты работают внутри Card"),
+    ("htmx-inner", "HTMX innerHTML не требует инициализации"),
+    ("htmx-outer", "HTMX outerHTML не требует cleanup"),
+)
