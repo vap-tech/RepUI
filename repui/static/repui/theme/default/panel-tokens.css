@@ -1,0 +1,52 @@
+@layer repui.theme {
+  :root,
+  [data-rui-color-scheme="light"] {
+    --rui-panel-background: var(--rui-color-surface);
+    --rui-panel-foreground: var(--rui-color-text);
+    --rui-panel-border: 0;
+    --rui-panel-radius: 0;
+    --rui-panel-shadow: none;
+    --rui-panel-backdrop-filter: none;
+    --rui-panel-padding: 0;
+  }
+
+  [data-rui-color-scheme="dark"] {
+    --rui-panel-background: var(--rui-color-surface);
+    --rui-panel-foreground: var(--rui-color-text);
+  }
+
+  /*
+   * Значения surface открытые.
+   * Эти правила являются примерами интеграции, а не закрытым enum.
+   */
+
+  :where(.rui-panel[data-surface="sidebar"]) {
+    --rui-panel-background: var(--rui-color-surface);
+    --rui-panel-border:
+      0 1px 0 0 var(--rui-color-border);
+  }
+
+  :where(.rui-panel[data-surface="appbar"]) {
+    --rui-panel-background: color-mix(
+      in srgb,
+      var(--rui-color-surface) 86%,
+      transparent
+    );
+    --rui-panel-foreground: var(--rui-color-text);
+    --rui-panel-border: 1px solid var(--rui-color-border);
+    --rui-panel-radius: var(--rui-radius-lg);
+    --rui-panel-shadow:
+      0 0.75rem 2rem rgb(0 0 0 / 0.14);
+    --rui-panel-backdrop-filter: blur(1rem);
+  }
+
+  :where(.rui-panel[data-surface="card"]) {
+    --rui-panel-background: var(--rui-color-surface);
+    --rui-panel-foreground: var(--rui-color-text);
+    --rui-panel-border: 1px solid var(--rui-color-border);
+    --rui-panel-radius: var(--rui-radius-lg);
+    --rui-panel-shadow:
+      0 0.5rem 1.5rem rgb(0 0 0 / 0.1);
+    --rui-panel-padding: var(--rui-space-4);
+  }
+}

@@ -1,0 +1,26 @@
+@layer repui.components {
+  :where(.rui-appbar) {
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    inline-size: 100%;
+    min-inline-size: 0;
+    min-block-size: 0;
+    color: var(--rui-appbar-foreground);
+    background: var(--rui-appbar-background);
+    border: var(--rui-appbar-border);
+    box-shadow: var(--rui-appbar-shadow);
+    backdrop-filter: var(--rui-appbar-backdrop-filter);
+    -webkit-backdrop-filter: var(--rui-appbar-backdrop-filter);
+    padding-block: var(--rui-appbar-padding-block);
+    padding-inline: var(--rui-appbar-padding-inline);
+    z-index: var(--rui-appbar-z-index);
+    transition: background-color var(--rui-appbar-transition), border-color var(--rui-appbar-transition), box-shadow var(--rui-appbar-transition), backdrop-filter var(--rui-appbar-transition);
+  }
+  :where(.rui-appbar[data-behavior="static"]) { position: static; }
+  :where(.rui-appbar[data-behavior="sticky"]) { position: sticky; inset-block-start: var(--rui-appbar-sticky-offset); }
+  :where(.rui-appbar > .rui-grid),
+  :where(.rui-appbar > .rui-container),
+  :where(.rui-appbar > .rui-stack),
+  :where(.rui-appbar > .rui-panel) { inline-size: 100%; }
+  @media (prefers-reduced-motion: reduce) { :where(.rui-appbar) { transition: none; } }
+}

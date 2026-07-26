@@ -1,0 +1,11 @@
+@layer app.theme {
+  :root {
+    --rui-color-primary:#2563eb;
+    --rui-color-on-primary:#fff;
+  }
+
+  /* Необязательно: меняет только Button. */
+  :where(.rui-button) {
+    --rui-button-radius:999px;
+  }
+}

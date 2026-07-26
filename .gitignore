@@ -7,3 +7,7 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+
+# Local Django development
+.venv/
+db.sqlite3

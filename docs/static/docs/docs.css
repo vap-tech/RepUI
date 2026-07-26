@@ -1,0 +1,106 @@
+@layer app.components {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    min-block-size: 100vh;
+    font-family: var(--rui-font-sans);
+  }
+
+  .docs-header {
+    min-block-size: 4rem;
+    padding-inline: var(--rui-space-5);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--rui-space-4);
+  }
+
+  .docs-brand {
+    color: var(--rui-color-text);
+    font-weight: 750;
+    text-decoration: none;
+  }
+
+  .docs-appbar-control {
+    margin-inline-start: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--rui-color-text);
+  }
+
+  .docs-appbar-control + .docs-appbar-control {
+    margin-inline-start: 0;
+  }
+
+  .docs-appbar-control select {
+    min-inline-size: 7rem;
+    padding: 0.4rem 0.6rem;
+    color: var(--rui-color-text);
+    background: var(--rui-color-surface);
+    border: 1px solid var(--rui-color-border);
+    border-radius: 0.5rem;
+  }
+
+  .docs-layout {
+    min-block-size: calc(100vh - 4rem);
+    display: grid;
+    grid-template-columns: minmax(14rem, 18rem) minmax(0, 1fr);
+  }
+
+  .docs-sidebar {
+    padding: var(--rui-space-5);
+    overflow: auto;
+  }
+
+  .docs-main {
+    min-inline-size: 0;
+    padding: clamp(1rem, 4vw, 3rem);
+    overflow: auto;
+  }
+
+  .docs-theme-control {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--rui-space-2);
+  }
+
+  .docs-theme-control__label {
+    color: var(--rui-color-text-muted);
+    font-size: 0.875rem;
+  }
+
+  .docs-theme-control__select {
+    min-block-size: var(--rui-control-height-sm);
+    padding-inline: 0.75rem 2rem;
+    border: 1px solid var(--rui-color-border);
+    border-radius: var(--rui-radius-md);
+    background: var(--rui-color-surface);
+    color: var(--rui-color-text);
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .docs-theme-control__select:focus-visible {
+    outline: var(--rui-focus-width) solid var(--rui-focus-color);
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 48rem) {
+    .docs-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .docs-sidebar {
+      border-inline-end: 0;
+      border-block-end: 1px solid var(--rui-color-border);
+    }
+
+    .docs-theme-control__label {
+      display: none;
+    }
+  }
+}

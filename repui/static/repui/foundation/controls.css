@@ -1,0 +1,4 @@
+.rui-control {
+    border: 1px solid var(--rui-border);
+    border-radius: var(--rui-radius);
+}

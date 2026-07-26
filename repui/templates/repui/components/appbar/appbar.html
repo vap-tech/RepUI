@@ -1,0 +1,9 @@
+{% load repui_attrs %}
+<header
+  class="rui-appbar{% if class_name %} {{ class_name }}{% endif %}"
+  data-behavior="{{ behavior }}"
+  data-surface="{{ surface }}"
+  {% html_attrs attrs %}
+>
+  {{ content|safe }}
+</header>

@@ -1,0 +1,42 @@
+@layer repui.components {
+  :where(.rui-panel) {
+    box-sizing: border-box;
+    min-inline-size: 0;
+    min-block-size: 0;
+
+    background: var(
+      --rui-panel-background,
+      var(--rui-color-surface)
+    );
+    color: var(
+      --rui-panel-foreground,
+      var(--rui-color-text)
+    );
+
+    border: var(--rui-panel-border, 0);
+    border-radius: var(--rui-panel-radius, 0);
+    box-shadow: var(--rui-panel-shadow, none);
+    backdrop-filter: var(--rui-panel-backdrop-filter, none);
+    -webkit-backdrop-filter:
+      var(--rui-panel-backdrop-filter, none);
+
+    padding: var(--rui-panel-padding, 0);
+  }
+
+  :where(.rui-panel[data-width="content"]) {
+    inline-size: fit-content;
+    max-inline-size: 100%;
+  }
+
+  :where(.rui-panel[data-width="full"]) {
+    inline-size: 100%;
+  }
+
+  :where(.rui-panel[data-height="content"]) {
+    block-size: auto;
+  }
+
+  :where(.rui-panel[data-height="full"]) {
+    block-size: 100%;
+  }
+}

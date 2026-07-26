@@ -1,0 +1,5 @@
+{
+"name":"select",
+"entry":"components/select/component.js",
+"css":["foundation/css/tokens.css","foundation/css/controls.css","components/select/component.css"]
+}

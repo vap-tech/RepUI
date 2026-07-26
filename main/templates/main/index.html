@@ -1,0 +1,181 @@
+{% load static %}
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="{% static 'main/favicon.svg' %}" />
+  <meta name="theme-color" content="#f7f8fb" />
+  <title>Репьёвка — unofficial</title>
+  <meta name="description" content="Неофициальный районный портал: новости, объявления, погода, инструкции и взаимопомощь." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,600;8..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'main/styles.css' %}" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
+
+  <header class="topbar" id="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="#top" aria-label="Репьёвка — на главную">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><path d="M7 23.5c5.8-1.2 9.4-4.3 11-9.4 1.4 4.7 3.8 7.9 7 9.4-5.2 2.2-12.7 2.3-18 0Z"/><path d="M11.2 10.6c2.4-3.1 5.8-4.7 10-4.9-1 4-3.7 6.8-8.1 8.4"/></svg>
+        </span>
+        <span class="brand__text">
+          <strong>Репьёвка</strong>
+          <small>unofficial</small>
+        </span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Основная навигация">
+        <a class="nav-link is-active" href="#top">Главная</a>
+        <a class="nav-link" href="#news">Новости</a>
+        <a class="nav-link" href="#ads">Объявления</a>
+        <a class="nav-link" href="#guides">Инструкции</a>
+        <a class="nav-link" href="#about">О нас</a>
+      </nav>
+
+      <div class="topbar__actions">
+        <button class="icon-button" id="themeToggle" type="button" aria-label="Переключить тему" title="Переключить тему">
+          <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4V2m0 20v-2M4 12H2m20 0h-2M5.64 5.64 4.22 4.22m15.56 15.56-1.42-1.42m0-12.72 1.42-1.42M4.22 19.78l1.42-1.42"/><circle cx="12" cy="12" r="4"/></svg>
+          <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.4 15.3A8.5 8.5 0 0 1 8.7 3.6 8.5 8.5 0 1 0 20.4 15.3Z"/></svg>
+        </button>
+        <button class="button button--ghost login-button" type="button">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5m5 5H3"/></svg>
+          <span>Войти</span>
+        </button>
+        <button class="icon-button mobile-menu-button" id="mobileMenuButton" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Открыть меню">
+          <svg class="icon icon-menu" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <svg class="icon icon-close" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu" hidden>
+      <nav class="container mobile-menu__inner" aria-label="Мобильная навигация">
+        <a href="#top">Главная</a><a href="#news">Новости</a><a href="#ads">Объявления</a><a href="#guides">Инструкции</a><a href="#about">О нас</a>
+        <button class="button button--primary mobile-login" type="button">Войти в аккаунт</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero section" id="top">
+      <div class="container hero__grid">
+        <div class="hero__content reveal">
+          <div class="eyebrow"><span class="status-dot"></span> Сделано местными — для местных</div>
+          <h1>Всё важное о районе — <span class="gradient-text">в одном месте</span></h1>
+          <p class="hero__lead">Новости, объявления, полезные инструкции и взаимопомощь без официоза и лишнего шума.</p>
+          <div class="hero__actions">
+            <a class="button button--primary button--large" href="#services">Посмотреть разделы <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></a>
+            <button class="button button--soft button--large" type="button" data-open-modal="help">Предложить помощь</button>
+          </div>
+          <div class="trust-row">
+            <div class="avatar-stack" aria-label="Участники сообщества">
+              <span>А</span><span>М</span><span>И</span><span>+48</span>
+            </div>
+            <p><strong>52 человека</strong> уже помогают соседям</p>
+          </div>
+        </div>
+
+        <div class="hero-dashboard reveal" aria-label="Краткая информация по району">
+          <div class="ambient ambient--one"></div><div class="ambient ambient--two"></div>
+          <article class="glass-card weather-card">
+            <div class="weather-card__top"><div><span class="overline">Сейчас в Репьёвке</span><div class="weather-temp">+23°</div></div><div class="weather-icon" aria-hidden="true">☀️</div></div>
+            <div class="weather-card__bottom"><span>Ясно</span><span>Ветер 3 м/с</span><span>Давление 752</span></div>
+          </article>
+          <article class="glass-card pulse-card">
+            <div class="card-heading"><span class="icon-badge icon-badge--red">!</span><div><span class="overline">Важно сегодня</span><h3>Отключение воды</h3></div></div>
+            <p>С 10:00 до 14:00 на улицах Советской и Победы.</p>
+            <a href="#news">Подробнее <span>→</span></a>
+          </article>
+          <article class="glass-card mini-stat-card">
+            <div><span class="overline">Новые объявления</span><strong>12</strong></div>
+            <svg viewBox="0 0 160 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0 39C20 38 25 19 45 24s25 16 42 3 28-25 73-20"/></svg>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--compact" id="services">
+      <div class="container">
+        <div class="section-heading reveal"><div><span class="eyebrow eyebrow--plain">Быстрый доступ</span><h2>Что нужно прямо сейчас?</h2></div><p>Самые востребованные районные сервисы — без длинных маршрутов по сайту.</p></div>
+        <div class="service-grid">
+          <a class="service-card reveal" href="#news"><span class="service-card__icon icon-badge--blue"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4zM8 9h8M8 13h5"/></svg></span><div><h3>Новости района</h3><p>Коротко о том, что действительно влияет на жизнь рядом.</p></div><span class="service-card__arrow">↗</span></a>
+          <a class="service-card reveal" href="#ads"><span class="service-card__icon icon-badge--orange"><svg viewBox="0 0 24 24"><path d="M3 7h18v10H3zM7 11h.01M11 11h6M7 14h4"/></svg></span><div><h3>Объявления</h3><p>Продать, купить, найти мастера или предложить услугу.</p></div><span class="service-card__arrow">↗</span></a>
+          <a class="service-card reveal" href="#guides"><span class="service-card__icon icon-badge--green"><svg viewBox="0 0 24 24"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3V4Zm3 0v13a3 3 0 0 0-3 3"/></svg></span><div><h3>Инструкции</h3><p>Куда звонить, что оформлять и как решить бытовую задачу.</p></div><span class="service-card__arrow">↗</span></a>
+          <button class="service-card service-card--button reveal" type="button" data-open-modal="help"><span class="service-card__icon icon-badge--purple"><svg viewBox="0 0 24 24"><path d="M12 21a9 9 0 1 0-9-9c0 1.6.4 3.1 1.1 4.4L3 21l4.6-1.1A9 9 0 0 0 12 21Z"/><path d="M8 12h8M12 8v8"/></svg></span><div><h3>Помощь соседям</h3><p>Попросить о помощи или откликнуться на чужую просьбу.</p></div><span class="service-card__arrow">↗</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="news">
+      <div class="container">
+        <div class="section-heading reveal"><div><span class="eyebrow eyebrow--plain">Лента района</span><h2>Последние новости</h2></div><a class="text-link" href="#">Все новости <span>→</span></a></div>
+        <div class="news-layout">
+          <article class="featured-news reveal">
+            <div class="featured-news__visual"><span class="news-tag">Главное</span><div class="map-pattern"></div><div class="featured-news__illustration"><span>Р</span></div></div>
+            <div class="featured-news__body"><div class="meta"><span>Сегодня, 09:40</span><span>•</span><span>Благоустройство</span></div><h3>В центре района обновят общественное пространство</h3><p>Появятся новые прогулочные зоны, освещение и место для районных мероприятий.</p><a class="text-link" href="#">Читать новость <span>→</span></a></div>
+          </article>
+          <div class="news-list">
+            <article class="news-item reveal"><time datetime="2026-07-21T08:20">08:20</time><div><span class="news-kicker">Транспорт</span><h3>Временно изменится расписание автобуса № 101</h3><p>Изменения действуют до конца недели.</p></div><span class="news-item__arrow">→</span></article>
+            <article class="news-item reveal"><time datetime="2026-07-20">Вчера</time><div><span class="news-kicker">События</span><h3>В субботу пройдёт семейный праздник</h3><p>Начало в 16:00 на центральной площади.</p></div><span class="news-item__arrow">→</span></article>
+            <article class="news-item reveal"><time datetime="2026-07-19">19 июл</time><div><span class="news-kicker">Полезное</span><h3>График работы районных служб в жару</h3><p>Собрали телефоны и актуальные часы приёма.</p></div><span class="news-item__arrow">→</span></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tinted" id="ads">
+      <div class="container">
+        <div class="section-heading reveal"><div><span class="eyebrow eyebrow--plain">Рядом с вами</span><h2>Свежие объявления</h2></div><button class="button button--soft" type="button">Подать объявление</button></div>
+        <div class="ad-grid">
+          <article class="ad-card reveal"><div class="ad-card__image ad-card__image--plants"><span>🌿</span><span class="ad-status">Сегодня</span></div><div class="ad-card__body"><span class="ad-category">Отдам бесплатно</span><h3>Рассада томатов и перца</h3><p>Осталось несколько крепких саженцев. Самовывоз.</p><div class="ad-card__footer"><strong>Бесплатно</strong><span>Репьёвка</span></div></div></article>
+          <article class="ad-card reveal"><div class="ad-card__image ad-card__image--tools"><span>🛠️</span><span class="ad-status">2 ч назад</span></div><div class="ad-card__body"><span class="ad-category">Услуги</span><h3>Мелкий ремонт по дому</h3><p>Сборка мебели, электрика, сантехника. Аккуратно.</p><div class="ad-card__footer"><strong>от 500 ₽</strong><span>По району</span></div></div></article>
+          <article class="ad-card reveal"><div class="ad-card__image ad-card__image--bike"><span>🚲</span><span class="ad-status">Вчера</span></div><div class="ad-card__body"><span class="ad-category">Продам</span><h3>Подростковый велосипед</h3><p>Исправный, после обслуживания. Подойдёт на рост 145–165.</p><div class="ad-card__footer"><strong>7 500 ₽</strong><span>Репьёвка</span></div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="guides">
+      <div class="container guides-grid">
+        <div class="guides-copy reveal"><span class="eyebrow eyebrow--plain">Понятно и по шагам</span><h2>Инструкции без канцелярита</h2><p>Разбираем типичные районные задачи простым языком: куда обратиться, что подготовить и сколько это займёт.</p><a class="button button--primary" href="#">Все инструкции</a></div>
+        <div class="guide-list">
+          <a class="guide-item reveal" href="#"><span class="guide-item__number">01</span><div><h3>Что делать при отключении воды</h3><p>Контакты, сроки и куда сообщить о проблеме.</p></div><span>↗</span></a>
+          <a class="guide-item reveal" href="#"><span class="guide-item__number">02</span><div><h3>Как записаться к врачу</h3><p>Через интернет, телефон или регистратуру.</p></div><span>↗</span></a>
+          <a class="guide-item reveal" href="#"><span class="guide-item__number">03</span><div><h3>Куда сообщить о яме или фонаре</h3><p>Короткий алгоритм и готовый шаблон обращения.</p></div><span>↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--compact" id="about">
+      <div class="container community-card reveal">
+        <div class="community-card__copy"><span class="eyebrow eyebrow--light">О проекте</span><h2>Неофициально — значит по-человечески</h2><p>Портал не заменяет официальные службы. Он помогает быстро понять ситуацию, найти нужный контакт и объединить людей вокруг полезных дел.</p><div class="community-card__actions"><a class="button button--white" href="#">Узнать больше</a><button class="button button--outline-light" type="button" data-open-modal="help">Стать участником</button></div></div>
+        <div class="community-card__stats"><div><strong>1 240+</strong><span>читателей в месяц</span></div><div><strong>86</strong><span>полезных инструкций</span></div><div><strong>310</strong><span>решённых просьб</span></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div><a class="brand brand--footer" href="#top"><span class="brand__mark"><svg viewBox="0 0 32 32"><path d="M7 23.5c5.8-1.2 9.4-4.3 11-9.4 1.4 4.7 3.8 7.9 7 9.4-5.2 2.2-12.7 2.3-18 0Z"/><path d="M11.2 10.6c2.4-3.1 5.8-4.7 10-4.9-1 4-3.7 6.8-8.1 8.4"/></svg></span><span class="brand__text"><strong>Репьёвка</strong><small>unofficial</small></span></a><p>Независимый районный портал, созданный сообществом.</p></div>
+      <div><h3>Разделы</h3><a href="#news">Новости</a><a href="#ads">Объявления</a><a href="#guides">Инструкции</a></div>
+      <div><h3>Проект</h3><a href="#about">О нас</a><a href="#">Правила</a><a href="#">Обратная связь</a></div>
+      <div><h3>Важно</h3><p>В экстренной ситуации звоните 112.</p><a class="text-link" href="#">Полезные телефоны →</a></div>
+    </div>
+    <div class="container footer__bottom"><span>© 2026 Репьёвка — unofficial</span><span>Не является официальным сайтом администрации</span></div>
+  </footer>
+
+  <div class="modal" id="helpModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+    <div class="modal__backdrop" data-close-modal></div>
+    <div class="modal__panel" role="document">
+      <button class="icon-button modal__close" type="button" data-close-modal aria-label="Закрыть"><svg class="icon" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+      <span class="eyebrow eyebrow--plain">Взаимопомощь</span><h2 id="helpTitle">Чем вы хотите поделиться?</h2><p>В рабочей версии здесь будет Django-форма с авторизацией и модерацией.</p>
+      <div class="modal-options"><button type="button"><span>🤝</span><strong>Предложить помощь</strong><small>Рассказать, чем можете помочь</small></button><button type="button"><span>💬</span><strong>Попросить о помощи</strong><small>Описать задачу для соседей</small></button></div>
+    </div>
+  </div>
+
+  <script src="{% static 'main/script.js' %}"></script>
+</body>
+</html>

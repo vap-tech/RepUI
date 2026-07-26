@@ -1,0 +1,11 @@
+{% load repui_attrs %}
+<div
+  class="rui-panel{% if class_name %} {{ class_name }}{% endif %}"
+  data-surface="{{ surface }}"
+  data-width="{{ width }}"
+  data-height="{{ height }}"
+  {% html_attrs layout_attrs %}
+  {% html_attrs attrs %}
+>
+  {{ content|safe }}
+</div>

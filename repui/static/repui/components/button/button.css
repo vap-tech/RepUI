@@ -1,0 +1,220 @@
+@layer repui.components {
+  :where(.rui-button) {
+    /* Component tokens: default + filled + default color */
+    --rui-button-height: var(--rui-control-height-md);
+    --rui-button-padding-x: 1rem;
+    --rui-button-gap: 0.5rem;
+    --rui-button-radius: var(--rui-radius-md);
+    --rui-button-font-size: 0.875rem;
+    --rui-button-font-weight: 650;
+
+    --rui-button-bg: var(--rui-color-surface-raised);
+    --rui-button-bg-hover: var(--rui-color-surface-hover);
+    --rui-button-bg-pressed: var(--rui-color-surface-pressed);
+    --rui-button-fg: var(--rui-color-text);
+    --rui-button-border: var(--rui-color-border);
+    --rui-button-border-hover: var(--rui-color-border-strong);
+    --rui-button-soft-bg: var(--rui-color-surface-hover);
+
+    box-sizing: border-box;
+    appearance: none;
+    min-block-size: var(--rui-button-height);
+    padding-inline: var(--rui-button-padding-x);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--rui-button-gap);
+    border: 1px solid var(--rui-button-border);
+    border-radius: var(--rui-button-radius);
+    background: var(--rui-button-bg);
+    color: var(--rui-button-fg);
+    font: var(--rui-button-font-weight) var(--rui-button-font-size)/1.2 var(--rui-font-sans);
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    transition:
+      background-color var(--rui-transition-fast),
+      border-color var(--rui-transition-fast),
+      color var(--rui-transition-fast),
+      box-shadow var(--rui-transition-fast),
+      transform 80ms ease;
+  }
+
+  :where(.rui-button:hover:not([disabled]):not([aria-disabled="true"])) {
+    background: var(--rui-button-bg-hover);
+    border-color: var(--rui-button-border-hover);
+  }
+
+  :where(.rui-button:active:not([disabled]):not([aria-disabled="true"])) {
+    background: var(--rui-button-bg-pressed);
+    transform: translateY(1px);
+  }
+
+  :where(.rui-button:focus-visible) {
+    outline: var(--rui-focus-width) solid var(--rui-focus-color);
+    outline-offset: 2px;
+  }
+
+  :where(.rui-button[disabled], .rui-button[aria-disabled="true"]) {
+    --rui-button-bg: var(--rui-color-disabled-bg);
+    --rui-button-bg-hover: var(--rui-color-disabled-bg);
+    --rui-button-bg-pressed: var(--rui-color-disabled-bg);
+    --rui-button-fg: var(--rui-color-disabled-text);
+    --rui-button-border: var(--rui-color-disabled-bg);
+    --rui-button-border-hover: var(--rui-color-disabled-bg);
+    cursor: not-allowed;
+  }
+
+  :where(.rui-button[data-full-width="true"]) {
+    inline-size: 100%;
+  }
+
+  :where(.rui-button[data-icon-only="true"]) {
+    inline-size: var(--rui-button-height);
+    padding-inline: 0;
+  }
+
+  /* Sizes */
+  :where(.rui-button[data-size="xs"]) {
+    --rui-button-height: var(--rui-control-height-xs);
+    --rui-button-padding-x: 0.625rem;
+    --rui-button-font-size: 0.75rem;
+    --rui-button-radius: var(--rui-radius-sm);
+  }
+
+  :where(.rui-button[data-size="sm"]) {
+    --rui-button-height: var(--rui-control-height-sm);
+    --rui-button-padding-x: 0.75rem;
+    --rui-button-font-size: 0.8125rem;
+  }
+
+  :where(.rui-button[data-size="lg"]) {
+    --rui-button-height: var(--rui-control-height-lg);
+    --rui-button-padding-x: 1.25rem;
+    --rui-button-font-size: 1rem;
+  }
+
+  :where(.rui-button[data-size="xl"]) {
+    --rui-button-height: var(--rui-control-height-xl);
+    --rui-button-padding-x: 1.5rem;
+    --rui-button-font-size: 1.0625rem;
+    --rui-button-radius: var(--rui-radius-lg);
+  }
+
+  /* Semantic colors → component tokens */
+  :where(.rui-button[data-color="primary"]) {
+    --rui-button-bg: var(--rui-color-primary);
+    --rui-button-bg-hover: var(--rui-color-primary-hover);
+    --rui-button-bg-pressed: var(--rui-color-primary-hover);
+    --rui-button-fg: var(--rui-color-on-primary);
+    --rui-button-border: var(--rui-color-primary);
+    --rui-button-border-hover: var(--rui-color-primary-hover);
+    --rui-button-soft-bg: var(--rui-color-primary-soft);
+  }
+
+  :where(.rui-button[data-color="secondary"]) {
+    --rui-button-bg: var(--rui-color-secondary);
+    --rui-button-bg-hover: var(--rui-color-secondary-hover);
+    --rui-button-bg-pressed: var(--rui-color-secondary-hover);
+    --rui-button-fg: var(--rui-color-on-secondary);
+    --rui-button-border: var(--rui-color-secondary);
+    --rui-button-border-hover: var(--rui-color-secondary-hover);
+    --rui-button-soft-bg: var(--rui-color-secondary-soft);
+  }
+
+  :where(.rui-button[data-color="success"]) {
+    --rui-button-bg: var(--rui-color-success);
+    --rui-button-bg-hover: var(--rui-color-success-hover);
+    --rui-button-bg-pressed: var(--rui-color-success-hover);
+    --rui-button-fg: var(--rui-color-on-success);
+    --rui-button-border: var(--rui-color-success);
+    --rui-button-border-hover: var(--rui-color-success-hover);
+    --rui-button-soft-bg: var(--rui-color-success-soft);
+  }
+
+  :where(.rui-button[data-color="warning"]) {
+    --rui-button-bg: var(--rui-color-warning);
+    --rui-button-bg-hover: var(--rui-color-warning-hover);
+    --rui-button-bg-pressed: var(--rui-color-warning-hover);
+    --rui-button-fg: var(--rui-color-on-warning);
+    --rui-button-border: var(--rui-color-warning);
+    --rui-button-border-hover: var(--rui-color-warning-hover);
+    --rui-button-soft-bg: var(--rui-color-warning-soft);
+  }
+
+  :where(.rui-button[data-color="danger"]) {
+    --rui-button-bg: var(--rui-color-danger);
+    --rui-button-bg-hover: var(--rui-color-danger-hover);
+    --rui-button-bg-pressed: var(--rui-color-danger-hover);
+    --rui-button-fg: var(--rui-color-on-danger);
+    --rui-button-border: var(--rui-color-danger);
+    --rui-button-border-hover: var(--rui-color-danger-hover);
+    --rui-button-soft-bg: var(--rui-color-danger-soft);
+  }
+
+  /* Variants */
+  :where(.rui-button[data-variant="outlined"]) {
+    background: transparent;
+    color: var(--rui-button-bg);
+    border-color: var(--rui-button-border);
+  }
+
+  :where(.rui-button[data-variant="outlined"]:hover:not([disabled]):not([aria-disabled="true"])) {
+    background: var(--rui-button-soft-bg);
+    color: var(--rui-button-bg);
+  }
+
+  :where(.rui-button[data-variant="text"]) {
+    background: transparent;
+    color: var(--rui-button-bg);
+    border-color: transparent;
+  }
+
+  :where(.rui-button[data-variant="text"]:hover:not([disabled]):not([aria-disabled="true"])) {
+    background: var(--rui-button-soft-bg);
+    color: var(--rui-button-bg);
+    border-color: transparent;
+  }
+
+  :where(.rui-button[data-variant="soft"]) {
+    background: var(--rui-button-soft-bg);
+    color: var(--rui-button-bg);
+    border-color: transparent;
+  }
+
+  :where(.rui-button[data-variant="soft"]:hover:not([disabled]):not([aria-disabled="true"])) {
+    background: var(--rui-button-soft-bg);
+    color: var(--rui-button-bg-hover);
+    border-color: transparent;
+  }
+
+  :where(.rui-button__content) {
+    min-inline-size: 0;
+  }
+
+  :where(.rui-button__spinner) {
+    inline-size: 1em;
+    block-size: 1em;
+    flex: 0 0 auto;
+    border: 2px solid currentColor;
+    border-inline-end-color: transparent;
+    border-radius: 999px;
+    animation: rui-button-spin 700ms linear infinite;
+  }
+
+  @keyframes rui-button-spin {
+    to { transform: rotate(1turn); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :where(.rui-button) {
+      transition: none;
+    }
+
+    :where(.rui-button__spinner) {
+      animation-duration: 1.4s;
+    }
+  }
+}

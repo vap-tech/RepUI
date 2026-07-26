@@ -1,0 +1,88 @@
+{% load static %}
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="{% static 'main/favicon.svg' %}" />
+  <meta name="theme-color" content="#f7f8fb" />
+  <title>Repyevka UI — библиотека компонентов</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,600;8..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'main/styles.css' %}" />
+  <link rel="stylesheet" href="{% static 'main/components.css' %}" />
+</head>
+<body class="docs-body">
+  <a class="skip-link" href="#componentsMain">Перейти к компонентам</a>
+  <header class="docs-topbar">
+    <a class="brand" href="{% url 'main:index' %}"><span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M7 23.5c5.8-1.2 9.4-4.3 11-9.4 1.4 4.7 3.8 7.9 7 9.4-5.2 2.2-12.7 2.3-18 0Z"/><path d="M11.2 10.6c2.4-3.1 5.8-4.7 10-4.9-1 4-3.7 6.8-8.1 8.4"/></svg></span><span class="brand__text"><strong>Repyevka UI</strong><small>component playground</small></span></a>
+    <div class="docs-topbar__actions">
+      <a class="button button--ghost" href="{% url 'main:index' %}">Открыть главную</a>
+      <button class="icon-button" id="themeToggle" type="button" aria-label="Переключить тему"><svg class="icon icon-sun" viewBox="0 0 24 24"><path d="M12 4V2m0 20v-2M4 12H2m20 0h-2M5.64 5.64 4.22 4.22m15.56 15.56-1.42-1.42m0-12.72 1.42-1.42M4.22 19.78l1.42-1.42"/><circle cx="12" cy="12" r="4"/></svg><svg class="icon icon-moon" viewBox="0 0 24 24"><path d="M20.4 15.3A8.5 8.5 0 0 1 8.7 3.6 8.5 8.5 0 1 0 20.4 15.3Z"/></svg></button>
+    </div>
+  </header>
+
+  <aside class="docs-sidebar" aria-label="Разделы библиотеки">
+    <div class="docs-sidebar__intro"><span class="eyebrow eyebrow--plain">v0.2 preview</span><p>Нативная UI-библиотека для Django-шаблонов без зависимости от MUI.</p></div>
+    <nav class="docs-nav">
+      <a href="#foundations">Основы</a><a href="#buttons">Кнопки</a><a href="#inputs">Поля ввода</a><a href="#navigation">Навигация</a><a href="#feedback">Обратная связь</a><a href="#data-display">Отображение данных</a><a href="#overlays">Оверлеи</a><a href="#states">Состояния</a>
+    </nav>
+  </aside>
+
+  <main class="docs-main" id="componentsMain">
+    <section class="docs-hero">
+      <div><span class="eyebrow"><span class="status-dot"></span>Design system playground</span><h1>Один язык интерфейса для всего районного портала</h1><p>Все базовые компоненты, состояния, размеры и паттерны в одном месте. Их можно копировать в Django templates, постепенно выносить в include-файлы или оборачивать в template tags.</p></div>
+      <div class="docs-hero__meta"><div><strong>30+</strong><span>компонентов</span></div><div><strong>2</strong><span>темы</span></div><div><strong>0</strong><span>UI-зависимостей</span></div></div>
+    </section>
+
+    <section class="docs-section" id="foundations"><header class="docs-section__header"><div><span>01</span><h2>Основы</h2></div><p>Цвет, типографика, радиусы, тени и интервалы.</p></header>
+      <div class="showcase-grid showcase-grid--2">
+        <article class="showcase"><div class="showcase__title"><h3>Цветовые токены</h3><code>--primary / --surface / --text</code></div><div class="swatches"><div><i class="swatch swatch--primary"></i><span>Primary</span></div><div><i class="swatch swatch--accent"></i><span>Accent</span></div><div><i class="swatch swatch--surface"></i><span>Surface</span></div><div><i class="swatch swatch--danger"></i><span>Danger</span></div><div><i class="swatch swatch--warning"></i><span>Warning</span></div><div><i class="swatch swatch--success"></i><span>Success</span></div></div></article>
+        <article class="showcase"><div class="showcase__title"><h3>Типографика</h3><code>Manrope + Roboto Flex</code></div><div class="type-ramp"><h1>Display</h1><h2>Heading</h2><h3>Subheading</h3><p>Основной текст для интерфейса и длинных описаний.</p><small>Вспомогательный текст и подписи</small></div></article>
+      </div>
+    </section>
+
+    <section class="docs-section" id="buttons"><header class="docs-section__header"><div><span>02</span><h2>Кнопки и действия</h2></div><p>Основные, вторичные, текстовые, иконки и группы.</p></header>
+      <article class="showcase"><div class="showcase__title"><h3>Варианты</h3><code>.button</code></div><div class="component-row"><button class="button button--primary">Основное действие</button><button class="button button--soft">Мягкая</button><button class="button button--ghost">Контурная</button><button class="button button--danger">Удалить</button><button class="button button--primary" disabled>Недоступно</button></div></article>
+      <div class="showcase-grid showcase-grid--2"><article class="showcase"><div class="showcase__title"><h3>Размеры</h3></div><div class="component-row component-row--align"><button class="button button--primary button--small">Малая</button><button class="button button--primary">Средняя</button><button class="button button--primary button--large">Большая</button></div></article><article class="showcase"><div class="showcase__title"><h3>Иконки и loading</h3></div><div class="component-row"><button class="icon-button" aria-label="Настройки">⚙</button><button class="button button--soft"><span>＋</span> Добавить</button><button class="button button--primary is-loading"><span class="spinner"></span>Сохранение</button></div></article></div>
+    </section>
+
+    <section class="docs-section" id="inputs"><header class="docs-section__header"><div><span>03</span><h2>Поля ввода</h2></div><p>Формы, выбор, переключатели и валидация.</p></header>
+      <div class="showcase-grid showcase-grid--2"><article class="showcase"><div class="showcase__title"><h3>Текстовые поля</h3></div><div class="form-stack"><label class="field"><span>Название объявления</span><input type="text" placeholder="Например, отдам рассаду"></label><label class="field"><span>Телефон</span><div class="input-prefix"><span>+7</span><input type="tel" value="900 000-00-00"></div><small>Будет виден только авторизованным пользователям.</small></label><label class="field field--error"><span>Электронная почта</span><input type="email" value="wrong@mail"><small>Проверьте адрес электронной почты.</small></label></div></article>
+      <article class="showcase"><div class="showcase__title"><h3>Выбор и переключатели</h3></div><div class="form-stack"><label class="field"><span>Категория</span><select><option>Объявления</option><option>Новости</option><option>Помощь</option></select></label><label class="check"><input type="checkbox" checked><span>Показывать номер телефона</span></label><label class="check"><input type="radio" name="delivery" checked><span>Опубликовать сейчас</span></label><label class="switch"><input type="checkbox" checked><span class="switch__track"></span><span>Уведомлять об ответах</span></label></div></article></div>
+      <article class="showcase"><div class="showcase__title"><h3>Поиск</h3><code>.search-field</code></div><div class="search-field"><span>⌕</span><input id="componentSearch" type="search" placeholder="Найти компонент…"><kbd>⌘ K</kbd></div></article>
+    </section>
+
+    <section class="docs-section" id="navigation"><header class="docs-section__header"><div><span>04</span><h2>Навигация</h2></div><p>Tabs, breadcrumbs, pagination и мобильная навигация.</p></header>
+      <article class="showcase"><div class="showcase__title"><h3>Tabs</h3></div><div class="tabs" role="tablist"><button class="tab is-active" data-tab="all">Все</button><button class="tab" data-tab="news">Новости <span class="badge">8</span></button><button class="tab" data-tab="ads">Объявления</button><button class="tab" data-tab="help">Помощь</button></div><div class="tab-panel" id="tabPanel">Показаны все материалы района.</div></article>
+      <div class="showcase-grid showcase-grid--2"><article class="showcase"><div class="showcase__title"><h3>Breadcrumbs</h3></div><nav class="breadcrumbs"><a href="#">Главная</a><span>›</span><a href="#">Объявления</a><span>›</span><strong>Транспорт</strong></nav></article><article class="showcase"><div class="showcase__title"><h3>Pagination</h3></div><nav class="pagination"><button>←</button><button class="is-active">1</button><button>2</button><button>3</button><span>…</span><button>12</button><button>→</button></nav></article></div>
+      <article class="showcase"><div class="showcase__title"><h3>Нижняя навигация</h3><code>mobile pattern</code></div><div class="phone-preview"><nav class="bottom-nav"><button class="is-active"><span>⌂</span>Главная</button><button><span>▤</span>Новости</button><button class="bottom-nav__fab">＋</button><button><span>◫</span>Объявления</button><button><span>○</span>Профиль</button></nav></div></article>
+    </section>
+
+    <section class="docs-section" id="feedback"><header class="docs-section__header"><div><span>05</span><h2>Обратная связь</h2></div><p>Alerts, toast, progress и статусные элементы.</p></header>
+      <div class="feedback-stack"><div class="alert alert--info"><span>i</span><div><strong>Информация</strong><p>Расписание автобусов обновлено сегодня в 08:20.</p></div><button>×</button></div><div class="alert alert--success"><span>✓</span><div><strong>Готово</strong><p>Объявление успешно отправлено на модерацию.</p></div><button>×</button></div><div class="alert alert--warning"><span>!</span><div><strong>Обратите внимание</strong><p>Возможны перебои с водой с 10:00 до 14:00.</p></div><button>×</button></div><div class="alert alert--danger"><span>×</span><div><strong>Ошибка</strong><p>Не удалось загрузить изображение. Попробуйте ещё раз.</p></div><button>×</button></div></div>
+      <div class="showcase-grid showcase-grid--2"><article class="showcase"><div class="showcase__title"><h3>Progress</h3></div><div class="progress-list"><div><span>Заполнение профиля <b>72%</b></span><div class="progress"><i style="width:72%"></i></div></div><div><span>Загрузка фото <b>38%</b></span><div class="progress"><i style="width:38%"></i></div></div></div></article><article class="showcase"><div class="showcase__title"><h3>Toast</h3></div><button class="button button--primary" id="showToast">Показать уведомление</button></article></div>
+    </section>
+
+    <section class="docs-section" id="data-display"><header class="docs-section__header"><div><span>06</span><h2>Отображение данных</h2></div><p>Карточки, chips, avatars, списки и таблицы.</p></header>
+      <article class="showcase"><div class="showcase__title"><h3>Chips и badges</h3></div><div class="component-row"><span class="chip">Все темы</span><span class="chip chip--selected">Транспорт</span><span class="chip">События <button>×</button></span><span class="badge">12</span><span class="badge badge--success">Проверено</span><span class="badge badge--warning">На модерации</span></div></article>
+      <div class="showcase-grid showcase-grid--3"><article class="mini-card"><span class="mini-card__icon">☀️</span><p>Погода</p><strong>+23°</strong><small>Ясно, ветер 3 м/с</small></article><article class="mini-card"><span class="mini-card__icon">📢</span><p>Объявления</p><strong>12 новых</strong><small>За последние сутки</small></article><article class="mini-card"><span class="mini-card__icon">🤝</span><p>Взаимопомощь</p><strong>4 просьбы</strong><small>Рядом с вами</small></article></div>
+      <article class="showcase"><div class="showcase__title"><h3>Список пользователей</h3></div><div class="user-list"><div class="user-row"><span class="avatar">АК</span><div><strong>Анна Крылова</strong><small>Проверенный участник</small></div><span class="badge badge--success">Онлайн</span><button class="icon-button">•••</button></div><div class="user-row"><span class="avatar avatar--photo">М</span><div><strong>Михаил Петров</strong><small>Автор 18 объявлений</small></div><span class="badge">5 мин назад</span><button class="icon-button">•••</button></div></div></article>
+      <article class="showcase showcase--flush"><div class="showcase__title padded"><h3>Таблица</h3></div><div class="table-wrap"><table class="data-table"><thead><tr><th>Материал</th><th>Категория</th><th>Статус</th><th>Дата</th><th></th></tr></thead><tbody><tr><td><strong>Изменение расписания автобусов</strong></td><td>Транспорт</td><td><span class="badge badge--success">Опубликовано</span></td><td>21 июля</td><td>•••</td></tr><tr><td><strong>Продам велосипед</strong></td><td>Объявления</td><td><span class="badge badge--warning">Модерация</span></td><td>20 июля</td><td>•••</td></tr></tbody></table></div></article>
+    </section>
+
+    <section class="docs-section" id="overlays"><header class="docs-section__header"><div><span>07</span><h2>Оверлеи</h2></div><p>Modal, dropdown, tooltip и dialog.</p></header>
+      <article class="showcase"><div class="showcase__title"><h3>Интерактивные примеры</h3></div><div class="component-row"><button class="button button--primary" data-demo-modal>Открыть modal</button><div class="dropdown-demo"><button class="button button--ghost" id="dropdownButton">Открыть меню ▾</button><div class="dropdown" id="dropdownMenu" hidden><button>Редактировать</button><button>Поделиться</button><hr><button class="danger-text">Удалить</button></div></div><button class="button button--soft tooltip-trigger" data-tooltip="Подсказка появляется при наведении">Наведи на меня</button></div></article>
+    </section>
+
+    <section class="docs-section" id="states"><header class="docs-section__header"><div><span>08</span><h2>Состояния страниц</h2></div><p>Skeleton, empty state и ошибка загрузки.</p></header>
+      <div class="showcase-grid showcase-grid--3"><article class="state-card"><div class="skeleton skeleton--image"></div><div class="skeleton skeleton--line"></div><div class="skeleton skeleton--line skeleton--short"></div><div class="skeleton skeleton--button"></div></article><article class="state-card state-card--center"><span class="state-icon">◇</span><h3>Пока пусто</h3><p>Здесь появятся сохранённые объявления.</p><button class="button button--primary button--small">Перейти к объявлениям</button></article><article class="state-card state-card--center"><span class="state-icon">↻</span><h3>Не удалось загрузить</h3><p>Проверьте соединение и повторите попытку.</p><button class="button button--ghost button--small">Повторить</button></article></div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"><span>✓</span><div><strong>Сохранено</strong><small>Изменения успешно применены.</small></div><button>×</button></div>
+  <div class="modal" id="demoModal" aria-hidden="true"><div class="modal__backdrop" data-close-demo></div><div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="demoModalTitle"><button class="icon-button modal__close" data-close-demo>×</button><span class="eyebrow eyebrow--plain">Новый материал</span><h2 id="demoModalTitle">Добавить объявление</h2><p>Пример универсального диалога для создания или редактирования сущности.</p><div class="form-stack"><label class="field"><span>Заголовок</span><input placeholder="Что вы хотите сообщить?"></label><label class="field"><span>Описание</span><textarea rows="4" placeholder="Добавьте подробности"></textarea></label></div><div class="dialog-actions"><button class="button button--ghost" data-close-demo>Отмена</button><button class="button button--primary">Опубликовать</button></div></div></div>
+  <script src="{% static 'main/components.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+@layer repui.components {
+  :where(.rui-page) {
+    box-sizing: border-box;
+    min-block-size: 100dvh;
+    inline-size: 100%;
+    min-inline-size: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    background: var(--rui-color-page);
+    color: var(--rui-color-text);
+  }
+
+  :where(.rui-page__content) {
+    box-sizing: border-box;
+    flex: 1 1 auto;
+
+    inline-size: 100%;
+    min-inline-size: 0;
+    min-block-size: 0;
+
+    display: block;
+  }
+
+  :where(.rui-page__content > .rui-grid),
+  :where(.rui-page__content > .rui-stack),
+  :where(.rui-page__content > .rui-container) {
+    block-size: 100%;
+  }
+}

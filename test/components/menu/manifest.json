@@ -1,0 +1,5 @@
+{
+"name":"menu",
+"entry":"components/menu/component.js",
+"css":["foundation/css/tokens.css","foundation/css/controls.css","components/menu/component.css"]
+}

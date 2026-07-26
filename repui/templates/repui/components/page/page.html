@@ -1,0 +1,7 @@
+{% load repui_attrs %}
+<div
+  class="rui-page{% if class_name %} {{ class_name }}{% endif %}"
+  {% html_attrs attrs %}
+>
+  {{ content|safe }}
+</div>

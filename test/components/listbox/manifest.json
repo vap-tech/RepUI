@@ -1,0 +1,5 @@
+{
+"name":"listbox",
+"entry":"components/listbox/component.js",
+"css":["foundation/css/tokens.css","foundation/css/controls.css","components/listbox/component.css"]
+}

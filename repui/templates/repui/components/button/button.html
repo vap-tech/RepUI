@@ -1,0 +1,24 @@
+{% load repui_attrs %}
+{% if href %}
+<a class="rui-button"
+ data-variant="{{ variant }}" data-color="{{ color }}" data-size="{{ size }}"
+ {% if full_width %}data-full-width="true"{% endif %}
+ {% if icon_only %}data-icon-only="true"{% endif %}
+ {% if loading %}data-loading="true" aria-busy="true"{% endif %}
+ {% if disabled or loading %}aria-disabled="true" tabindex="-1"{% else %}href="{{ href }}"{% endif %}
+ {% html_attrs attrs %}>
+ {% if loading %}<span class="rui-button__spinner" aria-hidden="true"></span>{% endif %}
+ <span class="rui-button__content">{{ content|safe }}</span>
+</a>
+{% else %}
+<button class="rui-button" type="{{ button_type }}"
+ data-variant="{{ variant }}" data-color="{{ color }}" data-size="{{ size }}"
+ {% if full_width %}data-full-width="true"{% endif %}
+ {% if icon_only %}data-icon-only="true"{% endif %}
+ {% if loading %}data-loading="true" aria-busy="true"{% endif %}
+ {% if disabled or loading %}disabled aria-disabled="true"{% endif %}
+ {% html_attrs attrs %}>
+ {% if loading %}<span class="rui-button__spinner" aria-hidden="true"></span>{% endif %}
+ <span class="rui-button__content">{{ content|safe }}</span>
+</button>
+{% endif %}

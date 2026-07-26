@@ -1,0 +1,44 @@
+@layer repui.theme {
+  :root,
+  [data-rui-color-scheme="light"] {
+    --rui-appbar-background: var(--rui-color-surface);
+    --rui-appbar-foreground: var(--rui-color-text);
+    --rui-appbar-border: 0;
+    --rui-appbar-shadow: none;
+    --rui-appbar-backdrop-filter: none;
+    --rui-appbar-padding-block: 0;
+    --rui-appbar-padding-inline: 0;
+    --rui-appbar-z-index: 20;
+    --rui-appbar-sticky-offset: 0;
+    --rui-appbar-transition: 180ms ease;
+  }
+  [data-rui-color-scheme="dark"] {
+    --rui-appbar-background: var(--rui-color-surface);
+    --rui-appbar-foreground: var(--rui-color-text);
+  }
+  :where(.rui-appbar[data-surface="transparent"]) {
+    --rui-appbar-background: transparent;
+    --rui-appbar-border: 0;
+    --rui-appbar-shadow: none;
+    --rui-appbar-backdrop-filter: none;
+  }
+  :where(.rui-appbar[data-surface="glass"]) {
+    --rui-appbar-background: color-mix(in srgb, var(--rui-color-surface) 62%, transparent);
+    --rui-appbar-border: 0;
+    --rui-appbar-shadow: none;
+    --rui-appbar-backdrop-filter: blur(1.25rem);
+  }
+
+  :where(.rui-appbar[data-surface="glass-solid"]) {
+    --rui-appbar-background: color-mix(in srgb, var(--rui-color-surface) 62%, transparent);
+    --rui-appbar-border: 1px solid var(--rui-color-border);
+    --rui-appbar-shadow: 0 0.75rem 2rem rgb(0 0 0 / 0.16);
+    --rui-appbar-backdrop-filter: blur(1.25rem);
+  }
+  :where(.rui-appbar[data-surface="solid"]) {
+    --rui-appbar-background: var(--rui-color-surface);
+    --rui-appbar-border: 1px solid var(--rui-color-border);
+    --rui-appbar-shadow: none;
+    --rui-appbar-backdrop-filter: none;
+  }
+}

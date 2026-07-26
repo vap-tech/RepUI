@@ -1,0 +1,23 @@
+@layer repui.tokens {
+  :root {
+    --rui-font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --rui-radius-sm: .375rem;
+    --rui-radius-md: .625rem;
+    --rui-radius-lg: .875rem;
+    --rui-focus-color: color-mix(in srgb, var(--rui-color-primary, #15803d) 70%, white);
+    --rui-focus-width: 3px;
+    --rui-color-surface: #fff;
+    --rui-color-text: #172017;
+    --rui-color-border: #cbd5cb;
+    --rui-color-primary: #15803d;
+    --rui-color-on-primary: #fff;
+    --rui-color-secondary: #475569;
+    --rui-color-on-secondary: #fff;
+    --rui-color-success: #15803d;
+    --rui-color-on-success: #fff;
+    --rui-color-warning: #b45309;
+    --rui-color-on-warning: #fff;
+    --rui-color-danger: #b91c1c;
+    --rui-color-on-danger: #fff;
+  }
+}

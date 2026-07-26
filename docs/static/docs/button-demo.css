@@ -1,0 +1,43 @@
+@layer app.components {
+  .rui-demo-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--rui-space-3);
+  }
+
+  .rui-demo-grid--baseline {
+    align-items: baseline;
+  }
+
+  .rui-demo-stack {
+    display: grid;
+    gap: var(--rui-space-4);
+  }
+
+  .example,
+  .component-panel__header,
+  .quality-checklist {
+    border: 1px solid var(--rui-color-border);
+    border-radius: var(--rui-radius-lg);
+    background: var(--rui-color-surface);
+    color: var(--rui-color-text);
+  }
+
+  .example__preview {
+    padding: var(--rui-space-5);
+    border: 1px dashed var(--rui-color-border);
+    border-radius: var(--rui-radius-md);
+    background: var(--rui-color-surface-raised);
+  }
+
+  .example p,
+  .quality-check small {
+    color: var(--rui-color-text-muted);
+  }
+
+  pre {
+    background: var(--rui-color-surface-raised);
+    color: var(--rui-color-text);
+    border: 1px solid var(--rui-color-border);
+  }
+}
