@@ -1,0 +1,55 @@
+{% load static repui repui_theme repui_layout %}
+<!doctype html>
+<html lang="ru" data-rui-theme-mode="system" data-rui-color-scheme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/svg+xml" href="{% static 'workbench/favicon.svg' %}">
+  {% repui_theme_head %}
+  <link rel="stylesheet" href="{% static 'repui/foundation/critical.css' %}">
+  <link rel="stylesheet" href="{% static 'repui/theme/default/layers.css' %}">
+  <link rel="stylesheet" href="{% static 'repui/theme/default/metrics.css' %}">
+  <link rel="stylesheet" href="{% static 'repui/theme/default/theme.css' %}">
+  <link rel="stylesheet" href="{% static 'repui/layout/layout.css' %}">
+  <link rel="stylesheet" href="{% static 'repui/theme/default/appbar-tokens.css' %}">
+  <link rel="stylesheet" href="{% static 'repui/components/appbar/appbar.css' %}">
+  <link rel="stylesheet" href="{% static 'repui/theme/default/panel-tokens.css' %}">
+  <link rel="stylesheet" href="{% static 'repui/components/panel/panel.css' %}">
+  <link rel="stylesheet" href="{% static 'repui/components/page/page.css' %}">
+  <link rel="stylesheet" href="{% static 'repui/theme/default/card-tokens.css' %}">
+  <link rel="stylesheet" href="{% static 'repui/components/card/card.css' %}">
+  <link rel="stylesheet" href="{% static 'workbench/docs.css' %}">
+  <link rel="stylesheet" href="{% static 'workbench/workbench.css' %}">
+  <title>RepUI Workbench</title>
+</head>
+<body>
+
+{% page %}
+  {% appbar behavior="sticky" surface="glass" %}
+    <div class="docs-header">
+      <a
+        href="{% url 'workbench:home' %}"
+        class="docs-brand"
+      >
+        RepUI Workbench
+      </a>
+    </div>
+  {% endappbar %}
+
+  {% page_content %}
+    {% grid columns=5 spacing="none" %}
+      {% container column=1 %}
+        {% include "workbench/partials/sidebar.html" %}
+      {% endcontainer %}
+
+      {% container column=4 %}
+        {% include "workbench/partials/workspace.html" %}
+      {% endcontainer %}
+    {% endgrid %}
+  {% endpage_content %}
+{% endpage %}
+
+<script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
+<script type="module" src="{% static 'repui/theme/default/theme.js' %}"></script>
+</body>
+</html>

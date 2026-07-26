@@ -1,0 +1,21 @@
+{% load repui %}
+{% panel surface="sidebar" width="full" height="full" class_name="docs-sidebar" %}
+  <nav aria-label="Компоненты RepUI">
+    {% for item in components %}
+      {% if item.enabled %}
+        <button type="button" class="workbench__nav-item"
+                hx-get="{% url 'workbench:component-partial' item.name %}"
+                hx-target="#component-panel" hx-swap="innerHTML"
+                hx-push-url="{% url 'workbench:component' item.name %}">
+          {{ item.title }}
+        </button>
+      {% else %}
+        <button type="button" class="workbench__nav-item" disabled title="{{ item.error }}">
+          {{ item.title }}
+        </button>
+      {% endif %}
+    {% empty %}
+      <p>Компоненты не найдены.</p>
+    {% endfor %}
+  </nav>
+{% endpanel %}

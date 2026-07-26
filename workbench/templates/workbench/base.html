@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/svg+xml" href="{% static 'docs/favicon.svg' %}">
+  <link rel="icon" type="image/svg+xml" href="{% static 'workbench/favicon.svg' %}">
 
   {% repui_theme_head %}
 
@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="{% static 'repui/theme/default/card-tokens.css' %}">
   <link rel="stylesheet" href="{% static 'repui/components/card/card.css' %}">
   {% block repui_component_styles %}{% endblock %}
-  <link rel="stylesheet" href="{% static 'docs/docs.css' %}">
+  <link rel="stylesheet" href="{% static 'workbench/docs.css' %}">
   {% block application_theme %}{% endblock %}
 
   <title>{% block title %}RepUI docs{% endblock %}</title>
@@ -32,8 +32,8 @@
     {% appbar id="docs-appbar" behavior="sticky" surface="default" %}
           <header class="docs-header">
             <a href="/docs/" class="docs-brand">RepUI docs</a>
-            {% include "docs/partials/appbar_controls.html" %}
-            {% include "docs/partials/theme_mode_select.html" %}
+            {% include "workbench/partials/appbar_controls.html" %}
+            {% include "workbench/partials/theme_mode_select.html" %}
           </header>
     {% endappbar %}
     {% page_content %}

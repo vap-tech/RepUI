@@ -1,0 +1,11 @@
+{% load repui %}
+{% panel surface="default" width="full" height="full" id="component-panel" class_name="docs-main" %}
+  {% if selected_component and selected_component.enabled %}
+    <div hx-get="{% url 'workbench:component-partial' selected_component.name %}"
+         hx-trigger="load" hx-swap="outerHTML">Загрузка…</div>
+  {% elif selected_component %}
+    <p>{{ selected_component.error }}</p>
+  {% else %}
+    <p>Выберите компонент слева.</p>
+  {% endif %}
+{% endpanel %}
