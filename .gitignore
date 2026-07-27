@@ -11,3 +11,4 @@ __pycache__/
 # Local Django development
 .venv/
 db.sqlite3
+staticfiles/
