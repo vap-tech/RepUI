@@ -1,6 +1,17 @@
-/**
- * Temporarily moves an overlay to body so ancestor overflow cannot clip it.
- */
+/** Moves an overlay to a portal and keeps it positioned relative to its anchor. */
+function getScrollParents(element) {
+  const parents = [];
+  let node = element?.parentElement;
+  while (node && node !== document.body) {
+    const style = getComputedStyle(node);
+    if (/(auto|scroll|overlay)/.test(`${style.overflow}${style.overflowX}${style.overflowY}`)) {
+      parents.push(node);
+    }
+    node = node.parentElement;
+  }
+  parents.push(window);
+  return [...new Set(parents)];
+}
 export class OverlayPortal {
   constructor(anchor, overlay, options = {}) {
     if (!(anchor instanceof Element)) {
@@ -18,17 +29,33 @@ export class OverlayPortal {
       viewportPadding: 8,
       matchAnchorWidth: true,
       flip: true,
+      restoreFocus: false,
       onRequestClose: null,
       ...options,
     };
     this.placeholder = document.createComment("rui-overlay-portal");
     this.mounted = false;
     this.abortController = null;
+    this.scrollParents = [];
+    this.frame = 0;
+    this.previousFocus = null;
+    this.resizeObserver = "ResizeObserver" in window
+      ? new ResizeObserver(() => this.schedulePosition())
+      : null;
+    this.intersectionObserver = "IntersectionObserver" in window
+      ? new IntersectionObserver((entries) => {
+          if (entries[0] && !entries[0].isIntersecting) {
+            this.options.onRequestClose?.({ reason: "anchor-hidden" });
+          }
+        })
+      : null;
     this.position = this.position.bind(this);
+    this.schedulePosition = this.schedulePosition.bind(this);
   }
 
   mount() {
     if (this.mounted) return;
+    this.previousFocus = document.activeElement;
     this.overlay.before(this.placeholder);
     this.options.container.append(this.overlay);
     this.overlay.dataset.ruiPortal = "true";
@@ -39,17 +66,16 @@ export class OverlayPortal {
 
     this.abortController = new AbortController();
     const { signal } = this.abortController;
-    window.addEventListener("resize", this.position, { signal, passive: true });
-    window.addEventListener("scroll", this.position, {
+    this.scrollParents = getScrollParents(this.anchor);
+    this.scrollParents.forEach((parent) => parent.addEventListener(
+      "scroll", this.schedulePosition, { signal, passive: true, capture: parent === window },
+    ));
+    window.addEventListener("resize", this.schedulePosition, { signal, passive: true });
+    window.visualViewport?.addEventListener("resize", this.schedulePosition, {
       signal,
       passive: true,
-      capture: true,
     });
-    window.visualViewport?.addEventListener("resize", this.position, {
-      signal,
-      passive: true,
-    });
-    window.visualViewport?.addEventListener("scroll", this.position, {
+    window.visualViewport?.addEventListener("scroll", this.schedulePosition, {
       signal,
       passive: true,
     });
@@ -63,7 +89,18 @@ export class OverlayPortal {
       event.preventDefault();
       this.options.onRequestClose?.({ reason: "escape", event });
     }, { signal, capture: true });
+    this.resizeObserver?.observe(this.anchor);
+    this.resizeObserver?.observe(this.overlay);
+    this.intersectionObserver?.observe(this.anchor);
     this.position();
+  }
+
+  schedulePosition() {
+    if (!this.mounted || this.frame) return;
+    this.frame = requestAnimationFrame(() => {
+      this.frame = 0;
+      this.position();
+    });
   }
 
   position() {
@@ -108,6 +145,11 @@ export class OverlayPortal {
     if (!this.mounted) return;
     this.abortController?.abort();
     this.abortController = null;
+    this.resizeObserver?.disconnect();
+    this.intersectionObserver?.disconnect();
+    this.scrollParents = [];
+    if (this.frame) cancelAnimationFrame(this.frame);
+    this.frame = 0;
     this.mounted = false;
     delete this.overlay.dataset.ruiPortal;
     ["position", "inset", "top", "left", "right", "bottom", "width", "margin", "max-width", "max-height"].forEach(
@@ -115,6 +157,10 @@ export class OverlayPortal {
     );
     delete this.overlay.dataset.side;
     if (this.placeholder.parentNode) this.placeholder.replaceWith(this.overlay);
+    if (this.options.restoreFocus && this.previousFocus?.isConnected) {
+      this.previousFocus.focus({ preventScroll: true });
+    }
+    this.previousFocus = null;
   }
 
   destroy() {

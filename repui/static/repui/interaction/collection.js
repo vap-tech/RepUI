@@ -5,13 +5,32 @@ export class CollectionController {
       options.disabledItemsFocusable ?? false;
     this.items = [];
     this.activeIndex = -1;
+    this.activeId = null;
+    this.selectedIds = new Set();
   }
 
   setItems(items) {
-    this.items = [...items];
-    if (!this.isNavigable(this.activeIndex)) {
-      this.activeIndex = this.first();
-    }
+    const previousActiveId = this.activeId;
+    const occurrences = new Map();
+    this.items = items.map((item, index) => {
+      if (item.id) return { ...item };
+      const base = item.value || `item-${index}`;
+      const occurrence = occurrences.get(base) ?? 0;
+      occurrences.set(base, occurrence + 1);
+      return {
+        ...item,
+        id: occurrence ? `${base}-${occurrence}` : base,
+      };
+    });
+    this.selectedIds = new Set(
+      this.items.filter((item) => item.selected).map((item) => item.id),
+    );
+
+    const restored = this.items.findIndex(
+      (item) => item.id === previousActiveId && this.isNavigable(this.items.indexOf(item)),
+    );
+    this.activeIndex = restored >= 0 ? restored : this.first();
+    this.activeId = this.activeIndex >= 0 ? this.items[this.activeIndex].id : null;
     return this;
   }
 
@@ -43,6 +62,7 @@ export class CollectionController {
   setActive(index) {
     if (!this.isNavigable(index)) return false;
     this.activeIndex = index;
+    this.activeId = this.items[index].id;
     return true;
   }
 
@@ -61,6 +81,7 @@ export class CollectionController {
 
       if (this.isNavigable(index)) {
         this.activeIndex = index;
+        this.activeId = this.items[index].id;
         return index;
       }
     }
@@ -90,6 +111,8 @@ export class CollectionController {
     return {
       items: this.items.map((item) => ({ ...item })),
       activeIndex: this.activeIndex,
+      activeId: this.activeId,
+      selectedIds: [...this.selectedIds],
     };
   }
 }

@@ -27,5 +27,8 @@ jobs:
       - name: Tests
         run: python manage.py test
 
+      - name: JavaScript interaction tests
+        run: node --test tests/js/*.test.mjs
+
       - name: Static files
         run: python manage.py collectstatic --noinput

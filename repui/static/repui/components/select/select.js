@@ -25,6 +25,7 @@ function collectRoots(root) {
 
 function optionRecord(option, index) {
   return {
+    id: option.dataset.ruiId || option.value || `option-${index}`,
     index,
     value: option.value,
     label: option.textContent.trim(),

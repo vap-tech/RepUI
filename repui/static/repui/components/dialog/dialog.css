@@ -1,0 +1,28 @@
+@layer repui.components {
+  .rui-dialog {
+    position: fixed;
+    inset: 0;
+    z-index: var(--rui-dialog-z-index, 1000);
+    display: grid;
+    place-items: center;
+    padding: var(--rui-space-6, 1.5rem);
+  }
+  .rui-dialog__backdrop {
+    position: absolute;
+    inset: 0;
+    background: var(--rui-dialog-backdrop, rgb(0 0 0 / .5));
+  }
+  .rui-dialog__panel {
+    position: relative;
+    z-index: 1;
+    inline-size: min(100%, var(--rui-dialog-max-width, 32rem));
+    max-block-size: calc(100dvh - 3rem);
+    overflow: auto;
+    padding: var(--rui-space-6, 1.5rem);
+    border: 1px solid var(--rui-color-border);
+    border-radius: var(--rui-radius-lg);
+    background: var(--rui-color-surface);
+    color: var(--rui-color-text);
+  }
+  body[data-rui-scroll-lock="true"] { overflow: hidden; }
+}

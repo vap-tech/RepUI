@@ -1,0 +1,6 @@
+{% load repui_attrs %}<div class="rui-dialog{% if class_name %} {{ class_name }}{% endif %}" id="{{ id }}" data-rui-dialog hidden aria-hidden="true" {% html_attrs attrs %}>
+  <div class="rui-dialog__backdrop" data-rui-dialog-close aria-hidden="true"></div>
+  <section class="rui-dialog__panel" role="dialog" aria-modal="true"{% if aria_label %} aria-label="{{ aria_label }}"{% endif %} tabindex="-1">
+    {{ content|safe }}
+  </section>
+</div>

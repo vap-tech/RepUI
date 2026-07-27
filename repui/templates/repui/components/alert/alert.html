@@ -1,0 +1,9 @@
+<div class="rui-alert" role="status" data-variant="{{ variant }}">
+  <span class="rui-alert__icon" aria-hidden="true">{{ icon|default:"•" }}</span>
+  <div>
+    {% if title %}<strong class="rui-alert__title">{{ title }}</strong>{% endif %}
+    {% if description %}<span class="rui-alert__description">{{ description }}</span>{% endif %}
+    {{ content|safe }}
+  </div>
+  {% if dismissible %}<button class="rui-alert__close" type="button" data-rui-alert-close aria-label="Закрыть">×</button>{% endif %}
+</div>

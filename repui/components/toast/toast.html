@@ -1,0 +1,11 @@
+{% load repui repui_layout %}
+{% container %}
+  {% card width="full" %}
+    {% card_header %}<h1>Toast</h1><p>Временное уведомление поверх страницы, по умолчанию справа снизу.</p>{% endcard_header %}
+    {% card_body %}
+      <button type="button" data-rui-toast="Сохранено" data-rui-toast-description="Toast создаётся через публичный ToastManager.">Показать Toast</button>
+      <p><code>mountToasts(document)</code> подключает единый lifecycle без auto-init.</p>
+      <div data-rui-toast-region aria-live="polite" aria-relevant="additions"></div>
+    {% endcard_body %}
+  {% endcard %}
+{% endcontainer %}

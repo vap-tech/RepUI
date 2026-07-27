@@ -1,0 +1,11 @@
+{% load repui repui_layout %}
+{% container %}
+  {% card width="full" %}
+    {% card_header %}<h1>Dialog</h1><p>Модальное окно с focus trap, Escape и restore focus.</p>{% endcard_header %}
+    {% card_body %}
+      <p>Dialog использует явный runtime mount и не создаёт содержимое автоматически.</p>
+      <pre><code>import { mountDialogs } from "/static/repui/core/dialog.js";
+mountDialogs(document);</code></pre>
+    {% endcard_body %}
+  {% endcard %}
+{% endcontainer %}

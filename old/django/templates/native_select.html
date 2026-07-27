@@ -1,6 +1,0 @@
-<label class="rui-field">
-  {% if label %}<span class="rui-field__label">{{ label }}</span>{% endif %}
-  <select class="rui-input rui-native-select" data-rui-native-select name="{{ name }}"{% if required %} required{% endif %}>
-    {% for option in options %}<option value="{{ option.value }}"{% if option.value == value %} selected{% endif %}{% if option.disabled %} disabled{% endif %}>{{ option.label }}</option>{% endfor %}
-  </select>
-</label>

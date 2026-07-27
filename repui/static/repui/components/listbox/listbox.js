@@ -18,11 +18,16 @@ class ListboxRuntime {
   }
 
   refresh() {
+    const occurrences = new Map();
     this.options.forEach((item, index) => {
-      if (!item.id) item.id = `rui-listbox-option-${index}-${Math.random().toString(36).slice(2)}`;
+      if (item.id) return;
+      const base = item.dataset.value || `item-${index}`;
+      const occurrence = occurrences.get(base) ?? 0;
+      occurrences.set(base, occurrence + 1);
+      item.id = `rui-listbox-option-${base}-${occurrence}`;
     });
     this.collection.setItems(this.options.map((item, index) => ({
-      index, value: item.dataset.value || "", label: item.textContent.trim(),
+      id: item.id, index, value: item.dataset.value || "", label: item.textContent.trim(),
       selected: item.getAttribute("aria-selected") === "true",
       disabled: item.getAttribute("aria-disabled") === "true",
     })));

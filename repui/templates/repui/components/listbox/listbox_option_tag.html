@@ -1,4 +1,4 @@
-<div class="rui-listbox__option" role="option" data-rui-listbox-option data-rui-option data-rui-roving-item
+<div{% if id %} id="{{ id }}"{% endif %} class="rui-listbox__option" role="option" data-rui-listbox-option data-rui-option data-rui-roving-item
      data-value="{{ value }}" aria-selected="{% if selected %}true{% else %}false{% endif %}"
      {% if disabled %}aria-disabled="true" data-disabled="true"{% endif %}>
   {{ content|safe }}

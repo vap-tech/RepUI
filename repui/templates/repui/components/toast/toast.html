@@ -1,0 +1,11 @@
+<div class="rui-toast-region" data-rui-toast-region aria-live="polite" aria-relevant="additions">
+  <article class="rui-toast" role="status">
+    <span class="rui-toast__icon" aria-hidden="true">●</span>
+    <div>
+      {% if title %}<div class="rui-toast__title">{{ title }}</div>{% endif %}
+      {% if description %}<div class="rui-toast__description">{{ description }}</div>{% endif %}
+      {{ content|safe }}
+    </div>
+    <button class="rui-toast__close" type="button" aria-label="Закрыть">×</button>
+  </article>
+</div>
