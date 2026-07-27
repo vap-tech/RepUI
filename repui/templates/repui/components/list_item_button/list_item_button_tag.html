@@ -1,0 +1,10 @@
+{% load repui_attrs %}
+{% if href and not disabled %}
+<a class="rui-list-item-button{% if class_name %} {{ class_name }}{% endif %}"
+   href="{{ href }}" {% html_attrs attrs %}>{{ content|safe }}</a>
+{% else %}
+<button class="rui-list-item-button{% if class_name %} {{ class_name }}{% endif %}"
+        type="button"
+        {% if disabled %}disabled aria-disabled="true"{% endif %}
+        {% html_attrs attrs %}>{{ content|safe }}</button>
+{% endif %}

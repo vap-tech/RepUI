@@ -6,6 +6,13 @@ COMPONENT = {
     "styles": (
         "repui/components/button/button.css",
     ),
-    "scripts": (),
+    "scripts": (
+        "repui/components/button/button.js",
+    ),
+    "runtime": {
+        "required": False,
+        "mount": "mountButtons",
+        "contract": ("refresh", "destroy"),
+    },
     "status": "stable",
 }

@@ -1,0 +1,22 @@
+{% load repui repui_layout %}
+
+{% container %}
+  {% stack spacing="lg" %}
+    {% card width="full" %}
+      {% card_header %}<h2>Menu</h2><p>Группа команд с keyboard-навигацией и roving focus.</p>{% endcard_header %}
+      {% card_body %}
+        {% menu %}
+          {% menu_item value="edit" %}Редактировать{% endmenu_item %}
+          {% menu_item value="duplicate" %}Дублировать{% endmenu_item %}
+          {% menu_item value="archive" %}Архивировать{% endmenu_item %}
+          {% menu_item value="delete" disabled=True %}Удалить — недоступно{% endmenu_item %}
+        {% endmenu %}
+        <p>Runtime подключается явно через <code>mountMenus(root)</code>. Он управляет стрелками, Home/End и событиями, но не запускается сам по себе.</p>
+      {% endcard_body %}
+    {% endcard %}
+    {% card width="full" %}
+      {% card_header %}<h3>Контракт</h3>{% endcard_header %}
+      {% card_body %}<ul><li>Контейнер — <code>role="menu"</code>.</li><li>Пункты — <code>menuitem</code>.</li><li><code>orientation</code> и <code>loop</code> задаются у Menu.</li><li>Disabled items исключаются из навигации.</li></ul>{% endcard_body %}
+    {% endcard %}
+  {% endstack %}
+{% endcontainer %}

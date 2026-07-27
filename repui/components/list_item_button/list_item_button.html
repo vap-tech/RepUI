@@ -1,0 +1,20 @@
+{% load repui repui_layout %}
+
+{% container %}
+  {% stack spacing="lg" %}
+    {% card width="full" %}
+      {% card_header %}<h2>List Item Button</h2><p>Полноширинный интерактивный пункт списка.</p>{% endcard_header %}
+      {% card_body %}
+        {% stack spacing="xs" %}
+          {% list_item_button %}<strong>Входящие</strong><small>12 новых сообщений</small>{% endlist_item_button %}
+          {% list_item_button href="#archive" %}<strong>Архив</strong><small>Сохранённые элементы</small>{% endlist_item_button %}
+          {% list_item_button disabled=True %}<strong>Удалённые</strong><small>Недоступно</small>{% endlist_item_button %}
+        {% endstack %}
+      {% endcard_body %}
+    {% endcard %}
+    {% card width="full" %}
+      {% card_header %}<h3>Когда использовать</h3>{% endcard_header %}
+      {% card_body %}<p>Подходит для navigation lists, списков чатов и элементов с одной основной action. Для сложной keyboard-группы используйте Menu, Tabs или отдельный collection-компонент.</p>{% endcard_body %}
+    {% endcard %}
+  {% endstack %}
+{% endcontainer %}

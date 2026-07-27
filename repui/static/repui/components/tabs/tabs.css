@@ -1,0 +1,30 @@
+@layer repui.components {
+  .rui-tab-list {
+    display: flex;
+    gap: var(--rui-tabs-gap, .25rem);
+    border-block-end: 1px solid var(--rui-color-border);
+  }
+
+  .rui-tabs[data-orientation="vertical"] .rui-tab-list {
+    flex-direction: column;
+    border-block-end: 0;
+    border-inline-end: 1px solid var(--rui-color-border);
+  }
+
+  .rui-tab {
+    border: 0;
+    border-block-end: 2px solid transparent;
+    padding: var(--rui-tab-padding, .625rem .875rem);
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .rui-tab[aria-selected="true"] {
+    border-color: var(--rui-color-primary);
+  }
+
+  .rui-tab-panel {
+    padding-block: var(--rui-tab-panel-padding, 1rem);
+  }
+}

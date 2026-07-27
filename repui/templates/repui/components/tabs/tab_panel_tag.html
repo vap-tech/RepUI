@@ -1,0 +1,7 @@
+<div class="rui-tab-panel"
+     id="{{ id }}"
+     role="tabpanel"
+     data-rui-tab-panel
+     {% if not selected %}hidden{% endif %}>
+  {{ content|safe }}
+</div>

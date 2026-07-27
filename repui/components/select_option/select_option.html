@@ -1,0 +1,21 @@
+{% load repui repui_layout %}
+
+{% container %}
+  {% stack spacing="lg" %}
+    {% card width="full" %}
+      {% card_header %}<h2>Select Option</h2><p>Низкоуровневый option для composite Select-контролов.</p>{% endcard_header %}
+      {% card_body %}
+        <div role="listbox" aria-label="Города">
+          {% select_option value="voronezh" selected=True %}Воронеж{% endselect_option %}
+          {% select_option value="liski" %}Лиски{% endselect_option %}
+          {% select_option value="bobrov" disabled=True %}Бобров — недоступен{% endselect_option %}
+        </div>
+        <p>Сам по себе Select Option не является полноценным Select. Его parent отвечает за value, popup и form integration.</p>
+      {% endcard_body %}
+    {% endcard %}
+    {% card width="full" %}
+      {% card_header %}<h3>Публичный API</h3>{% endcard_header %}
+      {% card_body %}<ul><li><code>value</code> — обязательное значение.</li><li><code>selected</code> — начальное selected-состояние.</li><li><code>disabled</code> исключает пункт из interaction-навигации.</li></ul><p>Для keyboard-группы runtime подключается явно через <code>mountSelectOptions(root)</code>.</p>{% endcard_body %}
+    {% endcard %}
+  {% endstack %}
+{% endcontainer %}

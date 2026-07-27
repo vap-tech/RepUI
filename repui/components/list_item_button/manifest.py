@@ -1,0 +1,1 @@
+COMPONENT = {'name': 'list_item_button', 'title': 'ListItemButton', 'description': 'Нативная интерактивная область ListItemButton.', 'template': 'repui/components/list_item_button/list_item_button.html', 'styles': ('repui/components/list_item_button/list-item-button.css',), 'scripts': (), 'status': 'stable'}

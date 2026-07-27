@@ -1,0 +1,9 @@
+@layer repui.components {
+  :where([data-rui-active="true"]) {
+    transform: translateY(1px);
+  }
+
+  :where([data-rui-disabled="true"]) {
+    cursor: not-allowed;
+  }
+}

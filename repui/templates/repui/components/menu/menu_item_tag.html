@@ -1,0 +1,10 @@
+<button type="button"
+        class="rui-menu-item"
+        role="menuitem"
+        data-rui-menu-item
+        data-rui-roving-item
+        tabindex="-1"
+        {% if disabled %}disabled aria-disabled="true"{% endif %}
+        {% if value is not None %}data-value="{{ value }}"{% endif %}>
+  {{ content|safe }}
+</button>

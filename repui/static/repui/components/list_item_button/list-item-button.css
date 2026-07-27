@@ -1,0 +1,12 @@
+@layer repui.components {
+  .rui-list-item-button {
+    display: block;
+    inline-size: 100%;
+    border: var(--rui-list-item-button-border, 0);
+    border-radius: var(--rui-list-item-button-radius, var(--rui-radius-md));
+    background: var(--rui-list-item-button-background, transparent);
+    color: inherit;
+    text-align: start;
+    cursor: pointer;
+  }
+}

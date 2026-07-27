@@ -1,0 +1,26 @@
+@layer repui.components {
+  .rui-menu {
+    display: flex;
+    flex-direction: column;
+    gap: var(--rui-menu-gap, .25rem);
+  }
+
+  .rui-menu[data-orientation="horizontal"] {
+    flex-direction: row;
+  }
+
+  .rui-menu-item {
+    border: 0;
+    border-radius: var(--rui-menu-item-radius, var(--rui-radius-sm));
+    padding: var(--rui-menu-item-padding, .5rem .75rem);
+    background: transparent;
+    color: inherit;
+    text-align: start;
+    cursor: pointer;
+  }
+
+  .rui-menu-item:hover,
+  .rui-menu-item:focus-visible {
+    background: var(--rui-menu-item-active-background, var(--rui-color-surface));
+  }
+}

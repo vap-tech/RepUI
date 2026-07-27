@@ -1,0 +1,26 @@
+{% load repui repui_layout %}
+
+{% container %}
+  {% stack spacing="lg" %}
+    {% card width="full" %}
+      {% card_header %}<h2>Tabs</h2><p>Группа вкладок и связанных панелей с единым selected-состоянием.</p>{% endcard_header %}
+      {% card_body %}
+        {% tabs %}
+          {% tab_list %}
+            {% tab panel="overview-panel" selected=True %}Обзор{% endtab %}
+            {% tab panel="api-panel" %}API{% endtab %}
+            {% tab panel="checks-panel" disabled=True %}Проверки{% endtab %}
+          {% endtab_list %}
+          {% tab_panel id="overview-panel" selected=True %}<p>Основная информация компонента.</p>{% endtab_panel %}
+          {% tab_panel id="api-panel" %}<p>Публичные параметры и события.</p>{% endtab_panel %}
+          {% tab_panel id="checks-panel" %}<p>Manual checklist.</p>{% endtab_panel %}
+        {% endtabs %}
+        <p>Runtime подключается явно через <code>mountTabs(root)</code>; activation может быть <code>automatic</code> или управляться клавиатурой.</p>
+      {% endcard_body %}
+    {% endcard %}
+    {% card width="full" %}
+      {% card_header %}<h3>Композиция</h3>{% endcard_header %}
+      {% card_body %}<p><code>Tabs → TabList → Tab + TabPanel</code>. Каждый <code>tab</code> явно ссылается на panel через <code>panel</code>; автоматически созданных секций нет.</p><ul><li>ARIA roles и связи рендерятся template tag.</li><li>Disabled tabs не участвуют в keyboard-навигации.</li><li>HTMX может заменить содержимое вкладки после явного refresh.</li></ul>{% endcard_body %}
+    {% endcard %}
+  {% endstack %}
+{% endcontainer %}

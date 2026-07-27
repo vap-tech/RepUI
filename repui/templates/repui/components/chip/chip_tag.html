@@ -1,0 +1,16 @@
+{% load repui_attrs %}
+<span class="rui-chip{% if class_name %} {{ class_name }}{% endif %}"
+      data-rui-chip
+      {% if value is not None %}data-value="{{ value }}"{% endif %}
+      {% if remove_on_delete %}data-remove-on-delete="true"{% endif %}
+      {% if disabled %}aria-disabled="true" data-disabled="true"{% endif %}
+      {% html_attrs attrs %}>
+  <span class="rui-chip__label">{{ content|safe }}</span>
+  {% if deletable %}
+    <button type="button"
+            class="rui-chip__delete"
+            data-rui-chip-delete
+            aria-label="Удалить"
+            {% if disabled %}disabled{% endif %}>×</button>
+  {% endif %}
+</span>

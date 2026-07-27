@@ -1,0 +1,12 @@
+@layer repui.components {
+  .rui-card-action {
+    display: block;
+    inline-size: 100%;
+    border: var(--rui-card-action-border, 0);
+    border-radius: var(--rui-card-action-radius, var(--rui-radius-md));
+    background: var(--rui-card-action-background, transparent);
+    color: inherit;
+    text-align: start;
+    cursor: pointer;
+  }
+}

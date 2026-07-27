@@ -1,0 +1,16 @@
+@layer repui.components {
+  .rui-select-option {
+    padding: var(--rui-select-option-padding, .5rem .75rem);
+    border-radius: var(--rui-select-option-radius, var(--rui-radius-sm));
+    cursor: pointer;
+  }
+
+  .rui-select-option[aria-selected="true"] {
+    background: var(--rui-select-option-selected-background, var(--rui-color-surface));
+  }
+
+  .rui-select-option[aria-disabled="true"] {
+    opacity: .55;
+    cursor: not-allowed;
+  }
+}

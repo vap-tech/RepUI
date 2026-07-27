@@ -1,0 +1,19 @@
+@layer repui.components {
+  .rui-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--rui-chip-gap, .375rem);
+    padding: var(--rui-chip-padding, .25rem .625rem);
+    border: var(--rui-chip-border, 1px solid var(--rui-color-border));
+    border-radius: var(--rui-chip-radius, 999px);
+    background: var(--rui-chip-background, var(--rui-color-surface));
+    color: var(--rui-chip-foreground, var(--rui-color-text));
+  }
+
+  .rui-chip__delete {
+    border: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+  }
+}

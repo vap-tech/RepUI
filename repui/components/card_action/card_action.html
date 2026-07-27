@@ -1,0 +1,22 @@
+{% load repui repui_layout %}
+
+{% container %}
+  {% stack spacing="lg" %}
+    {% card width="full" %}
+      {% card_header %}<h2>Card Action</h2><p>Действие, оформленное как часть поверхности Card.</p>{% endcard_header %}
+      {% card_body %}
+        <p>Используйте для явного действия внутри карточки или ссылки на связанную область.</p>
+        {% card_action href="#details" %}Открыть детали{% endcard_action %}
+        {% card_action %}Выполнить действие{% endcard_action %}
+        {% card_action disabled=True %}Недоступное действие{% endcard_action %}
+      {% endcard_body %}
+    {% endcard %}
+    {% card width="full" %}
+      {% card_header %}<h3>Публичный контракт</h3>{% endcard_header %}
+      {% card_body %}
+        <ul><li><code>href</code> превращает элемент в ссылку.</li><li><code>disabled</code> блокирует действие.</li><li>Внутрь передаётся явный текст или HTML-контент.</li></ul>
+        <p>Runtime-события и lifecycle: <code>rui:activate</code>, <code>rui:change</code>, <code>rui:delete</code> — только если их подключает прикладная композиция.</p>
+      {% endcard_body %}
+    {% endcard %}
+  {% endstack %}
+{% endcontainer %}

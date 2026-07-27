@@ -1,0 +1,19 @@
+{% load repui repui_layout %}
+
+{% container %}
+  {% stack spacing="lg" %}
+    {% card width="full" %}
+      {% card_header %}<h2>Icon Button</h2><p>Кнопка для компактного действия, которому обязательно доступное имя.</p>{% endcard_header %}
+      {% card_body %}
+        {% icon_button aria_label="Добавить" %}+{% endicon_button %}
+        {% icon_button aria_label="Открыть настройки" %}⚙{% endicon_button %}
+        {% icon_button aria_label="Удалить" disabled=True %}×{% endicon_button %}
+        <p>Каждая кнопка требует <code>aria_label</code>. Это не декоративный элемент: имя обязательно для keyboard и screen reader.</p>
+      {% endcard_body %}
+    {% endcard %}
+    {% card width="full" %}
+      {% card_header %}<h3>Публичный API</h3>{% endcard_header %}
+      {% card_body %}<ul><li><code>aria_label</code> — обязательное accessible name.</li><li><code>href</code> — вариант ссылки.</li><li><code>disabled</code>, <code>id</code>, <code>class_name</code> и <code>attrs</code>.</li></ul><p>Runtime optional: <code>mount...</code> возвращает общий handle, но не эмулирует native keyboard.</p>{% endcard_body %}
+    {% endcard %}
+  {% endstack %}
+{% endcontainer %}

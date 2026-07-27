@@ -1,0 +1,10 @@
+<div class="rui-select-option"
+     role="option"
+     data-rui-select-option
+     data-rui-roving-item
+     data-value="{{ value }}"
+     aria-selected="{% if selected %}true{% else %}false{% endif %}"
+     tabindex="-1"
+     {% if disabled %}aria-disabled="true" data-disabled="true"{% endif %}>
+  {{ content|safe }}
+</div>

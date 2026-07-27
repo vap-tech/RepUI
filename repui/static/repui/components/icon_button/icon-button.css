@@ -1,0 +1,13 @@
+@layer repui.components {
+  .rui-icon-button {
+    display: inline-grid;
+    place-items: center;
+    inline-size: var(--rui-icon-button-size, 2.5rem);
+    block-size: var(--rui-icon-button-size, 2.5rem);
+    border: var(--rui-icon-button-border, 1px solid transparent);
+    border-radius: var(--rui-icon-button-radius, 999px);
+    background: var(--rui-icon-button-background, transparent);
+    color: var(--rui-icon-button-foreground, currentColor);
+    cursor: pointer;
+  }
+}

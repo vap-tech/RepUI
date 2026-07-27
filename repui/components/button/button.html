@@ -93,6 +93,31 @@
 
     {% card width="full" %}
       {% card_header %}
+        <h3>Runtime</h3>
+      {% endcard_header %}
+
+      {% card_body %}
+        <p>
+          Для обычной Button JavaScript не нужен: браузер нативно обслуживает
+          click, Enter, Space, focus, disabled, submit и переход по ссылке.
+        </p>
+
+        <p>
+          Необязательный <code>mountButtons()</code> существует только для
+          приложений с единым lifecycle компонентов. Он возвращает handles с
+          <code>element</code>, <code>refresh()</code> и
+          <code>destroy()</code>, но не добавляет обработчики поведения.
+        </p>
+
+        <pre><code>import { mountButtons }
+  from "/static/repui/components/button/button.js";
+
+const buttons = mountButtons(document);</code></pre>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
         <h3>Theme tokens</h3>
       {% endcard_header %}
 

@@ -1,8 +1,1 @@
-COMPONENT = {
-    "name": "menu",
-    "styles": (
-        "repui/components/menu/component.css",
-    ),
-    "scripts": ("repui/components/menu/component.js",),
-    "template": "repui/menu/component.html",
-}
+COMPONENT = {'name': 'menu', 'title': 'Menu', 'description': 'Группа menuitem с roving tabindex и явным mount.', 'template': 'repui/components/menu/menu.html', 'styles': ('repui/interaction/interaction.css', 'repui/components/menu/menu.css'), 'scripts': ('repui/components/menu/menu.js',), 'status': 'experimental'}

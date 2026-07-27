@@ -1,0 +1,1 @@
+COMPONENT = {'name': 'chip', 'title': 'Chip', 'description': 'Компактный интерактивный маркер с необязательным удалением.', 'template': 'repui/components/chip/chip.html', 'styles': ('repui/interaction/interaction.css', 'repui/components/chip/chip.css'), 'scripts': ('repui/components/chip/chip.js',), 'status': 'experimental'}

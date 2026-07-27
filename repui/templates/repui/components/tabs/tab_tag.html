@@ -1,0 +1,12 @@
+<button type="button"
+        class="rui-tab"
+        role="tab"
+        data-rui-tab
+        data-rui-roving-item
+        data-panel="{{ panel }}"
+        aria-controls="{{ panel }}"
+        aria-selected="{% if selected %}true{% else %}false{% endif %}"
+        tabindex="{% if selected %}0{% else %}-1{% endif %}"
+        {% if disabled %}disabled aria-disabled="true"{% endif %}>
+  {{ content|safe }}
+</button>
