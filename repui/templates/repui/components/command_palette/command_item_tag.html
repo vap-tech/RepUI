@@ -1,0 +1,7 @@
+<button type="button" class="rui-command__item" data-rui-command-item data-rui-option
+  data-value="{{ value|default:action|default:content|striptags }}"
+  {% if keywords %}data-keywords="{{ keywords }}"{% endif %}
+  {% if action %}data-action="{{ action }}"{% endif %}
+  {% if href %}data-href="{{ href }}"{% endif %}>
+  {{ content|safe }}
+</button>

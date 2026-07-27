@@ -1,0 +1,9 @@
+<div class="rui-command" id="{{ id }}" data-rui-command hidden>
+  <div class="rui-command__backdrop" data-rui-command-close></div>
+  <section class="rui-command__panel" role="dialog" aria-modal="true" aria-label="{{ label|default:'Команды' }}" tabindex="-1">
+    <input class="rui-command__input" data-rui-command-input type="search" placeholder="Поиск команды…" autocomplete="off">
+    <div class="rui-command__list" data-rui-command-list role="listbox"></div>
+    <p class="rui-command__empty" data-rui-command-empty hidden>Команды не найдены.</p>
+    {{ content|safe }}
+  </section>
+</div>

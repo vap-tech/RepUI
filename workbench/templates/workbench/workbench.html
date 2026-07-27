@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="{% static 'workbench/favicon.svg' %}">
   {% repui_theme_head %}
-  {% repui_css page appbar panel card button select listbox dialog alert toast card_action chip icon_button list_item_button menu select_option tabs list navbar drawer tree autocomplete %}
+  {% repui_css page appbar panel card button select listbox dialog alert toast command_palette card_action chip icon_button list_item_button menu select_option tabs list navbar drawer tree autocomplete %}
   <link rel="stylesheet" href="{% static 'workbench/docs.css' %}">
   <link rel="stylesheet" href="{% static 'workbench/workbench.css' %}">
   <title>RepUI Workbench</title>
@@ -48,6 +48,7 @@
   import { mountListboxes } from "{% static 'repui/components/listbox/listbox.js' %}";
   import { mountDialogs } from "{% static 'repui/core/dialog.js' %}";
   import { mountToasts } from "{% static 'repui/components/toast/toast.js' %}";
+  import { mountCommandPalettes } from "{% static 'repui/components/command_palette/command-palette.js' %}";
   import { mountNavbars } from "{% static 'repui/components/navbar/navbar.js' %}";
   import { mountDrawers } from "{% static 'repui/components/drawer/drawer.js' %}";
   import { mountTrees } from "{% static 'repui/components/tree/tree.js' %}";
@@ -58,6 +59,7 @@
   const mountListboxRuntime = (root) => mountListboxes(root);
   const mountDialogRuntime = (root) => mountDialogs(root);
   const mountToastRuntime = (root) => mountToasts(root);
+  const mountCommandRuntime = (root) => mountCommandPalettes(root);
   const mountInteractionRuntime = (root) => {
     mountNavbars(root);
     mountDrawers(root);
@@ -68,12 +70,14 @@
   mountListboxRuntime(document);
   mountDialogRuntime(document);
   mountToastRuntime(document);
+  mountCommandRuntime(document);
   mountInteractionRuntime(document);
   document.body.addEventListener("htmx:afterSwap", (event) => {
     mountSelectRuntime(event.detail.target);
     mountListboxRuntime(event.detail.target);
     mountDialogRuntime(event.detail.target);
     mountToastRuntime(event.detail.target);
+    mountCommandRuntime(event.detail.target);
     mountInteractionRuntime(event.detail.target);
   });
 </script>

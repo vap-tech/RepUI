@@ -1,0 +1,15 @@
+{% load repui repui_layout %}
+{% container %}
+  {% card width="full" %}
+    {% card_header %}<h1>Command Palette</h1><p>Поиск и запуск действий через клавиатуру.</p>{% endcard_header %}
+    {% card_body %}
+      <button type="button" data-rui-command-trigger="demo-command-palette">Открыть Command Palette</button>
+      {% command id="demo-command-palette" label="Команды Workbench" %}
+        {% command_item value="select" keywords="выбор форма" %}Открыть Select{% endcommand_item %}
+        {% command_item value="listbox" keywords="список навигация" %}Открыть Listbox{% endcommand_item %}
+        {% command_item value="dialog" keywords="окно модальное" %}Открыть Dialog{% endcommand_item %}
+      {% endcommand %}
+      <p><code>Ctrl/Cmd + K</code> открывает палету, стрелки меняют active, Enter запускает команду, Escape закрывает.</p>
+    {% endcard_body %}
+  {% endcard %}
+{% endcontainer %}
