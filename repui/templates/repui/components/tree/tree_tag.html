@@ -1,0 +1,1 @@
+{% load repui_attrs %}<div class="rui-tree{% if class_name %} {{ class_name }}{% endif %}" role="tree" data-rui-tree aria-label="{{ aria_label|default:'Дерево' }}"{% if multiselectable %} aria-multiselectable="true"{% endif %} {% html_attrs attrs %}>{{ content|safe }}</div>

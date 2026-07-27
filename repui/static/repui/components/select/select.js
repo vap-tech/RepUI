@@ -69,6 +69,7 @@ class SelectRuntime {
     this.wrapper = document.createElement("div");
     this.wrapper.className = "rui-select";
     this.wrapper.dataset.size = this.select.dataset.size || "md";
+    this.wrapper.dataset.width = this.select.dataset.width || "full";
     this.wrapper.dataset.multiple = String(this.select.multiple);
 
     this.trigger = document.createElement("button");
@@ -378,6 +379,22 @@ class SelectRuntime {
     );
   }
 
+  sizeToContent() {
+    if (this.select.dataset.width !== "content") return;
+
+    const probe = document.createElement("span");
+    const style = getComputedStyle(this.trigger);
+    probe.style.cssText =
+      `position:absolute;visibility:hidden;white-space:nowrap;font:${style.font};`;
+    probe.textContent = [...this.select.options]
+      .map((option) => option.textContent.trim())
+      .sort((left, right) => right.length - left.length)[0] || "";
+    document.body.append(probe);
+    const width = Math.ceil(probe.getBoundingClientRect().width);
+    probe.remove();
+    this.wrapper.style.minInlineSize = `${width + 64}px`;
+  }
+
   open(initial = "selected") {
     if (this.isOpen || this.disabled || this.readonly) return this;
 
@@ -443,6 +460,7 @@ class SelectRuntime {
       this.collection.items[this.collection.activeIndex]?.value;
 
     this.renderOptions();
+    this.sizeToContent();
     this.syncFromNative();
 
     if (wasOpen) {

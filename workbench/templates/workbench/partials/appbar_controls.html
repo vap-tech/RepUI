@@ -2,7 +2,7 @@
 
 <label class="docs-appbar-control">
   <span>Поведение</span>
-  {% select name="docs_appbar_behavior" rui_appbar_behavior_target="docs-appbar" %}
+  {% select name="docs_appbar_behavior" width="content" rui_appbar_behavior_target="docs-appbar" %}
     {% select_option value="static" %}Static{% endselect_option %}
     {% select_option value="sticky" selected=True %}Sticky{% endselect_option %}
   {% endselect %}
@@ -10,7 +10,7 @@
 
 <label class="docs-appbar-control">
   <span>Surface</span>
-  {% select name="docs_appbar_surface" rui_appbar_surface_target="docs-appbar" %}
+  {% select name="docs_appbar_surface" width="content" rui_appbar_surface_target="docs-appbar" %}
     {% select_option value="default" selected=True %}Default{% endselect_option %}
     {% select_option value="glass" %}Glass{% endselect_option %}
     {% select_option value="glass-solid" %}Glass + Solid + Shadow{% endselect_option %}

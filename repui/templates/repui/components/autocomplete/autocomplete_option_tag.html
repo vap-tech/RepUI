@@ -1,0 +1,1 @@
+{% load repui_attrs %}<div class="rui-autocomplete__option{% if class_name %} {{ class_name }}{% endif %}" role="option" data-rui-autocomplete-option data-value="{{ value }}" aria-selected="{{ selected|default:False|yesno:'true,false' }}"{% if disabled %} aria-disabled="true"{% endif %} {% html_attrs attrs %}>{{ content|safe }}</div>

@@ -85,6 +85,7 @@
           <div><dt><code>readonly</code></dt><dd>Запрещает изменение без удаления значения из формы.</dd></div>
           <div><dt><code>required</code></dt><dd>Использует native validation.</dd></div>
           <div><dt><code>size</code></dt><dd><code>sm</code>, <code>md</code>, <code>lg</code>.</dd></div>
+          <div><dt><code>width</code></dt><dd><code>full</code> по умолчанию; <code>content</code> резервирует ширину по самому длинному option.</dd></div>
         </dl>
         <p><strong>Django template note:</strong> открывающий block-tag <code>{% verbatim %}{% select ... %}{% endverbatim %}</code> с параметрами пишите одной строкой. Многострочный opening tag может нарушить распознавание <code>{% verbatim %}{% endselect %}{% endverbatim %}</code>.</p>
       {% endcard_body %}
@@ -157,8 +158,13 @@ skills = request.POST.getlist("skills")</code></pre>
           <label><input type="checkbox"> Tab закрывает и продолжает навигацию.</label>
           <label><input type="checkbox"> Typeahead находит option.</label>
           <label><input type="checkbox"> Disabled option пропускается.</label>
+          <label><input type="checkbox"> Readonly не открывается и сохраняет значение для формы.</label>
           <label><input type="checkbox"> Native input/change отправляются.</label>
           <label><input type="checkbox"> rui:change содержит string или string[].</label>
+          <label><input type="checkbox"> Popup не обрезается родительским overflow и переворачивается у края viewport.</label>
+          <label><input type="checkbox"> Scroll и resize обновляют положение popup.</label>
+          <label><input type="checkbox"> width="content" не меняет размер при выборе другого option.</label>
+          <label><input type="checkbox"> Outside click и Escape закрывают popup.</label>
           <label><input type="checkbox"> Light и dark читаются.</label>
           <label><input type="checkbox"> После HTMX swap Select монтируется один раз.</label>
           <label><input type="checkbox"> destroy возвращает обычный native select.</label>

@@ -1,0 +1,9 @@
+.rui-drawer { position: fixed; inset: 0; z-index: var(--rui-z-modal, 1300); display: flex; }
+.rui-drawer[hidden] { display: none; }
+.rui-drawer__backdrop { position: absolute; inset: 0; background: rgb(0 0 0 / .42); }
+.rui-drawer__panel { position: relative; z-index: 1; width: min(var(--rui-drawer-width, 20rem), 90vw); height: 100%; overflow: auto; background: var(--rui-color-surface, Canvas); color: var(--rui-color-on-surface, CanvasText); box-shadow: var(--rui-shadow-lg, 0 12px 32px rgb(0 0 0 / .24)); }
+.rui-drawer[data-side="right"] { justify-content: flex-end; }
+.rui-drawer[data-variant="persistent"] { position: relative; z-index: auto; display: block; }
+.rui-drawer[data-variant="persistent"] .rui-drawer__backdrop { display: none; }
+.rui-drawer[data-variant="persistent"] .rui-drawer__panel { width: var(--rui-drawer-width, 20rem); box-shadow: none; border-inline-end: 1px solid var(--rui-color-divider, rgb(0 0 0 / .12)); }
+body[data-rui-drawer-open="true"] { overflow: hidden; }

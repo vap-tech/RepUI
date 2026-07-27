@@ -1,0 +1,4 @@
+.rui-list { margin: 0; padding: var(--rui-list-padding, .5rem 0); list-style: none; }
+.rui-list[data-disable-padding="true"] { padding: 0; }
+.rui-list[data-dense="true"] { --rui-list-item-block-padding: .375rem; }
+ol.rui-list { list-style: decimal; padding-inline-start: 1.5rem; }

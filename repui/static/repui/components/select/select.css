@@ -26,6 +26,11 @@
     font: inherit;
   }
 
+  .rui-select[data-width="content"] {
+    inline-size: max-content;
+    min-inline-size: 12rem;
+  }
+
   .rui-select__trigger {
     display: flex;
     align-items: center;

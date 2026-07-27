@@ -1,0 +1,11 @@
+.rui-tree { display: grid; gap: .125rem; }
+.rui-tree-item { outline: none; }
+.rui-tree-item__row { display: flex; align-items: center; gap: .375rem; min-height: 2.25rem; padding: .375rem .5rem; border-radius: var(--rui-radius-sm, .375rem); cursor: default; user-select: none; }
+.rui-tree-item__row:hover { background: color-mix(in srgb, currentColor 7%, transparent); }
+.rui-tree-item:focus-visible > .rui-tree-item__row { outline: 2px solid var(--rui-color-primary, currentColor); outline-offset: -2px; }
+.rui-tree-item[aria-selected="true"] > .rui-tree-item__row { background: color-mix(in srgb, var(--rui-color-primary, currentColor) 14%, transparent); }
+.rui-tree-item[aria-disabled="true"] > .rui-tree-item__row { opacity: .5; }
+.rui-tree-item__indicator { inline-size: 1rem; block-size: 1rem; flex: none; }
+.rui-tree-item[aria-expanded] > .rui-tree-item__row > .rui-tree-item__indicator::before { content: "▸"; display: block; transition: transform .12s ease; }
+.rui-tree-item[aria-expanded="true"] > .rui-tree-item__row > .rui-tree-item__indicator::before { transform: rotate(90deg); }
+.rui-tree-item__group { margin-inline-start: 1rem; padding-inline-start: .5rem; border-inline-start: 1px solid var(--rui-color-divider, rgb(0 0 0 / .12)); }

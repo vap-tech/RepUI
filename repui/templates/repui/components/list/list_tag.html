@@ -1,0 +1,1 @@
+{% load repui_attrs %}{% if ordered %}<ol{% else %}<ul{% endif %} class="rui-list{% if class_name %} {{ class_name }}{% endif %}" data-dense="{{ dense|default:False|yesno:'true,false' }}" data-disable-padding="{{ disable_padding|default:False|yesno:'true,false' }}" {% html_attrs attrs %}>{{ content|safe }}{% if ordered %}</ol>{% else %}</ul>{% endif %}

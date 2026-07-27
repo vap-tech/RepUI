@@ -1,8 +1,10 @@
 COMPONENT = {
     "name": "listbox",
-    "styles": (
-        "repui/components/listbox/component.css",
-    ),
-    "scripts": ("repui/components/listbox/component.js",),
-    "template": "repui/listbox/component.html",
+    "title": "Listbox",
+    "description": "Standalone список options с active/selected и keyboard navigation.",
+    "styles": ("repui/interaction/interaction.css", "repui/components/listbox/listbox.css"),
+    "scripts": ("repui/components/listbox/listbox.js",),
+    "template": "repui/components/listbox/listbox.html",
+    "runtime": {"mount": "mountListboxes", "contract": ("refresh", "select", "destroy")},
+    "status": "stable",
 }

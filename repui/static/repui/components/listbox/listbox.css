@@ -1,0 +1,20 @@
+@layer repui.components {
+  .rui-listbox {
+    display: grid;
+    gap: .15rem;
+    min-inline-size: 0;
+    padding: .25rem;
+    border: 1px solid var(--rui-color-border);
+    border-radius: var(--rui-radius-md);
+    background: var(--rui-color-surface);
+  }
+  .rui-listbox__option {
+    padding: .625rem .75rem;
+    border-radius: var(--rui-radius-sm);
+    color: var(--rui-color-text);
+    cursor: pointer;
+  }
+  .rui-listbox__option[data-active="true"] { background: var(--rui-color-surface-hover); }
+  .rui-listbox__option[aria-selected="true"] { font-weight: 600; }
+  .rui-listbox__option[aria-disabled="true"] { opacity: .55; cursor: not-allowed; }
+}

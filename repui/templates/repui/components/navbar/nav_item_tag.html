@@ -1,0 +1,1 @@
+{% load repui_attrs %}<a class="rui-nav-item{% if class_name %} {{ class_name }}{% endif %}" {% if disabled %}aria-disabled="true" tabindex="-1"{% else %}href="{{ href }}"{% endif %} {% if current %}aria-current="page"{% endif %} data-rui-nav-item data-rui-roving-item {% html_attrs attrs %}>{{ content|safe }}</a>

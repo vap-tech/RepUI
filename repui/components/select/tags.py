@@ -4,6 +4,7 @@ from django.template.loader import render_to_string
 
 
 _ALLOWED_SIZES = {"sm", "md", "lg"}
+_ALLOWED_WIDTHS = {"full", "content"}
 
 
 class SelectNode(Node):
@@ -28,6 +29,10 @@ class SelectNode(Node):
                 f"Unknown select size: {size}"
             )
 
+        width = str(resolved.pop("width", "full"))
+        if width not in _ALLOWED_WIDTHS:
+            raise TemplateSyntaxError(f"Unknown select width: {width}")
+
         attrs = dict(resolved.pop("attrs", {}) or {})
         aliases = {
             "id": "id",
@@ -51,6 +56,7 @@ class SelectNode(Node):
             "name": name,
             "content": content,
             "size": size,
+            "width": width,
             "multiple": bool(resolved.pop("multiple", False)),
             "disabled": bool(resolved.pop("disabled", False)),
             "required": bool(resolved.pop("required", False)),
