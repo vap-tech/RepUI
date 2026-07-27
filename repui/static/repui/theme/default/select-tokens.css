@@ -1,0 +1,19 @@
+@layer repui.theme {
+  :root {
+    --rui-select-background: var(--rui-color-surface);
+    --rui-select-foreground: var(--rui-color-text);
+    --rui-select-border: 1px solid var(--rui-color-border);
+    --rui-select-radius: var(--rui-radius-md);
+    --rui-select-shadow: var(--rui-shadow-lg);
+    --rui-select-focus-ring: 0 0 0 3px color-mix(
+      in srgb,
+      var(--rui-color-primary) 24%,
+      transparent
+    );
+    --rui-select-option-active-background:
+      color-mix(in srgb, var(--rui-color-primary) 12%, transparent);
+    --rui-select-option-selected-background:
+      color-mix(in srgb, var(--rui-color-primary) 18%, transparent);
+    --rui-select-disabled-opacity: .55;
+  }
+}

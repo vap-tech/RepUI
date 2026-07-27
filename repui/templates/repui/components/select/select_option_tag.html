@@ -1,0 +1,7 @@
+{% load repui_attrs %}
+<option
+  value="{{ value }}"
+  {% if selected %}selected{% endif %}
+  {% if disabled %}disabled{% endif %}
+  {% html_attrs attrs %}
+>{{ content }}</option>

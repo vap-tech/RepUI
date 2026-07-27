@@ -1,0 +1,17 @@
+{% load repui_attrs %}
+<select
+  class="rui-select-native{% if class_name %} {{ class_name }}{% endif %}"
+  name="{{ name }}"
+  data-rui-select
+  data-size="{{ size }}"
+  data-placeholder="{{ placeholder }}"
+  data-empty-text="{{ empty_text }}"
+  {% if multiple %}multiple{% endif %}
+  {% if disabled %}disabled{% endif %}
+  {% if required %}required{% endif %}
+  {% if readonly %}data-readonly="true" aria-readonly="true"{% endif %}
+  {% if autofocus %}autofocus{% endif %}
+  {% html_attrs attrs %}
+>
+  {{ content|safe }}
+</select>

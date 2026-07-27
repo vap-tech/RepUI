@@ -1,14 +1,10 @@
 # SelectOption
 
-Это building block, не полный Select.
+Это option-level API компонента Select, а не самостоятельный popup.
 
 ```django
 {% select_option value="ru" selected=True %}Русский{% endselect_option %}
 ```
 
-```js
-import { mountSelectOptions } from ".../select-option.js";
-mountSelectOptions(document);
-```
-
-Отправляет `rui:activate`, затем `rui:change`.
+`select_option` рендерит нативный `<option>`. Keyboard, selection, события и
+синхронизация формы принадлежат родительскому Select и его `mountSelects()`.

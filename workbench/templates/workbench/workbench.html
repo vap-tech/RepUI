@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="{% static 'workbench/favicon.svg' %}">
   {% repui_theme_head %}
-  {% repui_css page appbar panel card button %}
+  {% repui_css page appbar panel card button select card_action chip icon_button list_item_button menu select_option tabs %}
   <link rel="stylesheet" href="{% static 'workbench/docs.css' %}">
   <link rel="stylesheet" href="{% static 'workbench/workbench.css' %}">
   <title>RepUI Workbench</title>
@@ -44,8 +44,14 @@
 <script type="module" src="{% static 'repui/theme/default/theme.js' %}"></script>
 <script type="module">
   import { mountAppBarControls } from "{% static 'repui/components/appbar/appbar.js' %}";
+  import { mountSelects } from "{% static 'repui/components/select/select.js' %}";
 
   mountAppBarControls(document);
+  const mountSelectRuntime = (root) => mountSelects(root);
+  mountSelectRuntime(document);
+  document.body.addEventListener("htmx:afterSwap", (event) => {
+    mountSelectRuntime(event.detail.target);
+  });
 </script>
 </body>
 </html>

@@ -31,4 +31,9 @@ def _select_option(parser, token):
     return SelectOptionNode(nodelist, kwargs)
 
 def register_tags(library: template.Library):
-    library.tag("select_option", _select_option)
+    """Keep the namespace owned by the Select component.
+
+    Select renders real native ``<option>`` elements, so its parent
+    component is the only owner of the public ``select_option`` tag.
+    """
+    return None

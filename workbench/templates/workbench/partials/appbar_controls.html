@@ -1,18 +1,20 @@
+{% load repui %}
+
 <label class="docs-appbar-control">
   <span>Поведение</span>
-  <select data-rui-appbar-behavior-target="docs-appbar">
-    <option value="static">Static</option>
-    <option value="sticky" selected>Sticky</option>
-  </select>
+  {% select name="docs_appbar_behavior" rui_appbar_behavior_target="docs-appbar" %}
+    {% select_option value="static" %}Static{% endselect_option %}
+    {% select_option value="sticky" selected=True %}Sticky{% endselect_option %}
+  {% endselect %}
 </label>
 
 <label class="docs-appbar-control">
   <span>Surface</span>
-  <select data-rui-appbar-surface-target="docs-appbar">
-    <option value="default" selected>Default</option>
-    <option value="glass">Glass</option>
-    <option value="glass-solid">Glass + Solid + Shadow</option>
-    <option value="transparent">Transparent</option>
-    <option value="solid">Solid</option>
-  </select>
+  {% select name="docs_appbar_surface" rui_appbar_surface_target="docs-appbar" %}
+    {% select_option value="default" selected=True %}Default{% endselect_option %}
+    {% select_option value="glass" %}Glass{% endselect_option %}
+    {% select_option value="glass-solid" %}Glass + Solid + Shadow{% endselect_option %}
+    {% select_option value="transparent" %}Transparent{% endselect_option %}
+    {% select_option value="solid" %}Solid{% endselect_option %}
+  {% endselect %}
 </label>

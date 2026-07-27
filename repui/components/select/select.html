@@ -1,0 +1,170 @@
+{% load repui repui_layout %}
+
+{% container %}
+  {% stack spacing="lg" %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h2>Select</h2>
+        <p>
+          Select выбирает одно или несколько значений. Источником истины
+          остаётся настоящий HTML <code>&lt;select&gt;</code>, поэтому Django
+          forms, browser validation и отправка формы работают без адаптеров.
+        </p>
+      {% endcard_header %}
+
+      {% card_body %}
+        <p><strong>Статус:</strong> Stable</p>
+        <p><strong>Использовать:</strong> для выбора из заранее известного списка.</p>
+        <p><strong>Не использовать:</strong> для свободного поиска и ввода — для этого нужен Combobox.</p>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Single</h3>
+      {% endcard_header %}
+      {% card_body %}
+        {% select name="city_demo" placeholder="Выберите город" %}
+          {% select_option value="msk" %}Москва{% endselect_option %}
+          {% select_option value="spb" %}Санкт-Петербург{% endselect_option %}
+          {% select_option value="kzn" %}Казань{% endselect_option %}
+          {% select_option value="disabled" disabled=True %}Недоступный вариант{% endselect_option %}
+        {% endselect %}
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Multiple</h3>
+        <p>
+          В multiple Enter, Space и pointer переключают выбранное значение,
+          не закрывая список.
+        </p>
+      {% endcard_header %}
+      {% card_body %}
+        {% select name="skills_demo" multiple=True placeholder="Выберите навыки" %}
+          {% select_option value="python" %}Python{% endselect_option %}
+          {% select_option value="django" selected=True %}Django{% endselect_option %}
+          {% select_option value="js" %}JavaScript{% endselect_option %}
+          {% select_option value="sql" selected=True %}SQL{% endselect_option %}
+          {% select_option value="rust" disabled=True %}Rust — недоступно{% endselect_option %}
+        {% endselect %}
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Состояния</h3>
+      {% endcard_header %}
+      {% card_body %}
+        {% stack spacing="md" %}
+          {% select name="disabled_demo" disabled=True %}
+            {% select_option value="one" selected=True %}Disabled{% endselect_option %}
+          {% endselect %}
+
+          {% select name="readonly_demo" readonly=True %}
+            {% select_option value="one" selected=True %}Readonly{% endselect_option %}
+            {% select_option value="two" %}Второе значение{% endselect_option %}
+          {% endselect %}
+        {% endstack %}
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Публичный API</h3>
+      {% endcard_header %}
+      {% card_body %}
+        <dl>
+          <div><dt><code>name</code></dt><dd>Имя поля Django form.</dd></div>
+          <div><dt><code>multiple</code></dt><dd>Разрешает несколько выбранных значений.</dd></div>
+          <div><dt><code>placeholder</code></dt><dd>Текст при отсутствии выбранных option.</dd></div>
+          <div><dt><code>empty_text</code></dt><dd>Текст при отсутствии option.</dd></div>
+          <div><dt><code>disabled</code></dt><dd>Полностью отключает поле.</dd></div>
+          <div><dt><code>readonly</code></dt><dd>Запрещает изменение без удаления значения из формы.</dd></div>
+          <div><dt><code>required</code></dt><dd>Использует native validation.</dd></div>
+          <div><dt><code>size</code></dt><dd><code>sm</code>, <code>md</code>, <code>lg</code>.</dd></div>
+        </dl>
+        <p><strong>Django template note:</strong> открывающий block-tag <code>{% verbatim %}{% select ... %}{% endverbatim %}</code> с параметрами пишите одной строкой. Многострочный opening tag может нарушить распознавание <code>{% verbatim %}{% endselect %}{% endverbatim %}</code>.</p>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Runtime</h3>
+      {% endcard_header %}
+      {% card_body %}
+        <pre><code>import { mountSelects }
+  from "/static/repui/components/select/select.js";
+
+const [select] = mountSelects(document);
+
+select.open();
+select.close();
+select.toggle();
+select.focus();
+select.refresh();
+select.value = ["python", "django"];
+select.destroy();</code></pre>
+
+        <p>
+          События: <code>rui:open</code>, <code>rui:close</code>,
+          <code>rui:change</code>.
+        </p>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Django</h3>
+      {% endcard_header %}
+      {% card_body %}
+        <pre><code>city = request.POST.get("city")
+skills = request.POST.getlist("skills")</code></pre>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Примеры</h3>
+      {% endcard_header %}
+      {% card_body %}
+        <pre><code>{% verbatim %}{% select name="city" placeholder="Выберите город" %}
+  {% select_option value="msk" %}Москва{% endselect_option %}
+  {% select_option value="spb" %}Санкт-Петербург{% endselect_option %}
+{% endselect %}{% endverbatim %}</code></pre>
+
+        <pre><code>{% verbatim %}{% select name="skills" multiple=True %}
+  {% select_option value="python" %}Python{% endselect_option %}
+  {% select_option value="django" selected=True %}Django{% endselect_option %}
+{% endselect %}{% endverbatim %}</code></pre>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Проверка</h3>
+      {% endcard_header %}
+      {% card_body %}
+        {% stack spacing="sm" %}
+          <label><input type="checkbox"> Single выбирается pointer.</label>
+          <label><input type="checkbox"> Multiple переключает несколько значений.</label>
+          <label><input type="checkbox"> ArrowUp/Down меняют active.</label>
+          <label><input type="checkbox"> Home/End работают.</label>
+          <label><input type="checkbox"> Enter и Space выбирают active.</label>
+          <label><input type="checkbox"> Escape закрывает список.</label>
+          <label><input type="checkbox"> Tab закрывает и продолжает навигацию.</label>
+          <label><input type="checkbox"> Typeahead находит option.</label>
+          <label><input type="checkbox"> Disabled option пропускается.</label>
+          <label><input type="checkbox"> Native input/change отправляются.</label>
+          <label><input type="checkbox"> rui:change содержит string или string[].</label>
+          <label><input type="checkbox"> Light и dark читаются.</label>
+          <label><input type="checkbox"> После HTMX swap Select монтируется один раз.</label>
+          <label><input type="checkbox"> destroy возвращает обычный native select.</label>
+        {% endstack %}
+      {% endcard_body %}
+    {% endcard %}
+
+  {% endstack %}
+{% endcontainer %}

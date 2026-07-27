@@ -2,6 +2,7 @@ from django.template import Context, Template
 from django.test import SimpleTestCase
 
 class SelectOptionTests(SimpleTestCase):
-    def test_role(self):
+    def test_native_option_markup(self):
         html = Template('{% load repui %}{% select_option value="one" %}One{% endselect_option %}').render(Context())
-        self.assertIn('role="option"', html)
+        self.assertIn('<option', html)
+        self.assertIn('value="one"', html)
