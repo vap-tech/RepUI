@@ -23,6 +23,12 @@ class WorkbenchEngineTests(SimpleTestCase):
             "/docs/",
         )
 
+    def test_component_catalog_url_exists(self):
+        self.assertEqual(
+            reverse("workbench:components"),
+            "/docs/components/",
+        )
+
     def test_sidebar_swaps_components_without_changing_browser_url(self):
         html = render_to_string(
             "workbench/partials/sidebar.html",

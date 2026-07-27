@@ -21,7 +21,6 @@ def workbench(
         if component_name
         else None
     )
-
     if component_name and selected is None:
         raise Http404("Unknown RepUI component")
 
@@ -34,6 +33,19 @@ def workbench(
             "components": components,
             "component_styles": get_component_styles(components),
             "selected_component": selected,
+        },
+    )
+
+
+def component_catalog(request: HttpRequest) -> HttpResponse:
+    """Render the static component catalog without Workbench HTMX behavior."""
+    components = get_components()
+    return render(
+        request,
+        "workbench/components.html",
+        {
+            "components": components,
+            "component_styles": get_component_styles(components),
         },
     )
 

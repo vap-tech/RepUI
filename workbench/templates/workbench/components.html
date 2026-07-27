@@ -1,0 +1,49 @@
+{% load static repui repui_theme repui_layout repui_css %}
+<!doctype html>
+<html lang="ru" data-rui-theme-mode="system" data-rui-color-scheme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/svg+xml" href="{% static 'workbench/favicon.svg' %}">
+  {% repui_theme_head %}
+  {% repui_css page appbar panel card button select listbox %}
+  <link rel="stylesheet" href="{% static 'workbench/docs.css' %}">
+  <link rel="stylesheet" href="{% static 'workbench/workbench.css' %}">
+  <title>RepUI Components</title>
+</head>
+<body>
+{% page %}
+  {% appbar id="docs-appbar" behavior="sticky" surface="glass" %}
+    <div class="docs-header">
+      <a href="{% url 'workbench:home' %}" class="docs-brand">RepUI Workbench</a>
+      <span>Components</span>
+      {% include "workbench/partials/theme_mode_select.html" %}
+    </div>
+  {% endappbar %}
+
+  {% page_content %}
+    {% container %}
+      {% panel surface="default" width="full" height="full" class_name="docs-main" %}
+        <div
+          id="component-catalog"
+          hx-get="{% static 'workbench/component-catalog.html' %}"
+          hx-trigger="load"
+          hx-swap="innerHTML"
+        >
+          Загружаем каталог компонентов…
+        </div>
+      {% endpanel %}
+    {% endcontainer %}
+  {% endpage_content %}
+{% endpage %}
+
+<script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
+<script type="module" src="{% static 'repui/theme/default/theme.js' %}"></script>
+<script type="module">
+  import { mountAppBarControls } from "{% static 'repui/components/appbar/appbar.js' %}";
+  import { mountSelects } from "{% static 'repui/components/select/select.js' %}";
+  mountAppBarControls(document);
+  mountSelects(document);
+</script>
+</body>
+</html>
