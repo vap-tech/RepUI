@@ -1,5 +1,6 @@
 from django.test import SimpleTestCase
 from django.urls import reverse
+from django.template.loader import render_to_string
 
 from workbench.utils import get_components
 
@@ -21,3 +22,14 @@ class WorkbenchEngineTests(SimpleTestCase):
             reverse("workbench:home"),
             "/docs/",
         )
+
+    def test_sidebar_swaps_components_without_changing_browser_url(self):
+        html = render_to_string(
+            "workbench/partials/sidebar.html",
+            {"components": [
+                {"name": "button", "title": "Button", "enabled": True, "error": ""},
+            ]},
+        )
+        self.assertIn('hx-swap="innerHTML"', html)
+        self.assertNotIn("hx-push-url", html)
+        self.assertNotIn("hx-replace-url", html)

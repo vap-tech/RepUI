@@ -5,8 +5,7 @@
       {% if item.enabled %}
         <button type="button" class="workbench__nav-item"
                 hx-get="{% url 'workbench:component-partial' item.name %}"
-                hx-target="#component-panel" hx-swap="innerHTML"
-                hx-push-url="{% url 'workbench:component' item.name %}">
+                hx-target="#component-panel" hx-swap="innerHTML">
           {{ item.title }}
         </button>
       {% else %}
