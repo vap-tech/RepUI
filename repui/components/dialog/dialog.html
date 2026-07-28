@@ -1,11 +1,40 @@
 {% load repui repui_layout %}
 {% container %}
   {% card width="full" %}
-    {% card_header %}<h1>Dialog</h1><p>Модальное окно с focus trap, Escape и restore focus.</p>{% endcard_header %}
+    {% card_header %}
+      <h1>Dialog</h1>
+      <p>Модальное окно с focus trap, Escape и возвратом focus.</p>
+    {% endcard_header %}
+
     {% card_body %}
-      <p>Dialog использует явный runtime mount и не создаёт содержимое автоматически.</p>
-      <pre><code>import { mountDialogs } from "/static/repui/core/dialog.js";
-mountDialogs(document);</code></pre>
+      {% button variant="filled" color="primary" data-rui-dialog-open="demo-dialog" %}
+        Открыть Dialog
+      {% endbutton %}
+
+      {% dialog id="demo-dialog" aria_label="Демонстрационный Dialog" %}
+        <h2>Демонстрационный Dialog</h2>
+        <p>Фокус перемещается внутрь окна, а после закрытия возвращается на trigger.</p>
+        {% button variant="text" data-rui-dialog-close=True %}
+          Закрыть
+        {% endbutton %}
+      {% enddialog %}
+
+      <h3>Как это работает</h3>
+      <ul>
+        <li><code>mountDialogs(document)</code> подключает explicit runtime.</li>
+        <li><code>data-rui-dialog-open="demo-dialog"</code> открывает конкретный Dialog.</li>
+        <li><code>data-rui-dialog-close</code> закрывает Dialog изнутри.</li>
+        <li>Escape закрывает верхний Dialog в modal stack.</li>
+        <li>Tab и Shift+Tab остаются внутри окна.</li>
+        <li>После закрытия focus возвращается на trigger.</li>
+        <li>При открытом modal Dialog body получает scroll lock.</li>
+      </ul>
+
+      <h3>Runtime API</h3>
+      <pre><code>const [dialog] = mountDialogs(document);
+dialog.open(trigger);
+dialog.close();
+dialog.destroy();</code></pre>
     {% endcard_body %}
   {% endcard %}
 {% endcontainer %}

@@ -16,6 +16,10 @@ export class DialogController {
     this.restoreTarget = null;
     this.onKeydown = this.onKeydown.bind(this);
     const { signal } = this.abort;
+    document.addEventListener('click', (event) => {
+      const trigger = event.target.closest(`[data-rui-dialog-open="${this.root.id}"]`);
+      if (trigger) this.open(trigger);
+    }, { signal });
     root.querySelectorAll('[data-rui-dialog-close]').forEach((button) =>
       button.addEventListener('click', () => this.close(), { signal }),
     );
@@ -36,7 +40,7 @@ export class DialogController {
     stack.push(this);
     document.body.dataset.ruiScrollLock = 'true';
     document.addEventListener('keydown', this.onKeydown, { signal: this.abort.signal });
-    requestAnimationFrame(() => (focusable(this.panel)[0] || this.panel)?.focus());
+    requestAnimationFrame(() => (focusable(this.panel)[0] || this.panel)?.focus?.());
     this.root.dispatchEvent(new CustomEvent('rui:dialogopen', { bubbles: true }));
     return this;
   }

@@ -40,6 +40,8 @@
   {% endpage_content %}
 {% endpage %}
 
+<div class="rui-toast-region" data-rui-toast-region aria-live="polite" aria-relevant="additions"></div>
+
 <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
 <script type="module" src="{% static 'repui/theme/default/theme.js' %}"></script>
 <script type="module">
@@ -69,9 +71,23 @@
   mountSelectRuntime(document);
   mountListboxRuntime(document);
   mountDialogRuntime(document);
-  mountToastRuntime(document);
+  const toastManager = mountToastRuntime(document)[0];
   mountCommandRuntime(document);
   mountInteractionRuntime(document);
+  document.body.addEventListener("rui:commandselect", (event) => {
+    const labels = {
+      select: "открыть Select",
+      listbox: "открыть Listbox",
+      dialog: "открыть Dialog",
+    };
+    const action = event.detail?.action;
+    if (toastManager && labels[action]) {
+      toastManager.show({
+        title: "Command Palette",
+        description: `Палета передала действие: ${labels[action]}.`,
+      });
+    }
+  });
   document.body.addEventListener("htmx:afterSwap", (event) => {
     mountSelectRuntime(event.detail.target);
     mountListboxRuntime(event.detail.target);

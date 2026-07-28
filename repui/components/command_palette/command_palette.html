@@ -3,13 +3,26 @@
   {% card width="full" %}
     {% card_header %}<h1>Command Palette</h1><p>Поиск и запуск действий через клавиатуру.</p>{% endcard_header %}
     {% card_body %}
-      <button type="button" data-rui-command-trigger="demo-command-palette">Открыть Command Palette</button>
+      {% button variant="filled" color="primary" data-rui-command-trigger="demo-command-palette" %}
+        Открыть Command Palette
+      {% endbutton %}
       {% command id="demo-command-palette" label="Команды Workbench" %}
         {% command_item value="select" keywords="выбор форма" %}Открыть Select{% endcommand_item %}
         {% command_item value="listbox" keywords="список навигация" %}Открыть Listbox{% endcommand_item %}
         {% command_item value="dialog" keywords="окно модальное" %}Открыть Dialog{% endcommand_item %}
       {% endcommand %}
-      <p><code>Ctrl/Cmd + K</code> открывает палету, стрелки меняют active, Enter запускает команду, Escape закрывает.</p>
+      <h3>Особенности работы</h3>
+      <ul>
+        <li><code>Ctrl/Cmd + K</code> открывает палету из любого места страницы.</li>
+        <li>Ввод в поле выполняет фильтрацию по label и <code>keywords</code>.</li>
+        <li>Стрелки меняют active, Enter запускает команду, Escape закрывает палету.</li>
+        <li>После выбора фокус возвращается на элемент, который открыл палету.</li>
+        <li>Выбор одной из трёх demo-команд показывает Toast с переданным действием.</li>
+      </ul>
+      <p>
+        Палета отправляет событие <code>rui:commandselect</code> с
+        <code>detail.action</code> и выбранным <code>detail.item</code>.
+      </p>
     {% endcard_body %}
   {% endcard %}
 {% endcontainer %}

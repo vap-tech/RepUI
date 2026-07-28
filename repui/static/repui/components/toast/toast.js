@@ -4,16 +4,15 @@ class ToastManager {
   constructor(region, root = region) {
     this.region = region;
     this.abort = new AbortController();
-    region.addEventListener("click", (event) => {
+    root.addEventListener("click", (event) => {
       const close = event.target.closest(".rui-toast__close");
-      if (close) this.close(close.closest(".rui-toast"));
-    }, { signal: this.abort.signal });
-    root.querySelectorAll?.("[data-rui-toast]").forEach((trigger) => {
-      trigger.addEventListener("click", () => this.show({
+      if (close && region.contains(close)) this.close(close.closest(".rui-toast"));
+      const trigger = event.target.closest("[data-rui-toast]");
+      if (trigger) this.show({
         title: trigger.dataset.ruiToast || "Готово",
         description: trigger.dataset.ruiToastDescription || "",
-      }), { signal: this.abort.signal });
-    });
+      });
+    }, { signal: this.abort.signal });
   }
 
   show({ title = "Готово", description = "", duration = 4200 } = {}) {

@@ -40,6 +40,13 @@ class ButtonNode(Node):
             "aria_label":"aria-label","hx_get":"hx-get","hx_post":"hx-post",
             "hx_target":"hx-target","hx_swap":"hx-swap","hx_confirm":"hx-confirm",
             "rui_appbar_toggle":"data-rui-appbar-toggle",
+            "data-rui-drawer-open":"data-rui-drawer-open",
+            "data-rui-drawer-close":"data-rui-drawer-close",
+            "data-rui-command-trigger":"data-rui-command-trigger",
+            "data-rui-toast":"data-rui-toast",
+            "data-rui-toast-description":"data-rui-toast-description",
+            "data-rui-dialog-open":"data-rui-dialog-open",
+            "data-rui-dialog-close":"data-rui-dialog-close",
             "aria_pressed":"aria-pressed",
         }
         for key,html_name in aliases.items():

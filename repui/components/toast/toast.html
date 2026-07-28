@@ -1,11 +1,47 @@
 {% load repui repui_layout %}
 {% container %}
   {% card width="full" %}
-    {% card_header %}<h1>Toast</h1><p>Временное уведомление поверх страницы, по умолчанию справа снизу.</p>{% endcard_header %}
+    {% card_header %}
+      <h1>Toast</h1>
+      <p>Временное уведомление поверх страницы.</p>
+    {% endcard_header %}
+
     {% card_body %}
-      <button type="button" data-rui-toast="Сохранено" data-rui-toast-description="Toast создаётся через публичный ToastManager.">Показать Toast</button>
-      <p><code>mountToasts(document)</code> подключает единый lifecycle без auto-init.</p>
-      <div data-rui-toast-region aria-live="polite" aria-relevant="additions"></div>
+      {% button variant="filled" color="primary" data-rui-toast="Сохранено" data-rui-toast-description="Toast показан через глобальный Workbench region." %}
+        Показать Toast
+      {% endbutton %}
+
+      <h3>Как это работает</h3>
+      <ul>
+        <li><code>mountToasts(document)</code> подключает explicit runtime.</li>
+        <li>Кнопка с <code>data-rui-toast</code> передаёт title уведомления.</li>
+        <li><code>data-rui-toast-description</code> задаёт дополнительное описание.</li>
+        <li>Toast автоматически исчезает через заданный duration.</li>
+        <li>Кнопка × закрывает конкретное уведомление.</li>
+        <li>Несколько Toast складываются в одну очередь региона.</li>
+        <li>Регион использует <code>aria-live="polite"</code>.</li>
+        <li>В Workbench region находится в shell, поэтому Toast не зависит от текущей карточки или HTMX-фрагмента.</li>
+      </ul>
+
+      <h3>Runtime API</h3>
+      <pre><code>const [toast] = mountToasts(document);
+
+toast.show({
+  title: "Сохранено",
+  description: "Изменения применены.",
+  duration: 4200,
+});
+
+toast.close(element);
+toast.destroy();</code></pre>
+
+      <h3>Theme contract</h3>
+      <p>
+        Положение задают токены
+        <code>--rui-toast-inset-inline-end</code> и
+        <code>--rui-toast-inset-block-end</code>.
+        По умолчанию Toast находится справа снизу viewport.
+      </p>
     {% endcard_body %}
   {% endcard %}
 {% endcontainer %}

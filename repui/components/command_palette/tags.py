@@ -9,6 +9,9 @@ class BlockNode(Node):
 
     def render(self, context):
         values = {key: value.resolve(context) for key, value in self.values.items()}
+        if self.kind == "command_item":
+            for key in ("value", "keywords", "action", "href"):
+                values.setdefault(key, None)
         return render_to_string(
             f"repui/components/command_palette/{self.kind}_tag.html",
             {**values, "content": self.nodelist.render(context).strip()},
