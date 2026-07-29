@@ -1,1 +1,19 @@
-{% load repui repui_layout %}{% container %}{% card width="full" %}{% card_header %}<h2>List</h2>{% endcard_header %}{% card_body %}{% list %}<li>{% list_item_button %}Первый пункт{% endlist_item_button %}</li><li>{% list_item_button href="#" %}Второй пункт{% endlist_item_button %}</li>{% endlist %}{% endcard_body %}{% endcard %}{% endcontainer %}
+{% load repui repui_layout %}
+
+{% container %}
+    {% card width="full" %}
+        {% card_header %}
+            <h2>List</h2>
+        {% endcard_header %}
+        {% card_body %}
+            {% list %}
+                {% list_item_button %}
+                    Первый пункт
+                {% endlist_item_button %}
+                {% list_item_button href="#" %}
+                    Второй пункт
+                {% endlist_item_button %}
+            {% endlist %}
+        {% endcard_body %}
+    {% endcard %}
+{% endcontainer %}

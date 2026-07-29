@@ -16,4 +16,14 @@
     color: inherit;
     cursor: pointer;
   }
+
+  .rui-chip[data-disabled="true"] {
+    opacity: var(--rui-chip-disabled-opacity, .52);
+    cursor: not-allowed;
+  }
+
+  .rui-chip[data-disabled="true"] .rui-chip__delete {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
 }

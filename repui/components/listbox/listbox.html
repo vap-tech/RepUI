@@ -1,6 +1,5 @@
 {% load repui repui_layout %}
 {% container %}
-  {% stack spacing="lg" %}
     {% card width="full" %}
       {% card_header %}<h2>Listbox</h2><p>Standalone список для выбора элемента без trigger и overlay.</p>{% endcard_header %}
       {% card_body %}
@@ -13,10 +12,10 @@
         <p>Стрелки меняют active, Enter выбирает пункт, pointer сразу передаёт active под курсор.</p>
       {% endcard_body %}
     {% endcard %}
+    <p></p>
     {% card width="full" %}
       {% card_header %}<h3>Публичный контракт</h3>{% endcard_header %}
       {% card_body %}<p><code>Listbox</code> не знает о Select, форме или Overlay. Он подходит для списков чатов, sidebar и выбора, который меняет внешний контент.</p><pre><code>import { mountListboxes } from "/static/repui/components/listbox/listbox.js";
 mountListboxes(document);</code></pre>{% endcard_body %}
     {% endcard %}
-  {% endstack %}
 {% endcontainer %}

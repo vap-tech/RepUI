@@ -51,6 +51,7 @@
   import { mountDialogs } from "{% static 'repui/core/dialog.js' %}";
   import { mountToasts } from "{% static 'repui/components/toast/toast.js' %}";
   import { mountCommandPalettes } from "{% static 'repui/components/command_palette/command-palette.js' %}";
+  import { mountChips } from "{% static 'repui/components/chip/chip.js' %}";
   import { mountNavbars } from "{% static 'repui/components/navbar/navbar.js' %}";
   import { mountDrawers } from "{% static 'repui/components/drawer/drawer.js' %}";
   import { mountTrees } from "{% static 'repui/components/tree/tree.js' %}";
@@ -62,6 +63,7 @@
   const mountDialogRuntime = (root) => mountDialogs(root);
   const mountToastRuntime = (root) => mountToasts(root);
   const mountCommandRuntime = (root) => mountCommandPalettes(root);
+  const mountChipRuntime = (root) => mountChips(root);
   const mountInteractionRuntime = (root) => {
     mountNavbars(root);
     mountDrawers(root);
@@ -73,6 +75,7 @@
   mountDialogRuntime(document);
   const toastManager = mountToastRuntime(document)[0];
   mountCommandRuntime(document);
+  mountChipRuntime(document);
   mountInteractionRuntime(document);
   document.body.addEventListener("rui:commandselect", (event) => {
     const labels = {
@@ -94,6 +97,7 @@
     mountDialogRuntime(event.detail.target);
     mountToastRuntime(event.detail.target);
     mountCommandRuntime(event.detail.target);
+    mountChipRuntime(event.detail.target);
     mountInteractionRuntime(event.detail.target);
   });
 </script>

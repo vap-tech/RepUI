@@ -5,7 +5,7 @@
     {% card width="full" %}
       {% card_header %}<h2>Chip</h2><p>Компактная метка с необязательным удалением.</p>{% endcard_header %}
       {% card_body %}
-        <p>{% chip value="design" %}Design{% endchip %} {% chip value="backend" deletable=True %}Backend{% endchip %} {% chip disabled=True %}Disabled{% endchip %}</p>
+        <p>{% chip value="design" %}Design{% endchip %} {% chip value="backend" deletable=True remove_on_delete=True %}Backend{% endchip %} {% chip disabled=True %}Disabled{% endchip %}</p>
         <p>Удаляемый вариант отправляет событие <code>rui:delete</code>; с <code>remove_on_delete</code> элемент удаляется из DOM.</p>
       {% endcard_body %}
     {% endcard %}

@@ -11,7 +11,7 @@ _SPECS = {
         "required": {"name"},
     },
     "autocomplete_option": {
-        "allowed": {"value", "selected", "disabled", "class_name", "attrs"},
+        "allowed": {"value", "selected", "disabled", "keywords", "class_name", "attrs"},
         "required": {"value"},
     },
 }

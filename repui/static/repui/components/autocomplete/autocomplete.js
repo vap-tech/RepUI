@@ -19,6 +19,7 @@ class AutocompleteRuntime {
     this.hiddenInput = root.querySelector("[data-rui-autocomplete-value]");
     this.popup = root.querySelector(".rui-autocomplete__popup");
     this.listbox = root.querySelector("[data-rui-autocomplete-options]");
+    this.empty = root.querySelector("[data-rui-autocomplete-empty]");
     if (!this.input || !this.hiddenInput || !this.popup || !this.listbox) {
       throw new Error("Autocomplete markup is incomplete");
     }
@@ -44,7 +45,7 @@ class AutocompleteRuntime {
       value: element.dataset.value || "",
       label: element.textContent.trim(),
       selected: element.getAttribute("aria-selected") === "true" || element.dataset.value === previousValue,
-      disabled: element.getAttribute("aria-disabled") === "true",
+      disabled: element.hidden || element.getAttribute("aria-disabled") === "true",
     })));
     const selected = this.collection.selected();
     this.setActive(selected >= 0 ? selected : this.collection.first(), { scroll: false });
@@ -61,6 +62,19 @@ class AutocompleteRuntime {
     return this;
   }
 
+  filter() {
+    const query = this.input.value.toLocaleLowerCase("ru-RU").trim();
+    let visible = 0;
+    this.options().forEach((option) => {
+      const text = `${option.dataset.value || ""} ${option.dataset.keywords || ""} ${option.textContent}`.toLocaleLowerCase("ru-RU");
+      option.hidden = !text.includes(query);
+      if (!option.hidden) visible += 1;
+    });
+    if (this.empty) this.empty.hidden = visible > 0;
+    this.refresh();
+    return visible;
+  }
+
   close() {
     if (this.popup.hidden) return this;
     this.popup.hidden = true;
@@ -71,14 +85,15 @@ class AutocompleteRuntime {
   }
 
   setActive(index, { scroll = true } = {}) {
+    this.options().forEach((option) => option.removeAttribute("data-active"));
     if (index < 0 || !this.collection.setActive(index)) {
       this.input.removeAttribute("aria-activedescendant");
       return this;
     }
     this.options().forEach((option, optionIndex) => {
       const active = optionIndex === index;
-      option.dataset.active = String(active);
       if (!active) return;
+      option.dataset.active = "true";
       if (!option.id) option.id = `${this.listbox.id}-option-${optionIndex}`;
       this.input.setAttribute("aria-activedescendant", option.id);
       if (scroll) option.scrollIntoView({ block: "nearest" });
@@ -125,7 +140,10 @@ class AutocompleteRuntime {
   bind() {
     const { signal } = this.abort;
     this.input.addEventListener("focus", () => this.open(), { signal });
-    this.input.addEventListener("input", () => this.open(), { signal });
+    this.input.addEventListener("input", () => {
+      this.filter();
+      this.open();
+    }, { signal });
     this.input.addEventListener("keydown", (event) => this.onKeydown(event), { signal });
     this.listbox.addEventListener("pointermove", (event) => {
       const option = event.target.closest("[data-rui-autocomplete-option]");

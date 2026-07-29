@@ -1,1 +1,18 @@
-{% load repui repui_layout %}{% container %}{% card width="full" %}{% card_header %}<h2>Autocomplete</h2>{% endcard_header %}{% card_body %}{% autocomplete name="city" placeholder="Город" %}{% autocomplete_option value="msk" %}Москва{% endautocomplete_option %}{% autocomplete_option value="spb" %}Санкт-Петербург{% endautocomplete_option %}{% autocomplete_option value="kzn" %}Казань{% endautocomplete_option %}{% endautocomplete %}{% endcard_body %}{% endcard %}{% endcontainer %}
+{% load repui repui_layout %}
+
+{% container %}
+  {% card width="full" %}
+    {% card_header %}
+      <h2>Autocomplete</h2>
+      <p>Ввод фильтрует доступные options по label, value и keywords.</p>
+    {% endcard_header %}
+    {% card_body %}
+      {% autocomplete name="city" placeholder="Город" %}
+        {% autocomplete_option value="msk" keywords="столица" %}Москва{% endautocomplete_option %}
+        {% autocomplete_option value="spb" keywords="петербург север" %}Санкт-Петербург{% endautocomplete_option %}
+        {% autocomplete_option value="kzn" %}Казань{% endautocomplete_option %}
+        {% autocomplete_option value="disabled" disabled=True %}Недоступный вариант{% endautocomplete_option %}
+      {% endautocomplete %}
+    {% endcard_body %}
+  {% endcard %}
+{% endcontainer %}
