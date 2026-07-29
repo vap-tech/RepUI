@@ -79,6 +79,26 @@ def _page_content(parser, token):
     )
 
 
+def _page_sidebar(parser, token):
+    return _parse(
+        parser,
+        token,
+        kind="page_sidebar",
+        end_tag="endpage_sidebar",
+    )
+
+
+def _page_body(parser, token):
+    return _parse(
+        parser,
+        token,
+        kind="page_body",
+        end_tag="endpage_body",
+    )
+
+
 def register_tags(library: template.Library):
     library.tag("page", _page)
     library.tag("page_content", _page_content)
+    library.tag("page_sidebar", _page_sidebar)
+    library.tag("page_body", _page_body)

@@ -1,0 +1,35 @@
+@layer repui.components {
+  :where(.rui-typography) {
+    margin: 0;
+    color: var(--rui-text-primary);
+    font-family: var(--rui-font-family-sans);
+    font-synthesis: none;
+    font-optical-sizing: auto;
+    text-rendering: optimizeLegibility;
+  }
+
+  :where(.rui-typography--display) { font-size: var(--rui-text-display-size); font-weight: var(--rui-text-display-weight); line-height: var(--rui-text-display-line-height); letter-spacing: var(--rui-text-display-letter-spacing); }
+  :where(.rui-typography--heading-lg) { font-size: var(--rui-text-heading-lg-size); font-weight: var(--rui-text-heading-lg-weight); line-height: var(--rui-text-heading-lg-line-height); letter-spacing: var(--rui-text-heading-lg-letter-spacing); }
+  :where(.rui-typography--heading) { font-size: var(--rui-text-heading-size); font-weight: var(--rui-text-heading-weight); line-height: var(--rui-text-heading-line-height); letter-spacing: var(--rui-text-heading-letter-spacing); }
+  :where(.rui-typography--title-lg) { font-size: var(--rui-text-title-lg-size); font-weight: var(--rui-text-title-lg-weight); line-height: var(--rui-text-title-lg-line-height); letter-spacing: var(--rui-text-title-lg-letter-spacing); }
+  :where(.rui-typography--title) { font-size: var(--rui-text-title-size); font-weight: var(--rui-text-title-weight); line-height: var(--rui-text-title-line-height); letter-spacing: var(--rui-text-title-letter-spacing); }
+  :where(.rui-typography--title-sm) { font-size: var(--rui-text-title-sm-size); font-weight: var(--rui-text-title-sm-weight); line-height: var(--rui-text-title-sm-line-height); letter-spacing: var(--rui-text-title-sm-letter-spacing); }
+  :where(.rui-typography--body-lg) { font-size: var(--rui-text-body-lg-size); font-weight: var(--rui-text-body-lg-weight); line-height: var(--rui-text-body-lg-line-height); letter-spacing: var(--rui-text-body-lg-letter-spacing); }
+  :where(.rui-typography--body) { font-size: var(--rui-text-body-size); font-weight: var(--rui-text-body-weight); line-height: var(--rui-text-body-line-height); letter-spacing: var(--rui-text-body-letter-spacing); }
+  :where(.rui-typography--body-sm) { font-size: var(--rui-text-body-sm-size); font-weight: var(--rui-text-body-sm-weight); line-height: var(--rui-text-body-sm-line-height); letter-spacing: var(--rui-text-body-sm-letter-spacing); }
+  :where(.rui-typography--label) { font-size: var(--rui-text-label-size); font-weight: var(--rui-text-label-weight); line-height: var(--rui-text-label-line-height); letter-spacing: var(--rui-text-label-letter-spacing); }
+  :where(.rui-typography--label-sm) { font-size: var(--rui-text-label-sm-size); font-weight: var(--rui-text-label-sm-weight); line-height: var(--rui-text-label-sm-line-height); letter-spacing: var(--rui-text-label-sm-letter-spacing); }
+  :where(.rui-typography--caption) { font-size: var(--rui-text-caption-size); font-weight: var(--rui-text-caption-weight); line-height: var(--rui-text-caption-line-height); letter-spacing: var(--rui-text-caption-letter-spacing); }
+
+  :where(.rui-typography--primary) { color: var(--rui-text-primary); }
+  :where(.rui-typography--secondary) { color: var(--rui-text-secondary); }
+  :where(.rui-typography--muted) { color: var(--rui-text-muted); }
+  :where(.rui-typography--disabled) { color: var(--rui-text-disabled); }
+  :where(.rui-typography--danger) { color: var(--rui-text-danger); }
+  :where(.rui-typography--nowrap) { white-space: nowrap; }
+  :where(.rui-typography--truncate) { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  :where(.rui-typography--balance) { text-wrap: balance; }
+  :where(.rui-typography--pretty) { text-wrap: pretty; }
+  :where(.rui-typography--numeric) { font-variant-numeric: tabular-nums; }
+  :where(.rui-typography--mono) { font-family: var(--rui-font-family-mono); }
+}

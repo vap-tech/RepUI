@@ -1,0 +1,41 @@
+{% load repui repui_layout %}
+
+{% container %}
+    {% card width="full" %}
+      {% card_header %}
+        <h2>Typography</h2>
+        <p>Публичный компонент для явной типографической семантики.</p>
+      {% endcard_header %}
+      {% card_body %}
+        {% typography variant="display" tag="h1" %}Display{% endtypography %}
+        {% typography variant="heading" tag="h2" %}Heading{% endtypography %}
+        {% typography variant="title" tag="h3" %}Title{% endtypography %}
+        {% typography variant="body" %}Body — основной текст интерфейса.{% endtypography %}
+        {% typography variant="body-sm" %}Body small — вторичный текст.{% endtypography %}
+        {% typography variant="label" tag="span" %}Label{% endtypography %}
+        {% typography variant="caption" %}Caption — поясняющий текст.{% endtypography %}
+      {% endcard_body %}
+    {% endcard %}
+    <p></p>
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Семантика и цвета</h3>
+      {% endcard_header %}
+      {% card_body %}
+        {% typography variant="title" tag="h3" color="primary" %}Primary title{% endtypography %}
+        {% typography variant="body" color="secondary" %}Secondary body{% endtypography %}
+        {% typography variant="body-sm" color="muted" %}Muted body{% endtypography %}
+        {% typography variant="caption" color="danger" %}Danger caption{% endtypography %}
+      {% endcard_body %}
+    {% endcard %}
+    <p></p>
+    {% card width="full" %}
+      {% card_header %}<h3>Пример API</h3>{% endcard_header %}
+      {% card_body %}
+        <pre><code>{% templatetag openblock %} typography variant="title" tag="h2" {% templatetag closeblock %}
+  Настройки
+{% templatetag openblock %} endtypography {% templatetag closeblock %}</code></pre>
+        <p>Вариант отвечает за внешний вид, а {% inline_code %}tag{% endinline_code %} — за HTML-семантику.</p>
+      {% endcard_body %}
+    {% endcard %}
+{% endcontainer %}

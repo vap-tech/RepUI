@@ -1,0 +1,25 @@
+@layer repui.components {
+  :where(.rui-inline-code) {
+    display: inline;
+    padding-top: .4em;
+    padding-left: .25em;
+    padding-right: .25em;
+    border: 1px solid var(--rui-inline-code-border);
+    border-radius: var(--rui-inline-code-radius);
+    background: var(--rui-inline-code-background);
+    color: var(--rui-inline-code-text);
+
+    font-family: var(--rui-font-family-mono);
+    font-size: 0.85em;
+    font-weight: var(--rui-font-weight-regular);
+    line-height: 1;
+
+    vertical-align: .05em;
+
+    letter-spacing: normal;
+    font-variant-ligatures: none;
+    white-space: break-spaces;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+}

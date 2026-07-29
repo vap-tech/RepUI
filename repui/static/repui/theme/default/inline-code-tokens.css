@@ -1,0 +1,16 @@
+@layer repui.theme {
+  :root {
+    --rui-inline-code-background: color-mix(
+      in srgb,
+      var(--rui-color-surface-raised, #f8faf8) 55%,
+      var(--rui-color-surface, #ffffff) 45%
+    );
+    --rui-inline-code-border: color-mix(
+      in srgb,
+      var(--rui-color-border, #cbd5cb) 85%,
+      transparent
+    );
+    --rui-inline-code-radius: .25rem;
+    --rui-inline-code-text: var(--rui-text-primary, var(--rui-color-text, #172017));
+  }
+}

@@ -1,0 +1,37 @@
+{% load repui repui_layout %}
+
+{% container %}
+  {% stack spacing="lg" %}
+    {% card width="full" %}
+      {% card_header %}
+        <h2>Tooltip</h2>
+        <p>Всплывающая подсказка для hover и keyboard focus.</p>
+      {% endcard_header %}
+      {% card_body %}
+        <p>
+          Наведите курсор или перейдите Tab на
+          {% tooltip title="Полное описание действия" %}
+            элементе с подсказкой
+          {% endtooltip %}.
+        </p>
+        <p>
+          {% tooltip title="Подсказка также открывается с клавиатуры" %}
+            {% button variant="outlined" %}Кнопка с Tooltip{% endbutton %}
+          {% endtooltip %}
+        </p>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}<h3>Поведение</h3>{% endcard_header %}
+      {% card_body %}
+        <ul>
+          <li>Открывается при наведении и keyboard focus.</li>
+          <li>Закрывается при уходе курсора, blur и Escape.</li>
+          <li>Рендерится через OverlayPortal вне потока документа.</li>
+          <li>Trigger связан с подсказкой через <code>aria-describedby</code>.</li>
+        </ul>
+      {% endcard_body %}
+    {% endcard %}
+  {% endstack %}
+{% endcontainer %}

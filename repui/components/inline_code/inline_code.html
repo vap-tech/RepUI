@@ -1,0 +1,37 @@
+{% load repui repui_layout %}
+
+{% container %}
+  {% card width="full" %}
+    {% card_header %}<h2>InlineCode</h2><p>Короткий код внутри обычного текста.</p>{% endcard_header %}
+    {% card_body %}
+      {% typography variant="body" %}
+        Используйте {% inline_code %}currentColor{% endinline_code %} для цвета SVG.
+      {% endtypography %}
+      <p>{% inline_code %}<button>{% endinline_code %} экранируется и не становится HTML-кнопкой.</p>
+    {% endcard_body %}
+  {% endcard %}
+
+  {% card width="full" %}
+    {% card_header %}
+      <h3>Метрики и перенос</h3>
+      <p>Проверка символов, регистра и длинных идентификаторов.</p>
+    {% endcard_header %}
+    {% card_body %}
+      <p>
+        {% inline_code %}gypq{% endinline_code %}
+        {% inline_code %}BUTTON{% endinline_code %}
+        {% inline_code %}<svg>{% endinline_code %}
+        {% inline_code %}12345{% endinline_code %}
+        {% inline_code %}snake_case{% endinline_code %}
+        {% inline_code %}camelCase{% endinline_code %}
+      </p>
+      <p>
+        Очень длинный параметр
+        {% inline_code %}
+        this_is_a_really_long_identifier_that_wraps this_is_a_really_long_identifier_that_wraps амаммваамавммвмвамангннгьньньгнньнгьнгьн муммамвмвамвамв
+        {% endinline_code %}
+        внутри абзаца.
+      </p>
+    {% endcard_body %}
+  {% endcard %}
+{% endcontainer %}

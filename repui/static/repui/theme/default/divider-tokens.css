@@ -1,0 +1,6 @@
+@layer repui.theme {
+  :root {
+    --rui-divider-thickness: 1px;
+    --rui-divider-color: var(--rui-color-border-subtle, var(--rui-color-border));
+  }
+}

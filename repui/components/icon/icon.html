@@ -1,0 +1,132 @@
+{% load repui repui_layout %}
+
+{% container %}
+  {% card width="full" %}
+    {% card_header %}<h2>Icon</h2><p>Inline SVG primitive на основе набора Lucide.</p>{% endcard_header %}
+    {% card_body %}
+      <div class="rui-icon-demo-grid">
+        <span>{% icon "plus" %} plus</span>
+        <span>{% icon "minus" %} minus</span>
+        <span>{% icon "x" %} x</span>
+        <span>{% icon "check" %} check</span>
+        <span>{% icon "pencil" %} pencil</span>
+        <span>{% icon "trash-2" %} trash-2</span>
+        <span>{% icon "copy" %} copy</span>
+        <span>{% icon "share-2" %} share-2</span>
+        <span>{% icon "download" %} download</span>
+        <span>{% icon "upload" %} upload</span>
+        <span>{% icon "refresh-cw" %} refresh-cw</span>
+        <span>{% icon "search" %} search</span>
+        <span>{% icon "funnel" %} funnel</span>
+        <span>{% icon "settings" %} settings</span>
+        <span>{% icon "menu" %} menu</span>
+        <span>{% icon "ellipsis" %} ellipsis</span>
+        <span>{% icon "info" %} info</span>
+        <span>{% icon "triangle-alert" %} triangle-alert</span>
+        <span>{% icon "calendar" %} calendar</span>
+        <span>{% icon "folder" %} folder</span>
+      </div>
+      <p>Иконки наследуют {% inline_code %}currentColor{% endinline_code %} и размер через {% inline_code %}em{% endinline_code %}.</p>
+    {% endcard_body %}
+  {% endcard %}
+
+  {% card width="full" %}
+    {% card_header %}
+      <h3>Icon рядом с текстом</h3>
+      <p>Для устойчивого выравнивания используйте явную композицию.</p>
+    {% endcard_header %}
+    {% card_body %}
+      <p>
+        Голый inline SVG участвует в baseline-выравнивании текста. Для коротких
+        и длинных строк, особенно с кириллицей, это может выглядеть неровно.
+      </p>
+      <p class="rui-icon-label">
+        {% icon "info" %}
+        <span>Так выглядит рекомендуемая композиция.</span>
+      </p>
+      <pre><code>&lt;span class="rui-icon-label"&gt;
+  {% templatetag openblock %} icon "info" {% templatetag closeblock %}
+  &lt;span&gt;Информация&lt;/span&gt;
+&lt;/span&gt;</code></pre>
+      <ul>
+          <li>{% inline_code %}Icon{% endinline_code %} остаётся нейтральным и не меняет глобальный baseline.</li>
+          <li>{% inline_code %}.rui-icon-label{% endinline_code %} задаёт {% inline_code %}inline-flex{% endinline_code %}, {% inline_code %}align-items: center{% endinline_code %} и gap.</li>
+        <li>Контейнер подходит для Button, Chip, MenuItem, Alert и обычного текста.</li>
+        <li>Для длинного текста сохраняется естественное поведение wrapping.</li>
+      </ul>
+    {% endcard_body %}
+  {% endcard %}
+
+  {% card width="full" %}
+    {% card_header %}
+      <h3>Варианты</h3>
+      <p>Размер, цвет, доступность и текстовые модификаторы.</p>
+    {% endcard_header %}
+    {% card_body %}
+      <h4>Размеры</h4>
+      <div class="rui-icon-demo-row">
+        <span>xs · 12px {% icon "star" size="xs" %}</span>
+        <span>sm · 14px {% icon "star" size="sm" %}</span>
+        <span>md · 18px {% icon "star" size="md" %}</span>
+        <span>lg · 24px {% icon "star" size="lg" %}</span>
+      </div>
+
+      <h4>Цвета</h4>
+      <div class="rui-icon-demo-row">
+        <span class="rui-icon-demo-primary">{% icon "circle-check" %}</span>
+        <span class="rui-icon-demo-secondary">{% icon "info" %}</span>
+        <span class="rui-icon-demo-muted">{% icon "clock" %}</span>
+        <span class="rui-icon-demo-danger">{% icon "circle-alert" %}</span>
+      </div>
+
+      <h4>Meaningful icon</h4>
+      <div class="rui-icon-demo-row">
+        {% icon "lightbulb" label="Подсказка" size="lg" %}
+        {% icon "triangle-alert" label="Предупреждение" size="lg" %}
+      </div>
+
+      <h4>Модификаторы</h4>
+      <div class="rui-icon-demo-row">
+        {% icon "settings" class_name="rui-icon--numeric" %}
+        {% icon "copy" class_name="rui-icon--mono" %}
+        {% icon "arrow-right" class_name="rui-icon--lg" %}
+      </div>
+
+      <h4>Иконка рядом с текстом</h4>
+      <div class="rui-icon-demo-text">
+        <p class="rui-icon-label"><span class="rui-icon-demo-primary">{% icon "lightbulb" %}</span><span>Совет: используйте Icon вместе с Typography.</span></p>
+        <p class="rui-icon-label"><span class="rui-icon-demo-danger">{% icon "triangle-alert" %}</span><span>Требуется внимание к этому состоянию.</span></p>
+        <p class="rui-icon-label"><span class="rui-icon-demo-secondary">{% icon "info" %}</span><span>Дополнительная информация для пользователя.</span></p>
+      </div>
+    {% endcard_body %}
+  {% endcard %}
+
+  {% card width="full" %}
+    {% card_header %}
+      <h3>Проверка шрифта и baseline</h3>
+      <p>Одинаковые примеры рядом на Manrope и Roboto Flex.</p>
+    {% endcard_header %}
+    {% card_body %}
+      <div class="rui-icon-font-comparison">
+        <section class="rui-icon-font-sample rui-icon-font-sample--manrope">
+          <h4>Manrope</h4>
+          <p class="rui-icon-label"><span>{% icon "lightbulb" %}</span><span>Settings</span></p>
+          <p class="rui-icon-label"><span>{% icon "lightbulb" %}</span><span>Настройки</span></p>
+          <p class="rui-icon-label"><span>{% icon "triangle-alert" %}</span><span>Warning</span></p>
+          <p class="rui-icon-label"><span>{% icon "triangle-alert" %}</span><span>Предупреждение</span></p>
+          <p class="rui-icon-label"><span>{% icon "info" %}</span><span>Information</span></p>
+          <p class="rui-icon-label"><span>{% icon "info" %}</span><span>Информация</span></p>
+        </section>
+        <section class="rui-icon-font-sample rui-icon-font-sample--roboto-flex">
+          <h4>Roboto Flex</h4>
+          <p class="rui-icon-label"><span>{% icon "lightbulb" %}</span><span>Settings</span></p>
+          <p class="rui-icon-label"><span>{% icon "lightbulb" %}</span><span>Настройки</span></p>
+          <p class="rui-icon-label"><span>{% icon "triangle-alert" %}</span><span>Warning</span></p>
+          <p class="rui-icon-label"><span>{% icon "triangle-alert" %}</span><span>Предупреждение</span></p>
+          <p class="rui-icon-label"><span>{% icon "info" %}</span><span>Information</span></p>
+          <p class="rui-icon-label"><span>{% icon "info" %}</span><span>Информация</span></p>
+        </section>
+      </div>
+    {% endcard_body %}
+  {% endcard %}
+{% endcontainer %}

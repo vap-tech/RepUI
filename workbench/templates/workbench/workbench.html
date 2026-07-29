@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="{% static 'workbench/favicon.svg' %}">
   {% repui_theme_head %}
-  {% repui_css page appbar panel card button select listbox dialog alert toast command_palette card_action chip icon_button list_item_button menu tabs list navbar drawer tree autocomplete %}
+  {% repui_css page appbar panel card button select listbox dialog alert toast command_palette card_action chip icon_button icon inline_code list_item_button menu tabs list navbar drawer tree autocomplete typography tooltip %}
   <link rel="stylesheet" href="{% static 'workbench/docs.css' %}">
   <link rel="stylesheet" href="{% static 'workbench/workbench.css' %}">
   <title>RepUI Workbench</title>
@@ -16,17 +16,13 @@
 {% page %}
   {% include "workbench/partials/appbar.html" %}
 
-  {% page_content %}
-    {% grid columns=5 spacing="none" %}
-      {% container column=1 %}
-        {% include "workbench/partials/sidebar.html" %}
-      {% endcontainer %}
+  {% page_sidebar id="docs-navigation" %}
+    {% include "workbench/partials/sidebar.html" %}
+  {% endpage_sidebar %}
 
-      {% container column=4 %}
-        {% include "workbench/partials/workspace.html" %}
-      {% endcontainer %}
-    {% endgrid %}
-  {% endpage_content %}
+  {% page_body %}
+    {% include "workbench/partials/workspace.html" %}
+  {% endpage_body %}
 {% endpage %}
 
 <div class="rui-toast-region" data-rui-toast-region aria-live="polite" aria-relevant="additions"></div>
@@ -44,6 +40,7 @@
   import { mountDrawers } from "{% static 'repui/components/drawer/drawer.js' %}";
   import { mountTrees } from "{% static 'repui/components/tree/tree.js' %}";
   import { mountAutocompletes } from "{% static 'repui/components/autocomplete/autocomplete.js' %}";
+  import { mountTooltips } from "{% static 'repui/components/tooltip/tooltip.js' %}";
 
   const mountSelectRuntime = (root) => mountSelects(root);
   const mountListboxRuntime = (root) => mountListboxes(root);
@@ -56,6 +53,7 @@
     mountDrawers(root);
     mountTrees(root);
     mountAutocompletes(root);
+    mountTooltips(root);
   };
   mountSelectRuntime(document);
   mountListboxRuntime(document);

@@ -1,0 +1,65 @@
+{% load repui repui_layout %}
+
+{% container %}
+  {% stack spacing="lg" %}
+    {% card width="full" %}
+      {% card_header %}
+        <h2>Divider</h2>
+        <p>Минимальный тематический разделитель без собственного отступа.</p>
+      {% endcard_header %}
+      {% card_body %}
+        <p>Первый блок</p>
+        {% divider %}
+        <p>Второй блок</p>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}<h3>Ориентация</h3>{% endcard_header %}
+      {% card_body %}
+        <div class="rui-divider-demo-row">
+          <span>Слева</span>
+          {% divider orientation="vertical" %}
+          <span>Справа</span>
+        </div>
+        <p>
+          По умолчанию Divider горизонтальный. Для вертикального варианта
+          используйте <code>orientation="vertical"</code>.
+        </p>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}<h3>Композиция со Stack</h3>{% endcard_header %}
+      {% card_body %}
+        {% stack spacing="md" %}
+          <p>Stack управляет расстоянием между блоками.</p>
+          <p>
+            Известное ограничение: в текущей реализации Layout Divider внутри
+            Stack может схлопываться до точки. Используйте Divider между
+            обычными блоками или задайте ему прикладную ширину.
+          </p>
+          {% divider %}
+          <p>Divider отвечает только за линию.</p>
+        {% endstack %}
+        <pre><code>{% verbatim %}{% stack spacing="lg" %}
+  {% card %}...{% endcard %}
+  {% divider %}
+  {% card %}...{% endcard %}
+{% endstack %}{% endverbatim %}</code></pre>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}<h3>Публичный API</h3>{% endcard_header %}
+      {% card_body %}
+        <p>
+          {% inline_code %}{% verbatim %}{% divider %}{% endverbatim %}{% endinline_code %}
+          рендерит <code>&lt;hr&gt;</code> без margin. Доступны
+          <code>horizontal</code> и <code>vertical</code>.
+        </p>
+        <p>Divider не имеет JavaScript API, mount/unmount или cleanup.</p>
+      {% endcard_body %}
+    {% endcard %}
+  {% endstack %}
+{% endcontainer %}

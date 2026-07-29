@@ -1,0 +1,1 @@
+{% load repui_attrs %}<span class="rui-tooltip{% if class_name %} {{ class_name }}{% endif %}" data-rui-tooltip {% html_attrs attrs %}><span class="rui-tooltip__trigger" data-rui-tooltip-trigger tabindex="0" aria-describedby="">{{ content|safe }}</span><span class="rui-tooltip__popup" data-rui-tooltip-popup role="tooltip" hidden>{{ title }}</span></span>

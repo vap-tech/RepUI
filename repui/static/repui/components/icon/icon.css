@@ -1,0 +1,101 @@
+@layer repui.components {
+  :where(.rui-icon-demo-grid) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    gap: .75rem;
+  }
+
+  :where(.rui-icon-demo-grid span),
+  :where(.rui-icon-demo-row) {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+  }
+
+  :where(.rui-icon-demo-text) {
+    display: grid;
+    gap: .6rem;
+  }
+
+  :where(.rui-icon-demo-text p) {
+    display: flex;
+    align-items: baseline;
+    gap: .5rem;
+  }
+
+  :where(.rui-icon-label) {
+    display: inline-flex;
+    align-items: center;
+    gap: .375em;
+    min-inline-size: 0;
+  }
+
+  :where(.rui-icon-label > .rui-icon),
+  :where(.rui-icon-label > span:first-child > .rui-icon) {
+    flex: 0 0 auto;
+  }
+
+  :where(.rui-icon-demo-text p.rui-icon-label) {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  :where(.rui-icon-font-comparison) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  :where(.rui-icon-font-sample) {
+    display: grid;
+    gap: .65rem;
+    padding: 1rem;
+    border: 1px solid var(--rui-color-border);
+    border-radius: var(--rui-radius-md);
+  }
+
+  :where(.rui-icon-font-sample h4),
+  :where(.rui-icon-font-sample p) {
+    margin: 0;
+  }
+
+  :where(.rui-icon-font-sample p) {
+    display: flex;
+    align-items: baseline;
+    gap: .5rem;
+  }
+
+  :where(.rui-icon-font-sample--manrope) { font-family: var(--rui-font-family-manrope); }
+  :where(.rui-icon-font-sample--roboto-flex) { font-family: var(--rui-font-family-roboto-flex); }
+
+  @media (max-width: 42rem) {
+    :where(.rui-icon-font-comparison) { grid-template-columns: 1fr; }
+  }
+
+  :where(.rui-icon-demo-row) {
+    flex-wrap: wrap;
+    min-block-size: 2.5rem;
+    margin-block-end: 1.25rem;
+  }
+
+  :where(.rui-icon-demo-primary) { color: var(--rui-color-primary); }
+  :where(.rui-icon-demo-secondary) { color: var(--rui-color-secondary); }
+  :where(.rui-icon-demo-muted) { color: var(--rui-text-muted); }
+  :where(.rui-icon-demo-danger) { color: var(--rui-color-danger); }
+
+  :where(.rui-icon) {
+    display: inline-block;
+    flex: 0 0 auto;
+    inline-size: 1em;
+    block-size: 1em;
+    vertical-align: -.125em;
+    color: currentColor;
+    fill: none;
+    stroke: currentColor;
+  }
+
+  :where(.rui-icon--xs) { font-size: .75rem; }
+  :where(.rui-icon--sm) { font-size: .875rem; }
+  :where(.rui-icon--md) { font-size: 1.125rem; }
+  :where(.rui-icon--lg) { font-size: 1.5rem; }
+}

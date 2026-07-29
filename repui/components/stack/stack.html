@@ -1,0 +1,86 @@
+{% load repui repui_layout %}
+
+{% container %}
+  {% stack spacing="lg" %}
+    {% card width="full" %}
+      {% card_header %}
+        <h2>Stack</h2>
+        <p>
+          Stack раскладывает дочерние элементы по вертикали и задаёт единое
+          расстояние между ними через {% inline_code %}spacing{% endinline_code %}.
+        </p>
+      {% endcard_header %}
+      {% card_body %}
+        <p>
+          По умолчанию элементы идут естественным потоком и не растягивают
+          друг друга. Stack не добавляет содержимым собственную семантику.
+        </p>
+        <p>
+          Используйте его для группировки полей, карточек, действий и других
+          элементов, которым нужен одинаковый вертикальный ритм.
+        </p>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Spacing</h3>
+        <p>Расстояние задаётся токенами Layout.</p>
+      {% endcard_header %}
+      {% card_body %}
+        {% stack spacing="sm" %}
+          <div class="rui-stack-demo-item">none — без расстояния</div>
+          <div class="rui-stack-demo-item">xs — минимальный отступ</div>
+          <div class="rui-stack-demo-item">sm — компактная группа</div>
+          <div class="rui-stack-demo-item">md — обычный ритм</div>
+          <div class="rui-stack-demo-item">lg — крупное разделение</div>
+        {% endstack %}
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
+        <h3>Варианты раскладки</h3>
+      {% endcard_header %}
+      {% card_body %}
+        <p>
+          Обычный Stack использует высоту содержимого. Параметр
+          {% inline_code %}rows{% endinline_code %} нужен для явного деления конечной области на строки.
+        </p>
+        <pre><code>{% verbatim %}{% stack spacing="md" %}
+  ...
+{% endstack %}
+
+{% stack rows=20 spacing="none" %}
+  {% container row=1 %}Header{% endcontainer %}
+  {% container row=19 %}Body{% endcontainer %}
+{% endstack %}{% endverbatim %}</code></pre>
+        <p>
+          Доступные значения: {% inline_code %}none{% endinline_code %},
+          {% inline_code %}xs{% endinline_code %},
+          {% inline_code %}sm{% endinline_code %},
+          {% inline_code %}md{% endinline_code %},
+          {% inline_code %}lg{% endinline_code %}. Для явных строк
+          дополнительно доступны
+          {% inline_code %}row_size="fill|content"{% endinline_code %},
+          {% inline_code %}row{% endinline_code %} и
+          {% inline_code %}id{% endinline_code %}/
+          {% inline_code %}class_name{% endinline_code %}.
+        </p>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}<h3>Проверка</h3>{% endcard_header %}
+      {% card_body %}
+        {% stack spacing="sm" %}
+          <label><input type="checkbox"> Элементы идут сверху вниз.</label>
+          <label><input type="checkbox"> spacing меняет только gap.</label>
+          <label><input type="checkbox"> Без rows элементы не накладываются.</label>
+          <label><input type="checkbox"> rows и row делят конечную область.</label>
+          <label><input type="checkbox"> Stack не создаёт JavaScript и runtime.</label>
+        {% endstack %}
+      {% endcard_body %}
+    {% endcard %}
+  {% endstack %}
+{% endcontainer %}

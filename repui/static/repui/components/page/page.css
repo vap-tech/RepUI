@@ -28,4 +28,48 @@
   :where(.rui-page__content > .rui-container) {
     block-size: 100%;
   }
+
+  :where(.rui-page:has(> .rui-page__sidebar):has(> .rui-page__body)) {
+    block-size: 100dvh;
+    min-block-size: 0;
+    display: grid;
+    grid-template:
+      "appbar appbar" auto
+      "sidebar body" minmax(0, 1fr)
+      / var(--rui-page-sidebar-width, 16rem) minmax(0, 1fr);
+    overflow: hidden;
+  }
+
+  :where(.rui-page:has(> .rui-page__sidebar):has(> .rui-page__body) > .rui-appbar) {
+    grid-area: appbar;
+  }
+
+  :where(.rui-page__sidebar) {
+    grid-area: sidebar;
+    min-inline-size: 0;
+    min-block-size: 0;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    overscroll-behavior: contain;
+  }
+
+  :where(.rui-page__body) {
+    grid-area: body;
+    min-inline-size: 0;
+    min-block-size: 0;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    overscroll-behavior: contain;
+  }
+
+  @media (max-width: 52rem) {
+    :where(.rui-page:has(> .rui-page__sidebar):has(> .rui-page__body)) {
+      grid-template:
+        "appbar" auto
+        "body" minmax(0, 1fr)
+        / minmax(0, 1fr);
+    }
+
+    :where(.rui-page__sidebar) { display: none; }
+  }
 }

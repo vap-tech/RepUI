@@ -91,10 +91,8 @@ class LayoutNode(Node):
             ))
 
         elif self.kind == "stack":
-            rows = positive_int(
-                values.pop("rows", 1),
-                name="rows",
-            )
+            has_explicit_rows = "rows" in self.kwargs
+            rows = positive_int(values.pop("rows", 1), name="rows")
             row_size = str(values.pop("row_size", "fill"))
             spacing = str(values.pop("spacing", "none"))
 
@@ -107,20 +105,21 @@ class LayoutNode(Node):
                     "spacing must be none, xs, sm, md or lg"
                 )
 
-            attrs["data-rows"] = rows
             attrs["data-row-size"] = row_size
             attrs["data-spacing"] = spacing
 
-            style_parts.extend((
-                f"--rui-stack-rows:{rows}",
-                "--rui-stack-row-size:"
-                + (
-                    "max-content"
-                    if row_size == "content"
-                    else "minmax(0,1fr)"
-                ),
-                f"--rui-layout-spacing:var(--rui-spacing-{spacing})",
-            ))
+            if has_explicit_rows:
+                attrs["data-rows"] = rows
+                style_parts.append(f"--rui-stack-rows:{rows}")
+                style_parts.append(
+                    "--rui-stack-row-size:"
+                    + (
+                        "max-content"
+                        if row_size == "content"
+                        else "minmax(0,1fr)"
+                    )
+                )
+            style_parts.append(f"--rui-layout-spacing:var(--rui-spacing-{spacing})")
 
         if values:
             unknown = ", ".join(sorted(values))

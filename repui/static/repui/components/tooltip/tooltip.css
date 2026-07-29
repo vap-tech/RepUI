@@ -1,0 +1,20 @@
+@layer repui.components {
+  :where(.rui-tooltip) { display: inline; }
+  :where(.rui-tooltip__trigger) { display: inline; }
+  :where(.rui-tooltip__trigger:focus-visible) {
+    outline: 2px solid var(--rui-color-primary, currentColor);
+    outline-offset: 2px;
+  }
+  :where(.rui-tooltip__popup) {
+    box-sizing: border-box;
+    padding: .4rem .6rem;
+    border: 1px solid var(--rui-tooltip-border, var(--rui-color-border, #cbd5cb));
+    border-radius: var(--rui-tooltip-radius, var(--rui-radius-sm));
+    background: var(--rui-tooltip-background, var(--rui-color-text, #172017));
+    color: var(--rui-tooltip-color, var(--rui-color-surface, #fff));
+    box-shadow: var(--rui-tooltip-shadow, 0 4px 12px rgb(0 0 0 / .2));
+    font: var(--rui-tooltip-font, 0.875rem / 1.35 var(--rui-font-family));
+    pointer-events: none;
+    z-index: var(--rui-tooltip-z-index, 1000);
+  }
+}

@@ -12,6 +12,7 @@ _FOUNDATION = (
     "repui/foundation/critical.css",
     "repui/theme/default/layers.css",
     "repui/foundation/tokens.css",
+    "repui/foundation/fonts.css",
     "repui/foundation/controls.css",
     "repui/theme/default/metrics.css",
     "repui/theme/default/theme.css",

@@ -2,283 +2,57 @@
 
 {% container %}
   {% stack spacing="lg" %}
-
     {% card width="full" %}
       {% card_header %}
         <h2>Page</h2>
         <p>
-          Page — корневая область интерфейса RepUI. Она связывает верхние
-          области страницы и основное содержимое в один стабильный экранный
-          shell.
+          Корневой shell страницы: AppBar сверху, отдельная боковая навигация
+          и рабочая область с независимой прокруткой.
         </p>
       {% endcard_header %}
-
       {% card_body %}
-        <p>Статус | Stable</p>
         <p>
-          Использовать | Один раз для крупной страницы приложения, документации,
-          административного интерфейса или рабочего экрана.
+          Page создаёт конечную область viewport и распределяет её между
+          верхней панелью, sidebar и body. Он не навязывает содержимое и не
+          добавляет скрытую разметку.
         </p>
-        <p>
-          Не использовать | Для отдельных блоков внутри страницы. Для них
-          предназначены Container, Grid, Stack, Panel и Card.
-        </p>
-        <p>
-          Page не показан внутри рабочей области: сам Workbench уже размещён
-          внутри Page. Вложенная Page создала бы второй page-level shell и
-          исказила бы проверку компонента.
-        </p>
+        <ul>
+          <li>sidebar прокручивается отдельно от рабочей области;</li>
+          <li>body получает всё оставшееся пространство;</li>
+          <li>внутри можно использовать Layout, Panel и Card.</li>
+        </ul>
       {% endcard_body %}
     {% endcard %}
 
     {% card width="full" %}
       {% card_header %}
-        <h3>Как устроена композиция</h3>
+        <h3>Как использовать</h3>
+        <p>Разметка shell задаётся явно через page_sidebar и page_body.</p>
       {% endcard_header %}
-
       {% card_body %}
-        <p>
-          Page задаёт внешний shell. Верхние элементы, например AppBar,
-          размещаются непосредственно внутри Page, а основная рабочая область —
-          внутри <code>page_content</code>.
-        </p>
-
         <pre><code>{% verbatim %}{% page %}
-  {% appbar behavior="sticky" surface="glass" %}
+  {% appbar %}
     ...
   {% endappbar %}
 
-  {% page_content %}
-    ...
-  {% endpage_content %}
+  {% page_sidebar %}
+    {% panel width="full" height="full" %}
+      Навигация
+    {% endpanel %}
+  {% endpage_sidebar %}
+
+  {% page_body %}
+    {% panel width="full" height="full" %}
+      Рабочая область
+    {% endpanel %}
+  {% endpage_body %}
 {% endpage %}{% endverbatim %}</code></pre>
-
         <p>
-          Внутри <code>page_content</code> можно использовать обычный Layout:
-          Container, Grid и Stack.
+          Для частичных обновлений HTMX сохраняйте Page и заменяйте содержимое
+          внутри <code>page_body</code>. Сам Page не имеет JavaScript API и не
+          требует mount/unmount.
         </p>
       {% endcard_body %}
     {% endcard %}
-
-    {% card width="full" %}
-      {% card_header %}
-        <h3>Ответственность Page</h3>
-      {% endcard_header %}
-
-      {% card_body %}
-        <ul>
-          <li>предоставляет корневую область страницы;</li>
-          <li>сохраняет стабильную вертикальную композицию shell;</li>
-          <li>отделяет верхние области от основного содержимого;</li>
-          <li>передаёт оставшееся пространство в <code>page_content</code>;</li>
-          <li>не управляет внутренней сеткой страницы;</li>
-          <li>не определяет оформление вложенных компонентов.</li>
-        </ul>
-      {% endcard_body %}
-    {% endcard %}
-
-    {% card width="full" %}
-      {% card_header %}
-        <h3>Page и Foundation</h3>
-      {% endcard_header %}
-
-      {% card_body %}
-        <p>
-          Page опирается на Foundation, который обеспечивает первый стабильный
-          кадр, базовую геометрию документа и page-level размеры.
-        </p>
-
-        <p>
-          Сам компонент не должен переопределять глобальные правила
-          <code>html</code>, <code>body</code>, reset или собственный
-          <code>100dvh</code> вне общего Foundation-контракта.
-        </p>
-
-        <p>
-          Foundation отвечает за геометрическую гарантию страницы, Page — за
-          явную композицию shell.
-        </p>
-      {% endcard_body %}
-    {% endcard %}
-
-    {% card width="full" %}
-      {% card_header %}
-        <h3>Публичный API</h3>
-      {% endcard_header %}
-
-      {% card_body %}
-        <dl>
-          <div>
-            <dt><code>page</code></dt>
-            <dd>
-              Корневой block-tag страницы. Содержит AppBar, другие верхние
-              области и один или несколько явных блоков содержимого.
-            </dd>
-          </div>
-
-          <div>
-            <dt><code>page_content</code></dt>
-            <dd>
-              Основная область страницы. Получает доступное пространство и
-              содержит пользовательский Layout.
-            </dd>
-          </div>
-
-          <div>
-            <dt><code>id</code></dt>
-            <dd>
-              Добавляет идентификатор, если shell нужно найти из прикладного
-              JavaScript или использовать как HTMX-target.
-            </dd>
-          </div>
-
-          <div>
-            <dt><code>class_name</code> и <code>attrs</code></dt>
-            <dd>
-              Добавляют прикладной класс и обычные HTML-атрибуты, не меняя
-              контракт Page.
-            </dd>
-          </div>
-        </dl>
-      {% endcard_body %}
-    {% endcard %}
-
-    {% card width="full" %}
-      {% card_header %}
-        <h3>Что размещать внутри</h3>
-      {% endcard_header %}
-
-      {% card_body %}
-        <p>Непосредственно внутри Page:</p>
-        <ul>
-          <li>AppBar;</li>
-          <li>другие крупные shell-области;</li>
-          <li><code>page_content</code>.</li>
-        </ul>
-
-        <p>Внутри <code>page_content</code>:</p>
-        <ul>
-          <li>Container;</li>
-          <li>Grid;</li>
-          <li>Stack;</li>
-          <li>Panel, Card и прикладные компоненты.</li>
-        </ul>
-
-        <p>
-          Page не навязывает внутреннюю разметку. Разделение рабочей области
-          выполняет Layout.
-        </p>
-      {% endcard_body %}
-    {% endcard %}
-
-    {% card width="full" %}
-      {% card_header %}
-        <h3>HTMX и runtime</h3>
-      {% endcard_header %}
-
-      {% card_body %}
-        <p>
-          Page не имеет собственного JavaScript API и не требует mount/unmount.
-        </p>
-
-        <p>
-          Обычно Page остаётся стабильной оболочкой, а HTMX заменяет содержимое
-          внутри <code>page_content</code>, Panel или другой вложенной области.
-        </p>
-
-        <p>
-          Полная замена Page допустима при обычной навигации, но для частичных
-          обновлений выгоднее сохранять shell и менять только внутренние
-          компоненты.
-        </p>
-      {% endcard_body %}
-    {% endcard %}
-
-    {% card width="full" %}
-      {% card_header %}
-        <h3>Theme tokens</h3>
-      {% endcard_header %}
-
-      {% card_body %}
-        <p>
-          Page использует минимальный набор токенов поверхности страницы.
-          Конкретный список следует брать из manifest текущей реализации.
-        </p>
-
-        <ul>
-          <li><code>--rui-page-background</code></li>
-          <li><code>--rui-page-foreground</code></li>
-          <li><code>--rui-page-content-background</code></li>
-          <li><code>--rui-page-content-padding</code></li>
-        </ul>
-
-        <p>
-          Приоритет: базовые tokens → активная light/dark theme →
-          пользовательская тема → локальные custom properties.
-        </p>
-      {% endcard_body %}
-    {% endcard %}
-
-    {% card width="full" %}
-      {% card_header %}
-        <h3>Примеры</h3>
-      {% endcard_header %}
-
-      {% card_body %}
-        <h4>Минимальная страница</h4>
-        <pre><code>{% verbatim %}{% page %}
-  {% page_content %}
-    {% container %}
-      Hello World
-    {% endcontainer %}
-  {% endpage_content %}
-{% endpage %}{% endverbatim %}</code></pre>
-
-        <h4>Страница с AppBar и рабочей областью</h4>
-        <pre><code>{% verbatim %}{% page %}
-  {% appbar behavior="sticky" surface="glass" %}
-    ...
-  {% endappbar %}
-
-  {% page_content %}
-    {% grid columns=5 %}
-      {% container column=1 %}
-        {% panel surface="sidebar" height="full" %}
-          ...
-        {% endpanel %}
-      {% endcontainer %}
-
-      {% container column=4 %}
-        {% panel width="full" height="full" %}
-          ...
-        {% endpanel %}
-      {% endcontainer %}
-    {% endgrid %}
-  {% endpage_content %}
-{% endpage %}{% endverbatim %}</code></pre>
-      {% endcard_body %}
-    {% endcard %}
-
-    {% card width="full" %}
-      {% card_header %}
-        <h3>Проверка</h3>
-      {% endcard_header %}
-
-      {% card_body %}
-        {% stack spacing="sm" %}
-          <label><input type="checkbox"> Page занимает корневую область без визуальных разрывов.</label>
-          <label><input type="checkbox"> AppBar и page_content образуют последовательный shell.</label>
-          <label><input type="checkbox"> page_content получает оставшееся пространство.</label>
-          <label><input type="checkbox"> Grid внутри page_content сохраняет размеры колонок.</label>
-          <label><input type="checkbox"> Panel с height="full" получает конечную высоту.</label>
-          <label><input type="checkbox"> Страница корректно отображается в light.</label>
-          <label><input type="checkbox"> Страница корректно отображается в dark.</label>
-          <label><input type="checkbox"> При reload нет краткого развала геометрии.</label>
-          <label><input type="checkbox"> HTMX-замена внутренней области не затрагивает Page shell.</label>
-          <label><input type="checkbox"> Page не создаёт listeners или дублированный lifecycle.</label>
-        {% endstack %}
-      {% endcard_body %}
-    {% endcard %}
-
   {% endstack %}
 {% endcontainer %}

@@ -1,0 +1,25 @@
+@layer repui.components {
+  :where(.rui-divider) {
+    display: block;
+    inline-size: 100%;
+    block-size: var(--rui-divider-thickness);
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: var(--rui-divider-color);
+    flex-shrink: 0;
+  }
+
+  :where(.rui-divider--vertical) {
+    inline-size: var(--rui-divider-thickness);
+    block-size: auto;
+    align-self: stretch;
+  }
+
+  :where(.rui-divider-demo-row) {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-block-size: 3rem;
+  }
+}
