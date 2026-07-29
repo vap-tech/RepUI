@@ -33,6 +33,7 @@ def workbench(
             "components": components,
             "component_styles": get_component_styles(components),
             "selected_component": selected,
+            "appbar_section": "components" if component_name else "home",
         },
     )
 
@@ -46,6 +47,7 @@ def component_catalog(request: HttpRequest) -> HttpResponse:
         {
             "components": components,
             "component_styles": get_component_styles(components),
+            "appbar_section": "components",
         },
     )
 

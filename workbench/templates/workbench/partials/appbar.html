@@ -9,7 +9,23 @@
       RepUI Workbench
     </a>
 
-    {% include "workbench/partials/appbar_controls.html" %}
+    {% if appbar_label %}
+      <span>{{ appbar_label }}</span>
+    {% endif %}
+
+    {% navbar aria_label="Навигация Workbench" %}
+      {% if appbar_section == "home" %}
+        {% nav_item href="/docs/" current=True %}Workbench{% endnav_item %}
+      {% else %}
+        {% nav_item href="/docs/" %}Workbench{% endnav_item %}
+      {% endif %}
+      {% if appbar_section == "components" %}
+        {% nav_item href="/docs/components/" current=True %}Components{% endnav_item %}
+      {% else %}
+        {% nav_item href="/docs/components/" %}Components{% endnav_item %}
+      {% endif %}
+    {% endnavbar %}
+
     {% include "workbench/partials/theme_mode_select.html" %}
   </div>
 {% endappbar %}

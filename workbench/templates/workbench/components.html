@@ -6,20 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="{% static 'workbench/favicon.svg' %}">
   {% repui_theme_head %}
-  {% repui_css page appbar panel card button select listbox %}
+  {% repui_css page appbar panel card button select listbox navbar %}
   <link rel="stylesheet" href="{% static 'workbench/docs.css' %}">
   <link rel="stylesheet" href="{% static 'workbench/workbench.css' %}">
   <title>RepUI Components</title>
 </head>
 <body>
 {% page %}
-  {% appbar id="docs-appbar" behavior="sticky" surface="glass" %}
-    <div class="docs-header">
-      <a href="{% url 'workbench:home' %}" class="docs-brand">RepUI Workbench</a>
-      <span>Components</span>
-      {% include "workbench/partials/theme_mode_select.html" %}
-    </div>
-  {% endappbar %}
+  {% include "workbench/partials/appbar.html" with appbar_label="Components" %}
 
   {% page_content %}
     {% container %}
@@ -40,10 +34,10 @@
 <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
 <script type="module" src="{% static 'repui/theme/default/theme.js' %}"></script>
 <script type="module">
-  import { mountAppBarControls } from "{% static 'repui/components/appbar/appbar.js' %}";
   import { mountSelects } from "{% static 'repui/components/select/select.js' %}";
-  mountAppBarControls(document);
+  import { mountNavbars } from "{% static 'repui/components/navbar/navbar.js' %}";
   mountSelects(document);
+  mountNavbars(document);
 </script>
 </body>
 </html>

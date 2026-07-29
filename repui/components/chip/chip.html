@@ -1,7 +1,6 @@
 {% load repui repui_layout %}
 
 {% container %}
-  {% stack spacing="lg" %}
     {% card width="full" %}
       {% card_header %}<h2>Chip</h2><p>Компактная метка с необязательным удалением.</p>{% endcard_header %}
       {% card_body %}
@@ -9,9 +8,9 @@
         <p>Удаляемый вариант отправляет событие <code>rui:delete</code>; с <code>remove_on_delete</code> элемент удаляется из DOM.</p>
       {% endcard_body %}
     {% endcard %}
+    <p></p>
     {% card width="full" %}
       {% card_header %}<h3>Публичный API</h3>{% endcard_header %}
       {% card_body %}<ul><li><code>value</code> — значение метки.</li><li><code>deletable</code> — показывает кнопку удаления.</li><li><code>remove_on_delete</code> — разрешает удаление самой метки.</li><li><code>disabled</code> — запрещает действие.</li></ul>{% endcard_body %}
     {% endcard %}
-  {% endstack %}
 {% endcontainer %}

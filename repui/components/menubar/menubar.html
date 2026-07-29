@@ -1,0 +1,24 @@
+{% load repui repui_layout %}
+
+{% container %}
+  {% card width="full" %}
+    {% card_header %}
+      <h2>Menubar</h2>
+      <p>Экспериментальная горизонтальная панель команд.</p>
+    {% endcard_header %}
+
+    {% card_body %}
+      {% navbar aria_label="Menubar demo" roving=True %}
+        {% nav_item href="#file" current=True %}File{% endnav_item %}
+        {% nav_item href="#edit" %}Edit{% endnav_item %}
+        {% nav_item href="#view" %}View{% endnav_item %}
+        {% nav_item href="#help" %}Help{% endnav_item %}
+      {% endnavbar %}
+
+      <p>
+        Первый этап проверяет горизонтальную навигацию, active state и
+        keyboard movement. Dropdown Menu добавим после проверки этой основы.
+      </p>
+    {% endcard_body %}
+  {% endcard %}
+{% endcontainer %}

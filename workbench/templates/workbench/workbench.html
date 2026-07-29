@@ -34,7 +34,6 @@
 <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
 <script type="module" src="{% static 'repui/theme/default/theme.js' %}"></script>
 <script type="module">
-  import { mountAppBarControls } from "{% static 'repui/components/appbar/appbar.js' %}";
   import { mountSelects } from "{% static 'repui/components/select/select.js' %}";
   import { mountListboxes } from "{% static 'repui/components/listbox/listbox.js' %}";
   import { mountDialogs } from "{% static 'repui/core/dialog.js' %}";
@@ -46,7 +45,6 @@
   import { mountTrees } from "{% static 'repui/components/tree/tree.js' %}";
   import { mountAutocompletes } from "{% static 'repui/components/autocomplete/autocomplete.js' %}";
 
-  mountAppBarControls(document);
   const mountSelectRuntime = (root) => mountSelects(root);
   const mountListboxRuntime = (root) => mountListboxes(root);
   const mountDialogRuntime = (root) => mountDialogs(root);
