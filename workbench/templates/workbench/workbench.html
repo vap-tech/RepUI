@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="{% static 'workbench/favicon.svg' %}">
   {% repui_theme_head %}
-  {% repui_css page appbar panel card button select listbox dialog alert toast command_palette card_action chip icon_button list_item_button menu select_option tabs list navbar drawer tree autocomplete %}
+  {% repui_css page appbar panel card button select listbox dialog alert toast command_palette card_action chip icon_button list_item_button menu tabs list navbar drawer tree autocomplete %}
   <link rel="stylesheet" href="{% static 'workbench/docs.css' %}">
   <link rel="stylesheet" href="{% static 'workbench/workbench.css' %}">
   <title>RepUI Workbench</title>
@@ -14,18 +14,7 @@
 <body>
 
 {% page %}
-        {% appbar id="docs-appbar" behavior="sticky" surface="glass" %}
-    <div class="docs-header">
-      <a
-        href="{% url 'workbench:home' %}"
-        class="docs-brand"
-      >
-        RepUI Workbench
-      </a>
-      {% include "workbench/partials/appbar_controls.html" %}
-      {% include "workbench/partials/theme_mode_select.html" %}
-    </div>
-  {% endappbar %}
+  {% include "workbench/partials/appbar.html" %}
 
   {% page_content %}
     {% grid columns=5 spacing="none" %}
