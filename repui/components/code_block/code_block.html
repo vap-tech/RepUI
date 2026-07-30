@@ -1,0 +1,35 @@
+{% load repui repui_layout %}
+
+{% container %}
+  {% stack spacing="lg" %}
+    {% card width="full" %}
+      {% card_header %}<h2>CodeBlock</h2><p>Многострочный код с прокруткой и явным copy action.</p>{% endcard_header %}
+      {% card_body %}
+        {% code_block language="django" %}{% verbatim %}{% button variant="filled" %}
+  Сохранить
+{% endbutton %}{% endverbatim %}{% endcode_block %}
+      {% endcard_body %}
+    {% endcard %}
+    {% card width="full" %}
+      {% card_header %}<h3>Публичный API</h3>{% endcard_header %}
+      {% card_body %}
+        <ul>
+          <li><code>language</code> — подпись языка.</li>
+          <li><code>copy=True</code> — добавить copy action.</li>
+          <li><code>height</code> задаёт максимальную высоту scroll area.</li>
+          <li>Content экранируется и не исполняется как HTML.</li>
+        </ul>
+        <p>Runtime подключается явно через <code>mountCodeBlocks(root)</code>.</p>
+      {% endcard_body %}
+    {% endcard %}
+    {% card width="full" %}
+      {% card_header %}<h3>Проверка</h3>{% endcard_header %}
+      {% card_body %}
+        <label><input type="checkbox"> Код не исполняется как HTML.</label>
+        <label><input type="checkbox"> Длинная строка прокручивается внутри блока.</label>
+        <label><input type="checkbox"> Copy action меняется на Copied.</label>
+        <label><input type="checkbox"> Повторный mount не создаёт вторую кнопку.</label>
+      {% endcard_body %}
+    {% endcard %}
+  {% endstack %}
+{% endcontainer %}

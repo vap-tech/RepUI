@@ -1,0 +1,14 @@
+@layer repui.theme {
+  :root {
+    --rui-code-block-background: var(--rui-color-surface-raised);
+    --rui-code-block-color: var(--rui-color-text);
+    --rui-code-block-border: var(--rui-color-border);
+    --rui-code-block-radius: var(--rui-radius-md);
+    --rui-code-block-padding: 1rem 1.25rem;
+    --rui-code-block-max-height: 24rem;
+    --rui-code-block-font-size: var(--rui-font-size-sm);
+    --rui-code-block-line-height: 1.6;
+    --rui-code-block-label-background: var(--rui-color-surface);
+    --rui-code-block-label-color: var(--rui-color-text-muted);
+  }
+}

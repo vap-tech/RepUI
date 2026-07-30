@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="{% static 'workbench/favicon.svg' %}">
   {% repui_theme_head %}
-  {% repui_css page appbar panel card button select listbox dialog alert toast command_palette card_action chip icon_button icon inline_code list_item_button menu tabs list navbar drawer tree autocomplete typography tooltip badge %}
+  {% repui_css page appbar panel card button select listbox dialog alert toast command_palette card_action chip icon_button icon inline_code list_item_button menu tabs list navbar drawer tree autocomplete typography tooltip badge code_block %}
   <link rel="stylesheet" href="{% static 'workbench/docs.css' %}">
   <link rel="stylesheet" href="{% static 'workbench/workbench.css' %}">
   <title>RepUI Workbench</title>
@@ -41,6 +41,7 @@
   import { mountTrees } from "{% static 'repui/components/tree/tree.js' %}";
   import { mountAutocompletes } from "{% static 'repui/components/autocomplete/autocomplete.js' %}";
   import { mountTooltips } from "{% static 'repui/components/tooltip/tooltip.js' %}";
+  import { mountCodeBlocks } from "{% static 'repui/components/code_block/code-block.js' %}";
 
   const mountSelectRuntime = (root) => mountSelects(root);
   const mountListboxRuntime = (root) => mountListboxes(root);
@@ -54,6 +55,7 @@
     mountTrees(root);
     mountAutocompletes(root);
     mountTooltips(root);
+    mountCodeBlocks(root);
   };
   mountSelectRuntime(document);
   mountListboxRuntime(document);
