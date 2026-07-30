@@ -1,5 +1,6 @@
 import { CollectionController } from "../../interaction/collection.js";
 import { OverlayPortal } from "../../interaction/overlay-portal.js";
+import { createDismissLayer } from "../../interaction/dismiss-layer.js";
 
 const instances = new WeakMap();
 let generatedId = 0;
@@ -50,7 +51,12 @@ class SelectRuntime {
     this.originalAriaHidden = select.getAttribute("aria-hidden");
     this.build();
     this.portal = new OverlayPortal(this.trigger, this.popup, {
-      onRequestClose: ({ reason }) => this.close(reason === "escape"),
+      onAnchorHidden: () => this.close(),
+    });
+    this.dismiss = createDismissLayer({
+      anchor: this.trigger,
+      overlay: this.popup,
+      onDismiss: ({ reason }) => this.close(reason === "escape"),
     });
     this.bind();
     this.refresh();
@@ -161,19 +167,6 @@ class SelectRuntime {
       { signal },
     );
 
-    document.addEventListener(
-      "pointerdown",
-      (event) => {
-        if (
-          this.isOpen &&
-          !this.wrapper.contains(event.target) &&
-          !this.popup.contains(event.target)
-        ) {
-          this.close();
-        }
-      },
-      { signal },
-    );
   }
 
   onTriggerKeyDown(event) {
@@ -479,6 +472,7 @@ class SelectRuntime {
   destroy() {
     this.close();
     this.portal.destroy();
+    this.dismiss.destroy();
     this.abortController.abort();
     clearTimeout(this.typeaheadTimer);
 

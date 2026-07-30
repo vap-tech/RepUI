@@ -61,7 +61,9 @@
 
   .rui-select__trigger:focus-visible {
     outline: 0;
-    box-shadow: var(--rui-select-focus-ring);
+    outline: var(--rui-focus-width) solid var(--rui-focus-color);
+    outline-offset: 2px;
+    box-shadow: none;
   }
 
   .rui-select__value {

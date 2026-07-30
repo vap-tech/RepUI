@@ -10,4 +10,8 @@
     color: var(--rui-icon-button-foreground, currentColor);
     cursor: pointer;
   }
+  .rui-icon-button:focus-visible {
+    outline: var(--rui-focus-width) solid var(--rui-focus-color);
+    outline-offset: 2px;
+  }
 }

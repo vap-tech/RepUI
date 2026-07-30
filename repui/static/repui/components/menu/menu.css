@@ -24,7 +24,7 @@
   }
 
   .rui-menu-item:focus-visible {
-    outline: 2px solid var(--rui-color-primary);
+    outline: var(--rui-focus-width) solid var(--rui-focus-color);
     outline-offset: -2px;
   }
 
