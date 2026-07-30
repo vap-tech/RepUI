@@ -45,6 +45,10 @@
     position: absolute;
     inset-block-end: .75rem;
     inset-inline-end: .75rem;
+    border: 1px solid var(--rui-color-border);
+    border-radius: var(--rui-radius-sm);
+    background: transparent;
+    color: var(--rui-color-text);
   }
 
   :where(.rui-code-block__copy > .rui-icon) {

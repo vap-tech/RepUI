@@ -42,11 +42,11 @@
           {% divider %}
           <p>Divider отвечает только за линию.</p>
         {% endstack %}
-        <pre><code>{% verbatim %}{% stack spacing="lg" %}
+        {% code_block language="django" title="divider.html" %}{% verbatim %}{% stack spacing="lg" %}
   {% card %}...{% endcard %}
   {% divider %}
   {% card %}...{% endcard %}
-{% endstack %}{% endverbatim %}</code></pre>
+{% endstack %}{% endverbatim %}{% endcode_block %}
       {% endcard_body %}
     {% endcard %}
 

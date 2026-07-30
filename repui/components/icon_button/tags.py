@@ -17,6 +17,14 @@ class IconButtonNode(Node):
         href = values.pop("href", None)
         disabled = bool(values.pop("disabled", False))
         attrs = dict(values.pop("attrs", {}) or {})
+        for key, html_name in {
+            "rui_menu_trigger": "data-rui-menu-trigger",
+            "rui_menu_context": "data-rui-menu-context",
+            "chat_id": "data-chat-id",
+        }.items():
+            value = values.pop(key, None)
+            if value is not None and value is not False:
+                attrs[html_name] = value
         class_name = values.pop("class_name", None)
         element_id = values.pop("id", None)
         if values:

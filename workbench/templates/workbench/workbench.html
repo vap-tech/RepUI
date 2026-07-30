@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="{% static 'workbench/favicon.svg' %}">
   {% repui_theme_head %}
-  {% repui_css page appbar panel card button select listbox dialog alert toast command_palette card_action chip icon_button icon inline_code list_item_button menu tabs list navbar drawer tree autocomplete typography tooltip badge code_block collapsible accordion popover pagination search combobox %}
+  {% repui_css page appbar panel card button select listbox dialog alert toast command_palette card_action chip icon_button icon inline_code list_item_button menu tabs list navbar drawer tree autocomplete typography tooltip badge code_block collapsible accordion popover pagination search combobox dropdown_menu divider %}
   <link rel="stylesheet" href="{% static 'workbench/docs.css' %}">
   <link rel="stylesheet" href="{% static 'workbench/workbench.css' %}">
   <title>RepUI Workbench</title>
@@ -48,6 +48,7 @@
   import { mountPaginations } from "{% static 'repui/components/pagination/pagination.js' %}";
   import { mountSearches } from "{% static 'repui/components/search/search.js' %}";
   import { mountComboboxes } from "{% static 'repui/components/combobox/component.js' %}";
+  import { mountDropdownMenus } from "{% static 'repui/components/dropdown_menu/dropdown-menu.js' %}";
 
   const mountSelectRuntime = (root) => mountSelects(root);
   const mountListboxRuntime = (root) => mountListboxes(root);
@@ -68,6 +69,7 @@
     mountPaginations(root);
     mountSearches(root);
     mountComboboxes(root);
+    mountDropdownMenus(root);
   };
   mountSelectRuntime(document);
   mountListboxRuntime(document);
@@ -89,6 +91,13 @@
         description: `Палета передала действие: ${labels[action]}.`,
       });
     }
+  });
+  document.body.addEventListener("rui:dropdownselect", (event) => {
+    const { action, contextData } = event.detail;
+    toastManager?.show({
+      title: "DropdownMenu",
+      description: `Действие «${action}» для чата ${contextData?.chatId ?? "без контекста"}.`,
+    });
   });
   document.body.addEventListener("htmx:afterSwap", (event) => {
     mountSelectRuntime(event.detail.target);
