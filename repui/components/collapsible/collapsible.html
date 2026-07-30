@@ -1,0 +1,17 @@
+{% load repui repui_layout %}
+{% container %}
+  {% stack spacing="lg" %}
+    {% card width="full" %}
+      {% card_header %}<h2>Collapsible</h2><p>Базовая раскрываемая область.</p>{% endcard_header %}
+      {% card_body %}
+        {% collapsible label="Дополнительные настройки" open=True %}
+          Здесь находится дополнительное содержимое.
+        {% endcollapsible %}
+      {% endcard_body %}
+    {% endcard %}
+    {% card width="full" %}
+      {% card_header %}<h3>Публичный API</h3>{% endcard_header %}
+      {% card_body %}<p>{% inline_code %}open{% endinline_code %} задаёт начальное состояние, а {% inline_code %}mountCollapsibles(root){% endinline_code %} подключает runtime явно.</p>{% endcard_body %}
+    {% endcard %}
+  {% endstack %}
+{% endcontainer %}

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="{% static 'workbench/favicon.svg' %}">
   {% repui_theme_head %}
-  {% repui_css page appbar panel card button select listbox dialog alert toast command_palette card_action chip icon_button icon inline_code list_item_button menu tabs list navbar drawer tree autocomplete typography tooltip badge code_block %}
+  {% repui_css page appbar panel card button select listbox dialog alert toast command_palette card_action chip icon_button icon inline_code list_item_button menu tabs list navbar drawer tree autocomplete typography tooltip badge code_block collapsible %}
   <link rel="stylesheet" href="{% static 'workbench/docs.css' %}">
   <link rel="stylesheet" href="{% static 'workbench/workbench.css' %}">
   <title>RepUI Workbench</title>
@@ -42,6 +42,7 @@
   import { mountAutocompletes } from "{% static 'repui/components/autocomplete/autocomplete.js' %}";
   import { mountTooltips } from "{% static 'repui/components/tooltip/tooltip.js' %}";
   import { mountCodeBlocks } from "{% static 'repui/components/code_block/code-block.js' %}";
+  import { mountCollapsibles } from "{% static 'repui/components/collapsible/collapsible.js' %}";
 
   const mountSelectRuntime = (root) => mountSelects(root);
   const mountListboxRuntime = (root) => mountListboxes(root);
@@ -56,6 +57,7 @@
     mountAutocompletes(root);
     mountTooltips(root);
     mountCodeBlocks(root);
+    mountCollapsibles(root);
   };
   mountSelectRuntime(document);
   mountListboxRuntime(document);

@@ -29,13 +29,6 @@ import {
   NavigationMenu,
 } from "./components/navigation-menu.js";
 import { initPagination } from "./components/pagination.js";
-import {
-  initCodeBlocks,
-  highlightHtml,
-  highlightCss,
-  highlightDjango,
-  highlightCode,
-} from "./components/code-block.js";
 
 let currentApi = null;
 function registerCollection(collection, name) {
@@ -80,7 +73,6 @@ export function init(root = document) {
   initValidation(root);
   initSearch(root);
   initPagination(root);
-  initCodeBlocks(root);
   currentApi = api;
   emit(document, "ready", api);
   return api;

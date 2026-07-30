@@ -1,0 +1,9 @@
+{% load repui_attrs %}<section class="rui-collapsible{% if class_name %} {{ class_name }}{% endif %}" data-rui-collapsible{% if id %} id="{{ id }}"{% endif %} data-state="{% if open %}open{% else %}closed{% endif %}" {% html_attrs attrs %}>
+  <button class="rui-collapsible__trigger" type="button" data-rui-collapsible-trigger aria-expanded="{{ open|yesno:'true,false' }}">
+    <span class="rui-collapsible__label">{{ label }}</span>
+    <span class="rui-collapsible__indicator" aria-hidden="true">⌄</span>
+  </button>
+  <div class="rui-collapsible__content" data-rui-collapsible-content{% if not open %} hidden{% endif %}>
+    <div class="rui-collapsible__body">{{ content }}</div>
+  </div>
+</section>
