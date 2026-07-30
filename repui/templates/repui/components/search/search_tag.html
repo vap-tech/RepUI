@@ -1,0 +1,6 @@
+{% load repui_attrs %}<form class="rui-search{% if class_name %} {{ class_name }}{% endif %}" data-rui-search method="{{ method|default:'get' }}" action="{{ action|default:'' }}"{% if id %} id="{{ id }}"{% endif %} aria-label="{{ aria_label|default:'Поиск' }}" {% html_attrs attrs %}>
+  <span class="rui-search__icon" aria-hidden="true">⌕</span>
+  <input class="rui-search__input" type="search" name="{{ name|default:'q' }}" placeholder="{{ placeholder|default:'Поиск' }}" value="{{ value|default:'' }}">
+  <button class="rui-search__clear" type="button" data-rui-search-clear aria-label="Очистить" hidden>×</button>
+  {{ content }}
+</form>

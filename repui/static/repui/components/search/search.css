@@ -1,0 +1,7 @@
+@layer repui.components {
+  :where(.rui-search) { display: flex; align-items: center; gap: var(--rui-space-2); min-inline-size: 0; max-inline-size: 34rem; padding: var(--rui-space-2) var(--rui-space-3); border: 1px solid var(--rui-color-border); border-radius: var(--rui-radius-md); background: var(--rui-color-surface); color: var(--rui-color-text-muted); }
+  :where(.rui-search:focus-within) { border-color: var(--rui-color-primary); outline: var(--rui-focus-width) solid color-mix(in srgb, var(--rui-color-primary) 24%, transparent); }
+  :where(.rui-search__icon) { flex: none; font-size: 1.25em; }
+  :where(.rui-search__input) { min-inline-size: 0; flex: 1; border: 0; outline: 0; background: transparent; color: var(--rui-color-text); font: inherit; }
+  :where(.rui-search__clear) { flex: none; border: 0; background: transparent; color: inherit; font: inherit; cursor: pointer; }
+}
