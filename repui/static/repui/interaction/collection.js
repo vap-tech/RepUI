@@ -37,7 +37,7 @@ export class CollectionController {
   isNavigable(index) {
     const item = this.items[index];
     if (!item) return false;
-    return this.disabledItemsFocusable || !item.disabled;
+    return !item.hidden && (this.disabledItemsFocusable || !item.disabled);
   }
 
   first() {

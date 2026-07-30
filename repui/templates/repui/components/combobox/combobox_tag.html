@@ -1,0 +1,5 @@
+{% load repui_attrs %}<div class="rui-combobox{% if class_name %} {{ class_name }}{% endif %}" data-rui-combobox{% if id %} id="{{ id }}"{% endif %}{% if disabled %} data-disabled{% endif %}>
+  <input class="rui-combobox__input" data-rui-combobox-input type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-haspopup="listbox" value="{{ value|default:'' }}" placeholder="{{ placeholder|default:'Начните вводить' }}"{% if required %} required{% endif %}{% if disabled %} disabled{% endif %} {% html_attrs attrs %}>
+  <input type="hidden" data-rui-combobox-value name="{{ name }}" value="{{ value|default:'' }}">
+  <div class="rui-combobox__popup" data-rui-combobox-popup hidden><div class="rui-combobox__list" data-rui-combobox-list role="listbox">{{ content }}</div><p class="rui-combobox__empty" data-rui-combobox-empty hidden>{{ empty_text|default:'Ничего не найдено' }}</p></div>
+</div>

@@ -1,8 +1,21 @@
-import "../../core/collection.js";
-import "../../core/popup.js";
+import { CollectionController } from "../../interaction/collection.js";
+import { OverlayPortal } from "../../interaction/overlay-portal.js";
 
-export function mount(root) {
-  console.log("combobox", root);
+const instances = new WeakMap();
+function collect(root) { const nodes=[]; if (root instanceof HTMLElement && root.matches("[data-rui-combobox]")) nodes.push(root); nodes.push(...(root.querySelectorAll?.("[data-rui-combobox]")||[])); return [...new Set(nodes)]; }
+class ComboboxRuntime {
+  constructor(element) {
+    this.element=element; this.input=element.querySelector("[data-rui-combobox-input]"); this.hidden=element.querySelector("[data-rui-combobox-value]"); this.popup=element.querySelector("[data-rui-combobox-popup]"); this.list=element.querySelector("[data-rui-combobox-list]"); this.empty=element.querySelector("[data-rui-combobox-empty]"); this.opened=false; this.controller=new CollectionController({loop:false}); this.portal=new OverlayPortal(this.input,this.popup,{offset:8,matchAnchorWidth:true,onRequestClose:()=>this.close()});
+    this.onInput=()=>this.filter(); this.onKeyDown=(event)=>this.key(event); this.onClick=(event)=>{const option=event.target.closest("[data-rui-combobox-option]"); if(option&&!option.disabled)this.choose(option);}; this.input.addEventListener("input",this.onInput); this.input.addEventListener("keydown",this.onKeyDown); this.list.addEventListener("click",this.onClick); this.refresh();
+  }
+  options(){return [...this.list.querySelectorAll("[data-rui-combobox-option]")];}
+  refresh(){const options=this.options(); this.controller.setItems(options.map((option,index)=>({id:option.id||option.dataset.value||`option-${index}`,label:option.textContent.trim(),value:option.dataset.value,disabled:option.disabled,hidden:option.hidden,element:option}))); this.render(); return this;}
+  filter(){const query=this.input.value.trim().toLocaleLowerCase(); let visible=0; this.options().forEach((option)=>{const haystack=`${option.textContent} ${option.dataset.keywords||""}`.toLocaleLowerCase(); option.hidden=Boolean(query&&!haystack.includes(query)); if(!option.hidden)visible+=1;}); this.empty.hidden=visible!==0; this.refresh(); this.open(); this.render(); this.element.dispatchEvent(new CustomEvent("rui:comboboxquery",{bubbles:true,detail:{query:this.input.value}}));}
+  render(){const state=this.controller.getState(); this.options().forEach((option,index)=>{option.dataset.active=String(index===state.activeIndex&&!option.hidden); option.setAttribute("aria-selected",String(option.dataset.value===this.hidden.value));});}
+  open(){if(!this.opened){this.popup.hidden=false; this.input.setAttribute("aria-expanded","true"); this.portal.mount(); this.opened=true;} else this.portal.schedulePosition(); return this;}
+  close(){if(!this.opened)return this; this.portal.unmount(); this.popup.hidden=true; this.input.setAttribute("aria-expanded","false"); this.opened=false; return this;}
+  choose(option){this.input.value=option.textContent.trim(); this.hidden.value=option.dataset.value||this.input.value; this.options().forEach((item)=>item.setAttribute("aria-selected",String(item===option))); this.close(); this.input.focus(); this.hidden.dispatchEvent(new Event("change",{bubbles:true})); this.element.dispatchEvent(new CustomEvent("rui:comboboxchange",{bubbles:true,detail:{value:this.hidden.value,label:this.input.value,item:option}}));}
+  key(event){if(event.key==="Escape"){event.preventDefault();this.close();return;} if(event.key==="Tab"){this.close();return;} if(event.key==="ArrowDown"||event.key==="ArrowUp"){event.preventDefault();this.open(); this.controller.move(event.key==="ArrowDown"?1:-1); this.render(); return;} if(event.key==="Enter"&&this.opened){event.preventDefault();const item=this.controller.items[this.controller.activeIndex]?.element;if(item&&!item.hidden&&!item.disabled)this.choose(item);}}
+  destroy(){this.input.removeEventListener("input",this.onInput);this.input.removeEventListener("keydown",this.onKeyDown);this.list.removeEventListener("click",this.onClick);this.portal.destroy();this.controller=null;instances.delete(this.element);}
 }
-
-export function destroy(root) {}
+export function mountComboboxes(root=document){return collect(root).map((element)=>{let instance=instances.get(element);if(!instance){instance=new ComboboxRuntime(element);instances.set(element,instance);}return instance;});}

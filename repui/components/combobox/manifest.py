@@ -4,5 +4,5 @@ COMPONENT = {
         "repui/components/combobox/component.css",
     ),
     "scripts": ("repui/components/combobox/component.js",),
-    "template": "repui/combobox/component.html",
+    "template": "repui/components/combobox/combobox.html",
 }
