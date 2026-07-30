@@ -15,6 +15,7 @@ class TooltipRuntime {
     this.element = element;
     this.trigger = element.querySelector("[data-rui-tooltip-trigger]");
     this.popup = element.querySelector("[data-rui-tooltip-popup]");
+    this.arrow = element.querySelector("[data-rui-tooltip-arrow]");
     if (!this.trigger || !this.popup) throw new Error("Tooltip markup is incomplete");
     if (!this.popup.id) this.popup.id = `rui-tooltip-${++uid}`;
     this.focusTarget = this.trigger.matches(
@@ -33,7 +34,10 @@ class TooltipRuntime {
     }
     this.portal = new OverlayPortal(this.trigger, this.popup, {
       matchAnchorWidth: false,
-      offset: 8,
+      align: "center",
+      horizontalFlip: true,
+      offset: 21,
+      arrow: this.arrow,
       onRequestClose: () => this.close(),
     });
     this.abort = new AbortController();

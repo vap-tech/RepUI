@@ -13,8 +13,53 @@
     background: var(--rui-tooltip-background, var(--rui-color-text, #172017));
     color: var(--rui-tooltip-color, var(--rui-color-surface, #fff));
     box-shadow: var(--rui-tooltip-shadow, 0 4px 12px rgb(0 0 0 / .2));
-    font: var(--rui-tooltip-font, 0.875rem / 1.35 var(--rui-font-family));
+    backdrop-filter: var(--rui-tooltip-backdrop-filter, none);
+    -webkit-backdrop-filter: var(--rui-tooltip-backdrop-filter, none);
+    font-family: var(--rui-font-family);
+    font-size: var(--rui-tooltip-font-size, var(--rui-text-body-sm-size, .875rem));
+    font-weight: var(--rui-tooltip-font-weight, var(--rui-text-body-sm-weight, 400));
+    line-height: var(--rui-tooltip-line-height, var(--rui-text-body-sm-line-height, 1.35));
     pointer-events: none;
     z-index: var(--rui-tooltip-z-index, 1000);
   }
+
+  :where(.rui-tooltip__arrow) {
+    position: absolute;
+    inset-inline-start: var(--rui-overlay-arrow-x, 50%);
+    inline-size: .65rem;
+    block-size: .65rem;
+    background: var(--rui-tooltip-background);
+    border: 1px solid var(--rui-tooltip-border);
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  :where(.rui-tooltip__popup[data-side="bottom"] .rui-tooltip__arrow) {
+    inset-block-start: -.38rem;
+    border-inline-end: 0;
+    border-block-end: 0;
+  }
+
+  :where(.rui-tooltip__popup[data-side="top"] .rui-tooltip__arrow) {
+    inset-block-end: -.38rem;
+    border-inline-start: 0;
+    border-block-start: 0;
+  }
+
+  :where(.rui-tooltip__popup[data-side="right"] .rui-tooltip__arrow) {
+    inset-block-start: var(--rui-overlay-arrow-y, 50%);
+    inset-inline-start: -.38rem;
+    transform: translateY(-50%) rotate(45deg);
+    border-inline-end: 0;
+    border-block-start: 0;
+  }
+
+  :where(.rui-tooltip__popup[data-side="left"] .rui-tooltip__arrow) {
+    inset-block-start: var(--rui-overlay-arrow-y, 50%);
+    inset-inline-start: auto;
+    inset-inline-end: -.38rem;
+    transform: translateY(-50%) rotate(45deg);
+    border-inline-start: 0;
+    border-block-end: 0;
+  }
+
 }

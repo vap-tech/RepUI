@@ -1,0 +1,18 @@
+@layer repui.theme {
+  :root,
+  [data-rui-color-scheme="light"] {
+    --rui-tooltip-background: #eeeeee;
+    --rui-tooltip-color: #202020;
+    --rui-tooltip-border: rgb(160 160 160 / .7);
+    --rui-tooltip-shadow: 4px 4px 8px rgb(0 0 0 / .1);
+    --rui-tooltip-backdrop-filter: none;
+  }
+
+  [data-rui-color-scheme="dark"] {
+    --rui-tooltip-background: #252525;
+    --rui-tooltip-color: #ededed;
+    --rui-tooltip-border: #4a4a4a;
+    --rui-tooltip-shadow: 4px 3px 8px rgb(255 255 255 / .07);
+    --rui-tooltip-backdrop-filter: none;
+  }
+}

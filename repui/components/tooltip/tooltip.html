@@ -14,11 +14,23 @@
             элементе с подсказкой
           {% endtooltip %}.
         </p>
-        <p>
-          {% tooltip title="Подсказка также открывается с клавиатуры" %}
-            {% button variant="outlined" %}Кнопка с Tooltip{% endbutton %}
-          {% endtooltip %}
-        </p>
+        {% grid columns=3 spacing="sm" %}
+          {% container %}
+            {% tooltip title="Подсказка слева" %}
+              {% button variant="outlined" %}Слева{% endbutton %}
+            {% endtooltip %}
+          {% endcontainer %}
+          {% container %}
+            {% tooltip title="Подсказка по центру" %}
+              {% button variant="outlined" %}По центру{% endbutton %}
+            {% endtooltip %}
+          {% endcontainer %}
+          {% container %}
+            {% tooltip title="Подсказка справа с horizontal fallback" %}
+              {% button variant="outlined" %}Справа{% endbutton %}
+            {% endtooltip %}
+          {% endcontainer %}
+        {% endgrid %}
       {% endcard_body %}
     {% endcard %}
 
@@ -29,7 +41,27 @@
           <li>Открывается при наведении и keyboard focus.</li>
           <li>Закрывается при уходе курсора, blur и Escape.</li>
           <li>Рендерится через OverlayPortal вне потока документа.</li>
-          <li>Trigger связан с подсказкой через <code>aria-describedby</code>.</li>
+          <li>
+            Trigger связан с подсказкой через
+            {% inline_code %}aria-describedby{% endinline_code %}.
+          </li>
+        </ul>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}<h3>TODO</h3>{% endcard_header %}
+      {% card_body %}
+        <p>
+          Базовое позиционирование готово. Следующий уровень — отдельные
+          edge cases OverlayPortal, а не обязательная часть текущего Tooltip.
+        </p>
+        <ul>
+          <li>сложные scroll containers и collision boundaries;</li>
+          <li>touch и long-press сценарии;</li>
+          <li>анимации открытия и закрытия;</li>
+          <li>тонкая настройка collision padding;</li>
+          <li>нестандартная геометрия anchor и visual viewport.</li>
         </ul>
       {% endcard_body %}
     {% endcard %}

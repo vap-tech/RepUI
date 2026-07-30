@@ -28,6 +28,9 @@ export class OverlayPortal {
       offset: 4,
       viewportPadding: 8,
       matchAnchorWidth: true,
+      align: "start",
+      horizontalFlip: false,
+      arrow: null,
       flip: true,
       restoreFocus: false,
       onRequestClose: null,
@@ -62,6 +65,7 @@ export class OverlayPortal {
     this.overlay.style.position = "fixed";
     this.overlay.style.inset = "auto";
     this.overlay.style.margin = "0";
+    if (this.options.arrow) this.options.arrow.dataset.ruiOverlayArrow = "true";
     this.mounted = true;
 
     this.abortController = new AbortController();
@@ -123,22 +127,60 @@ export class OverlayPortal {
     const below = viewportTop + viewportHeight - padding - anchorRect.bottom - this.options.offset;
     const above = anchorRect.top - viewportTop - padding - this.options.offset;
     const openAbove = this.options.flip && below < natural.height && above > below;
-    const available = Math.max(80, openAbove ? above : below);
+    const right = viewportLeft + viewportWidth - padding - anchorRect.right - this.options.offset;
+    const leftSpace = anchorRect.left - viewportLeft - padding - this.options.offset;
+    const horizontalSide = this.options.horizontalFlip &&
+      below < natural.height && above < natural.height &&
+      (right >= natural.width || leftSpace >= natural.width)
+      ? (right >= leftSpace ? "right" : "left")
+      : null;
+    const side = horizontalSide || (openAbove ? "top" : "bottom");
+    const available = Math.max(
+      80,
+      side === "top" ? above : side === "bottom" ? below : viewportHeight - padding * 2,
+    );
     this.overlay.style.maxHeight = `${Math.floor(available)}px`;
 
     const measured = this.overlay.getBoundingClientRect();
-    const top = openAbove
+    const top = side === "top"
       ? anchorRect.top - measured.height - this.options.offset
-      : anchorRect.bottom + this.options.offset;
+      : side === "bottom"
+        ? anchorRect.bottom + this.options.offset
+        : anchorRect.top + (anchorRect.height - measured.height) / 2;
     const minLeft = viewportLeft + padding;
     const maxLeft = viewportLeft + viewportWidth - padding - measured.width;
-    const left = Math.min(Math.max(anchorRect.left, minLeft), Math.max(minLeft, maxLeft));
+    const preferredLeft = side === "right"
+      ? anchorRect.right + this.options.offset
+      : side === "left"
+        ? anchorRect.left - measured.width - this.options.offset
+        : this.options.align === "center"
+          ? anchorRect.left + (anchorRect.width - measured.width) / 2
+          : anchorRect.left;
+    const left = Math.min(Math.max(preferredLeft, minLeft), Math.max(minLeft, maxLeft));
     const minTop = viewportTop + padding;
     const maxTop = viewportTop + viewportHeight - padding - measured.height;
 
     this.overlay.style.left = `${Math.round(left)}px`;
     this.overlay.style.top = `${Math.round(Math.min(Math.max(top, minTop), Math.max(minTop, maxTop)))}px`;
-    this.overlay.dataset.side = openAbove ? "top" : "bottom";
+    this.overlay.dataset.side = side;
+    if (this.options.arrow) {
+      const arrowPadding = 8;
+      const anchorCenter = anchorRect.left + anchorRect.width / 2;
+      const arrowX = Math.min(
+        Math.max(anchorCenter - left, arrowPadding),
+        Math.max(arrowPadding, measured.width - arrowPadding),
+      );
+      this.overlay.style.setProperty(
+        "--rui-overlay-arrow-x",
+        `${Math.round(arrowX)}px`,
+      );
+      const anchorMiddle = anchorRect.top + anchorRect.height / 2;
+      const arrowY = Math.min(
+        Math.max(anchorMiddle - top, arrowPadding),
+        Math.max(arrowPadding, measured.height - arrowPadding),
+      );
+      this.overlay.style.setProperty("--rui-overlay-arrow-y", `${Math.round(arrowY)}px`);
+    }
   }
 
   unmount() {
@@ -152,9 +194,10 @@ export class OverlayPortal {
     this.frame = 0;
     this.mounted = false;
     delete this.overlay.dataset.ruiPortal;
-    ["position", "inset", "top", "left", "right", "bottom", "width", "margin", "max-width", "max-height"].forEach(
+    ["position", "inset", "top", "left", "right", "bottom", "width", "margin", "max-width", "max-height", "--rui-overlay-arrow-x", "--rui-overlay-arrow-y"].forEach(
       (property) => this.overlay.style.removeProperty(property),
     );
+    if (this.options.arrow) delete this.options.arrow.dataset.ruiOverlayArrow;
     delete this.overlay.dataset.side;
     if (this.placeholder.parentNode) this.placeholder.replaceWith(this.overlay);
     if (this.options.restoreFocus && this.previousFocus?.isConnected) {
