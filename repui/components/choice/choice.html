@@ -1,0 +1,38 @@
+{% load repui repui_layout %}
+{% container %}
+  {% grid columns=3 spacing="lg" %}
+    {% container column=2 %}
+      {% stack spacing="lg" %}
+        {% card width="full" %}
+          {% card_header %}<h2>Choice</h2><p>Явная композиция нативного radio или checkbox.</p>{% endcard_header %}
+          {% card_body %}
+            {% stack spacing="md" %}
+              {% choice type="radio" name="delivery" value="courier" checked=True description="Доставка до двери" %}Курьер{% endchoice %}
+              {% choice type="radio" name="delivery" value="pickup" description="Забрать самостоятельно" %}Самовывоз{% endchoice %}
+              {% choice type="checkbox" name="terms" value="accepted" description="Можно снять отметку" %}Согласен с условиями{% endchoice %}
+              {% choice type="checkbox" disabled=True %}Недоступный вариант{% endchoice %}
+            {% endstack %}
+          {% endcard_body %}
+        {% endcard %}
+        {% card width="full" %}
+          {% card_header %}<h3>Публичный API</h3>{% endcard_header %}
+          {% card_body %}<p>{% inline_code %}type{% endinline_code %} выбирает {% inline_code %}radio{% endinline_code %} или {% inline_code %}checkbox{% endinline_code %}. Label задаётся содержимым тега, описание — параметром {% inline_code %}description{% endinline_code %}.</p><p>Компонент оставляет выбор и отправку формы нативному браузеру.</p>{% endcard_body %}
+        {% endcard %}
+      {% endstack %}
+    {% endcontainer %}
+    {% container column=1 %}
+      {% card width="full" %}
+        {% card_header %}<h3>Проверки Choice</h3>{% endcard_header %}
+        {% card_body %}
+          {% stack spacing="sm" %}
+            <label><input type="checkbox"> Radio выбирает один вариант в группе.</label>
+            <label><input type="checkbox"> Checkbox можно отметить и снять.</label>
+            <label><input type="checkbox"> Tab и Space работают.</label>
+            <label><input type="checkbox"> Description не ломает выравнивание.</label>
+            <label><input type="checkbox"> Disabled недоступен.</label>
+          {% endstack %}
+        {% endcard_body %}
+      {% endcard %}
+    {% endcontainer %}
+  {% endgrid %}
+{% endcontainer %}

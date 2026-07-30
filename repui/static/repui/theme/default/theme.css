@@ -41,6 +41,8 @@
 
     --rui-color-disabled-bg: #e7ece7;
     --rui-color-disabled-text: #7a867a;
+    --rui-color-disabled-border: #b7c1b7;
+    --rui-color-disabled-control-bg: #ffffff;
     --rui-focus-color: #4ade80;
   }
 
@@ -85,6 +87,8 @@
 
     --rui-color-disabled-bg: #263126;
     --rui-color-disabled-text: #7f8c7f;
+    --rui-color-disabled-border: #4b594b;
+    --rui-color-disabled-control-bg: #111711;
     --rui-focus-color: #86efac;
   }
 

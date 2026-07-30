@@ -1,0 +1,21 @@
+<label class="rui-choice{% if disabled %} rui-choice--disabled{% endif %}{% if root_class %} {{ root_class }}{% endif %}">
+  <input
+    class="rui-choice__input"
+    type="{{ type }}"
+    id="{{ id }}"
+    {% if name %}name="{{ name }}"{% endif %}
+    {% if value is not None %}value="{{ value }}"{% endif %}
+    {% if aria_label %}aria-label="{{ aria_label }}"{% endif %}
+    {% if description_id %}aria-describedby="{{ description_id }}"{% endif %}
+    {% if checked %}checked{% endif %}
+    {% if disabled %}disabled{% endif %}
+    {% if required %}required{% endif %}
+  >
+  <span class="rui-choice__control" aria-hidden="true">
+    <span class="rui-choice__indicator"></span>
+  </span>
+  <span class="rui-choice__content">
+    {% if label %}<span class="rui-choice__label">{{ label }}</span>{% endif %}
+    {% if description %}<span class="rui-choice__description" id="{{ description_id }}">{{ description }}</span>{% endif %}
+  </span>
+</label>
