@@ -3,7 +3,7 @@
 {% container %}
   {% stack spacing="lg" %}
     {% card width="full" %}
-      {% card_header %}<h2>Menu</h2><p>Группа команд с keyboard-навигацией и roving focus.</p>{% endcard_header %}
+      {% card_header %}<h2>Menu</h2><p>Самостоятельная группа команд с keyboard-навигацией и roving focus.</p>{% endcard_header %}
       {% card_body %}
         {% menu %}
           {% menu_item value="edit" %}Редактировать{% endmenu_item %}
@@ -11,12 +11,34 @@
           {% menu_item value="archive" %}Архивировать{% endmenu_item %}
           {% menu_item value="delete" disabled=True %}Удалить — недоступно{% endmenu_item %}
         {% endmenu %}
-        <p>Runtime подключается явно через <code>mountMenus(root)</code>. Он управляет стрелками, Home/End и событиями, но не запускается сам по себе.</p>
+        <p>Это именно список команд: у него нет собственного trigger, popup или позиционирования.</p>
       {% endcard_body %}
     {% endcard %}
     {% card width="full" %}
       {% card_header %}<h3>Контракт</h3>{% endcard_header %}
-      {% card_body %}<ul><li>Контейнер — <code>role="menu"</code>.</li><li>Пункты — <code>menuitem</code>.</li><li><code>orientation</code> и <code>loop</code> задаются у Menu.</li><li>Disabled items исключаются из навигации.</li></ul>{% endcard_body %}
+      {% card_body %}<ul><li>Контейнер — <code>role="menu"</code>.</li><li>Пункты — <code>menuitem</code>.</li><li><code>orientation</code> и <code>loop</code> задаются у Menu.</li><li>Disabled items исключаются из навигации.</li><li>Runtime подключается явно через <code>mountMenus(root)</code>.</li><li>Публичный API runtime: <code>refresh()</code>, <code>focusFirst()</code>, <code>focusLast()</code>, <code>focusCurrent()</code>, <code>items</code>, <code>destroy()</code>.</li></ul>{% endcard_body %}
+    {% endcard %}
+    {% card width="full" %}
+      {% card_header %}<h3>Композиция</h3><p>Menu не знает, кто его открыл.</p>{% endcard_header %}
+      {% card_body %}
+        <p><strong>DropdownMenu</strong> добавляет trigger, OverlayPortal и закрытие после выбора.</p>
+        <p><strong>Menubar</strong> размещает несколько trigger по горизонтали и использует Menu внутри каждого раздела.</p>
+        <p><strong>ContextMenu</strong> может открыть тот же Menu по правому клику.</p>
+        <p><strong>Popover</strong> может содержать Menu, если внешний компонент отвечает за размещение и lifecycle.</p>
+        <p>Таким образом, Menu отвечает за пункты, focus и activation, а внешний компонент — за trigger, overlay и позиционирование.</p>
+      {% endcard_body %}
+    {% endcard %}
+    {% card width="full" %}
+      {% card_header %}<h3>Где использовать</h3>{% endcard_header %}
+      {% card_body %}
+        <ul>
+          <li>статичная панель действий без popup;</li>
+          <li>содержимое DropdownMenu;</li>
+          <li>выпадающие разделы Menubar;</li>
+          <li>контекстное меню и меню внутри Popover.</li>
+        </ul>
+        <p>Если нужен trigger или popup, используйте композицию, а не добавляйте эту ответственность в Menu.</p>
+      {% endcard_body %}
     {% endcard %}
   {% endstack %}
 {% endcontainer %}

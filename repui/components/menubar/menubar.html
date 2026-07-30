@@ -1,24 +1,26 @@
 {% load repui repui_layout %}
-
 {% container %}
-  {% card width="full" %}
-    {% card_header %}
-      <h2>Menubar</h2>
-      <p>Экспериментальная горизонтальная панель команд.</p>
-    {% endcard_header %}
-
-    {% card_body %}
-      {% navbar aria_label="Menubar demo" roving=True %}
-        {% nav_item href="#file" current=True %}File{% endnav_item %}
-        {% nav_item href="#edit" %}Edit{% endnav_item %}
-        {% nav_item href="#view" %}View{% endnav_item %}
-        {% nav_item href="#help" %}Help{% endnav_item %}
-      {% endnavbar %}
-
-      <p>
-        Первый этап проверяет горизонтальную навигацию, active state и
-        keyboard movement. Dropdown Menu добавим после проверки этой основы.
-      </p>
-    {% endcard_body %}
-  {% endcard %}
+  {% stack spacing="lg" %}
+    {% card width="full" %}
+      {% card_header %}<h2>Menubar</h2><p>Постоянная горизонтальная строка разделов с выпадающими меню.</p>{% endcard_header %}
+      {% card_body %}
+        {% menubar label="Разделы" %}
+          {% menubar_item value="file" label="Файл" %}
+            {% menu %}{% menu_item value="new" %}Новый{% endmenu_item %}{% menu_item value="open" %}Открыть{% endmenu_item %}{% endmenu %}
+          {% endmenubar_item %}
+          {% menubar_item value="view" label="Вид" %}
+            {% menu %}{% menu_item value="light" %}Светлая тема{% endmenu_item %}{% menu_item value="dark" %}Тёмная тема{% endmenu_item %}{% endmenu %}
+          {% endmenubar_item %}
+          {% menubar_item value="help" label="Помощь" %}
+            {% menu %}{% menu_item value="docs" %}Документация{% endmenu_item %}{% menu_item value="about" %}О RepUI{% endmenu_item %}{% endmenu %}
+          {% endmenubar_item %}
+        {% endmenubar %}
+        <p>Клавиатура: ←/→ переключают разделы, Enter/Space/↓ открывают меню, Escape закрывает его.</p>
+      {% endcard_body %}
+    {% endcard %}
+    {% card width="full" %}
+      {% card_header %}<h3>Встраивание</h3>{% endcard_header %}
+      {% card_body %}<p>Menubar не зависит от Page или AppBar. Его можно разместить в любой композиции и слушать событие <code>rui:menubarselect</code>.</p>{% endcard_body %}
+    {% endcard %}
+  {% endstack %}
 {% endcontainer %}
