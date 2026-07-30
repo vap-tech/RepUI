@@ -19,24 +19,30 @@ class CodeBlockRuntime {
     if (!this.code) throw new Error("CodeBlock requires a code element");
     this.source = this.code.textContent;
     this.code.innerHTML = highlightCode(this.source, element.dataset.language);
-    if (element.dataset.copy !== "false") {
-      this.copy = document.createElement("button");
-      this.copy.type = "button";
-      this.copy.className = "rui-code-block__copy rui-icon-button";
-      this.copy.innerHTML = COPY_ICON;
-      this.copy.setAttribute("aria-label", "Copy code");
-      element.append(this.copy);
-      this.onCopy = () => this.copySource();
-      this.copy.addEventListener("click", this.onCopy);
-    }
     this.label = element.dataset.language;
     if (this.label) {
       const language = document.createElement("span");
       language.className = "rui-code-block__language";
-      language.textContent = this.label;
-      language.setAttribute("aria-hidden", "true");
-      element.append(language);
+      language.innerHTML = COPY_ICON;
+      language.append(document.createTextNode(this.label));
       this.language = language;
+      element.append(language);
+    }
+    if (element.dataset.copy !== "false") {
+      this.copy = this.language || document.createElement("button");
+      this.copy.setAttribute("role", "button");
+      this.copy.setAttribute("tabindex", "0");
+      this.copy.setAttribute("aria-label", "Copy code");
+      this.onCopy = () => this.copySource();
+      this.copy.addEventListener("click", this.onCopy);
+      this.onCopyKeydown = (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          this.copySource();
+        }
+      };
+      this.copy.addEventListener("keydown", this.onCopyKeydown);
+      if (!this.language) element.append(this.copy);
     }
   }
 
@@ -44,19 +50,19 @@ class CodeBlockRuntime {
     try {
       await navigator.clipboard.writeText(this.source);
       this.copy.setAttribute("aria-label", "Copied");
-      this.copy.innerHTML = CHECK_ICON;
+      if (this.language) this.language.firstElementChild.outerHTML = CHECK_ICON;
       this.copy.dataset.state = "success";
     } catch {
       this.copy.setAttribute("aria-label", "Copy failed");
-      this.copy.innerHTML = ERROR_ICON;
+      if (this.language) this.language.firstElementChild.outerHTML = ERROR_ICON;
       this.copy.dataset.state = "error";
     }
     clearTimeout(this.resetTimer);
     this.resetTimer = setTimeout(() => {
       this.copy.setAttribute("aria-label", "Copy code");
-      this.copy.innerHTML = COPY_ICON;
+      if (this.language) this.language.firstElementChild.outerHTML = COPY_ICON;
       delete this.copy.dataset.state;
-    }, 1600);
+    }, 600);
   }
 
   refresh() { return this; }
@@ -64,6 +70,7 @@ class CodeBlockRuntime {
   destroy() {
     clearTimeout(this.resetTimer);
     this.copy?.removeEventListener("click", this.onCopy);
+    this.copy?.removeEventListener("keydown", this.onCopyKeydown);
     this.copy?.remove();
     this.language?.remove();
     instances.delete(this.element);
