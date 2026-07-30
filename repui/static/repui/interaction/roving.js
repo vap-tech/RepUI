@@ -66,6 +66,7 @@ export function createRovingGroup(root, options = {}) {
 
   root.addEventListener("focusin", (event) => {
     const item = event.target.closest(config.itemSelector);
+    if (!item || item.closest(config.itemSelector) !== item || !root.contains(item)) return;
     const next = items.indexOf(item);
     if (next >= 0) setCurrent(next, false);
   }, { signal });
@@ -95,6 +96,14 @@ export function createRovingGroup(root, options = {}) {
     refresh,
     setCurrent,
     move,
+    focusFirst() { setCurrent(0, true); return api; },
+    focusLast() { setCurrent(items.length - 1, true); return api; },
+    focusCurrent() { if (index >= 0) items[index].focus({ preventScroll: true }); return api; },
+    setCurrentByElement(element, focus = false) {
+      const next = items.indexOf(element);
+      if (next >= 0) setCurrent(next, focus);
+      return api;
+    },
     get items() {
       return [...items];
     },

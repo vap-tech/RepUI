@@ -32,8 +32,7 @@ export class OverlayPortal {
       horizontalFlip: false,
       arrow: null,
       flip: true,
-      restoreFocus: false,
-      onRequestClose: null,
+      onAnchorHidden: null,
       ...options,
     };
     this.placeholder = document.createComment("rui-overlay-portal");
@@ -48,7 +47,7 @@ export class OverlayPortal {
     this.intersectionObserver = "IntersectionObserver" in window
       ? new IntersectionObserver((entries) => {
           if (entries[0] && !entries[0].isIntersecting) {
-            this.options.onRequestClose?.({ reason: "anchor-hidden" });
+            this.options.onAnchorHidden?.({ reason: "anchor-hidden" });
           }
         })
       : null;
@@ -57,7 +56,7 @@ export class OverlayPortal {
   }
 
   mount() {
-    if (this.mounted) return;
+    if (this.mounted) return this.activate();
     this.previousFocus = document.activeElement;
     this.overlay.before(this.placeholder);
     this.options.container.append(this.overlay);
@@ -68,6 +67,11 @@ export class OverlayPortal {
     if (this.options.arrow) this.options.arrow.dataset.ruiOverlayArrow = "true";
     this.mounted = true;
 
+    this.activate();
+  }
+
+  activate() {
+    if (!this.mounted || this.abortController) return this;
     this.abortController = new AbortController();
     const { signal } = this.abortController;
     this.scrollParents = getScrollParents(this.anchor);
@@ -83,20 +87,23 @@ export class OverlayPortal {
       signal,
       passive: true,
     });
-    document.addEventListener("pointerdown", (event) => {
-      const path = event.composedPath();
-      if (path.includes(this.anchor) || path.includes(this.overlay)) return;
-      this.options.onRequestClose?.({ reason: "outside-pointer", event });
-    }, { signal, capture: true });
-    document.addEventListener("keydown", (event) => {
-      if (event.key !== "Escape") return;
-      event.preventDefault();
-      this.options.onRequestClose?.({ reason: "escape", event });
-    }, { signal, capture: true });
     this.resizeObserver?.observe(this.anchor);
     this.resizeObserver?.observe(this.overlay);
     this.intersectionObserver?.observe(this.anchor);
     this.position();
+    return this;
+  }
+
+  deactivate() {
+    if (!this.mounted) return this;
+    this.abortController?.abort();
+    this.abortController = null;
+    this.resizeObserver?.disconnect();
+    this.intersectionObserver?.disconnect();
+    this.scrollParents = [];
+    if (this.frame) cancelAnimationFrame(this.frame);
+    this.frame = 0;
+    return this;
   }
 
   schedulePosition() {
@@ -185,13 +192,7 @@ export class OverlayPortal {
 
   unmount() {
     if (!this.mounted) return;
-    this.abortController?.abort();
-    this.abortController = null;
-    this.resizeObserver?.disconnect();
-    this.intersectionObserver?.disconnect();
-    this.scrollParents = [];
-    if (this.frame) cancelAnimationFrame(this.frame);
-    this.frame = 0;
+    this.deactivate();
     this.mounted = false;
     delete this.overlay.dataset.ruiPortal;
     ["position", "inset", "top", "left", "right", "bottom", "width", "margin", "max-width", "max-height", "--rui-overlay-arrow-x", "--rui-overlay-arrow-y"].forEach(
@@ -200,9 +201,6 @@ export class OverlayPortal {
     if (this.options.arrow) delete this.options.arrow.dataset.ruiOverlayArrow;
     delete this.overlay.dataset.side;
     if (this.placeholder.parentNode) this.placeholder.replaceWith(this.overlay);
-    if (this.options.restoreFocus && this.previousFocus?.isConnected) {
-      this.previousFocus.focus({ preventScroll: true });
-    }
     this.previousFocus = null;
   }
 

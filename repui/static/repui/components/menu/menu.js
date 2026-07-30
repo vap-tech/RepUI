@@ -35,6 +35,10 @@ function mountMenu(root) {
       roving.refresh();
       return api;
     },
+    focusFirst() { roving.focusFirst(); return api; },
+    focusLast() { roving.focusLast(); return api; },
+    focusCurrent() { roving.focusCurrent(); return api; },
+    get items() { return roving.items; },
     destroy() {
       abort.abort();
       roving.destroy();
@@ -51,4 +55,8 @@ export function mountMenus(root = document) {
   if (root.matches?.("[data-rui-menu]")) elements.push(root);
   elements.push(...root.querySelectorAll?.("[data-rui-menu]") ?? []);
   return elements.map(mountMenu);
+}
+
+export function getMenu(root) {
+  return instances.get(root) || mountMenu(root);
 }
