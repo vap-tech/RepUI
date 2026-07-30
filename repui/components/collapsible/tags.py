@@ -1,6 +1,7 @@
 from django import template
 from django.template import Node, TemplateSyntaxError
 from django.template.loader import render_to_string
+from django.utils.safestring import mark_safe
 
 
 _ALLOWED = {"label", "open", "id", "class_name", "attrs"}
@@ -22,7 +23,7 @@ class CollapsibleNode(Node):
         return render_to_string(
             "repui/components/collapsible/collapsible_tag.html",
             {
-                "content": self.nodelist.render(context).strip(),
+                "content": mark_safe(self.nodelist.render(context).strip()),
                 "label": values.get("label", "Подробнее"),
                 "open": bool(values.get("open", False)),
                 "id": values.get("id"),

@@ -1,0 +1,29 @@
+@layer repui.components {
+  :where(.rui-accordion) {
+    min-inline-size: 0;
+    overflow: hidden;
+    border: 1px solid var(--rui-color-border);
+    border-radius: var(--rui-radius-lg);
+    background: var(--rui-color-surface);
+  }
+  :where(.rui-accordion__item + .rui-accordion__item) { border-block-start: 1px solid var(--rui-color-border); }
+  :where(.rui-accordion__trigger) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--rui-space-4);
+    inline-size: 100%;
+    padding: var(--rui-space-4);
+    border: 0;
+    background: transparent;
+    color: var(--rui-color-text);
+    font: inherit;
+    font-weight: var(--rui-font-weight-semibold);
+    text-align: start;
+    cursor: pointer;
+  }
+  :where(.rui-accordion__trigger:hover) { background: var(--rui-color-surface-muted); }
+  :where(.rui-accordion__indicator) { transition: transform 160ms ease; }
+  :where(.rui-accordion__item[data-state="open"] .rui-accordion__indicator) { transform: rotate(180deg); }
+  :where(.rui-accordion__panel) { padding: var(--rui-space-4); border-block-start: 1px solid var(--rui-color-border); color: var(--rui-color-text-muted); }
+}

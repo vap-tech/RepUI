@@ -1,0 +1,18 @@
+{% load repui repui_layout %}
+{% container %}
+  {% stack spacing="lg" %}
+    {% card width="full" %}
+      {% card_header %}<h2>Accordion</h2><p>Группа раскрываемых секций.</p>{% endcard_header %}
+      {% card_body %}
+        {% accordion %}
+          {% accordion_item label="Что входит в контракт" open=True %}Только явно переданные секции и их содержимое.{% endaccordion_item %}
+          {% accordion_item label="Можно ли открыть несколько" %}Передайте <strong>multiple=True</strong> в Accordion.{% endaccordion_item %}
+        {% endaccordion %}
+      {% endcard_body %}
+    {% endcard %}
+    {% card width="full" %}
+      {% card_header %}<h3>Публичный API</h3>{% endcard_header %}
+      {% card_body %}<p>Runtime подключается явно через {% inline_code %}mountAccordions(root){% endinline_code %}.</p>{% endcard_body %}
+    {% endcard %}
+  {% endstack %}
+{% endcontainer %}

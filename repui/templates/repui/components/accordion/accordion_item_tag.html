@@ -1,0 +1,6 @@
+{% load repui_attrs %}<article class="rui-accordion__item" data-rui-accordion-item data-state="{% if open %}open{% else %}closed{% endif %}"{% if id %} id="{{ id }}"{% endif %} {% html_attrs attrs %}>
+  <button class="rui-accordion__trigger" type="button" data-rui-accordion-trigger aria-expanded="{{ open|yesno:'true,false' }}">
+    <span>{{ label|default:"Подробнее" }}</span><span class="rui-accordion__indicator" aria-hidden="true">⌄</span>
+  </button>
+  <div class="rui-accordion__panel" data-rui-accordion-panel{% if not open %} hidden{% endif %}>{{ content }}</div>
+</article>
