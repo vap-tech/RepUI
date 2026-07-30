@@ -1,0 +1,4 @@
+@layer repui.components {
+  :where(.rui-popover) { position: relative; display: inline-block; }
+  :where(.rui-popover__content) { min-inline-size: 12rem; max-inline-size: min(24rem, calc(100vw - 1rem)); padding: var(--rui-space-2) var(--rui-space-4); border: 1px solid var(--rui-color-border); border-radius: var(--rui-radius-md); background: var(--rui-color-surface-raised); color: var(--rui-color-text); box-shadow: var(--rui-shadow-lg); }
+}

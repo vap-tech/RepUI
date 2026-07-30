@@ -1,0 +1,4 @@
+{% load repui_attrs %}<span class="rui-popover{% if class_name %} {{ class_name }}{% endif %}" data-rui-popover{% if id %} id="{{ id }}"{% endif %} {% html_attrs attrs %}>
+  <button class="rui-popover__trigger" type="button" data-rui-popover-trigger aria-expanded="false">{{ label|default:"Открыть" }}</button>
+  <div class="rui-popover__content" data-rui-popover-content hidden role="dialog">{{ content }}</div>
+</span>

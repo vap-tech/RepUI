@@ -13,7 +13,6 @@ import { initSelects, Select } from "./components/select.js";
 import { initTooltips } from "./components/tooltip.js";
 import { initValidation } from "./components/validation.js";
 import { initDropdowns, DropdownMenu } from "./components/dropdown.js";
-import { initPopovers, Popover } from "./components/popover.js";
 import { initSheets, Sheet } from "./components/sheet.js";
 import { initAlertDialogs, AlertDialog } from "./components/alert-dialog.js";
 import { initListboxes, Listbox } from "./components/listbox.js";
@@ -21,8 +20,6 @@ import { initComboboxes, Combobox } from "./components/combobox.js";
 import { initCommands, CommandPalette } from "./components/command.js";
 import { initSearch } from "./components/search.js";
 import { initTabs, Tabs } from "./components/tabs.js";
-import { initAccordions, Accordion } from "./components/accordion.js";
-import { initCollapsibles, Collapsible } from "./components/collapsible.js";
 import { initMenubars, Menubar } from "./components/menubar.js";
 import {
   initNavigationMenus,
@@ -55,12 +52,9 @@ export function init(root = document) {
     comboboxes: initComboboxes(root),
     commands: initCommands(root),
     dropdowns: initDropdowns(root),
-    popovers: initPopovers(root),
     sheets: initSheets(root),
     alertDialogs: initAlertDialogs(root),
     tabs: initTabs(root),
-    accordions: initAccordions(root),
-    collapsibles: initCollapsibles(root),
     menubars: initMenubars(root),
     navigationMenus: initNavigationMenus(root),
   };
@@ -98,13 +92,10 @@ const RepUI = {
   Combobox,
   CommandPalette,
   Tabs,
-  Accordion,
-  Collapsible,
   Menubar,
   NavigationMenu,
   ToastManager,
   DropdownMenu,
-  Popover,
   Sheet,
   AlertDialog,
   debug: setDebug,

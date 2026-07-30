@@ -1,0 +1,2 @@
+{% load repui repui_layout %}
+{% container %}{% stack spacing="lg" %}{% card width="full" %}{% card_header %}<h2>Popover</h2><p>Произвольное всплывающее содержимое.</p>{% endcard_header %}{% card_body %}{% popover label="Показать подробности" %}Содержимое Popover размещается через OverlayPortal.{% endpopover %}{% endcard_body %}{% endcard %}{% endstack %}{% endcontainer %}
