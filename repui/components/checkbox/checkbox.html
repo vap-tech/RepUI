@@ -1,0 +1,40 @@
+{% load repui repui_layout %}
+{% container %}
+  {% grid columns=3 spacing="lg" %}
+    {% container column=2 %}
+      {% stack spacing="lg" %}
+        {% card width="full" %}
+          {% card_header %}<h2>Checkbox</h2><p>Нативный флажок для булевых значений формы.</p>{% endcard_header %}
+          {% card_body %}
+            {% stack spacing="md" %}
+              {% checkbox name="notifications" value="email" %}Email-уведомления{% endcheckbox %}
+              {% checkbox name="notifications" value="push" checked=True %}Push-уведомления{% endcheckbox %}
+              {% checkbox name="notifications" value="sms" disabled=True %}SMS недоступны{% endcheckbox %}
+            {% endstack %}
+          {% endcard_body %}
+        {% endcard %}
+        {% card width="full" %}
+          {% card_header %}<h3>Публичный API</h3>{% endcard_header %}
+          {% card_body %}
+            <p>Используйте {% inline_code %}{% checkbox %}Label{% endcheckbox %}{% endinline_code %} с параметрами {% inline_code %}name{% endinline_code %}, {% inline_code %}value{% endinline_code %}, {% inline_code %}checked{% endinline_code %}, {% inline_code %}disabled{% endinline_code %} и {% inline_code %}required{% endinline_code %}.</p>
+            <p>Это нативный <code>input[type="checkbox"]</code>: значение читается через Django forms и отправляется только когда флажок отмечен.</p>
+          {% endcard_body %}
+        {% endcard %}
+      {% endstack %}
+    {% endcontainer %}
+    {% container column=1 %}
+      {% card width="full" %}
+        {% card_header %}<h3>Проверки Checkbox</h3>{% endcard_header %}
+        {% card_body %}
+          {% stack spacing="sm" %}
+            <label><input type="checkbox"> Можно отметить и снять.</label>
+            <label><input type="checkbox"> Tab и Space работают нативно.</label>
+            <label><input type="checkbox"> Checked сохраняется после рендера.</label>
+            <label><input type="checkbox"> Disabled нельзя изменить.</label>
+            <label><input type="checkbox"> Light и dark читаются.</label>
+          {% endstack %}
+        {% endcard_body %}
+      {% endcard %}
+    {% endcontainer %}
+  {% endgrid %}
+{% endcontainer %}

@@ -1,0 +1,24 @@
+@layer repui.components {
+  :where(.rui-checkbox) {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--rui-checkbox-text);
+    font-family: var(--rui-font-family);
+    font-size: var(--rui-text-body-size);
+    line-height: var(--rui-text-body-line-height);
+    cursor: pointer;
+  }
+
+  :where(.rui-checkbox input) {
+    inline-size: 1rem;
+    block-size: 1rem;
+    margin: 0;
+    accent-color: var(--rui-checkbox-accent);
+  }
+
+  :where(.rui-checkbox--disabled) {
+    color: var(--rui-checkbox-disabled-text);
+    cursor: not-allowed;
+  }
+}

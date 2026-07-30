@@ -1,0 +1,12 @@
+:root,
+[data-theme="light"] {
+  --rui-checkbox-text: var(--rui-color-on-surface);
+  --rui-checkbox-accent: var(--rui-color-primary);
+  --rui-checkbox-disabled-text: var(--rui-color-on-surface-disabled);
+}
+
+[data-theme="dark"] {
+  --rui-checkbox-text: var(--rui-color-on-surface);
+  --rui-checkbox-accent: var(--rui-color-primary);
+  --rui-checkbox-disabled-text: var(--rui-color-on-surface-disabled);
+}

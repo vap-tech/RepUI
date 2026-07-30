@@ -1,0 +1,1 @@
+{% load repui_attrs %}<label class="rui-checkbox{% if disabled %} rui-checkbox--disabled{% endif %}"><input type="checkbox" {% html_attrs attrs %}{% if checked %} checked{% endif %}{% if disabled %} disabled{% endif %}{% if required %} required{% endif %}>{% if content %}<span class="rui-checkbox__label">{{ content }}</span>{% endif %}</label>

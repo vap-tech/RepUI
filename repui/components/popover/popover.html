@@ -1,2 +1,24 @@
 {% load repui repui_layout %}
-{% container %}{% stack spacing="lg" %}{% card width="full" %}{% card_header %}<h2>Popover</h2><p>Произвольное всплывающее содержимое.</p>{% endcard_header %}{% card_body %}{% popover label="Показать подробности" %}Содержимое Popover размещается через OverlayPortal.{% endpopover %}{% endcard_body %}{% endcard %}{% endstack %}{% endcontainer %}
+{% container %}
+  {% grid columns=3 spacing="lg" %}
+    {% container column=2 %}
+      {% card width="full" %}
+        {% card_header %}<h2>Popover</h2><p>Произвольное всплывающее содержимое.</p>{% endcard_header %}
+        {% card_body %}{% popover label="Показать подробности" %}Содержимое Popover размещается через OverlayPortal.{% endpopover %}{% endcard_body %}
+      {% endcard %}
+    {% endcontainer %}
+    {% container column=1 %}
+      {% card width="full" %}
+        {% card_header %}<h3>Проверки Popover</h3>{% endcard_header %}
+        {% card_body %}
+          {% stack spacing="sm" %}
+          <label><input type="checkbox"> Trigger открывает содержимое.</label>
+          <label><input type="checkbox"> Outside click и Escape закрывают.</label>
+          <label><input type="checkbox"> Popup не обрезается родителем.</label>
+          <label><input type="checkbox"> Позиция обновляется при scroll/resize.</label>
+          {% endstack %}
+        {% endcard_body %}
+      {% endcard %}
+    {% endcontainer %}
+  {% endgrid %}
+{% endcontainer %}

@@ -1,6 +1,9 @@
 {% load repui repui_layout %}
 
 {% container %}
+  {% grid columns=3 spacing="lg" %}
+    {% container column=2 %}
+    {% stack spacing="lg" %}
   {% card width="full" %}
     {% card_header %}
       <h2>Autocomplete</h2>
@@ -26,4 +29,21 @@
       </ol>
     {% endcard_body %}
   {% endcard %}
+    {% endstack %}
+    {% endcontainer %}
+    {% container column=1 %}
+      {% card width="full" %}
+        {% card_header %}<h3>Проверки Autocomplete</h3>{% endcard_header %}
+        {% card_body %}
+          {% stack spacing="sm" %}
+          <label><input type="checkbox"> Пустое поле открывает варианты.</label>
+          <label><input type="checkbox"> Нет совпадений — popup не открывается.</label>
+          <label><input type="checkbox"> Повторный фокус с совпадениями открывает popup.</label>
+          <label><input type="checkbox"> Уход фокуса закрывает popup.</label>
+          <label><input type="checkbox"> Disabled option недоступен.</label>
+          {% endstack %}
+        {% endcard_body %}
+      {% endcard %}
+    {% endcontainer %}
+  {% endgrid %}
 {% endcontainer %}

@@ -1,5 +1,7 @@
 {% load repui repui_layout %}
 {% container %}
+  {% grid columns=3 spacing="lg" %}
+    {% container column=2 %}
   {% stack spacing="lg" %}
     {% card width="full" %}
       {% card_header %}<h2>Menubar</h2><p>Постоянная горизонтальная строка разделов с выпадающими меню.</p>{% endcard_header %}
@@ -24,4 +26,20 @@
       {% card_body %}<p>Menubar не зависит от Page или AppBar. Его можно разместить в любой композиции и слушать событие <code>rui:menubarselect</code>.</p>{% endcard_body %}
     {% endcard %}
   {% endstack %}
+    {% endcontainer %}
+    {% container column=1 %}
+      {% card width="full" %}
+        {% card_header %}<h3>Проверки Menubar</h3>{% endcard_header %}
+        {% card_body %}
+          {% stack spacing="sm" %}
+          <label><input type="checkbox"> ←/→ переключают разделы.</label>
+          <label><input type="checkbox"> Enter, Space и ↓ открывают меню.</label>
+          <label><input type="checkbox"> Escape закрывает меню.</label>
+          <label><input type="checkbox"> Активный пункт виден с клавиатуры.</label>
+          <label><input type="checkbox"> После Enter фокус возвращается на trigger.</label>
+          {% endstack %}
+        {% endcard_body %}
+      {% endcard %}
+    {% endcontainer %}
+  {% endgrid %}
 {% endcontainer %}
