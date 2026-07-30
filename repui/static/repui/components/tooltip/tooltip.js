@@ -19,11 +19,11 @@ class TooltipRuntime {
     if (!this.trigger || !this.popup) throw new Error("Tooltip markup is incomplete");
     if (!this.popup.id) this.popup.id = `rui-tooltip-${++uid}`;
     this.focusTarget = this.trigger.matches(
-      "a,button,input,select,textarea,[contenteditable=\"true\"]",
+      "a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[contenteditable=\"true\"]",
     )
       ? this.trigger
       : this.trigger.querySelector(
-          "a,button,input,select,textarea,[contenteditable=\"true\"]",
+          "a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[contenteditable=\"true\"]",
         );
     if (this.focusTarget) {
       this.trigger.removeAttribute("tabindex");
@@ -40,6 +40,8 @@ class TooltipRuntime {
       arrow: this.arrow,
       onRequestClose: () => this.close(),
     });
+    this.openDelay = 650;
+    this.openTimer = 0;
     this.abort = new AbortController();
     const { signal } = this.abort;
     this.trigger.addEventListener("pointerenter", () => this.open(), { signal });
@@ -49,13 +51,21 @@ class TooltipRuntime {
   }
 
   open() {
+    clearTimeout(this.openTimer);
     if (!this.popup.hidden) return this;
-    this.popup.hidden = false;
-    this.portal.mount();
+    this.openTimer = setTimeout(() => {
+      this.openTimer = 0;
+      if (this.popup.hidden) {
+        this.popup.hidden = false;
+        this.portal.mount();
+      }
+    }, this.openDelay);
     return this;
   }
 
   close() {
+    clearTimeout(this.openTimer);
+    this.openTimer = 0;
     if (this.popup.hidden) return this;
     this.popup.hidden = true;
     this.portal.unmount();

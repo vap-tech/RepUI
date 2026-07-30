@@ -9,9 +9,13 @@
           {{ item.title }}
         </button>
       {% else %}
-        <button type="button" class="workbench__nav-item" disabled title="{{ item.error }}">
-          {{ item.title }}
-        </button>
+        {% tooltip title=item.error|default:"Workbench-страница пока не добавлена" %}
+          <span class="workbench__nav-tooltip-trigger">
+            <button type="button" class="workbench__nav-item" disabled>
+              {{ item.title }}
+            </button>
+          </span>
+        {% endtooltip %}
       {% endif %}
     {% empty %}
       <p>Компоненты не найдены.</p>
