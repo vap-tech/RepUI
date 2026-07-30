@@ -15,4 +15,15 @@
       {% endautocomplete %}
     {% endcard_body %}
   {% endcard %}
+  {% card width="full" %}
+    {% card_header %}<h3>Проверка фильтрации</h3>{% endcard_header %}
+    {% card_body %}
+      <ol>
+        <li>Пустое поле открывает список вариантов.</li>
+        <li>Значение без совпадений не открывает popup и не показывает «Ничего не найдено».</li>
+        <li>После повторного фокуса popup открывается, если совпадения появились.</li>
+        <li>Открытый popup закрывается при уходе фокуса в другое место.</li>
+      </ol>
+    {% endcard_body %}
+  {% endcard %}
 {% endcontainer %}

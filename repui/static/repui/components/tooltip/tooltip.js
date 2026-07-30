@@ -1,4 +1,5 @@
 import { OverlayPortal } from "../../interaction/overlay-portal.js";
+import { createDismissLayer } from "../../interaction/dismiss-layer.js";
 
 const instances = new WeakMap();
 let uid = 0;
@@ -38,8 +39,9 @@ class TooltipRuntime {
       horizontalFlip: true,
       offset: 21,
       arrow: this.arrow,
-      onRequestClose: () => this.close(),
+      onAnchorHidden: () => this.close(),
     });
+    this.dismiss = createDismissLayer({ anchor: this.trigger, overlay: this.popup, outsidePointer: false, onDismiss: () => this.close() });
     this.openDelay = 650;
     this.openTimer = 0;
     this.abort = new AbortController();
@@ -75,6 +77,7 @@ class TooltipRuntime {
   destroy() {
     this.close();
     this.portal.destroy();
+    this.dismiss.destroy();
     this.abort.abort();
     instances.delete(this.element);
   }

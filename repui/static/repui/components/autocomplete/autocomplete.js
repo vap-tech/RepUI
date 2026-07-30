@@ -1,5 +1,6 @@
 import { CollectionController } from "../../interaction/collection.js";
 import { OverlayPortal } from "../../interaction/overlay-portal.js";
+import { createDismissLayer } from "../../interaction/dismiss-layer.js";
 
 const instances = new WeakMap();
 const ROOT_SELECTOR = "[data-rui-autocomplete]";
@@ -28,8 +29,9 @@ class AutocompleteRuntime {
     if (!this.listbox.id) this.listbox.id = `rui-autocomplete-${++uid}`;
     this.input.setAttribute("aria-controls", this.listbox.id);
     this.portal = new OverlayPortal(this.input, this.popup, {
-      onRequestClose: () => this.close(),
+      onAnchorHidden: () => this.close(),
     });
+    this.dismiss = createDismissLayer({ anchor: this.input, overlay: this.popup, onDismiss: () => this.close() });
     this.bind();
     this.refresh();
   }
@@ -54,7 +56,12 @@ class AutocompleteRuntime {
   }
 
   open() {
-    if (this.input.disabled || this.input.readOnly || !this.collection.items.length) return this;
+    const hasVisibleOptions = this.options().some(
+      (option) => !option.hidden && option.getAttribute("aria-disabled") !== "true",
+    );
+    if (this.input.disabled || this.input.readOnly || !hasVisibleOptions) {
+      return this;
+    }
     this.popup.hidden = false;
     this.portal.mount();
     this.input.setAttribute("aria-expanded", "true");
@@ -72,6 +79,7 @@ class AutocompleteRuntime {
     });
     if (this.empty) this.empty.hidden = visible > 0;
     this.refresh();
+    if (visible === 0) this.close();
     return visible;
   }
 
@@ -139,10 +147,11 @@ class AutocompleteRuntime {
 
   bind() {
     const { signal } = this.abort;
-    this.input.addEventListener("focus", () => this.open(), { signal });
+    this.input.addEventListener("focus", () => {
+      if (this.filter() > 0) this.open();
+    }, { signal });
     this.input.addEventListener("input", () => {
-      this.filter();
-      this.open();
+      if (this.filter() > 0) this.open();
     }, { signal });
     this.input.addEventListener("keydown", (event) => this.onKeydown(event), { signal });
     this.listbox.addEventListener("pointermove", (event) => {
@@ -160,6 +169,7 @@ class AutocompleteRuntime {
   destroy() {
     this.close();
     this.portal.destroy();
+    this.dismiss.destroy();
     this.abort.abort();
     instances.delete(this.element);
   }
