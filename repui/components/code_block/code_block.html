@@ -11,6 +11,54 @@
       {% endcard_body %}
     {% endcard %}
     {% card width="full" %}
+      {% card_header %}<h3>Подсветка языков</h3><p>CodeBlock использует Highlight.js для популярных форматов.</p>{% endcard_header %}
+      {% card_body %}
+        {% stack spacing="md" %}
+          {% code_block language="css" title="layout.css" %}{% verbatim %}.rui-page {
+  display: grid;
+  min-block-size: 100dvh;
+}{% endverbatim %}{% endcode_block %}
+
+          {% code_block language="html" title="index.html" %}{% verbatim %}<main class="content">
+  <h1>RepUI</h1>
+</main>{% endverbatim %}{% endcode_block %}
+
+          {% code_block language="xml" title="config.xml" %}{% verbatim %}<config>
+  <environment name="development" />
+</config>{% endverbatim %}{% endcode_block %}
+
+          {% code_block language="json" title="settings.json" %}{% verbatim %}{
+  "debug": true,
+  "language": "ru"
+}{% endverbatim %}{% endcode_block %}
+
+          {% code_block language="python" title="views.py" %}{% verbatim %}from django.http import HttpResponse
+
+
+def health(request):
+    return HttpResponse("ok"){% endverbatim %}{% endcode_block %}
+
+          {% code_block language="django" title="page.html" %}{% verbatim %}{% if user.is_authenticated %}
+  Привет, {{ user.username }}
+{% endif %}{% endverbatim %}{% endcode_block %}
+        {% endstack %}
+      {% endcard_body %}
+    {% endcard %}
+    {% card width="full" %}
+      {% card_header %}<h3>Реальный UI-код</h3><p>Примеры с компонентами RepUI внутри шаблона.</p>{% endcard_header %}
+      {% card_body %}
+        {% stack spacing="md" %}
+          {% code_block language="django" title="button.html" %}{% verbatim %}{% button variant="filled" color="primary" %}
+  Сохранить
+{% endbutton %}{% endverbatim %}{% endcode_block %}
+
+          {% code_block language="django" title="badge.html" %}{% verbatim %}{% badge color="success" %}
+  {% icon "check" %} Готово
+{% endbadge %}{% endverbatim %}{% endcode_block %}
+        {% endstack %}
+      {% endcard_body %}
+    {% endcard %}
+    {% card width="full" %}
       {% card_header %}<h3>Публичный API</h3>{% endcard_header %}
       {% card_body %}
         <ul>

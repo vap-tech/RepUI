@@ -57,4 +57,14 @@
   :where(.rui-code-token--string, .rui-code-token--variable) { color: var(--rui-color-success); }
   :where(.rui-code-token--number) { color: var(--rui-color-warning); }
   :where(.rui-code-token--punctuation) { color: var(--rui-color-text-muted); }
+
+  :where(.rui-code-block .hljs-comment) { color: var(--rui-color-text-muted); }
+  :where(.rui-code-block .hljs-tag, .rui-code-block .hljs-keyword,
+    .rui-code-block .hljs-selector-tag) { color: var(--rui-color-primary); }
+  :where(.rui-code-block .hljs-attr, .rui-code-block .hljs-attribute,
+    .rui-code-block .hljs-template-variable) { color: var(--rui-color-info, var(--rui-color-primary)); }
+  :where(.rui-code-block .hljs-string, .rui-code-block .hljs-variable,
+    .rui-code-block .hljs-number, .rui-code-block .hljs-literal) { color: var(--rui-color-success); }
+  :where(.rui-code-block .hljs-title, .rui-code-block .hljs-name,
+    .rui-code-block .hljs-built_in) { color: var(--rui-color-warning); }
 }
