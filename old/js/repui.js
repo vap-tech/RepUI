@@ -9,13 +9,11 @@ import { initDialogs, Dialog } from "./components/dialog.js";
 import { initToasts, ToastManager } from "./components/toast.js";
 import { initAlerts } from "./components/alert.js";
 import { initSelects, Select } from "./components/select.js";
-import { initTooltips } from "./components/tooltip.js";
 import { initValidation } from "./components/validation.js";
 import { initDropdowns, DropdownMenu } from "./components/dropdown.js";
 import { initSheets, Sheet } from "./components/sheet.js";
 import { initAlertDialogs, AlertDialog } from "./components/alert-dialog.js";
 import { initListboxes, Listbox } from "./components/listbox.js";
-import { initComboboxes, Combobox } from "./components/combobox.js";
 import { initCommands, CommandPalette } from "./components/command.js";
 import { initTabs, Tabs } from "./components/tabs.js";
 import { initMenubars, Menubar } from "./components/menubar.js";
@@ -46,7 +44,6 @@ export function init(root = document) {
     toasts: initToasts(root),
     listboxes: initListboxes(root),
     selects: initSelects(root),
-    comboboxes: initComboboxes(root),
     commands: initCommands(root),
     dropdowns: initDropdowns(root),
     sheets: initSheets(root),
@@ -59,7 +56,6 @@ export function init(root = document) {
     registerCollection(collection, name.replace(/s$/, "")),
   );
   initAlerts(root);
-  initTooltips(root);
   initValidation(root);
   currentApi = api;
   emit(document, "ready", api);
@@ -83,7 +79,6 @@ const RepUI = {
   Dialog,
   Listbox,
   Select,
-  Combobox,
   CommandPalette,
   Tabs,
   Menubar,
