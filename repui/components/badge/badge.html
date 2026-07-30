@@ -5,7 +5,11 @@
     {% card width="full" %}
       {% card_header %}
       {% grid columns=10 spacing="sm" %}
-        {% container column=9 %}<h2>{% icon "badge-check" %} Badge</h2>{% endcontainer %}
+        {% container column=9 %}
+        <h2>
+            {% icon "badge-check" %} Badge
+        </h2>
+        {% endcontainer %}
         {% container column=1 class_name="rui-badge-heading-status" %}
           {% badge color="success" %}{% icon "check" %}Stable{% endbadge %}
         {% endcontainer %}

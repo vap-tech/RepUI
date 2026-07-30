@@ -1,6 +1,7 @@
 from django import template
 from django.template import Node, TemplateSyntaxError
 from django.template.loader import render_to_string
+from uuid import uuid4
 
 register = template.Library()
 
@@ -36,14 +37,24 @@ class CheckboxNode(Node):
             if values.get(key) is not None:
                 attrs[html_name] = values[key]
 
+        choice_id = attrs.pop("id", None) or f"rui-checkbox-{uuid4().hex}"
+        root_class = attrs.pop("class", "")
         return render_to_string(
-            "repui/components/checkbox/checkbox_tag.html",
+            "repui/components/choice/choice_tag.html",
             {
-                "content": content,
+                "type": "checkbox",
+                "id": choice_id,
+                "name": attrs.pop("name", None),
+                "value": attrs.pop("value", None),
+                "label": content,
+                "aria_label": attrs.pop("aria-label", None),
+                "description": "",
+                "description_id": None,
                 "attrs": attrs,
                 "checked": bool(values.get("checked", False)),
                 "disabled": bool(values.get("disabled", False)),
                 "required": bool(values.get("required", False)),
+                "root_class": root_class,
             },
             request=context.get("request"),
         )
