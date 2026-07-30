@@ -1,0 +1,49 @@
+@layer repui.components {
+  :where(.rui-badge) {
+    display: inline-flex;
+    align-items: center;
+    gap: .35em;
+    box-sizing: border-box;
+    min-inline-size: 0;
+    padding: .18em .5em;
+    border: 1px solid var(--rui-badge-border);
+    border-radius: var(--rui-badge-radius);
+    background: var(--rui-badge-background);
+    color: var(--rui-badge-color);
+    font-family: var(--rui-font-family);
+    font-size: var(--rui-badge-font-size);
+    font-weight: var(--rui-badge-font-weight);
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  :where(.rui-badge--sm) {
+    font-size: var(--rui-font-size-xs);
+  }
+
+  :where(.rui-badge--md) {
+    font-size: var(--rui-font-size-sm);
+  }
+
+  :where(.rui-badge--dot) {
+    inline-size: var(--rui-badge-dot-size);
+    block-size: var(--rui-badge-dot-size);
+    padding: 0;
+    border-radius: 50%;
+    font-size: 0;
+  }
+
+  :where(.rui-badge > .rui-icon) {
+    flex: none;
+  }
+
+  :where(.rui-badge-label) {
+    display: inline-flex;
+    align-items: center;
+    gap: .35em;
+  }
+
+  :where(.rui-badge-heading-status) {
+    justify-self: end;
+  }
+}

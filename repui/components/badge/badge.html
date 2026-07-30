@@ -1,0 +1,99 @@
+{% load repui repui_layout %}
+
+{% container %}
+  {% stack spacing="lg" %}
+    {% card width="full" %}
+      {% card_header %}
+      {% grid columns=10 spacing="sm" %}
+        {% container column=9 %}<h2>{% icon "badge-check" %} Badge</h2>{% endcontainer %}
+        {% container column=1 class_name="rui-badge-heading-status" %}
+          {% badge color="success" %}{% icon "check" %}Stable{% endbadge %}
+        {% endcontainer %}
+      {% endgrid %}
+      <p>Небольшая метка статуса или счётчика.</p>
+      {% endcard_header %}
+      {% card_body %}
+        {% badge color="success" %}{% icon "check" %}Готово{% endbadge %}
+        {% badge color="warning" %}В ожидании{% endbadge %}
+        {% badge color="danger" %}Ошибка{% endbadge %}
+        {% badge %}3{% endbadge %}
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}<h3>Варианты</h3>{% endcard_header %}
+      {% card_body %}
+        {% stack spacing="md" %}
+          <div>{% badge size="sm" %}Small{% endbadge %} {% badge %}Medium{% endbadge %}</div>
+          <div><span class="rui-badge-label">{% badge dot=True color="success" %}{% endbadge %} Online</span></div>
+          <div>{% badge color="primary" %}{% icon "star" %}Избранное{% endbadge %}</div>
+        {% endstack %}
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}<h3>Цвета и размеры</h3>{% endcard_header %}
+      {% card_body %}
+        {% stack spacing="md" %}
+          <div>
+            {% badge %}Default{% endbadge %}
+            {% badge color="primary" %}Primary{% endbadge %}
+            {% badge color="success" %}Success{% endbadge %}
+            {% badge color="warning" %}Warning{% endbadge %}
+            {% badge color="danger" %}Danger{% endbadge %}
+          </div>
+          <div>
+            {% badge size="sm" %}Small{% endbadge %}
+            {% badge size="md" %}Medium{% endbadge %}
+            {% badge size="sm" color="success" %}12{% endbadge %}
+            {% badge size="md" color="danger" %}99+{% endbadge %}
+          </div>
+        {% endstack %}
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}<h3>Dot и композиция</h3>{% endcard_header %}
+      {% card_body %}
+        <p>
+          <span class="rui-badge-label">{% badge dot=True color="success" %}{% endbadge %}Online</span>
+          <span class="rui-badge-label">{% badge dot=True color="warning" %}{% endbadge %}Ожидание</span>
+          <span class="rui-badge-label">{% badge dot=True color="danger" %}{% endbadge %}Offline</span>
+        </p>
+        <p>
+          {% badge color="success" %}{% icon "check" %}Оплачено{% endbadge %}
+          {% badge color="warning" %}{% icon "clock" %}В обработке{% endbadge %}
+          {% badge color="danger" %}{% icon "triangle-alert" %}Ошибка{% endbadge %}
+        </p>
+        <p>
+          Уведомления {% badge color="primary" %}7{% endbadge %}
+          рядом с текстом и
+          {% badge color="success" %}Активен{% endbadge %}
+          рядом со статусом.
+        </p>
+      {% endcard_body %}
+      {% card_footer %}
+        <p>
+          Для dot-индикатора с подписью используйте внешний
+          {% inline_code %}.rui-badge-label{% endinline_code %} с
+          {% inline_code %}display: inline-flex{% endinline_code %} и
+          {% inline_code %}align-items: center{% endinline_code %}. Badge отвечает за точку, а wrapper
+          выравнивает её вместе с текстом.
+        </p>
+      {% endcard_footer %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}<h3>Публичный API</h3>{% endcard_header %}
+      {% card_body %}
+        <ul>
+          <li>{% inline_code %}color{% endinline_code %}: default, primary, success, warning, danger.</li>
+          <li>{% inline_code %}size{% endinline_code %}: sm или md.</li>
+          <li>{% inline_code %}dot=True{% endinline_code %} — точечный индикатор.</li>
+          <li>Контент, Icon и порядок элементов задаёт разработчик.</li>
+          <li>Badge не создаёт runtime и не прикрепляется к другим компонентам автоматически.</li>
+        </ul>
+      {% endcard_body %}
+    {% endcard %}
+  {% endstack %}
+{% endcontainer %}

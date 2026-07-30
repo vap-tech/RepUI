@@ -1,0 +1,35 @@
+@layer repui.theme {
+  :root {
+    --rui-badge-background: var(--rui-color-surface-raised);
+    --rui-badge-color: var(--rui-color-text);
+    --rui-badge-border: var(--rui-color-border);
+    --rui-badge-radius: var(--rui-radius-sm);
+    --rui-badge-font-size: var(--rui-font-size-sm);
+    --rui-badge-font-weight: var(--rui-font-weight-medium);
+    --rui-badge-dot-size: .5rem;
+  }
+
+  :where(.rui-badge[data-color="primary"]) {
+    --rui-badge-background: var(--rui-color-primary-soft);
+    --rui-badge-color: var(--rui-color-primary);
+    --rui-badge-border: var(--rui-color-primary);
+  }
+
+  :where(.rui-badge[data-color="success"]) {
+    --rui-badge-background: var(--rui-color-success-soft);
+    --rui-badge-color: var(--rui-color-success);
+    --rui-badge-border: var(--rui-color-success);
+  }
+
+  :where(.rui-badge[data-color="warning"]) {
+    --rui-badge-background: var(--rui-color-warning-soft);
+    --rui-badge-color: var(--rui-color-warning);
+    --rui-badge-border: var(--rui-color-warning);
+  }
+
+  :where(.rui-badge[data-color="danger"]) {
+    --rui-badge-background: var(--rui-color-danger-soft);
+    --rui-badge-color: var(--rui-color-danger);
+    --rui-badge-border: var(--rui-color-danger);
+  }
+}

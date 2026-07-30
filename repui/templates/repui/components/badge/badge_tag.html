@@ -1,0 +1,1 @@
+{% load repui_attrs %}<span class="rui-badge rui-badge--{{ size }}{% if dot %} rui-badge--dot{% endif %}{% if class_name %} {{ class_name }}{% endif %}" data-color="{{ color }}" {% html_attrs attrs %}>{{ content|safe }}</span>
