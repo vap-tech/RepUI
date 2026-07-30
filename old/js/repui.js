@@ -25,7 +25,6 @@ import {
   initNavigationMenus,
   NavigationMenu,
 } from "./components/navigation-menu.js";
-import { initPagination } from "./components/pagination.js";
 
 let currentApi = null;
 function registerCollection(collection, name) {
@@ -66,7 +65,6 @@ export function init(root = document) {
   initTooltips(root);
   initValidation(root);
   initSearch(root);
-  initPagination(root);
   currentApi = api;
   emit(document, "ready", api);
   return api;

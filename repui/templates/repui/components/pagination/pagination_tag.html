@@ -1,0 +1,1 @@
+{% load repui_attrs %}<nav class="rui-pagination{% if class_name %} {{ class_name }}{% endif %}" data-rui-pagination{% if id %} id="{{ id }}"{% endif %} aria-label="{{ aria_label|default:'Pagination' }}" {% html_attrs attrs %}>{{ content }}</nav>
