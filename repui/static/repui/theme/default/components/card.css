@@ -1,0 +1,7 @@
+@layer repui.theme {
+  :where(.rui-card) {
+    --rui-card-background: var(--rui-color-surface);
+    --rui-card-border: 1px solid var(--rui-color-border-subtle);
+    --rui-card-shadow: var(--rui-shadow-xs);
+  }
+}

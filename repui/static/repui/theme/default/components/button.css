@@ -1,0 +1,8 @@
+@layer repui.theme {
+  :where(.rui-button) {
+    --rui-button-radius: var(--rui-radius-md);
+    --rui-button-font-weight: var(--rui-font-weight-semibold);
+    --rui-button-bg-hover: var(--rui-color-surface-hover);
+    --rui-button-bg-pressed: var(--rui-color-surface-pressed);
+  }
+}

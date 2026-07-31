@@ -1,0 +1,6 @@
+@layer repui.theme {
+  :where(.rui-choice) {
+    --rui-choice-accent: var(--rui-color-primary);
+    --rui-choice-disabled: var(--rui-color-text-disabled);
+  }
+}

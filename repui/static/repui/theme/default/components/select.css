@@ -1,0 +1,7 @@
+@layer repui.theme {
+  :where(.rui-select) {
+    --rui-select-background: var(--rui-overlay-background);
+    --rui-select-border: 1px solid var(--rui-overlay-border);
+    --rui-select-shadow: var(--rui-overlay-shadow);
+  }
+}

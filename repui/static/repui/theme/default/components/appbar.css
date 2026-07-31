@@ -1,0 +1,8 @@
+@layer repui.theme {
+  :where(.rui-appbar) {
+    --rui-appbar-background: var(--rui-color-surface);
+    --rui-appbar-foreground: var(--rui-color-text);
+    --rui-appbar-border: 1px solid var(--rui-color-border-subtle);
+    --rui-appbar-shadow: none;
+  }
+}

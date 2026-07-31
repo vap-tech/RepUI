@@ -1,7 +1,8 @@
 @layer repui.components {
   :where(.rui-pagination) { display: flex; align-items: center; gap: var(--rui-space-2); flex-wrap: wrap; }
   :where(.rui-pagination__item) { display: inline-flex; align-items: center; justify-content: center; min-inline-size: 2.5rem; min-block-size: 2.5rem; padding-inline: var(--rui-space-3); border: 1px solid var(--rui-color-border); border-radius: var(--rui-radius-md); background: var(--rui-color-surface); color: var(--rui-color-text); font: inherit; text-decoration: none; cursor: pointer; }
-  :where(.rui-pagination__item:hover) { background: var(--rui-color-surface-muted); }
-  :where(.rui-pagination__item[aria-current="page"]) { border-color: var(--rui-color-primary); background: var(--rui-color-primary); color: var(--rui-color-primary-contrast); }
+  :where(.rui-pagination__item:hover) { background: var(--rui-color-surface-hover); }
+  :where(.rui-pagination__item[aria-current="page"]) { border-color: var(--rui-color-primary); background: var(--rui-color-primary-soft); color: var(--rui-color-text); }
+  :where(.rui-pagination__item[aria-current="page"]:hover) { background: var(--rui-color-primary-soft-hover); }
   :where(.rui-pagination__item[aria-disabled="true"], .rui-pagination__item:disabled) { opacity: .45; pointer-events: none; }
 }

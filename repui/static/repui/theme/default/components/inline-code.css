@@ -1,0 +1,7 @@
+@layer repui.theme {
+  :where(.rui-inline-code) {
+    --rui-inline-code-background: var(--rui-color-surface-sunken);
+    --rui-inline-code-border: var(--rui-color-border);
+    --rui-inline-code-text: var(--rui-color-text-secondary);
+  }
+}

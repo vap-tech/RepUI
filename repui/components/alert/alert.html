@@ -1,10 +1,15 @@
 {% load repui repui_layout %}
-{% container %}
-  {% card width="full" %}
-    {% card_header %}<h1>Alert</h1><p>Статическое сообщение внутри страницы.</p>{% endcard_header %}
-    {% card_body %}
-      {% alert variant="info" title="Информация" description="Это inline-сообщение не покидает свою область." %}{% endalert %}
-      {% alert variant="success" title="Готово" description="Операция завершена успешно." dismissible=True %}{% endalert %}
-    {% endcard_body %}
-  {% endcard %}
+    {% container %}
+        {% card width="full" %}
+            {% card_header %}
+            <h1>Alert</h1>
+            <p>Статическое сообщение внутри страницы.</p>
+        {% endcard_header %}
+        {% card_body %}
+            {% stack spacing="xs"%}
+                {% alert variant="info" title="Информация" description="Это inline-сообщение не покидает свою область." %}{% endalert %}
+                {% alert variant="success" title="Готово" description="Операция завершена успешно." dismissible=True %}{% endalert %}
+            {% endstack %}
+        {% endcard_body %}
+    {% endcard %}
 {% endcontainer %}

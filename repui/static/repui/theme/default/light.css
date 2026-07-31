@@ -1,50 +1,55 @@
 @layer repui.theme {
-  [data-rui-color-scheme="light"] {
+  [data-rui-theme="default"][data-rui-color-scheme="light"] {
     color-scheme: light;
-
-    --rui-color-page: #f4f7f4;
-    --rui-color-surface: #ffffff;
-    --rui-color-surface-raised: #f8faf8;
-    --rui-color-surface-hover: #eef5ee;
-    --rui-color-surface-pressed: #e3ece3;
-
-    --rui-color-text: #172017;
-    --rui-color-text-muted: #647064;
-    --rui-color-border: #cbd5cb;
-    --rui-color-border-strong: #8f9c8f;
-
-    --rui-color-primary: #15803d;
-    --rui-color-primary-hover: #166534;
-    --rui-color-primary-soft: #dcfce7;
-    --rui-color-on-primary: #ffffff;
-
-    --rui-color-secondary: #475569;
-    --rui-color-secondary-hover: #334155;
-    --rui-color-secondary-soft: #e2e8f0;
-    --rui-color-on-secondary: #ffffff;
-
-    --rui-color-success: #15803d;
-    --rui-color-success-hover: #166534;
-    --rui-color-success-soft: #dcfce7;
-    --rui-color-on-success: #ffffff;
-
-    --rui-color-warning: #b45309;
-    --rui-color-warning-hover: #92400e;
-    --rui-color-warning-soft: #fef3c7;
-    --rui-color-on-warning: #ffffff;
-
-    --rui-color-danger: #b91c1c;
-    --rui-color-danger-hover: #991b1b;
-    --rui-color-danger-soft: #fee2e2;
-    --rui-color-on-danger: #ffffff;
-
-    --rui-color-disabled-bg: #e7ece7;
-    --rui-color-disabled-text: #7a867a;
-    --rui-color-disabled-border: #b7c1b7;
-    --rui-color-disabled-control-bg: #ffffff;
-    --rui-color-inverse-surface: #eeeeee;
-    --rui-color-on-inverse-surface: #202020;
-    --rui-color-inverse-border: rgb(160 160 160 / .7);
-    --rui-focus-color: #4ade80;
+    --rui-color-page: oklch(96.8% 0.008 240);
+    --rui-color-surface: oklch(99% 0.004 240);
+    --rui-color-surface-raised: oklch(100% 0 0);
+    --rui-color-surface-sunken: oklch(94.5% 0.011 240);
+    --rui-color-surface-hover: oklch(95.5% 0.022 190);
+    --rui-color-surface-pressed: oklch(91.5% 0.043 190);
+    --rui-color-surface-selected: oklch(92.5% 0.052 190);
+    --rui-color-surface-disabled: oklch(94% 0.006 240);
+    --rui-color-text: oklch(20% 0.03 242);
+    --rui-color-text-secondary: oklch(39% 0.032 242);
+    --rui-color-text-muted: oklch(53% 0.027 242);
+    --rui-color-text-disabled: oklch(69% 0.018 242);
+    --rui-color-text-inverse: oklch(98% 0.004 240);
+    --rui-color-border-subtle: oklch(90% 0.015 240);
+    --rui-color-border: oklch(82% 0.023 240);
+    --rui-color-border-strong: oklch(65% 0.03 240);
+    --rui-color-primary: oklch(53% 0.12 184);
+    --rui-color-primary-hover: oklch(47% 0.11 184);
+    --rui-color-primary-pressed: oklch(41% 0.095 184);
+    --rui-color-primary-soft: oklch(93% 0.045 184);
+    --rui-color-primary-soft-hover: oklch(88% 0.072 184);
+    --rui-color-on-primary: oklch(98% 0.005 184);
+    --rui-color-accent: oklch(57% 0.18 245);
+    --rui-color-accent-hover: oklch(50% 0.17 245);
+    --rui-color-accent-soft: oklch(93% 0.04 245);
+    --rui-color-on-accent: oklch(98% 0.004 245);
+    --rui-color-focus: oklch(61% 0.17 245);
+    --rui-color-focus-outer: oklch(65% 0.15 245 / 28%);
+    --rui-color-inverse-surface: oklch(25% 0.027 242);
+    --rui-color-on-inverse-surface: oklch(97% 0.006 240);
+    --rui-color-inverse-border: oklch(38% 0.032 242);
+    --rui-color-success: oklch(52% 0.135 145);
+    --rui-color-success-hover: oklch(46% 0.125 145);
+    --rui-color-success-soft: oklch(94% 0.04 145);
+    --rui-color-success-border: oklch(80% 0.078 145);
+    --rui-color-on-success: white;
+    --rui-color-warning: oklch(63% 0.15 76);
+    --rui-color-warning-hover: oklch(56% 0.145 70);
+    --rui-color-warning-soft: oklch(95% 0.055 82);
+    --rui-color-warning-border: oklch(83% 0.11 80);
+    --rui-color-on-warning: oklch(22% 0.04 70);
+    --rui-color-danger: oklch(56% 0.2 27);
+    --rui-color-danger-hover: oklch(49% 0.19 27);
+    --rui-color-danger-soft: oklch(95% 0.043 27);
+    --rui-color-danger-border: oklch(82% 0.09 27);
+    --rui-color-on-danger: white;
+    --rui-color-info: var(--rui-color-accent);
+    --rui-color-info-soft: var(--rui-color-accent-soft);
+    --rui-color-info-border: oklch(82% 0.075 245);
+    --rui-color-on-info: var(--rui-color-on-accent);
   }
 }

@@ -55,10 +55,15 @@
       {% card_body %}
         <p>
           {% inline_code %}{% verbatim %}{% divider %}{% endverbatim %}{% endinline_code %}
-          рендерит <code>&lt;hr&gt;</code> без margin. Доступны
-          <code>horizontal</code> и <code>vertical</code>.
+          рендерит {% inline_code %}&lt;hr&gt;{% endinline_code %} без margin.
+          Доступны {% inline_code %}horizontal{% endinline_code %} и
+          {% inline_code %}vertical{% endinline_code %}.
         </p>
-        <p>Divider не имеет JavaScript API, mount/unmount или cleanup.</p>
+        <p>
+          Divider не имеет {% inline_code %}JavaScript API{% endinline_code %},
+          {% inline_code %}mount/unmount{% endinline_code %} или
+          {% inline_code %}cleanup{% endinline_code %}.
+        </p>
       {% endcard_body %}
     {% endcard %}
   {% endstack %}

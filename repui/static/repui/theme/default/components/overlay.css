@@ -1,0 +1,7 @@
+@layer repui.theme {
+  :root {
+    --rui-overlay-background: var(--rui-color-surface-raised);
+    --rui-overlay-border: var(--rui-color-border);
+    --rui-overlay-shadow: var(--rui-shadow-overlay);
+  }
+}

@@ -1,0 +1,8 @@
+@layer repui.theme {
+  :where(.rui-tooltip__popup) {
+    --rui-tooltip-background: var(--rui-color-inverse-surface);
+    --rui-tooltip-color: var(--rui-color-on-inverse-surface);
+    --rui-tooltip-border: var(--rui-color-inverse-border);
+    --rui-tooltip-shadow: var(--rui-shadow-overlay);
+  }
+}

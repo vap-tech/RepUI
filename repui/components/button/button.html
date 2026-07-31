@@ -27,10 +27,14 @@
       {% endcard_header %}
 
       {% card_body %}
-        {% button variant="filled" %}Filled{% endbutton %}
-        {% button variant="outlined" %}Outlined{% endbutton %}
-        {% button variant="text" %}Text{% endbutton %}
+        {% button variant="filled" color="primary" %}Filled{% endbutton %}
+        {% button variant="outlined" color="primary" %}Outlined{% endbutton %}
+        {% button variant="text" color="primary" %}Text{% endbutton %}
       {% endcard_body %}
+
+      {% card_footer %}
+        {% alert variant="info" title="Важно" description="Если цвет не указан, Filled и Outlined отличаются только вариантом рамки." %}{% endalert %}
+      {% endcard_footer %}
     {% endcard %}
 
     {% card width="full" %}

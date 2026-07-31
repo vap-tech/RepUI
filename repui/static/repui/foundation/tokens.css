@@ -4,20 +4,20 @@
     --rui-radius-sm: .375rem;
     --rui-radius-md: .625rem;
     --rui-radius-lg: .875rem;
-    --rui-focus-color: color-mix(in srgb, var(--rui-color-primary, #15803d) 70%, white);
+    --rui-focus-color: Highlight;
     --rui-focus-width: 3px;
-    --rui-color-surface: #fff;
-    --rui-color-text: #172017;
-    --rui-color-border: #cbd5cb;
-    --rui-color-primary: #15803d;
-    --rui-color-on-primary: #fff;
-    --rui-color-secondary: #475569;
-    --rui-color-on-secondary: #fff;
-    --rui-color-success: #15803d;
-    --rui-color-on-success: #fff;
-    --rui-color-warning: #b45309;
-    --rui-color-on-warning: #fff;
-    --rui-color-danger: #b91c1c;
-    --rui-color-on-danger: #fff;
+    --rui-color-surface: Canvas;
+    --rui-color-text: CanvasText;
+    --rui-color-border: GrayText;
+    --rui-color-primary: Highlight;
+    --rui-color-on-primary: HighlightText;
+    --rui-color-secondary: GrayText;
+    --rui-color-on-secondary: Canvas;
+    --rui-color-success: Highlight;
+    --rui-color-on-success: HighlightText;
+    --rui-color-warning: Highlight;
+    --rui-color-on-warning: HighlightText;
+    --rui-color-danger: Highlight;
+    --rui-color-on-danger: HighlightText;
   }
 }

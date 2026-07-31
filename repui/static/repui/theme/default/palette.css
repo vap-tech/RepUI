@@ -1,6 +1,56 @@
-@layer repui.theme {
-  :where(html, body) {
-    background: var(--rui-color-page);
-    color: var(--rui-color-text);
+@layer repui.metrics, repui.theme {
+  :root {
+    --rui-core-slate-0: oklch(99% 0.004 240);
+    --rui-core-slate-1: oklch(97% 0.007 240);
+    --rui-core-slate-2: oklch(94% 0.011 240);
+    --rui-core-slate-3: oklch(89% 0.016 240);
+    --rui-core-slate-4: oklch(80% 0.022 240);
+    --rui-core-slate-5: oklch(68% 0.028 240);
+    --rui-core-slate-6: oklch(53% 0.032 240);
+    --rui-core-slate-7: oklch(39% 0.032 240);
+    --rui-core-slate-8: oklch(27% 0.03 240);
+    --rui-core-slate-9: oklch(19% 0.026 240);
+    --rui-core-slate-10: oklch(13.5% 0.022 240);
+
+    --rui-core-jade-1: oklch(95% 0.032 184);
+    --rui-core-jade-2: oklch(90% 0.062 184);
+    --rui-core-jade-3: oklch(82% 0.098 184);
+    --rui-core-jade-4: oklch(71% 0.125 184);
+    --rui-core-jade-5: oklch(60% 0.13 184);
+    --rui-core-jade-6: oklch(51% 0.117 184);
+    --rui-core-jade-7: oklch(42% 0.095 184);
+
+    --rui-core-azure-1: oklch(95% 0.03 245);
+    --rui-core-azure-2: oklch(89% 0.065 245);
+    --rui-core-azure-3: oklch(79% 0.12 245);
+    --rui-core-azure-4: oklch(67% 0.17 245);
+    --rui-core-azure-5: oklch(57% 0.19 245);
+    --rui-core-azure-6: oklch(48% 0.17 245);
+
+    --rui-radius-xs: 0.25rem;
+    --rui-radius-sm: 0.4375rem;
+    --rui-radius-md: 0.625rem;
+    --rui-radius-lg: 0.875rem;
+    --rui-radius-xl: 1.125rem;
+
+    --rui-shadow-xs: 0 1px 2px oklch(20% 0.025 240 / 5%);
+    --rui-shadow-sm:
+      0 2px 7px oklch(20% 0.03 240 / 7%),
+      0 1px 2px oklch(20% 0.025 240 / 4%);
+    --rui-shadow-md:
+      0 10px 25px oklch(20% 0.032 240 / 10%),
+      0 3px 8px oklch(20% 0.027 240 / 6%);
+    --rui-shadow-overlay:
+      0 20px 52px oklch(16% 0.035 240 / 17%),
+      0 5px 15px oklch(16% 0.03 240 / 8%);
+  }
+
+  [data-rui-theme="default"][data-rui-color-scheme="dark"] {
+    --rui-shadow-xs: 0 1px 2px rgb(0 0 0 / 20%);
+    --rui-shadow-sm: 0 5px 14px rgb(0 0 0 / 25%);
+    --rui-shadow-md: 0 14px 36px rgb(0 0 0 / 34%);
+    --rui-shadow-overlay:
+      0 24px 64px rgb(0 0 0 / 48%),
+      0 0 0 1px oklch(75% 0.05 240 / 7%);
   }
 }

@@ -1,59 +1,63 @@
 {% load repui repui_layout %}
 
 {% container %}
-  {% card width="full" %}
-    {% card_header %}
-      <h2>Drawer</h2>
-      <p>Боковая панель для навигации и дополнительного содержимого.</p>
-    {% endcard_header %}
+    {% stack spacing="xs" %}
+        {% card width="full" %}
+            {% card_header %}
+                <h2>Drawer</h2>
+                <p>Боковая панель для навигации и дополнительного содержимого.</p>
+            {% endcard_header %}
+            {% card_body %}
+                {% button variant="filled" color="primary" data-rui-drawer-open="demo-drawer" %}
+                    Открыть Drawer
+                {% endbutton %}
+                {% drawer id="demo-drawer" aria_label="Навигация" %}
+                    {% button variant="text" data-rui-drawer-close=True %}
+                        Закрыть
+                    {% endbutton %}
+                    <p>Содержимое панели.</p>
+                {% enddrawer %}
+            {% endcard_body %}
+        {% endcard %}
 
-    {% card_body %}
-      {% button variant="filled" color="primary" data-rui-drawer-open="demo-drawer" %}
-        Открыть Drawer
-      {% endbutton %}
+        {% card width="full" %}
+            {% card_header %}
+                <h3>Public API</h3>
+            {% endcard_header %}
+            {% card_body %}
+                <ul>
+                    <li><code>{% templatetag openblock %} drawer id="..." {% templatetag closeblock %}</code> создаёт Drawer.</li>
+                    <li><code>side="left|right"</code> выбирает сторону открытия.</li>
+                    <li><code>variant="modal|persistent"</code> выбирает режим панели.</li>
+                    <li><code>aria_label</code> задаёт доступное имя.</li>
+                </ul>
+                <p>
+                    Trigger открывает панель через
+                    <code>data-rui-drawer-open="demo-drawer"</code>.
+                    Runtime Drawer ищет trigger по ID.
+                </p>
+            {% endcard_body %}
+        {% endcard %}
 
-      {% drawer id="demo-drawer" aria_label="Навигация" %}
-        {% button variant="text" data-rui-drawer-close=True %}
-          Закрыть
-        {% endbutton %}
-        <p>Содержимое панели.</p>
-      {% enddrawer %}
-    {% endcard_body %}
-  {% endcard %}
-
-  {% card width="full" %}
-    {% card_header %}<h3>Public API</h3>{% endcard_header %}
-    {% card_body %}
-      <ul>
-        <li><code>{% templatetag openblock %} drawer id="..." {% templatetag closeblock %}</code> создаёт Drawer.</li>
-        <li><code>side="left|right"</code> выбирает сторону открытия.</li>
-        <li><code>variant="modal|persistent"</code> выбирает режим панели.</li>
-        <li><code>aria_label</code> задаёт доступное имя.</li>
-      </ul>
-      <p>
-        Trigger открывает панель через
-        <code>data-rui-drawer-open="demo-drawer"</code>.
-        Runtime Drawer ищет trigger по ID.
-      </p>
-    {% endcard_body %}
-  {% endcard %}
-
-  {% card width="full" %}
-    {% card_header %}<h3>Close marker</h3>{% endcard_header %}
-    {% card_body %}
-      <p>
-        <code>data-rui-drawer-close</code> — marker закрытия.
-        Он должен находиться внутри конкретного Drawer и закрывает только
-        содержащую его панель.
-      </p>
-      <pre><code>{% templatetag openblock %} button data-rui-drawer-close=True {% templatetag closeblock %}
-  Закрыть
-{% templatetag openblock %} endbutton {% templatetag closeblock %}</code></pre>
-      <p>
-        Значение marker не используется. Внешняя кнопка с
-        <code>data-rui-drawer-close="demo-drawer"</code> пока не является
-        поддержанным способом закрытия.
-      </p>
-    {% endcard_body %}
-  {% endcard %}
+        {% card width="full" %}
+            {% card_header %}
+                <h3>Close marker</h3>
+            {% endcard_header %}
+            {% card_body %}
+                <p>
+                    <code>data-rui-drawer-close</code> — marker закрытия.
+                    Он должен находиться внутри конкретного Drawer и закрывает только
+                    содержащую его панель.
+                </p>
+                <pre><code>{% templatetag openblock %} button data-rui-drawer-close=True {% templatetag closeblock %}
+                    Закрыть
+                    {% templatetag openblock %} endbutton {% templatetag closeblock %}</code></pre>
+                <p>
+                    Значение marker не используется. Внешняя кнопка с
+                    <code>data-rui-drawer-close="demo-drawer"</code> пока не является
+                    поддержанным способом закрытия.
+                </p>
+            {% endcard_body %}
+        {% endcard %}
+    {% endstack %}
 {% endcontainer %}

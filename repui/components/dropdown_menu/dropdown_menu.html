@@ -5,9 +5,11 @@
       {% card width="full" %}
         {% card_header %}<h2>DropdownMenu</h2><p>Меню действий для строк списка с контекстом записи.</p>{% endcard_header %}
         {% card_body %}
+
           <article data-rui-menu-context data-chat-id="42">
-            <span>Алгоритм работы MUI Select</span>
+            <span>Алгоритм работы MUI Select
             {% icon_button aria_label="Действия чата" rui_menu_trigger="chat-menu-42" %}{% icon "ellipsis" %}{% endicon_button %}
+            </span>
           </article>
           {% dropdown_menu id="chat-menu-42" %}
             {% menu %}
@@ -19,6 +21,7 @@
               {% menu_item value="delete" %}{% icon "trash" %} Удалить{% endmenu_item %}
             {% endmenu %}
           {% enddropdown_menu %}
+
         {% endcard_body %}
       {% endcard %}
     {% endcontainer %}

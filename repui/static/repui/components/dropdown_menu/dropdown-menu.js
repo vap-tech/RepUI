@@ -16,8 +16,13 @@ class DropdownMenuRuntime {
     this.trigger = trigger;
     this.menu = document.getElementById(trigger.dataset.ruiMenuTrigger);
     if (!this.menu) throw new Error("DropdownMenu trigger target not found");
-    this.menuRuntime = getMenu(this.menu);
+    this.menuRoot = this.menu.matches("[data-rui-menu]")
+      ? this.menu
+      : this.menu.querySelector("[data-rui-menu]");
+    if (!this.menuRoot) throw new Error("DropdownMenu requires one Menu root");
+    this.menuRuntime = getMenu(this.menuRoot);
     this.opened = false;
+    this.dismiss = null;
     this.portal = new OverlayPortal(trigger, this.menu, {
       offset: 8,
       matchAnchorWidth: false,
@@ -85,6 +90,11 @@ class DropdownMenuRuntime {
     this.trigger.setAttribute("aria-expanded", "true");
     this.portal.mount();
     this.opened = true;
+    this.dismiss = createDismissLayer({
+      anchor: this.trigger,
+      overlay: this.menu,
+      onDismiss: ({ reason }) => this.close({ restoreFocus: reason === "escape" }),
+    });
     if (focusPosition) queueMicrotask(() => this.focusItem(focusPosition));
     return this;
   }
@@ -92,14 +102,11 @@ class DropdownMenuRuntime {
   close({ restoreFocus = false } = {}) {
     if (!this.opened) return this;
     this.menu.hidden = true;
+    this.dismiss?.destroy();
+    this.dismiss = null;
     this.portal.unmount();
     this.trigger.setAttribute("aria-expanded", "false");
     this.opened = false;
-    this.dismiss = createDismissLayer({
-      anchor: trigger,
-      overlay: this.menu,
-      onDismiss: ({ reason }) => this.close({ restoreFocus: reason === "escape" }),
-    });
     if (restoreFocus) this.trigger.focus({ preventScroll: true });
     return this;
   }
@@ -114,7 +121,7 @@ class DropdownMenuRuntime {
     this.menu.removeEventListener("click", this.onSelect);
     this.menuRuntime.destroy();
     this.portal.destroy();
-    this.dismiss.destroy();
+    this.dismiss?.destroy();
     instances.delete(this.trigger);
   }
 }

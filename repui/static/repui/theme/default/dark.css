@@ -1,50 +1,55 @@
 @layer repui.theme {
-  [data-rui-color-scheme="dark"] {
+  [data-rui-theme="default"][data-rui-color-scheme="dark"] {
     color-scheme: dark;
-
-    --rui-color-page: #0c110c;
-    --rui-color-surface: #111711;
-    --rui-color-surface-raised: #182018;
-    --rui-color-surface-hover: #202a20;
-    --rui-color-surface-pressed: #293429;
-
-    --rui-color-text: #edf6ed;
-    --rui-color-text-muted: #a8b5a8;
-    --rui-color-border: #394539;
-    --rui-color-border-strong: #647164;
-
-    --rui-color-primary: #4ade80;
-    --rui-color-primary-hover: #86efac;
-    --rui-color-primary-soft: #12351f;
-    --rui-color-on-primary: #07210f;
-
-    --rui-color-secondary: #94a3b8;
-    --rui-color-secondary-hover: #cbd5e1;
-    --rui-color-secondary-soft: #263244;
-    --rui-color-on-secondary: #111827;
-
-    --rui-color-success: #4ade80;
-    --rui-color-success-hover: #86efac;
-    --rui-color-success-soft: #12351f;
-    --rui-color-on-success: #052e16;
-
-    --rui-color-warning: #fbbf24;
-    --rui-color-warning-hover: #fcd34d;
-    --rui-color-warning-soft: #3c2a0b;
-    --rui-color-on-warning: #451a03;
-
-    --rui-color-danger: #f87171;
-    --rui-color-danger-hover: #fca5a5;
-    --rui-color-danger-soft: #3d1717;
-    --rui-color-on-danger: #450a0a;
-
-    --rui-color-disabled-bg: #263126;
-    --rui-color-disabled-text: #7f8c7f;
-    --rui-color-disabled-border: #4b594b;
-    --rui-color-disabled-control-bg: #111711;
-    --rui-color-inverse-surface: #252525;
-    --rui-color-on-inverse-surface: #ededed;
-    --rui-color-inverse-border: #4a4a4a;
-    --rui-focus-color: #86efac;
+    --rui-color-page: oklch(14.5% 0.022 242);
+    --rui-color-surface: oklch(18.5% 0.026 242);
+    --rui-color-surface-raised: oklch(22.5% 0.03 242);
+    --rui-color-surface-sunken: oklch(12.5% 0.019 242);
+    --rui-color-surface-hover: oklch(25% 0.042 190);
+    --rui-color-surface-pressed: oklch(29% 0.06 190);
+    --rui-color-surface-selected: oklch(27% 0.066 190);
+    --rui-color-surface-disabled: oklch(18% 0.018 242);
+    --rui-color-text: oklch(93.5% 0.012 240);
+    --rui-color-text-secondary: oklch(79% 0.021 240);
+    --rui-color-text-muted: oklch(65% 0.025 240);
+    --rui-color-text-disabled: oklch(46% 0.022 240);
+    --rui-color-text-inverse: oklch(17% 0.024 242);
+    --rui-color-border-subtle: oklch(27% 0.025 242);
+    --rui-color-border: oklch(35% 0.032 242);
+    --rui-color-border-strong: oklch(51% 0.04 242);
+    --rui-color-primary: oklch(72% 0.12 184);
+    --rui-color-primary-hover: oklch(78% 0.105 184);
+    --rui-color-primary-pressed: oklch(65% 0.125 184);
+    --rui-color-primary-soft: oklch(27% 0.07 184);
+    --rui-color-primary-soft-hover: oklch(32% 0.082 184);
+    --rui-color-on-primary: oklch(16% 0.035 184);
+    --rui-color-accent: oklch(74% 0.145 245);
+    --rui-color-accent-hover: oklch(81% 0.12 245);
+    --rui-color-accent-soft: oklch(27% 0.075 245);
+    --rui-color-on-accent: oklch(16% 0.03 245);
+    --rui-color-focus: oklch(75% 0.145 245);
+    --rui-color-focus-outer: oklch(72% 0.14 245 / 30%);
+    --rui-color-inverse-surface: oklch(31% 0.024 242);
+    --rui-color-on-inverse-surface: oklch(96% 0.008 240);
+    --rui-color-inverse-border: oklch(43% 0.032 242);
+    --rui-color-success: oklch(70% 0.14 145);
+    --rui-color-success-hover: oklch(77% 0.12 145);
+    --rui-color-success-soft: oklch(26% 0.07 145);
+    --rui-color-success-border: oklch(47% 0.09 145);
+    --rui-color-on-success: oklch(16% 0.03 145);
+    --rui-color-warning: oklch(80% 0.14 82);
+    --rui-color-warning-hover: oklch(86% 0.11 82);
+    --rui-color-warning-soft: oklch(29% 0.075 78);
+    --rui-color-warning-border: oklch(52% 0.1 80);
+    --rui-color-on-warning: oklch(18% 0.03 70);
+    --rui-color-danger: oklch(72% 0.16 27);
+    --rui-color-danger-hover: oklch(80% 0.13 27);
+    --rui-color-danger-soft: oklch(30% 0.09 27);
+    --rui-color-danger-border: oklch(53% 0.12 27);
+    --rui-color-on-danger: oklch(18% 0.03 27);
+    --rui-color-info: var(--rui-color-accent);
+    --rui-color-info-soft: var(--rui-color-accent-soft);
+    --rui-color-info-border: oklch(52% 0.1 245);
+    --rui-color-on-info: var(--rui-color-on-accent);
   }
 }
