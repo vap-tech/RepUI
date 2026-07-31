@@ -8,6 +8,7 @@ COMPONENT = {
         "repui/components/panel/panel.css",
     ),
     "theme_styles": ("repui/theme/default/panel-tokens.css",),
+    "contract_styles": ("repui/theme/contract/components/panel-tokens.css",),
     "scripts": (),
     "status": "stable",
 }

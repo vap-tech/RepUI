@@ -5,6 +5,7 @@ COMPONENT = {
     "template": "repui/components/tooltip/tooltip.html",
     "styles": ("repui/components/tooltip/tooltip.css",),
     "theme_styles": ("repui/theme/default/tooltip-tokens.css",),
+    "contract_styles": ("repui/theme/contract/components/tooltip-tokens.css",),
     "scripts": ("repui/components/tooltip/tooltip.js",),
     "runtime": {
         "required": True,

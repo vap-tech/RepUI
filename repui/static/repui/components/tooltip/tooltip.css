@@ -8,10 +8,10 @@
   :where(.rui-tooltip__popup) {
     box-sizing: border-box;
     padding: .4rem .6rem;
-    border: 1px solid var(--rui-tooltip-border, var(--rui-color-border, #cbd5cb));
+    border: 1px solid var(--rui-tooltip-border, var(--rui-color-border));
     border-radius: var(--rui-tooltip-radius, var(--rui-radius-sm));
-    background: var(--rui-tooltip-background, var(--rui-color-text, #172017));
-    color: var(--rui-tooltip-color, var(--rui-color-surface, #fff));
+    background: var(--rui-tooltip-background, var(--rui-color-text));
+    color: var(--rui-tooltip-color, var(--rui-color-surface));
     box-shadow: var(--rui-tooltip-shadow, 0 4px 12px rgb(0 0 0 / .2));
     backdrop-filter: var(--rui-tooltip-backdrop-filter, none);
     -webkit-backdrop-filter: var(--rui-tooltip-backdrop-filter, none);

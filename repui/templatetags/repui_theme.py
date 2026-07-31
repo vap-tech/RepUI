@@ -7,12 +7,17 @@ _BOOTSTRAP = r"""
 <script>
 (() => {
   const key = "rui-theme-mode";
+  const themeKey = "rui-theme";
   const allowed = new Set(["light", "dark", "system"]);
+  const themes = new Set(["default", "mineral"]);
   let mode = "system";
+  let theme = "default";
 
   try {
     const stored = localStorage.getItem(key);
     if (allowed.has(stored)) mode = stored;
+    const storedTheme = localStorage.getItem(themeKey);
+    if (themes.has(storedTheme)) theme = storedTheme;
   } catch (_) {}
 
   const prefersDark = window.matchMedia &&
@@ -25,6 +30,7 @@ _BOOTSTRAP = r"""
   const root = document.documentElement;
   root.dataset.ruiThemeMode = mode;
   root.dataset.ruiColorScheme = scheme;
+  root.dataset.ruiTheme = theme;
 })();
 </script>
 """

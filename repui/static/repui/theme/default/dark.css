@@ -1,0 +1,47 @@
+@layer repui.theme {
+  [data-rui-color-scheme="dark"] {
+    color-scheme: dark;
+
+    --rui-color-page: #0c110c;
+    --rui-color-surface: #111711;
+    --rui-color-surface-raised: #182018;
+    --rui-color-surface-hover: #202a20;
+    --rui-color-surface-pressed: #293429;
+
+    --rui-color-text: #edf6ed;
+    --rui-color-text-muted: #a8b5a8;
+    --rui-color-border: #394539;
+    --rui-color-border-strong: #647164;
+
+    --rui-color-primary: #4ade80;
+    --rui-color-primary-hover: #86efac;
+    --rui-color-primary-soft: #12351f;
+    --rui-color-on-primary: #07210f;
+
+    --rui-color-secondary: #94a3b8;
+    --rui-color-secondary-hover: #cbd5e1;
+    --rui-color-secondary-soft: #263244;
+    --rui-color-on-secondary: #111827;
+
+    --rui-color-success: #4ade80;
+    --rui-color-success-hover: #86efac;
+    --rui-color-success-soft: #12351f;
+    --rui-color-on-success: #052e16;
+
+    --rui-color-warning: #fbbf24;
+    --rui-color-warning-hover: #fcd34d;
+    --rui-color-warning-soft: #3c2a0b;
+    --rui-color-on-warning: #451a03;
+
+    --rui-color-danger: #f87171;
+    --rui-color-danger-hover: #fca5a5;
+    --rui-color-danger-soft: #3d1717;
+    --rui-color-on-danger: #450a0a;
+
+    --rui-color-disabled-bg: #263126;
+    --rui-color-disabled-text: #7f8c7f;
+    --rui-color-disabled-border: #4b594b;
+    --rui-color-disabled-control-bg: #111711;
+    --rui-focus-color: #86efac;
+  }
+}

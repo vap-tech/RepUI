@@ -6,6 +6,9 @@ COMPONENT = {
     "theme_styles": (
         "repui/theme/default/typography-tokens.css",
     ),
+    "contract_styles": (
+        "repui/theme/contract/components/typography-tokens.css",
+    ),
     "styles": (
         "repui/components/typography/typography.css",
     ),

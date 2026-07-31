@@ -1,0 +1,1 @@
+"""Mineral Laboratory theme."""

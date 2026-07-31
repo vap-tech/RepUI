@@ -1,0 +1,6 @@
+@layer repui.theme {
+  :where(html, body) {
+    background: var(--rui-color-page);
+    color: var(--rui-color-text);
+  }
+}

@@ -6,6 +6,7 @@ COMPONENT = {
     "template": "repui/components/badge/badge.html",
     "styles": ("repui/components/badge/badge.css",),
     "theme_styles": ("repui/theme/default/badge-tokens.css",),
+    "contract_styles": ("repui/theme/contract/components/badge-tokens.css",),
     "scripts": (),
     "status": "stable",
 }

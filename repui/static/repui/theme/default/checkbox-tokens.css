@@ -1,12 +1,14 @@
-:root,
-[data-theme="light"] {
+@layer repui.theme {
+  :root,
+  [data-rui-color-scheme="light"] {
   --rui-checkbox-text: var(--rui-color-on-surface);
   --rui-checkbox-accent: var(--rui-color-primary);
   --rui-checkbox-disabled-text: var(--rui-color-disabled-text);
-}
+  }
 
-[data-theme="dark"] {
+  [data-rui-color-scheme="dark"] {
   --rui-checkbox-text: var(--rui-color-on-surface);
   --rui-checkbox-accent: var(--rui-color-primary);
   --rui-checkbox-disabled-text: var(--rui-color-disabled-text);
+  }
 }

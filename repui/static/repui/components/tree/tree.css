@@ -8,4 +8,4 @@
 .rui-tree-item__indicator { inline-size: 1rem; block-size: 1rem; flex: none; }
 .rui-tree-item[aria-expanded] > .rui-tree-item__row > .rui-tree-item__indicator::before { content: "▸"; display: block; transition: transform .12s ease; }
 .rui-tree-item[aria-expanded="true"] > .rui-tree-item__row > .rui-tree-item__indicator::before { transform: rotate(90deg); }
-.rui-tree-item__group { margin-inline-start: 1rem; padding-inline-start: .5rem; border-inline-start: 1px solid var(--rui-color-divider, rgb(0 0 0 / .12)); }
+.rui-tree-item__group { margin-inline-start: 1rem; padding-inline-start: .5rem; border-inline-start: 1px solid var(--rui-color-divider, var(--rui-color-border-subtle)); }

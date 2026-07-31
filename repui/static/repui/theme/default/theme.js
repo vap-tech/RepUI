@@ -1,5 +1,7 @@
 const STORAGE_KEY = "rui-theme-mode";
+const THEME_STORAGE_KEY = "rui-theme";
 const MODES = new Set(["light", "dark", "system"]);
+const THEMES = new Set(["default", "mineral"]);
 const root = document.documentElement;
 const media = window.matchMedia("(prefers-color-scheme: dark)");
 
@@ -18,6 +20,25 @@ export function getThemeMode() {
   return normalize(root.dataset.ruiThemeMode);
 }
 
+export function getTheme() {
+  return THEMES.has(root.dataset.ruiTheme) ? root.dataset.ruiTheme : "default";
+}
+
+export function setTheme(theme, { persist = true } = {}) {
+  const normalized = THEMES.has(theme) ? theme : "default";
+  root.dataset.ruiTheme = normalized;
+  if (persist) {
+    try { localStorage.setItem(THEME_STORAGE_KEY, normalized); } catch (_) {}
+  }
+  document.dispatchEvent(new CustomEvent("repui:themechange", {
+    detail: {
+      theme: normalized,
+      mode: getThemeMode(),
+      colorScheme: root.dataset.ruiColorScheme,
+    },
+  }));
+}
+
 export function setThemeMode(mode, { persist = true } = {}) {
   const normalized = normalize(mode);
   const scheme = resolveThemeMode(normalized);
@@ -32,7 +53,7 @@ export function setThemeMode(mode, { persist = true } = {}) {
   }
 
   document.dispatchEvent(new CustomEvent("repui:themechange", {
-    detail: { mode: normalized, colorScheme: scheme },
+    detail: { theme: getTheme(), mode: normalized, colorScheme: scheme },
   }));
 }
 
@@ -50,8 +71,23 @@ function mountThemeSelect(select) {
   });
 }
 
+function mountPaletteSelect(select) {
+  if (select.dataset.ruiMounted === "true") return;
+  select.dataset.ruiMounted = "true";
+  select.value = getTheme();
+
+  select.addEventListener("change", () => {
+    setTheme(select.value);
+  });
+
+  document.addEventListener("repui:themechange", (event) => {
+    select.value = event.detail.theme;
+  });
+}
+
 export function mountThemeControls(scope = document) {
   scope.querySelectorAll("[data-rui-theme-select]").forEach(mountThemeSelect);
+  scope.querySelectorAll("[data-rui-palette-select]").forEach(mountPaletteSelect);
 }
 
 media.addEventListener("change", () => {

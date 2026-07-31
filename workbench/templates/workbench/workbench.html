@@ -1,12 +1,15 @@
 {% load static repui repui_theme repui_layout repui_css %}
 <!doctype html>
-<html lang="ru" data-rui-theme-mode="system" data-rui-color-scheme="light">
+<html lang="ru" data-rui-theme="default" data-rui-theme-mode="system" data-rui-color-scheme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="{% static 'workbench/favicon.svg' %}">
   {% repui_theme_head %}
   {% repui_css page appbar panel card button checkbox choice select listbox dialog alert toast command_palette card_action chip icon_button icon inline_code list_item_button menu tabs list navbar drawer tree autocomplete typography tooltip badge code_block collapsible accordion popover pagination search combobox dropdown_menu divider menubar %}
+  <link rel="stylesheet" href="{% static 'repui/theme/mineral/palette.css' %}">
+  <link rel="stylesheet" href="{% static 'repui/theme/mineral/light.css' %}">
+  <link rel="stylesheet" href="{% static 'repui/theme/mineral/dark.css' %}">
   <link rel="stylesheet" href="{% static 'workbench/docs.css' %}">
   <link rel="stylesheet" href="{% static 'workbench/workbench.css' %}">
   <title>RepUI Workbench</title>

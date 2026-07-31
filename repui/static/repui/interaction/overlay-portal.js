@@ -41,6 +41,7 @@ export class OverlayPortal {
     this.scrollParents = [];
     this.frame = 0;
     this.previousFocus = null;
+    this.themeContext = null;
     this.resizeObserver = "ResizeObserver" in window
       ? new ResizeObserver(() => this.schedulePosition())
       : null;
@@ -61,6 +62,18 @@ export class OverlayPortal {
     this.overlay.before(this.placeholder);
     this.options.container.append(this.overlay);
     this.overlay.dataset.ruiPortal = "true";
+    const themeScope = this.anchor.closest("[data-rui-theme]");
+    if (themeScope) {
+      this.themeContext = {
+        theme: this.overlay.getAttribute("data-rui-theme"),
+        scheme: this.overlay.getAttribute("data-rui-color-scheme"),
+      };
+      this.overlay.dataset.ruiTheme = themeScope.dataset.ruiTheme;
+      if (themeScope.dataset.ruiColorScheme) {
+        this.overlay.dataset.ruiColorScheme =
+          themeScope.dataset.ruiColorScheme;
+      }
+    }
     this.overlay.style.position = "fixed";
     this.overlay.style.inset = "auto";
     this.overlay.style.margin = "0";
@@ -195,6 +208,22 @@ export class OverlayPortal {
     this.deactivate();
     this.mounted = false;
     delete this.overlay.dataset.ruiPortal;
+    if (this.themeContext) {
+      if (this.themeContext.theme === null) {
+        delete this.overlay.dataset.ruiTheme;
+      } else {
+        this.overlay.setAttribute("data-rui-theme", this.themeContext.theme);
+      }
+      if (this.themeContext.scheme === null) {
+        delete this.overlay.dataset.ruiColorScheme;
+      } else {
+        this.overlay.setAttribute(
+          "data-rui-color-scheme",
+          this.themeContext.scheme,
+        );
+      }
+      this.themeContext = null;
+    }
     ["position", "inset", "top", "left", "right", "bottom", "width", "margin", "max-width", "max-height", "--rui-overlay-arrow-x", "--rui-overlay-arrow-y"].forEach(
       (property) => this.overlay.style.removeProperty(property),
     );

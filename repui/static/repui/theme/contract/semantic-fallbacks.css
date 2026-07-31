@@ -1,0 +1,24 @@
+@layer repui.theme {
+  :root {
+    color-scheme: light;
+
+    --rui-color-page: Canvas;
+    --rui-color-surface: Canvas;
+    --rui-color-surface-raised: Canvas;
+    --rui-color-surface-hover: color-mix(in srgb, Canvas 92%, CanvasText);
+    --rui-color-surface-pressed: color-mix(in srgb, Canvas 86%, CanvasText);
+    --rui-color-text: CanvasText;
+    --rui-color-text-muted: GrayText;
+    --rui-color-border: GrayText;
+    --rui-color-border-strong: CanvasText;
+    --rui-color-primary: Highlight;
+    --rui-color-primary-hover: Highlight;
+    --rui-color-primary-soft: color-mix(in srgb, Highlight 15%, Canvas);
+    --rui-color-on-primary: HighlightText;
+    --rui-color-disabled-bg: color-mix(in srgb, CanvasText 10%, Canvas);
+    --rui-color-disabled-text: GrayText;
+    --rui-color-disabled-border: GrayText;
+    --rui-color-disabled-control-bg: Canvas;
+    --rui-focus-color: Highlight;
+  }
+}

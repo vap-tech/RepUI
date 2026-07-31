@@ -12,6 +12,10 @@ COMPONENT = {
         "repui/theme/default/choice-tokens.css",
         "repui/theme/default/checkbox-tokens.css",
     ),
+    "contract_styles": (
+        "repui/theme/contract/components/choice-tokens.css",
+        "repui/theme/contract/components/checkbox-tokens.css",
+    ),
     "scripts": (),
     "status": "stable",
 }

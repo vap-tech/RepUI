@@ -1,0 +1,23 @@
+@layer repui.theme {
+  [data-rui-theme="mineral"][data-rui-color-scheme="light"] {
+    --rui-shadow-xs: 0 1px 2px oklch(22% 0.04 295 / 6%);
+    --rui-shadow-sm:
+      0 3px 10px oklch(22% 0.05 295 / 8%),
+      0 1px 2px oklch(22% 0.04 295 / 5%);
+    --rui-shadow-md:
+      0 12px 30px oklch(22% 0.055 295 / 11%),
+      0 3px 8px oklch(22% 0.04 295 / 7%);
+    --rui-shadow-overlay:
+      0 24px 64px oklch(18% 0.06 295 / 18%),
+      0 6px 16px oklch(18% 0.045 295 / 10%);
+  }
+
+  [data-rui-theme="mineral"][data-rui-color-scheme="dark"] {
+    --rui-shadow-xs: 0 1px 2px rgb(0 0 0 / 24%);
+    --rui-shadow-sm: 0 6px 16px rgb(0 0 0 / 28%);
+    --rui-shadow-md: 0 18px 44px rgb(0 0 0 / 38%);
+    --rui-shadow-overlay:
+      0 28px 72px rgb(0 0 0 / 52%),
+      0 0 0 1px oklch(72% 0.12 305 / 10%);
+  }
+}

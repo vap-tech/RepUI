@@ -1,5 +1,6 @@
-:root,
-[data-theme="light"] {
+@layer repui.theme {
+  :root,
+  [data-rui-color-scheme="light"] {
   --rui-choice-text: var(--rui-color-text);
   --rui-choice-muted: var(--rui-color-text-muted, #71717a);
   --rui-choice-disabled: var(--rui-color-text-muted, #a1a1aa);
@@ -10,9 +11,9 @@
   --rui-choice-disabled-border: var(--rui-color-disabled-border);
   --rui-choice-disabled-background: var(--rui-color-disabled-control-bg);
   --rui-choice-disabled-indicator: var(--rui-color-disabled-text);
-}
+  }
 
-[data-theme="dark"] {
+  [data-rui-color-scheme="dark"] {
   --rui-choice-text: var(--rui-color-text);
   --rui-choice-muted: var(--rui-color-text-muted, #a1a1aa);
   --rui-choice-disabled: var(--rui-color-text-muted, #71717a);
@@ -23,4 +24,5 @@
   --rui-choice-disabled-border: var(--rui-color-disabled-border);
   --rui-choice-disabled-background: var(--rui-color-disabled-control-bg);
   --rui-choice-disabled-indicator: var(--rui-color-disabled-text);
+  }
 }
