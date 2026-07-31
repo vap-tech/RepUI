@@ -42,6 +42,9 @@
     --rui-color-disabled-text: #7f8c7f;
     --rui-color-disabled-border: #4b594b;
     --rui-color-disabled-control-bg: #111711;
+    --rui-color-inverse-surface: #252525;
+    --rui-color-on-inverse-surface: #ededed;
+    --rui-color-inverse-border: #4a4a4a;
     --rui-focus-color: #86efac;
   }
 }

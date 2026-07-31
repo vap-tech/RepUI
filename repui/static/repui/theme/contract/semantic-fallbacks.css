@@ -15,6 +15,9 @@
     --rui-color-primary-hover: Highlight;
     --rui-color-primary-soft: color-mix(in srgb, Highlight 15%, Canvas);
     --rui-color-on-primary: HighlightText;
+    --rui-color-inverse-surface: CanvasText;
+    --rui-color-on-inverse-surface: Canvas;
+    --rui-color-inverse-border: GrayText;
     --rui-color-disabled-bg: color-mix(in srgb, CanvasText 10%, Canvas);
     --rui-color-disabled-text: GrayText;
     --rui-color-disabled-border: GrayText;

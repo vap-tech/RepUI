@@ -26,5 +26,8 @@
     --rui-color-on-accent: oklch(99% 0.005 190);
     --rui-color-focus: var(--rui-color-accent);
     --rui-color-focus-outer: oklch(70% 0.11 190 / 32%);
+    --rui-color-inverse-surface: oklch(27% 0.035 292);
+    --rui-color-on-inverse-surface: oklch(97% 0.01 80);
+    --rui-color-inverse-border: oklch(40% 0.045 292);
   }
 }
