@@ -35,15 +35,14 @@
 <div class="rui-toast-region" data-rui-toast-region aria-live="polite" aria-relevant="additions"></div>
 
 <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
+{% include "workbench/partials/appbar_runtime.html" %}
 <script type="module" src="{% static 'repui/theme/default/theme.js' %}"></script>
 <script type="module">
-  import { mountSelects } from "{% static 'repui/components/select/select.js' %}";
   import { mountListboxes } from "{% static 'repui/components/listbox/listbox.js' %}";
   import { mountDialogs } from "{% static 'repui/core/dialog.js' %}";
   import { mountToasts } from "{% static 'repui/components/toast/toast.js' %}";
   import { mountCommandPalettes } from "{% static 'repui/components/command_palette/command-palette.js' %}";
   import { mountChips } from "{% static 'repui/components/chip/chip.js' %}";
-  import { mountNavbars } from "{% static 'repui/components/navbar/navbar.js' %}";
   import { mountDrawers } from "{% static 'repui/components/drawer/drawer.js' %}";
   import { mountTrees } from "{% static 'repui/components/tree/tree.js' %}";
   import { mountAutocompletes } from "{% static 'repui/components/autocomplete/autocomplete.js' %}";
@@ -59,14 +58,12 @@
   import { mountMenubars } from "{% static 'repui/components/menubar/menubar.js' %}";
   import { mountMenus } from "{% static 'repui/components/menu/menu.js' %}";
 
-  const mountSelectRuntime = (root) => mountSelects(root);
   const mountListboxRuntime = (root) => mountListboxes(root);
   const mountDialogRuntime = (root) => mountDialogs(root);
   const mountToastRuntime = (root) => mountToasts(root);
   const mountCommandRuntime = (root) => mountCommandPalettes(root);
   const mountChipRuntime = (root) => mountChips(root);
   const mountInteractionRuntime = (root) => {
-    mountNavbars(root);
     mountDrawers(root);
     mountTrees(root);
     mountAutocompletes(root);
@@ -82,7 +79,6 @@
     mountMenus(root);
     mountMenubars(root);
   };
-  mountSelectRuntime(document);
   mountListboxRuntime(document);
   mountDialogRuntime(document);
   const toastManager = mountToastRuntime(document)[0];
@@ -111,7 +107,6 @@
     });
   });
   document.body.addEventListener("htmx:afterSwap", (event) => {
-    mountSelectRuntime(event.detail.target);
     mountListboxRuntime(event.detail.target);
     mountDialogRuntime(event.detail.target);
     mountToastRuntime(event.detail.target);

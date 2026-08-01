@@ -58,8 +58,8 @@ export function setThemeMode(mode, { persist = true } = {}) {
 }
 
 function mountThemeSelect(select) {
-  if (select.dataset.ruiMounted === "true") return;
-  select.dataset.ruiMounted = "true";
+  if (select.dataset.ruiThemeControlMounted === "true") return;
+  select.dataset.ruiThemeControlMounted = "true";
   select.value = getThemeMode();
 
   select.addEventListener("change", () => {
@@ -72,8 +72,8 @@ function mountThemeSelect(select) {
 }
 
 function mountPaletteSelect(select) {
-  if (select.dataset.ruiMounted === "true") return;
-  select.dataset.ruiMounted = "true";
+  if (select.dataset.ruiThemeControlMounted === "true") return;
+  select.dataset.ruiThemeControlMounted = "true";
   select.value = getTheme();
   select.dispatchEvent(new Event("input", { bubbles: true }));
 
@@ -88,8 +88,8 @@ function mountPaletteSelect(select) {
 }
 
 function mountThemeToggle(button) {
-  if (button.dataset.ruiMounted === "true") return;
-  button.dataset.ruiMounted = "true";
+  if (button.dataset.ruiThemeControlMounted === "true") return;
+  button.dataset.ruiThemeControlMounted = "true";
 
   const update = () => {
     const dark = root.dataset.ruiColorScheme === "dark";

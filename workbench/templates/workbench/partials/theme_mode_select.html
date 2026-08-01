@@ -1,6 +1,10 @@
 {% load repui %}
 
-<label class="docs-theme-control">
+<div class="docs-theme-control">
+    {% icon_button href="https://github.com/vap-tech/rui-core" aria_label="RepUI на GitHub" class_name="docs-github-link" %}
+        {% icon "github" %}
+    {% endicon_button %}
+
     {% icon_button aria_label="Переключить тему" class_name="docs-theme-toggle" rui_theme_toggle=True %}
         <span data-rui-theme-icon="dark" aria-hidden="true">{% icon "moon" %}</span>
         <span data-rui-theme-icon="light" aria-hidden="true" hidden>{% icon "sun" %}</span>
@@ -11,4 +15,4 @@
         {% select_option value="mineral" %}Mineral Laboratory{% endselect_option %}
         {% select_option value="ocean-deep" %}Ocean Deep{% endselect_option %}
     {% endselect %}
-</label>
+</div>

@@ -27,15 +27,12 @@
 {% endpage %}
 
 <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
+{% include "workbench/partials/appbar_runtime.html" %}
 <script type="module" src="{% static 'repui/theme/default/theme.js' %}"></script>
 <script type="module">
-  import { mountSelects } from "{% static 'repui/components/select/select.js' %}";
-  import { mountNavbars } from "{% static 'repui/components/navbar/navbar.js' %}";
   import { mountTooltips } from "{% static 'repui/components/tooltip/tooltip.js' %}";
   import { mountCodeBlocks } from "{% static 'repui/components/code_block/code-block.js' %}";
   import { mountAccordions } from "{% static 'repui/components/accordion/accordion.js' %}";
-  mountSelects(document);
-  mountNavbars(document);
   mountTooltips(document);
   mountCodeBlocks(document);
   mountAccordions(document);

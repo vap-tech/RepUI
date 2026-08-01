@@ -56,7 +56,27 @@
 
   .docs-theme-toggle:hover {
     border-color: var(--rui-color-primary);
-    background: var(--rui-color-primary-soft);
+    background: var(--rui-color-surface-hover);
+  }
+
+  .docs-github-link {
+    inline-size: 2.5rem;
+    block-size: 2.5rem;
+    border: 1px solid var(--rui-color-border);
+    border-radius: var(--rui-radius-md);
+    background: transparent;
+    color: var(--rui-color-text);
+  }
+
+  .docs-github-link:hover {
+    border-color: var(--rui-color-primary);
+    background: var(--rui-color-surface-hover);
+  }
+
+  .docs-github-link .rui-icon {
+    fill: currentColor;
+    stroke: none;
+    font-size: 1.35rem;
   }
 
   .docs-layout {
