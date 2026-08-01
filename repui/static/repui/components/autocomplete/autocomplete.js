@@ -163,7 +163,6 @@ class AutocompleteRuntime {
       const option = event.target.closest("[data-rui-autocomplete-option]");
       if (option) this.choose(this.options().indexOf(option), event);
     }, { signal });
-    this.element.addEventListener("htmx:afterSwap", () => this.refresh(), { signal });
   }
 
   destroy() {
@@ -187,7 +186,3 @@ export function mountAutocompletes(root = document) {
     return instance;
   });
 }
-
-document.addEventListener("htmx:afterSwap", (event) => {
-  mountAutocompletes(event.detail?.target || event.target);
-});

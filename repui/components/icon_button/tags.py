@@ -2,30 +2,33 @@ from django import template
 from django.template import Node, TemplateSyntaxError
 from django.template.loader import render_to_string
 
+from repui.template_support.arguments import (
+    compile_keyword_arguments,
+    extract_html_attrs,
+    resolve_arguments,
+    resolve_bool,
+)
+
 class IconButtonNode(Node):
     def __init__(self, nodelist, kwargs):
         self.nodelist = nodelist
         self.kwargs = kwargs
 
     def render(self, context):
-        values = {key: value.resolve(context) for key, value in self.kwargs.items()}
+        values = resolve_arguments(self.kwargs, context)
         content = self.nodelist.render(context).strip()
         aria_label = values.pop("aria_label", None)
         if not aria_label:
             raise TemplateSyntaxError("icon_button requires aria_label")
 
         href = values.pop("href", None)
-        disabled = bool(values.pop("disabled", False))
-        attrs = dict(values.pop("attrs", {}) or {})
-        for key, html_name in {
+        disabled = resolve_bool(values.pop("disabled", False), name="disabled")
+        attrs = extract_html_attrs(values, {
             "rui_menu_trigger": "data-rui-menu-trigger",
             "rui_menu_context": "data-rui-menu-context",
             "chat_id": "data-chat-id",
             "rui_theme_toggle": "data-rui-theme-toggle",
-        }.items():
-            value = values.pop(key, None)
-            if value is not None and value is not False:
-                attrs[html_name] = value
+        })
         class_name = values.pop("class_name", None)
         element_id = values.pop("id", None)
         if values:
@@ -48,13 +51,7 @@ class IconButtonNode(Node):
         )
 
 def _icon_button(parser, token):
-    bits = token.split_contents()
-    kwargs = {}
-    for bit in bits[1:]:
-        if "=" not in bit:
-            raise TemplateSyntaxError("icon_button arguments must use name=value")
-        name, value = bit.split("=", 1)
-        kwargs[name] = parser.compile_filter(value)
+    kwargs = compile_keyword_arguments(parser, token)
     nodelist = parser.parse(("endicon_button",))
     parser.delete_first_token()
     return IconButtonNode(nodelist, kwargs)

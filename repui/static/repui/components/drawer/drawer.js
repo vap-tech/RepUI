@@ -119,7 +119,3 @@ export function mountDrawers(root = document) {
     return instance;
   });
 }
-
-document.addEventListener("htmx:afterSwap", (event) => {
-  mountDrawers(event.detail?.target || event.target);
-});

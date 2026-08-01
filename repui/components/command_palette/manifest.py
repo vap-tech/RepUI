@@ -5,6 +5,11 @@ COMPONENT = {
     "styles": ("repui/components/command_palette/command-palette.css",),
     "scripts": ("repui/components/command_palette/command-palette.js",),
     "template": "repui/components/command_palette/command_palette.html",
-    "runtime": {"mount": "mountCommandPalettes", "contract": ("open", "close", "destroy")},
+    "contract_styles": (),
+    "runtime": {
+        "required": True,
+        "mount": "mountCommandPalettes",
+        "contract": ("open", "close", "refresh", "destroy"),
+    },
     "status": "experimental",
 }

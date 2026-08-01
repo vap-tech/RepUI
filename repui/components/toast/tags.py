@@ -2,13 +2,24 @@ from django import template
 from django.template import Node, TemplateSyntaxError
 from django.template.loader import render_to_string
 
+from repui.template_support.arguments import (
+    compile_keyword_arguments,
+    reject_unknown,
+    resolve_arguments,
+)
+
 
 class ToastNode(Node):
     def __init__(self, values, nodelist):
         self.values, self.nodelist = values, nodelist
 
     def render(self, context):
-        values = {key: value.resolve(context) for key, value in self.values.items()}
+        values = resolve_arguments(self.values, context)
+        reject_unknown(
+            values,
+            {"title", "description", "duration"},
+            component="toast",
+        )
         return render_to_string(
             "repui/components/toast/toast.html",
             {**values, "content": self.nodelist.render(context).strip()},
@@ -17,14 +28,7 @@ class ToastNode(Node):
 
 
 def _toast(parser, token):
-    values = {}
-    for bit in token.split_contents()[1:]:
-        if "=" not in bit:
-            raise TemplateSyntaxError("toast arguments must use name=value")
-        key, value = bit.split("=", 1)
-        if key not in {"title", "description", "duration"}:
-            raise TemplateSyntaxError(f"Unknown toast argument: {key}")
-        values[key] = parser.compile_filter(value)
+    values = compile_keyword_arguments(parser, token)
     node_list = parser.parse(("endtoast",))
     parser.delete_first_token()
     return ToastNode(values, node_list)

@@ -58,5 +58,11 @@ export function mountMenus(root = document) {
 }
 
 export function getMenu(root) {
-  return instances.get(root) || mountMenu(root);
+  const instance = instances.get(root);
+  if (!instance) {
+    throw new Error(
+      "Menu runtime must be mounted before a composite consumer",
+    );
+  }
+  return instance;
 }

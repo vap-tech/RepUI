@@ -24,4 +24,5 @@ class AutocompleteTests(SimpleTestCase):
         self.assertIn("export function mountAutocompletes", source)
         self.assertIn("refresh()", source)
         self.assertIn("destroy()", source)
-        self.assertIn('htmx:afterSwap', source)
+        bootstrap = (root / "static/repui/runtime/bootstrap.js").read_text(encoding="utf-8")
+        self.assertIn('["autocomplete", mountAutocompletes]', bootstrap)

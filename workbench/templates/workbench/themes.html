@@ -6,14 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="{% static 'workbench/favicon.svg' %}">
   {% repui_theme_head %}
-  {% repui_css page appbar panel card button checkbox choice select listbox alert tabs typography tooltip badge code_block inline_code accordion icon icon_button navbar hero theme_preview %}
-  <link rel="stylesheet" href="{% static 'repui/theme/mineral/palette.css' %}">
-  <link rel="stylesheet" href="{% static 'repui/theme/mineral/light.css' %}">
-  <link rel="stylesheet" href="{% static 'repui/theme/mineral/dark.css' %}">
-  <link rel="stylesheet" href="{% static 'repui/theme/ocean-deep/palette.css' %}">
-  <link rel="stylesheet" href="{% static 'repui/theme/ocean-deep/light.css' %}">
-  <link rel="stylesheet" href="{% static 'repui/theme/ocean-deep/dark.css' %}">
-  {% for asset in ocean_theme_component_styles %}<link rel="stylesheet" href="{% static asset %}">{% endfor %}
+  {% repui_css themes="all" page appbar panel card button checkbox choice select listbox alert tabs typography tooltip badge code_block inline_code accordion icon icon_button navbar hero theme_preview %}
   <link rel="stylesheet" href="{% static 'workbench/docs.css' %}">
   <link rel="stylesheet" href="{% static 'workbench/workbench.css' %}">
   <title>RepUI Themes</title>
@@ -29,13 +22,5 @@
 <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
 {% include "workbench/partials/appbar_runtime.html" %}
 <script type="module" src="{% static 'repui/theme/default/theme.js' %}"></script>
-<script type="module">
-  import { mountTooltips } from "{% static 'repui/components/tooltip/tooltip.js' %}";
-  import { mountCodeBlocks } from "{% static 'repui/components/code_block/code-block.js' %}";
-  import { mountAccordions } from "{% static 'repui/components/accordion/accordion.js' %}";
-  mountTooltips(document);
-  mountCodeBlocks(document);
-  mountAccordions(document);
-</script>
 </body>
 </html>

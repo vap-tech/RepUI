@@ -2,6 +2,13 @@ from django import template
 from django.template import Node, TemplateSyntaxError
 from django.template.loader import render_to_string
 
+from repui.template_support.arguments import (
+    compile_keyword_arguments,
+    extract_html_attrs,
+    resolve_arguments,
+    resolve_bool,
+)
+
 
 _ALLOWED_SIZES = {"sm", "md", "lg"}
 _ALLOWED_WIDTHS = {"full", "content"}
@@ -13,10 +20,7 @@ class SelectNode(Node):
         self.kwargs = kwargs
 
     def render(self, context):
-        resolved = {
-            key: value.resolve(context)
-            for key, value in self.kwargs.items()
-        }
+        resolved = resolve_arguments(self.kwargs, context)
         content = self.nodelist.render(context).strip()
 
         name = resolved.pop("name", None)
@@ -33,7 +37,6 @@ class SelectNode(Node):
         if width not in _ALLOWED_WIDTHS:
             raise TemplateSyntaxError(f"Unknown select width: {width}")
 
-        attrs = dict(resolved.pop("attrs", {}) or {})
         aliases = {
             "id": "id",
             "form": "form",
@@ -48,21 +51,18 @@ class SelectNode(Node):
             "rui_appbar_surface_target": "data-rui-appbar-surface-target",
             "rui_palette_select": "data-rui-palette-select",
         }
-        for key, html_name in aliases.items():
-            value = resolved.pop(key, None)
-            if value is not None and value is not False:
-                attrs[html_name] = value
+        attrs = extract_html_attrs(resolved, aliases)
 
         values = {
             "name": name,
             "content": content,
             "size": size,
             "width": width,
-            "multiple": bool(resolved.pop("multiple", False)),
-            "disabled": bool(resolved.pop("disabled", False)),
-            "required": bool(resolved.pop("required", False)),
-            "readonly": bool(resolved.pop("readonly", False)),
-            "autofocus": bool(resolved.pop("autofocus", False)),
+            "multiple": resolve_bool(resolved.pop("multiple", False), name="multiple"),
+            "disabled": resolve_bool(resolved.pop("disabled", False), name="disabled"),
+            "required": resolve_bool(resolved.pop("required", False), name="required"),
+            "readonly": resolve_bool(resolved.pop("readonly", False), name="readonly"),
+            "autofocus": resolve_bool(resolved.pop("autofocus", False), name="autofocus"),
             "placeholder": resolved.pop(
                 "placeholder",
                 "Выберите значение",
@@ -94,10 +94,7 @@ class SelectOptionNode(Node):
         self.kwargs = kwargs
 
     def render(self, context):
-        resolved = {
-            key: value.resolve(context)
-            for key, value in self.kwargs.items()
-        }
+        resolved = resolve_arguments(self.kwargs, context)
         content = self.nodelist.render(context).strip()
 
         if "value" not in resolved:
@@ -106,8 +103,8 @@ class SelectOptionNode(Node):
             )
 
         value = resolved.pop("value")
-        selected = bool(resolved.pop("selected", False))
-        disabled = bool(resolved.pop("disabled", False))
+        selected = resolve_bool(resolved.pop("selected", False), name="selected")
+        disabled = resolve_bool(resolved.pop("disabled", False), name="disabled")
         attrs = dict(resolved.pop("attrs", {}) or {})
 
         if resolved:
@@ -130,16 +127,7 @@ class SelectOptionNode(Node):
 
 
 def _parse_block(parser, token, node_class, end_tag):
-    bits = token.split_contents()
-    kwargs = {}
-
-    for bit in bits[1:]:
-        if "=" not in bit:
-            raise TemplateSyntaxError(
-                f"{bits[0]} arguments must use name=value"
-            )
-        name, value = bit.split("=", 1)
-        kwargs[name] = parser.compile_filter(value)
+    kwargs = compile_keyword_arguments(parser, token)
 
     nodelist = parser.parse((end_tag,))
     parser.delete_first_token()

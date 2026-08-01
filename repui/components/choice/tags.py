@@ -3,15 +3,14 @@ from django.template import Node, TemplateSyntaxError
 from django.template.loader import render_to_string
 from uuid import uuid4
 
+from repui.template_support.arguments import (
+    compile_keyword_arguments,
+    reject_unknown,
+    resolve_arguments,
+    resolve_bool,
+)
+
 register = template.Library()
-
-
-def _as_bool(value, *, name):
-    if isinstance(value, bool):
-        return value
-    if value in (None, ""):
-        return False
-    raise TemplateSyntaxError(f"{name} must resolve to True or False")
 
 
 class ChoiceNode(Node):
@@ -20,12 +19,10 @@ class ChoiceNode(Node):
         self.kwargs = kwargs
 
     def render(self, context):
-        values = {key: value.resolve(context) for key, value in self.kwargs.items()}
+        values = resolve_arguments(self.kwargs, context)
         label = self.nodelist.render(context).strip()
         allowed = {"type", "name", "value", "id", "class_name", "aria_label", "description", "checked", "disabled", "required"}
-        unknown = set(values) - allowed
-        if unknown:
-            raise TemplateSyntaxError("Unknown choice arguments: " + ", ".join(sorted(unknown)))
+        reject_unknown(values, allowed, component="choice")
         choice_type = str(values.get("type", "radio"))
         if choice_type not in {"radio", "checkbox"}:
             raise TemplateSyntaxError("choice type must be radio or checkbox")
@@ -51,9 +48,9 @@ class ChoiceNode(Node):
                 "description": values.get("description", ""),
                 "description_id": f"{choice_id}-description",
                 "attrs": attrs,
-                "checked": _as_bool(values.get("checked"), name="checked"),
-                "disabled": _as_bool(values.get("disabled"), name="disabled"),
-                "required": _as_bool(values.get("required"), name="required"),
+                "checked": resolve_bool(values.get("checked"), name="checked"),
+                "disabled": resolve_bool(values.get("disabled"), name="disabled"),
+                "required": resolve_bool(values.get("required"), name="required"),
                 "root_class": root_class,
             },
             request=context.get("request"),
@@ -61,13 +58,7 @@ class ChoiceNode(Node):
 
 
 def _choice(parser, token):
-    bits = token.split_contents()
-    kwargs = {}
-    for bit in bits[1:]:
-        if "=" not in bit:
-            raise TemplateSyntaxError("choice arguments must use name=value")
-        name, value = bit.split("=", 1)
-        kwargs[name] = parser.compile_filter(value)
+    kwargs = compile_keyword_arguments(parser, token)
     nodelist = parser.parse(("endchoice",))
     parser.delete_first_token()
     return ChoiceNode(nodelist, kwargs)

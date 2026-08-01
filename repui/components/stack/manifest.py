@@ -4,8 +4,9 @@ COMPONENT = {
     "version": "1.0",
     "description": "Вертикальная раскладка с управляемым расстоянием между элементами.",
     "template": "repui/components/stack/stack.html",
+    "contract_styles": (),
     "styles": (),
-    "theme_styles": (),
     "scripts": (),
+    "runtime": None,
     "status": "stable",
 }

@@ -2,6 +2,13 @@ from django import template
 from django.template import Node, TemplateSyntaxError
 from django.template.loader import render_to_string
 
+from repui.template_support.arguments import (
+    compile_keyword_arguments,
+    extract_html_attrs,
+    resolve_arguments,
+    resolve_bool,
+)
+
 _ALLOWED_VARIANTS={"filled","outlined","text","soft"}
 _ALLOWED_COLORS={"default","primary","secondary","success","warning","danger"}
 _ALLOWED_SIZES={"xs","sm","md","lg","xl"}
@@ -12,7 +19,7 @@ class ButtonNode(Node):
         self.kwargs=kwargs
 
     def render(self,context):
-        resolved={k:v.resolve(context) for k,v in self.kwargs.items()}
+        resolved=resolve_arguments(self.kwargs, context)
         content=self.nodelist.render(context).strip()
 
         variant=str(resolved.pop("variant","filled"))
@@ -27,11 +34,10 @@ class ButtonNode(Node):
 
         href=resolved.pop("href",None)
         button_type=str(resolved.pop("type","button"))
-        disabled=bool(resolved.pop("disabled",False))
-        loading=bool(resolved.pop("loading",False))
-        full_width=bool(resolved.pop("full_width",False))
-        icon_only=bool(resolved.pop("icon_only",False))
-        attrs=dict(resolved.pop("attrs",{}) or {})
+        disabled=resolve_bool(resolved.pop("disabled", False), name="disabled")
+        loading=resolve_bool(resolved.pop("loading", False), name="loading")
+        full_width=resolve_bool(resolved.pop("full_width", False), name="full_width")
+        icon_only=resolve_bool(resolved.pop("icon_only", False), name="icon_only")
 
         aliases={
             "class_name":"class",
@@ -49,10 +55,7 @@ class ButtonNode(Node):
             "data-rui-dialog-close":"data-rui-dialog-close",
             "aria_pressed":"aria-pressed",
         }
-        for key,html_name in aliases.items():
-            value=resolved.pop(key,None)
-            if value is not None and value is not False:
-                attrs[html_name]=value
+        attrs=extract_html_attrs(resolved, aliases)
 
         if resolved:
             raise TemplateSyntaxError("Unknown button arguments: "+", ".join(sorted(resolved)))
@@ -78,13 +81,7 @@ class ButtonNode(Node):
         )
 
 def _button(parser,token):
-    bits=token.split_contents()
-    kwargs={}
-    for bit in bits[1:]:
-        if "=" not in bit:
-            raise TemplateSyntaxError("button arguments must use name=value")
-        name,value=bit.split("=",1)
-        kwargs[name]=parser.compile_filter(value)
+    kwargs=compile_keyword_arguments(parser, token)
     nodelist=parser.parse(("endbutton",))
     parser.delete_first_token()
     return ButtonNode(nodelist,kwargs)

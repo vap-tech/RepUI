@@ -7,10 +7,7 @@ from django import template
 from django.template import Context, Node, TemplateSyntaxError
 from django.template.loader import render_to_string
 
-try:
-    from repui.layout import layout_attributes
-except ImportError:
-    layout_attributes = None
+from repui.layout import layout_attributes
 
 
 _ALLOWED_SIZES = {"content", "full"}
@@ -98,11 +95,6 @@ class CardNode(Node):
 
         layout_attrs: dict[str, Any] = {}
         if column is not None or row is not None:
-            if layout_attributes is None:
-                raise TemplateSyntaxError(
-                    "card column/row require repui.layout"
-                )
-
             layout_attrs = layout_attributes(
                 column=column,
                 row=row,

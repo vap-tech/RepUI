@@ -1,7 +1,7 @@
 @layer repui.theme {
   :where(.rui-menu) {
     --rui-menu-background: var(--rui-overlay-background);
-    --rui-menu-border: var(--rui-overlay-border);
+    --rui-menu-border: 1px solid var(--rui-overlay-border);
     --rui-menu-shadow: var(--rui-overlay-shadow);
   }
 }

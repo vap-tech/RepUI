@@ -1,0 +1,13 @@
+@layer repui.theme {
+  :root {
+    --rui-menu-gap: var(--rui-space-1);
+    --rui-menu-padding: var(--rui-space-2);
+    --rui-menu-background: var(--rui-color-surface-raised);
+    --rui-menu-border: 1px solid var(--rui-color-border);
+    --rui-menu-radius: var(--rui-radius-md);
+    --rui-menu-shadow: var(--rui-shadow-overlay);
+    --rui-menu-item-radius: var(--rui-radius-sm);
+    --rui-menu-item-padding: var(--rui-space-2) var(--rui-space-3);
+    --rui-menu-item-active-background: var(--rui-color-surface-hover);
+  }
+}

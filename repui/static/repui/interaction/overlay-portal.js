@@ -40,7 +40,6 @@ export class OverlayPortal {
     this.abortController = null;
     this.scrollParents = [];
     this.frame = 0;
-    this.previousFocus = null;
     this.themeContext = null;
     this.resizeObserver = "ResizeObserver" in window
       ? new ResizeObserver(() => this.schedulePosition())
@@ -58,7 +57,6 @@ export class OverlayPortal {
 
   mount() {
     if (this.mounted) return this.activate();
-    this.previousFocus = document.activeElement;
     this.overlay.before(this.placeholder);
     this.options.container.append(this.overlay);
     this.overlay.dataset.ruiPortal = "true";
@@ -230,7 +228,6 @@ export class OverlayPortal {
     if (this.options.arrow) delete this.options.arrow.dataset.ruiOverlayArrow;
     delete this.overlay.dataset.side;
     if (this.placeholder.parentNode) this.placeholder.replaceWith(this.overlay);
-    this.previousFocus = null;
   }
 
   destroy() {

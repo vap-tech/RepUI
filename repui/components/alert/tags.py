@@ -2,6 +2,12 @@ from django import template
 from django.template import Node, TemplateSyntaxError
 from django.template.loader import render_to_string
 
+from repui.template_support.arguments import (
+    compile_keyword_arguments,
+    reject_unknown,
+    resolve_arguments,
+)
+
 _TONES = {"neutral", "info", "success", "warning", "danger"}
 
 
@@ -10,7 +16,12 @@ class AlertNode(Node):
         self.values, self.nodelist = values, nodelist
 
     def render(self, context):
-        values = {key: value.resolve(context) for key, value in self.values.items()}
+        values = resolve_arguments(self.values, context)
+        reject_unknown(
+            values,
+            {"tone", "variant", "title", "description", "icon", "dismissible"},
+            component="alert",
+        )
         tone = values.get("tone")
         legacy_variant = values.get("variant")
         if tone is not None and legacy_variant is not None:
@@ -35,14 +46,7 @@ class AlertNode(Node):
 
 
 def _alert(parser, token):
-    values = {}
-    for bit in token.split_contents()[1:]:
-        if "=" not in bit:
-            raise TemplateSyntaxError("alert arguments must use name=value")
-        key, value = bit.split("=", 1)
-        if key not in {"tone", "variant", "title", "description", "icon", "dismissible"}:
-            raise TemplateSyntaxError(f"Unknown alert argument: {key}")
-        values[key] = parser.compile_filter(value)
+    values = compile_keyword_arguments(parser, token)
     node_list = parser.parse(("endalert",))
     parser.delete_first_token()
     return AlertNode(values, node_list)

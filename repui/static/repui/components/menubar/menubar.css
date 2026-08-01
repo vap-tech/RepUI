@@ -5,5 +5,6 @@
   :where(.rui-menubar__trigger:hover, .rui-menubar__item[data-active="true"] .rui-menubar__trigger) { background: var(--rui-color-surface-hover); }
   :where(.rui-menubar__trigger:focus-visible) { outline: var(--rui-focus-width) solid var(--rui-focus-color); outline-offset: -2px; }
   :where(.rui-menubar__item[data-active="true"] .rui-menubar__trigger) { font-weight: var(--rui-font-weight-semibold); }
-  :where(.rui-menubar__menu) { position: absolute; inset-block-start: calc(100% + .25rem); inset-inline-start: 0; z-index: 20; min-inline-size: 12rem; padding: .5rem; border: 1px solid var(--rui-color-border); border-radius: var(--rui-radius-md); background: var(--rui-color-surface-raised); box-shadow: var(--rui-shadow-lg); }
+  /* The nested Menu owns the overlay surface; this wrapper only anchors it. */
+  :where(.rui-menubar__menu) { position: absolute; inset-block-start: calc(100% + .25rem); inset-inline-start: 0; z-index: 20; min-inline-size: 12rem; }
 }

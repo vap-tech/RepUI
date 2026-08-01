@@ -3,6 +3,13 @@ from django.template import Node, TemplateSyntaxError
 from django.template.loader import render_to_string
 from uuid import uuid4
 
+from repui.template_support.arguments import (
+    compile_keyword_arguments,
+    reject_unknown,
+    resolve_arguments,
+    resolve_bool,
+)
+
 register = template.Library()
 
 
@@ -12,18 +19,14 @@ class CheckboxNode(Node):
         self.kwargs = kwargs
 
     def render(self, context):
-        values = {key: value.resolve(context) for key, value in self.kwargs.items()}
+        values = resolve_arguments(self.kwargs, context)
         content = self.nodelist.render(context).strip()
 
         allowed = {
             "id", "name", "value", "class_name", "aria_label", "title",
             "checked", "disabled", "required",
         }
-        unknown = set(values) - allowed
-        if unknown:
-            raise TemplateSyntaxError(
-                "Unknown checkbox arguments: " + ", ".join(sorted(unknown))
-            )
+        reject_unknown(values, allowed, component="checkbox")
 
         attrs = {}
         aliases = {
@@ -51,9 +54,9 @@ class CheckboxNode(Node):
                 "description": "",
                 "description_id": None,
                 "attrs": attrs,
-                "checked": bool(values.get("checked", False)),
-                "disabled": bool(values.get("disabled", False)),
-                "required": bool(values.get("required", False)),
+                "checked": resolve_bool(values.get("checked"), name="checked"),
+                "disabled": resolve_bool(values.get("disabled"), name="disabled"),
+                "required": resolve_bool(values.get("required"), name="required"),
                 "root_class": root_class,
             },
             request=context.get("request"),
@@ -61,13 +64,7 @@ class CheckboxNode(Node):
 
 
 def _checkbox(parser, token):
-    bits = token.split_contents()
-    kwargs = {}
-    for bit in bits[1:]:
-        if "=" not in bit:
-            raise TemplateSyntaxError("checkbox arguments must use name=value")
-        name, value = bit.split("=", 1)
-        kwargs[name] = parser.compile_filter(value)
+    kwargs = compile_keyword_arguments(parser, token)
     nodelist = parser.parse(("endcheckbox",))
     parser.delete_first_token()
     return CheckboxNode(nodelist, kwargs)

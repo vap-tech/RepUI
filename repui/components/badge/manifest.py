@@ -5,8 +5,8 @@ COMPONENT = {
     "description": "Небольшая метка статуса или счётчика.",
     "template": "repui/components/badge/badge.html",
     "styles": ("repui/components/badge/badge.css",),
-    "theme_styles": ("repui/theme/default/badge-tokens.css",),
     "contract_styles": ("repui/theme/contract/components/badge-tokens.css",),
     "scripts": (),
+    "runtime": None,
     "status": "stable",
 }

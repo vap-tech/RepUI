@@ -1,21 +1,27 @@
 """Discoverable RepUI theme manifests."""
 
 from importlib import import_module
+from functools import lru_cache
 from pathlib import Path
 
 
 def get_theme(name="default"):
     normalized = str(name or "default").strip().lower()
     module_name = normalized.replace("-", "_")
+    package_name = f"repui.themes.{module_name}"
+    manifest_module = f"repui.themes.{module_name}.manifest"
     try:
-        module = import_module(f"repui.themes.{module_name}.manifest")
-    except (ImportError, ModuleNotFoundError):
-        return None
+        module = import_module(manifest_module)
+    except ModuleNotFoundError as exc:
+        if exc.name in {package_name, manifest_module}:
+            return None
+        raise
 
     value = getattr(module, "THEME", None)
     return value if isinstance(value, dict) else None
 
 
+@lru_cache(maxsize=1)
 def list_themes():
     root = Path(__file__).resolve().parent / "themes"
     names = []

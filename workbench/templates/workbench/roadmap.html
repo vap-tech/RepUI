@@ -6,14 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="{% static 'workbench/favicon.svg' %}">
   {% repui_theme_head %}
-  {% repui_css page appbar panel card button checkbox choice alert badge divider icon icon_button inline_code typography stack grid container navbar select %}
-  <link rel="stylesheet" href="{% static 'repui/theme/mineral/palette.css' %}">
-  <link rel="stylesheet" href="{% static 'repui/theme/mineral/light.css' %}">
-  <link rel="stylesheet" href="{% static 'repui/theme/mineral/dark.css' %}">
-  <link rel="stylesheet" href="{% static 'repui/theme/ocean-deep/palette.css' %}">
-  <link rel="stylesheet" href="{% static 'repui/theme/ocean-deep/light.css' %}">
-  <link rel="stylesheet" href="{% static 'repui/theme/ocean-deep/dark.css' %}">
-  {% for asset in ocean_theme_component_styles %}<link rel="stylesheet" href="{% static asset %}">{% endfor %}
+  {% repui_css themes="all" page appbar panel card button checkbox choice alert badge divider icon icon_button inline_code typography stack grid container navbar select %}
   <link rel="stylesheet" href="{% static 'workbench/docs.css' %}">
   <link rel="stylesheet" href="{% static 'workbench/workbench.css' %}">
   <link rel="stylesheet" href="{% static 'workbench/roadmap.css' %}">

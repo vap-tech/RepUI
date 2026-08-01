@@ -1,16 +1,6 @@
 {% load static %}
-<script type="module">
-  import { mountNavbars } from "{% static 'repui/components/navbar/navbar.js' %}";
-  import { mountSelects } from "{% static 'repui/components/select/select.js' %}";
-
-  const mountAppBarRuntime = (root) => {
-    mountNavbars(root);
-    mountSelects(root);
-  };
-
-  mountAppBarRuntime(document);
-
-  document.addEventListener("htmx:afterSwap", (event) => {
-    mountAppBarRuntime(event.detail?.target || event.target);
-  });
+<script>
+  window.__repuiRuntimeReady ??= import(
+    "{% static 'repui/runtime/bootstrap.js' %}"
+  ).then(({ installRuntime }) => installRuntime());
 </script>

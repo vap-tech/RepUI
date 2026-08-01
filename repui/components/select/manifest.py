@@ -3,10 +3,10 @@ COMPONENT = {
     "title": "Select",
     "description": "Select для Django forms с native source of truth.",
     "template": "repui/components/select/select_tag.html",
-    "styles": (
-        "repui/theme/default/select-tokens.css",
-        "repui/components/select/select.css",
+    "contract_styles": (
+        "repui/theme/contract/components/select-tokens.css",
     ),
+    "styles": ("repui/components/select/select.css",),
     "scripts": (
         "repui/components/select/select.js",
     ),

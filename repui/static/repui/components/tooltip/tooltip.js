@@ -93,7 +93,3 @@ export function mountTooltips(root = document) {
     return instance;
   });
 }
-
-document.addEventListener("htmx:afterSwap", (event) => {
-  mountTooltips(event.detail?.target || event.target);
-});

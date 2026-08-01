@@ -1,5 +1,8 @@
 node_modules/
 test-results/
+build/
+dist/
+*.egg-info/
 
 # Python/Django cache
 __pycache__/

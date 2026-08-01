@@ -6,14 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="{% static 'workbench/favicon.svg' %}">
   {% repui_theme_head %}
-  {% repui_css page appbar panel card button checkbox choice select listbox dialog alert toast command_palette card_action chip icon_button icon inline_code list_item_button menu tabs list navbar drawer tree autocomplete typography tooltip badge code_block collapsible accordion popover pagination search combobox dropdown_menu divider menubar hero theme_preview %}
-  <link rel="stylesheet" href="{% static 'repui/theme/mineral/palette.css' %}">
-  <link rel="stylesheet" href="{% static 'repui/theme/mineral/light.css' %}">
-  <link rel="stylesheet" href="{% static 'repui/theme/mineral/dark.css' %}">
-  <link rel="stylesheet" href="{% static 'repui/theme/ocean-deep/palette.css' %}">
-  <link rel="stylesheet" href="{% static 'repui/theme/ocean-deep/light.css' %}">
-  <link rel="stylesheet" href="{% static 'repui/theme/ocean-deep/dark.css' %}">
-  {% for asset in ocean_theme_component_styles %}<link rel="stylesheet" href="{% static asset %}">{% endfor %}
+  {% repui_css themes="all" page appbar panel card button checkbox choice select listbox dialog alert toast command_palette card_action chip icon_button icon inline_code list_item_button menu tabs list navbar drawer tree autocomplete typography tooltip badge code_block collapsible accordion popover pagination search combobox dropdown_menu divider menubar hero theme_preview %}
   <link rel="stylesheet" href="{% static 'workbench/docs.css' %}">
   <link rel="stylesheet" href="{% static 'workbench/workbench.css' %}">
   <title>RepUI Workbench</title>
@@ -38,53 +31,8 @@
 {% include "workbench/partials/appbar_runtime.html" %}
 <script type="module" src="{% static 'repui/theme/default/theme.js' %}"></script>
 <script type="module">
-  import { mountListboxes } from "{% static 'repui/components/listbox/listbox.js' %}";
-  import { mountDialogs } from "{% static 'repui/core/dialog.js' %}";
-  import { mountToasts } from "{% static 'repui/components/toast/toast.js' %}";
-  import { mountCommandPalettes } from "{% static 'repui/components/command_palette/command-palette.js' %}";
-  import { mountChips } from "{% static 'repui/components/chip/chip.js' %}";
-  import { mountDrawers } from "{% static 'repui/components/drawer/drawer.js' %}";
-  import { mountTrees } from "{% static 'repui/components/tree/tree.js' %}";
-  import { mountAutocompletes } from "{% static 'repui/components/autocomplete/autocomplete.js' %}";
-  import { mountTooltips } from "{% static 'repui/components/tooltip/tooltip.js' %}";
-  import { mountCodeBlocks } from "{% static 'repui/components/code_block/code-block.js' %}";
-  import { mountCollapsibles } from "{% static 'repui/components/collapsible/collapsible.js' %}";
-  import { mountAccordions } from "{% static 'repui/components/accordion/accordion.js' %}";
-  import { mountPopovers } from "{% static 'repui/components/popover/popover.js' %}";
-  import { mountPaginations } from "{% static 'repui/components/pagination/pagination.js' %}";
-  import { mountSearches } from "{% static 'repui/components/search/search.js' %}";
-  import { mountComboboxes } from "{% static 'repui/components/combobox/component.js' %}";
-  import { mountDropdownMenus } from "{% static 'repui/components/dropdown_menu/dropdown-menu.js' %}";
-  import { mountMenubars } from "{% static 'repui/components/menubar/menubar.js' %}";
-  import { mountMenus } from "{% static 'repui/components/menu/menu.js' %}";
-
-  const mountListboxRuntime = (root) => mountListboxes(root);
-  const mountDialogRuntime = (root) => mountDialogs(root);
-  const mountToastRuntime = (root) => mountToasts(root);
-  const mountCommandRuntime = (root) => mountCommandPalettes(root);
-  const mountChipRuntime = (root) => mountChips(root);
-  const mountInteractionRuntime = (root) => {
-    mountDrawers(root);
-    mountTrees(root);
-    mountAutocompletes(root);
-    mountTooltips(root);
-    mountCodeBlocks(root);
-    mountCollapsibles(root);
-    mountAccordions(root);
-    mountPopovers(root);
-    mountPaginations(root);
-    mountSearches(root);
-    mountComboboxes(root);
-    mountDropdownMenus(root);
-    mountMenus(root);
-    mountMenubars(root);
-  };
-  mountListboxRuntime(document);
-  mountDialogRuntime(document);
-  const toastManager = mountToastRuntime(document)[0];
-  mountCommandRuntime(document);
-  mountChipRuntime(document);
-  mountInteractionRuntime(document);
+  const runtime = await window.__repuiRuntimeReady;
+  const toastManager = runtime.first("toast");
   document.body.addEventListener("rui:commandselect", (event) => {
     const labels = {
       select: "открыть Select",
@@ -105,14 +53,6 @@
       title: "DropdownMenu",
       description: `Действие «${action}» для чата ${contextData?.chatId ?? "без контекста"}.`,
     });
-  });
-  document.body.addEventListener("htmx:afterSwap", (event) => {
-    mountListboxRuntime(event.detail.target);
-    mountDialogRuntime(event.detail.target);
-    mountToastRuntime(event.detail.target);
-    mountCommandRuntime(event.detail.target);
-    mountChipRuntime(event.detail.target);
-    mountInteractionRuntime(event.detail.target);
   });
 </script>
 </body>

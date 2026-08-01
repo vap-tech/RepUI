@@ -1,5 +1,5 @@
 @layer repui.components {
-  :where(.rui-dropdown-menu) { z-index: 20; min-inline-size: 13rem; padding: var(--rui-space-2); border: 1px solid var(--rui-color-border); border-radius: var(--rui-radius-lg); background: var(--rui-color-surface-raised); color: var(--rui-color-text); box-shadow: var(--rui-shadow-lg); }
+  :where(.rui-dropdown-menu) { z-index: 20; min-inline-size: 13rem; color: var(--rui-color-text); }
   :where(.rui-dropdown-menu .rui-menu) { gap: var(--rui-space-1); }
   :where(.rui-dropdown-menu .rui-menu-item) { inline-size: 100%; padding: var(--rui-space-3); }
   :where(.rui-chat-list) { display: grid; gap: var(--rui-space-2); }

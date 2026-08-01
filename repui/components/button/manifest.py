@@ -6,6 +6,7 @@ COMPONENT = {
     "styles": (
         "repui/components/button/button.css",
     ),
+    "contract_styles": (),
     "scripts": (
         "repui/components/button/button.js",
     ),

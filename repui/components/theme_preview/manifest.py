@@ -7,7 +7,7 @@ COMPONENT = {
     "styles": ("repui/components/theme_preview/theme-preview.css",),
     "contract_styles": ("repui/theme/contract/components/theme-preview-tokens.css",),
     "scripts": (),
-    "runtime": False,
+    "runtime": None,
     "htmx": {"inner_html": True, "outer_html": True, "mount_required": False, "cleanup_required": False},
     "api": {
         "name": {"required": True},

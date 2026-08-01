@@ -37,7 +37,11 @@ function mount(root) {
   };
   const open = (item, focusFirst = false) => {
     if (active === item) {
-      close(true);
+      if (focusFirst) queueMicrotask(() => {
+        const menu = portals.get(item)?.overlay;
+        const menuRoot = menu?.querySelector("[data-rui-menu]") || menu;
+        getMenu(menuRoot)?.focusFirst();
+      });
       return;
     }
     const trigger = item.querySelector(".rui-menubar__trigger");

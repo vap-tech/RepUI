@@ -138,7 +138,3 @@ export function mountTrees(root = document) {
     return instance;
   });
 }
-
-document.addEventListener("htmx:afterSwap", (event) => {
-  mountTrees(event.detail?.target || event.target);
-});

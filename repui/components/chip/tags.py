@@ -2,22 +2,35 @@ from django import template
 from django.template import Node, TemplateSyntaxError
 from django.template.loader import render_to_string
 
+from repui.template_support.arguments import (
+    compile_keyword_arguments,
+    reject_unknown,
+    resolve_arguments,
+    resolve_bool,
+)
+
 class ChipNode(Node):
     def __init__(self, nodelist, kwargs):
         self.nodelist = nodelist
         self.kwargs = kwargs
 
     def render(self, context):
-        values = {key: value.resolve(context) for key, value in self.kwargs.items()}
+        values = resolve_arguments(self.kwargs, context)
+        reject_unknown(
+            values,
+            {"disabled", "deletable", "remove_on_delete", "value", "attrs", "class_name"},
+            component="chip",
+        )
         content = self.nodelist.render(context).strip()
-        disabled = bool(values.pop("disabled", False))
-        deletable = bool(values.pop("deletable", False))
-        remove_on_delete = bool(values.pop("remove_on_delete", False))
+        disabled = resolve_bool(values.pop("disabled", False), name="disabled")
+        deletable = resolve_bool(values.pop("deletable", False), name="deletable")
+        remove_on_delete = resolve_bool(
+            values.pop("remove_on_delete", False),
+            name="remove_on_delete",
+        )
         value = values.pop("value", None)
         attrs = dict(values.pop("attrs", {}) or {})
         class_name = values.pop("class_name", None)
-        if values:
-            raise TemplateSyntaxError("Unknown chip arguments: " + ", ".join(sorted(values)))
         return render_to_string(
             "repui/components/chip/chip_tag.html",
             {
@@ -33,13 +46,7 @@ class ChipNode(Node):
         )
 
 def _chip(parser, token):
-    bits = token.split_contents()
-    kwargs = {}
-    for bit in bits[1:]:
-        if "=" not in bit:
-            raise TemplateSyntaxError("chip arguments must use name=value")
-        key, value = bit.split("=", 1)
-        kwargs[key] = parser.compile_filter(value)
+    kwargs = compile_keyword_arguments(parser, token)
     nodelist = parser.parse(("endchip",))
     parser.delete_first_token()
     return ChipNode(nodelist, kwargs)

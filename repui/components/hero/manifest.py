@@ -7,7 +7,7 @@ COMPONENT = {
     "styles": ("repui/components/hero/hero.css",),
     "contract_styles": ("repui/theme/contract/components/hero-tokens.css",),
     "scripts": (),
-    "runtime": False,
+    "runtime": None,
     "htmx": {"inner_html": True, "outer_html": True, "mount_required": False, "cleanup_required": False},
     "status": "experimental",
     "api": {

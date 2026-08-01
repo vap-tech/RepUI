@@ -2,10 +2,12 @@
   .rui-menu {
     display: flex;
     flex-direction: column;
-    gap: var(--rui-menu-gap, .25rem);
-    background: var(--rui-menu-background, transparent);
-    border: var(--rui-menu-border, 0);
-    box-shadow: var(--rui-menu-shadow, none);
+    gap: var(--rui-menu-gap);
+    padding: var(--rui-menu-padding);
+    border: var(--rui-menu-border);
+    border-radius: var(--rui-menu-radius);
+    background: var(--rui-menu-background);
+    box-shadow: var(--rui-menu-shadow);
   }
 
   .rui-menu[data-orientation="horizontal"] {
@@ -14,8 +16,8 @@
 
   .rui-menu-item {
     border: 0;
-    border-radius: var(--rui-menu-item-radius, var(--rui-radius-sm));
-    padding: var(--rui-menu-item-padding, .5rem .75rem);
+    border-radius: var(--rui-menu-item-radius);
+    padding: var(--rui-menu-item-padding);
     background: transparent;
     color: inherit;
     text-align: start;
@@ -23,7 +25,7 @@
   }
 
   .rui-menu-item:hover:not(:disabled) {
-    background: var(--rui-menu-item-active-background, var(--rui-color-surface-hover));
+    background: var(--rui-menu-item-active-background);
   }
 
   .rui-menu-item:focus-visible {

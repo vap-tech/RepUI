@@ -53,11 +53,7 @@ class SelectRuntime {
     this.portal = new OverlayPortal(this.trigger, this.popup, {
       onAnchorHidden: () => this.close(),
     });
-    this.dismiss = createDismissLayer({
-      anchor: this.trigger,
-      overlay: this.popup,
-      onDismiss: ({ reason }) => this.close(reason === "escape"),
-    });
+    this.dismiss = null;
     this.bind();
     this.refresh();
   }
@@ -395,6 +391,11 @@ class SelectRuntime {
     this.isOpen = true;
     this.popup.hidden = false;
     this.portal.mount();
+    this.dismiss = createDismissLayer({
+      anchor: this.trigger,
+      overlay: this.popup,
+      onDismiss: ({ reason }) => this.close(reason === "escape"),
+    });
     this.wrapper.dataset.open = "true";
     this.trigger.setAttribute("aria-expanded", "true");
 
@@ -417,6 +418,8 @@ class SelectRuntime {
     if (!this.isOpen) return this;
 
     this.isOpen = false;
+    this.dismiss?.destroy();
+    this.dismiss = null;
     this.portal.unmount();
     this.popup.hidden = true;
     this.wrapper.dataset.open = "false";
@@ -472,7 +475,7 @@ class SelectRuntime {
   destroy() {
     this.close();
     this.portal.destroy();
-    this.dismiss.destroy();
+    this.dismiss?.destroy();
     this.abortController.abort();
     clearTimeout(this.typeaheadTimer);
 

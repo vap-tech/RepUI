@@ -55,7 +55,3 @@ export function mountNavbars(root = document) {
     return instance;
   });
 }
-
-document.addEventListener("htmx:afterSwap", (event) => {
-  mountNavbars(event.detail?.target || event.target);
-});

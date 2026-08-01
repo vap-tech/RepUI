@@ -2,6 +2,13 @@ from django import template
 from django.template import Node, TemplateSyntaxError
 from django.template.loader import render_to_string
 
+from repui.template_support.arguments import (
+    compile_keyword_arguments,
+    reject_unknown,
+    resolve_arguments,
+    resolve_bool,
+)
+
 
 class BadgeNode(Node):
     """Render a small explicit status or count label."""
@@ -11,19 +18,17 @@ class BadgeNode(Node):
         self.kwargs = kwargs
 
     def render(self, context):
-        values = {
-            key: expression.resolve(context)
-            for key, expression in self.kwargs.items()
-        }
+        values = resolve_arguments(self.kwargs, context)
+        reject_unknown(
+            values,
+            {"color", "size", "dot", "class_name", "attrs"},
+            component="badge",
+        )
         color = values.pop("color", "default")
         size = values.pop("size", "md")
-        dot = bool(values.pop("dot", False))
+        dot = resolve_bool(values.pop("dot", False), name="dot")
         class_name = values.pop("class_name", None)
         attrs = dict(values.pop("attrs", {}) or {})
-        if values:
-            raise TemplateSyntaxError(
-                "Unknown badge arguments: " + ", ".join(sorted(values))
-            )
         return render_to_string(
             "repui/components/badge/badge_tag.html",
             {
@@ -39,13 +44,7 @@ class BadgeNode(Node):
 
 
 def _badge(parser, token):
-    bits = token.split_contents()
-    kwargs = {}
-    for bit in bits[1:]:
-        if "=" not in bit:
-            raise TemplateSyntaxError("badge arguments must use name=value")
-        key, value = bit.split("=", 1)
-        kwargs[key] = parser.compile_filter(value)
+    kwargs = compile_keyword_arguments(parser, token)
     nodelist = parser.parse(("endbadge",))
     parser.delete_first_token()
     return BadgeNode(nodelist, kwargs)

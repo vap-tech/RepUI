@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "repui"
+version = "0.9.3rc0"
+description = "Server-first UI components for Django."
+requires-python = ">=3.12"
+dependencies = [
+  "Django>=6.0,<6.1",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Framework :: Django",
+  "Framework :: Django :: 6.0",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.12",
+]
+
+[project.optional-dependencies]
+build = [
+  "build>=1.2",
+]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+include = ["repui*"]
+
+[tool.setuptools.package-data]
+repui = [
+  "static/**/*",
+  "templates/**/*.html",
+]

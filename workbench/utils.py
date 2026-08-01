@@ -1,29 +1,25 @@
 from __future__ import annotations
 
-from importlib import import_module
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
-from django.apps import apps
 from django.template import TemplateSyntaxError, engines
+
+from repui.component_registry import (
+    components_root as registry_components_root,
+    get_component_manifest,
+)
 
 
 def components_root() -> Path:
     """Return the installed RepUI components directory."""
-    return Path(apps.get_app_config("repui").path) / "components"
+    return registry_components_root()
 
 
 def _load_manifest(component_name: str) -> dict[str, Any]:
     """Load a component manifest without making it mandatory."""
-    try:
-        module = import_module(
-            f"repui.components.{component_name}.manifest"
-        )
-    except (ImportError, ModuleNotFoundError):
-        return {}
-
-    manifest = getattr(module, "COMPONENT", {})
-    return manifest if isinstance(manifest, dict) else {}
+    return get_component_manifest(component_name) or {}
 
 
 def component_template_path(component_name: str) -> Path:
@@ -57,13 +53,14 @@ def template_state(
     return True, None
 
 
-def get_components() -> list[dict[str, Any]]:
+@lru_cache(maxsize=1)
+def _get_components_cached() -> tuple[dict[str, Any], ...]:
     """Discover component folders and return navigation-ready dictionaries."""
     root = components_root()
     components: list[dict[str, Any]] = []
 
     if not root.is_dir():
-        return components
+        return tuple(components)
 
     for directory in sorted(
         root.iterdir(),
@@ -101,7 +98,12 @@ def get_components() -> list[dict[str, Any]]:
             "manifest": manifest,
         })
 
-    return components
+    return tuple(components)
+
+
+def get_components() -> list[dict[str, Any]]:
+    """Discover components once per process and return a caller-owned list."""
+    return list(_get_components_cached())
 
 
 def get_component(

@@ -5,6 +5,11 @@ COMPONENT = {
     "styles": ("repui/components/toast/toast.css",),
     "scripts": ("repui/components/toast/toast.js",),
     "template": "repui/components/toast/toast.html",
-    "runtime": {"mount": "mountToasts", "contract": ("show", "close", "destroy")},
+    "contract_styles": (),
+    "runtime": {
+        "required": True,
+        "mount": "mountToasts",
+        "contract": ("show", "close", "destroy"),
+    },
     "status": "stable",
 }

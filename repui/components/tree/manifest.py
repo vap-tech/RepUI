@@ -3,6 +3,7 @@ COMPONENT = {
     "title": "Tree",
     "description": "Иерархический treeview с roving focus и раскрытием узлов.",
     "template": "repui/components/tree/tree.html",
+    "contract_styles": (),
     "styles": ("repui/components/tree/tree.css",),
     "scripts": ("repui/components/tree/tree.js",),
     "runtime": {

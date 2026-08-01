@@ -3,8 +3,9 @@ COMPONENT = {
     "title": "List",
     "description": "Семантический список и layout-контейнер для ListItemButton.",
     "template": "repui/components/list/list.html",
+    "contract_styles": (),
     "styles": ("repui/components/list/list.css",),
     "scripts": (),
-    "runtime": {"required": False, "mount": None, "contract": ()},
+    "runtime": None,
     "status": "stable",
 }

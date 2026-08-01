@@ -119,7 +119,8 @@ class DropdownMenuRuntime {
     this.trigger.removeEventListener("keydown", this.onTriggerKeyDown);
     this.menu.removeEventListener("keydown", this.onMenuKeyDown);
     this.menu.removeEventListener("click", this.onSelect);
-    this.menuRuntime.destroy();
+    // Menu belongs to the shared runtime bootstrap. DropdownMenu only owns
+    // its trigger, portal and dismiss layer.
     this.portal.destroy();
     this.dismiss?.destroy();
     instances.delete(this.trigger);

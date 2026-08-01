@@ -10,7 +10,7 @@ from .utils import (
     get_component,
     get_components,
 )
-from repui.theme_registry import get_theme, get_theme_assets, list_themes
+from repui.theme_registry import get_theme, list_themes
 
 
 def workbench(
@@ -26,10 +26,6 @@ def workbench(
         raise Http404("Unknown RepUI component")
 
     components = get_components()
-    ocean_theme_component_styles = get_theme_assets(
-        "ocean-deep",
-        [component["name"] for component in components],
-    )
     default_theme = get_theme("default") or {}
     hero = default_theme.get("presentation", {}).get("hero", {})
 
@@ -41,7 +37,6 @@ def workbench(
             "component_styles": get_component_styles(components),
             "selected_component": selected,
             "appbar_section": "components" if component_name else "home",
-            "ocean_theme_component_styles": ocean_theme_component_styles,
             "home_hero": {
                 "atlas": hero.get("atlas"),
                 "atlas_column": hero.get("column", 0),
@@ -66,10 +61,6 @@ def roadmap(request: HttpRequest) -> HttpResponse:
                 ("Данные и навигация", "По потребности", "Table, Breadcrumbs, Accordion, EmptyState и DataList."),
                 ("Специализированные компоненты", "Не приоритет", "Slider, Rating, Stepper, Timeline и сложные data-grid сценарии."),
             ),
-            "ocean_theme_component_styles": get_theme_assets(
-                "ocean-deep",
-                [component["name"] for component in components],
-            ),
         },
     )
 
@@ -93,10 +84,6 @@ def theme_authoring(request: HttpRequest) -> HttpResponse:
         "workbench/themes.html",
         {
             "appbar_section": "themes",
-            "ocean_theme_component_styles": get_theme_assets(
-                "ocean-deep",
-                [component["name"] for component in get_components()],
-            ),
             "theme_cards": theme_cards,
         },
     )
