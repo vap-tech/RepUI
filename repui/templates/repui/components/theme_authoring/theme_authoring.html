@@ -4,6 +4,22 @@
   {% stack spacing="lg" %}
     {% card width="full" %}
       {% card_header %}
+        {% typography variant="heading" tag="h2" %}Доступные темы{% endtypography %}
+        {% typography variant="body" color="secondary" %}
+          Карточки строятся из manifest и используют presentation metadata темы.
+        {% endtypography %}
+      {% endcard_header %}
+      {% card_body %}
+        {% grid columns=3 spacing="md" %}
+          {% for theme in theme_cards %}
+            {% include "repui/components/theme_authoring/theme_preview_card.html" with theme=theme %}
+          {% endfor %}
+        {% endgrid %}
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}
         {% stack spacing="sm" %}
           <div>
             {% badge color="primary" %}{% icon "palette" %} Theme authoring{% endbadge %}
