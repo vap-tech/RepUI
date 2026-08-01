@@ -51,21 +51,25 @@ def workbench(
     )
 
 
-def component_catalog(request: HttpRequest) -> HttpResponse:
-    """Render the static component catalog without Workbench HTMX behavior."""
+def roadmap(request: HttpRequest) -> HttpResponse:
     components = get_components()
-    ocean_theme_component_styles = get_theme_assets(
-        "ocean-deep",
-        [component["name"] for component in components],
-    )
     return render(
         request,
-        "workbench/components.html",
+        "workbench/roadmap.html",
         {
+            "appbar_section": "roadmap",
             "components": components,
-            "component_styles": get_component_styles(components),
-            "appbar_section": "components",
-            "ocean_theme_component_styles": ocean_theme_component_styles,
+            "roadmap_phases": (
+                ("Укрепить существующие контракты", "Сейчас", "Клавиатура, HTMX lifecycle, portal context и baseline-проверки официальных тем."),
+                ("Закрыть базовые формы", "Следующее", "TextField, Textarea, FormControl, RadioGroup, Switch и FieldError."),
+                ("Loading и feedback", "Запланировано", "Spinner, Progress, Skeleton и loading-состояния форм при HTMX submit."),
+                ("Данные и навигация", "По потребности", "Table, Breadcrumbs, Accordion, EmptyState и DataList."),
+                ("Специализированные компоненты", "Не приоритет", "Slider, Rating, Stepper, Timeline и сложные data-grid сценарии."),
+            ),
+            "ocean_theme_component_styles": get_theme_assets(
+                "ocean-deep",
+                [component["name"] for component in components],
+            ),
         },
     )
 

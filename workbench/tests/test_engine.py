@@ -23,10 +23,10 @@ class WorkbenchEngineTests(SimpleTestCase):
             "/docs/",
         )
 
-    def test_component_catalog_url_exists(self):
+    def test_roadmap_url_exists(self):
         self.assertEqual(
-            reverse("workbench:components"),
-            "/docs/components/",
+            reverse("workbench:roadmap"),
+            "/docs/roadmap/",
         )
 
     def test_sidebar_swaps_components_without_changing_browser_url(self):

@@ -1,0 +1,20 @@
+@layer app.components {
+  :where(.rui-roadmap) { max-inline-size: 90rem; margin-inline: auto; }
+  :where(.rui-roadmap__summary) { display: flex; flex-wrap: wrap; gap: var(--rui-space-2); }
+  :where(.rui-roadmap__section-heading) { display: grid; gap: var(--rui-space-1); margin-block-start: var(--rui-space-3); }
+  :where(.rui-roadmap__principles) { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--rui-space-4); }
+  :where(.rui-roadmap__principle) { display: grid; gap: var(--rui-space-2); min-block-size: 100%; }
+  :where(.rui-roadmap__principle-icon) { display: grid; inline-size: 2.5rem; block-size: 2.5rem; place-items: center; border: 1px solid var(--rui-color-border); border-radius: var(--rui-radius-md); background: var(--rui-color-primary-soft); color: var(--rui-color-primary); font-size: 1.35rem; }
+  :where(.rui-roadmap__columns) { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--rui-space-5); }
+  :where(.rui-roadmap__columns h3) { margin-block-start: 0; }
+  :where(.rui-roadmap__columns ul, .rui-roadmap__checklist) { margin-block: var(--rui-space-3) 0; padding-inline-start: 1.25rem; color: var(--rui-color-text-secondary); }
+  :where(.rui-roadmap__columns li, .rui-roadmap__checklist li) { margin-block: var(--rui-space-2); }
+  :where(.rui-roadmap__catalog-group + .rui-roadmap__catalog-group) { margin-block-start: var(--rui-space-5); }
+  :where(.rui-roadmap__phase) { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--rui-space-5); }
+  :where(.rui-roadmap__phase-index) { display: grid; inline-size: 3rem; block-size: 3rem; place-items: center; border: 1px solid var(--rui-color-border); border-radius: var(--rui-radius-md); background: var(--rui-color-primary-soft); color: var(--rui-color-primary); font-family: var(--rui-font-family-mono); font-size: var(--rui-font-size-sm); font-weight: var(--rui-font-weight-semibold); }
+  :where(.rui-roadmap__section-title) { display: flex; align-items: center; justify-content: space-between; gap: var(--rui-space-3); }
+  @media (max-width: 72rem) { :where(.rui-roadmap__principles) { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 60rem) { :where(.rui-roadmap__columns) { grid-template-columns: 1fr; } }
+  @media (max-width: 38rem) { :where(.rui-roadmap__principles) { grid-template-columns: 1fr; } }
+  @media (max-width: 38rem) { :where(.rui-roadmap__phase) { grid-template-columns: 1fr; } :where(.rui-roadmap__section-title) { align-items: flex-start; flex-direction: column; } }
+}

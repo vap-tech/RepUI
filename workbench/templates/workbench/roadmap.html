@@ -1,0 +1,147 @@
+{% load static repui repui_theme repui_layout repui_css %}
+<!doctype html>
+<html lang="ru" data-rui-theme="default" data-rui-theme-mode="system" data-rui-color-scheme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/svg+xml" href="{% static 'workbench/favicon.svg' %}">
+  {% repui_theme_head %}
+  {% repui_css page appbar panel card button checkbox choice alert badge divider icon icon_button inline_code typography stack grid container navbar select %}
+  <link rel="stylesheet" href="{% static 'repui/theme/mineral/palette.css' %}">
+  <link rel="stylesheet" href="{% static 'repui/theme/mineral/light.css' %}">
+  <link rel="stylesheet" href="{% static 'repui/theme/mineral/dark.css' %}">
+  <link rel="stylesheet" href="{% static 'repui/theme/ocean-deep/palette.css' %}">
+  <link rel="stylesheet" href="{% static 'repui/theme/ocean-deep/light.css' %}">
+  <link rel="stylesheet" href="{% static 'repui/theme/ocean-deep/dark.css' %}">
+  {% for asset in ocean_theme_component_styles %}<link rel="stylesheet" href="{% static asset %}">{% endfor %}
+  <link rel="stylesheet" href="{% static 'workbench/docs.css' %}">
+  <link rel="stylesheet" href="{% static 'workbench/workbench.css' %}">
+  <link rel="stylesheet" href="{% static 'workbench/roadmap.css' %}">
+  <title>RepUI Roadmap</title>
+</head>
+<body>
+{% page %}
+  {% include "workbench/partials/appbar.html" %}
+  {% page_content %}
+    {% container %}
+      {% stack spacing="lg" class_name="rui-roadmap" %}
+        {% card width="full" %}
+          {% card_body %}
+            {% stack spacing="md" %}
+              {% typography variant="caption" tone="secondary" %}REPUI ROADMAP{% endtypography %}
+              {% typography variant="display" tag="h1" %}Компоненты RepUI{% endtypography %}
+              {% typography variant="body-lg" tone="secondary" %}
+                Направление развития серверной UI-библиотеки для Django и HTMX.
+                Roadmap отражает готовность контрактов, доступность, темизацию и применимость.
+              {% endtypography %}
+              <div class="rui-roadmap__summary">
+                {% badge color="success" %}Базовая система готова{% endbadge %}
+                {% badge color="primary" %}HTMX-first{% endbadge %}
+                {% badge %}Без обязательного SPA{% endbadge %}
+                {% badge color="info" %}Django-native{% endbadge %}
+                {% badge %}Без React runtime{% endbadge %}
+              </div>
+            {% endstack %}
+          {% endcard_body %}
+        {% endcard %}
+
+        {% alert tone="info" %}
+          Порядок не является обещанием сроков. Компонент считается готовым после проверки HTML-контракта,
+          клавиатуры, доступности, light/dark-тем и поведения после HTMX-перерендера.
+        {% endalert %}
+
+        <div class="rui-roadmap__section-heading">
+          {% typography variant="heading-lg" tag="h2" %}На что ориентируется RepUI{% endtypography %}
+          {% typography variant="body" tone="secondary" %}Четыре принципа, которые определяют API и критерии готовности компонентов.{% endtypography %}
+        </div>
+
+        <div class="rui-roadmap__principles">
+          {% card width="full" %}
+            {% card_body %}
+              <div class="rui-roadmap__principle">
+                <div class="rui-roadmap__principle-icon">{% icon "server" %}</div>
+                {% typography variant="title" tag="h3" %}Server-first{% endtypography %}
+                {% typography variant="body-sm" tone="secondary" %}Сервер формирует HTML, Django остаётся источником состояния, а JavaScript усиливает интерфейс.{% endtypography %}
+              </div>
+            {% endcard_body %}
+          {% endcard %}
+          {% card width="full" %}
+            {% card_body %}
+              <div class="rui-roadmap__principle">
+                <div class="rui-roadmap__principle-icon">{% icon "zap" %}</div>
+                {% typography variant="title" tag="h3" %}HTMX-friendly{% endtypography %}
+                {% typography variant="body-sm" tone="secondary" %}Компоненты должны переживать swap, повторный mount и частичное обновление без утечек runtime.{% endtypography %}
+              </div>
+            {% endcard_body %}
+          {% endcard %}
+          {% card width="full" %}
+            {% card_body %}
+              <div class="rui-roadmap__principle">
+                <div class="rui-roadmap__principle-icon">{% icon "accessibility" %}</div>
+                {% typography variant="title" tag="h3" %}Нативная семантика{% endtypography %}
+                {% typography variant="body-sm" tone="secondary" %}HTML, фокус, клавиатура и браузерные состояния остаются основой поведения, а не обходным путём.{% endtypography %}
+              </div>
+            {% endcard_body %}
+          {% endcard %}
+          {% card width="full" %}
+            {% card_body %}
+              <div class="rui-roadmap__principle">
+                <div class="rui-roadmap__principle-icon">{% icon "palette" %}</div>
+                {% typography variant="title" tag="h3" %}Token-driven{% endtypography %}
+                {% typography variant="body-sm" tone="secondary" %}Компоненты читают semantic tokens и поддерживают официальные темы без жёстко зашитых цветов.{% endtypography %}
+              </div>
+            {% endcard_body %}
+          {% endcard %}
+        </div>
+
+        <div class="rui-roadmap__section-heading">
+          {% typography variant="heading-lg" tag="h2" %}Текущее состояние{% endtypography %}
+          {% typography variant="body" tone="secondary" %}Что уже можно использовать и что сейчас проходит стабилизацию контрактов.{% endtypography %}
+        </div>
+
+        <div class="rui-roadmap__columns">
+          {% card width="full" %}
+            {% card_header %}<h2>Основной набор</h2><p>Уже используется в Workbench и прикладных композициях.</p>{% endcard_header %}
+            {% card_body %}
+              <div class="rui-roadmap__catalog-group"><div class="rui-roadmap__section-title"><h3>Actions и содержимое</h3>{% badge color="success" %}Используется{% endbadge %}</div><ul><li>Button, Icon, IconButton</li><li>Badge, Chip</li><li>Typography, InlineCode, Divider</li></ul></div>
+              <div class="rui-roadmap__catalog-group"><h3>Layout и surfaces</h3><ul><li>Page, Stack, Grid, Container</li><li>Card, Panel</li><li>Hero, Theme Preview</li></ul></div>
+              <div class="rui-roadmap__catalog-group"><h3>Navigation и collections</h3><ul><li>List, ListItemButton, Listbox</li><li>Menu, Menubar, Navbar</li><li>Tabs, Pagination, Tree</li></ul></div>
+            {% endcard_body %}
+          {% endcard %}
+          {% card width="full" %}
+            {% card_header %}<h2>Интерактивные компоненты</h2><p>Работают, но их контракты ещё укрепляются тестами и реальными интеграциями.</p>{% endcard_header %}
+            {% card_body %}
+              <div class="rui-roadmap__catalog-group"><div class="rui-roadmap__section-title"><h3>Формы и поиск</h3>{% badge color="warning" %}Стабилизация{% endbadge %}</div><ul><li>Choice, Select</li><li>Autocomplete, Search</li><li>Combobox — серверная фильтрация в развитии</li></ul></div>
+              <div class="rui-roadmap__catalog-group"><h3>Overlay и feedback</h3><ul><li>Dialog, Drawer, Sheet, Popover</li><li>Tooltip, Toast, Alert</li><li>OverlayPortal, DismissLayer</li></ul></div>
+              <div class="rui-roadmap__catalog-group"><h3>Общие механики</h3><ul><li>Roving focus и keyboard ownership</li><li>Theme engine и portal context</li><li>HTMX lifecycle и destroy</li></ul></div>
+            {% endcard_body %}
+          {% endcard %}
+        </div>
+
+        {% typography variant="heading-lg" tag="h2" %}Следующие этапы{% endtypography %}
+        {% for title, status, description in roadmap_phases %}
+          {% card width="full" %}
+            {% card_body %}
+              <div class="rui-roadmap__phase">
+                <span class="rui-roadmap__phase-index">0{{ forloop.counter }}</span>
+                <div><div class="rui-roadmap__section-title"><h3>{{ title }}</h3>{% badge %}{{ status }}{% endbadge %}</div><p>{{ description }}</p></div>
+              </div>
+            {% endcard_body %}
+          {% endcard %}
+        {% endfor %}
+
+        {% card width="full" %}
+          {% card_header %}<h2>Когда компонент считается готовым</h2><p>Готовность — это проверяемый контракт, а не только наличие шаблона.</p>{% endcard_header %}
+          {% card_body %}
+            <ul class="rui-roadmap__checklist"><li>минимальный HTML и нативная семантика;</li><li>мышь, touch и клавиатура;</li><li>light/dark во всех официальных темах;</li><li>disabled, focus, error и loading;</li><li>повторный mount после HTMX swap;</li><li>валидация Django tag API;</li><li>тесты и Workbench-страница;</li><li>нет hardcoded цветов и layout overrides темы.</li></ul>
+            {% alert tone="neutral" %}RepUI не стремится копировать каталоги MUI, Ant Design, Bootstrap или Chakra UI. Это серверная Django-библиотека: React и обязательный клиентский runtime не входят в её архитектуру. Новый компонент появляется, когда у него есть реальный серверный сценарий и устойчивый контракт.{% endalert %}
+          {% endcard_body %}
+        {% endcard %}
+      {% endstack %}
+    {% endcontainer %}
+  {% endpage_content %}
+{% endpage %}
+<script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
+<script type="module" src="{% static 'repui/theme/default/theme.js' %}"></script>
+</body>
+</html>
