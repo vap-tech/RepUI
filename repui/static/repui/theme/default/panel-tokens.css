@@ -35,8 +35,7 @@
     --rui-panel-foreground: var(--rui-color-text);
     --rui-panel-border: 1px solid var(--rui-color-border);
     --rui-panel-radius: var(--rui-radius-lg);
-    --rui-panel-shadow:
-      0 0.75rem 2rem rgb(0 0 0 / 0.14);
+    --rui-panel-shadow: var(--rui-shadow-md);
     --rui-panel-backdrop-filter: blur(1rem);
   }
 
@@ -45,8 +44,7 @@
     --rui-panel-foreground: var(--rui-color-text);
     --rui-panel-border: 1px solid var(--rui-color-border);
     --rui-panel-radius: var(--rui-radius-lg);
-    --rui-panel-shadow:
-      0 0.5rem 1.5rem rgb(0 0 0 / 0.1);
+    --rui-panel-shadow: var(--rui-shadow-sm);
     --rui-panel-padding: var(--rui-space-4);
   }
 }

@@ -1,3 +1,0 @@
-.rui-skeleton { border-radius: var(--rui-radius-sm); background: linear-gradient(90deg, var(--rui-color-surface-muted) 25%, color-mix(in srgb, var(--rui-color-surface-muted) 68%, var(--rui-color-surface)) 50%, var(--rui-color-surface-muted) 75%); background-size: 200% 100%; animation: rui-shimmer 1.45s linear infinite; }
-.rui-skeleton[data-shape="circle"] { border-radius: 50%; }
-@keyframes rui-shimmer { to { background-position: -200% 0; } }

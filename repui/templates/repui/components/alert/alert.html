@@ -1,6 +1,12 @@
-<div class="rui-alert" role="status" data-variant="{{ variant }}">
-  <span class="rui-alert__icon" aria-hidden="true">{{ icon|default:"•" }}</span>
-  <div>
+<div
+  class="rui-alert"
+  role="{% if tone == 'danger' or tone == 'warning' %}alert{% else %}status{% endif %}"
+  data-tone="{{ tone }}"
+>
+  {% if icon %}
+    <span class="rui-alert__icon" aria-hidden="true">{{ icon }}</span>
+  {% endif %}
+  <div class="rui-alert__content">
     {% if title %}<strong class="rui-alert__title">{{ title }}</strong>{% endif %}
     {% if description %}<span class="rui-alert__description">{{ description }}</span>{% endif %}
     {{ content|safe }}

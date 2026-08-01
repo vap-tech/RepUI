@@ -118,4 +118,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# RepUI theme defaults. Applications may override this in their own settings.
+REPUI = {
+    'THEME': 'default',
+}
 STATIC_ROOT = BASE_DIR / 'staticfiles'

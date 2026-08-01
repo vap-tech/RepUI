@@ -1,5 +1,0 @@
-<label class="rui-field"{% if invalid %} data-invalid="true"{% endif %}>
-  <span class="rui-field__label">{{ label }}</span>
-  <input class="rui-datetime-input" type="datetime-local" name="{{ name }}"{% if id %} id="{{ id }}"{% endif %}{% if value %} value="{{ value }}"{% endif %}{% if min %} min="{{ min }}"{% endif %}{% if max %} max="{{ max }}"{% endif %}{% if step %} step="{{ step }}"{% endif %}{% if required %} required{% endif %}{% if invalid %} aria-invalid="true"{% endif %}{% if describedby %} aria-describedby="{{ describedby }}"{% endif %}>
-  {% if error %}<span class="rui-field-error"{% if error_id %} id="{{ error_id }}"{% endif %} role="alert">{{ error }}</span>{% elif description %}<span class="rui-field__description"{% if description_id %} id="{{ description_id }}"{% endif %}>{{ description }}</span>{% endif %}
-</label>

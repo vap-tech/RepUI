@@ -51,5 +51,7 @@
     --rui-color-info-soft: var(--rui-color-accent-soft);
     --rui-color-info-border: oklch(82% 0.075 245);
     --rui-color-on-info: var(--rui-color-on-accent);
+    --rui-scrollbar-thumb: oklch(65% 0.03 240);
+    --rui-scrollbar-track: oklch(94.5% 0.011 240);
   }
 }

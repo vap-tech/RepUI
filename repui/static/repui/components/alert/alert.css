@@ -1,10 +1,47 @@
 @layer repui.components {
-  .rui-alert { --_tone: var(--rui-color-info); --_soft: var(--rui-color-info-soft); display: grid; grid-template-columns: auto 1fr auto; align-items: start; gap: .8rem; padding: .9rem 1rem; border: 1px solid color-mix(in srgb, var(--_tone) 24%, var(--rui-color-border)); border-radius: var(--rui-radius-md); background: var(--_soft); color: var(--rui-color-text); }
-  .rui-alert[data-variant="success"] { --_tone: var(--rui-color-success); --_soft: var(--rui-color-success-soft); }
-  .rui-alert[data-variant="warning"] { --_tone: var(--rui-color-warning); --_soft: var(--rui-color-warning-soft); }
-  .rui-alert[data-variant="danger"] { --_tone: var(--rui-color-danger); --_soft: var(--rui-color-danger-soft); }
-  .rui-alert__icon { color: var(--_tone); font-weight: 800; }
-  .rui-alert__title { display: block; font-weight: 740; }
-  .rui-alert__description { display: block; color: var(--rui-color-text-muted); font-size: .88rem; }
-  .rui-alert__close { border: 0; background: transparent; color: var(--rui-color-text-muted); cursor: pointer; }
+  :where(.rui-alert) {
+    --_background: var(--rui-alert-background, var(--rui-color-surface));
+    --_foreground: var(--rui-alert-foreground, var(--rui-color-text));
+    --_muted: var(--rui-alert-muted, var(--rui-color-text-secondary));
+    --_border: var(--rui-alert-border-color, var(--rui-color-border));
+    --_icon: var(--rui-alert-icon-color, var(--rui-color-text-secondary));
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: start;
+    gap: var(--rui-alert-gap, var(--rui-space-3, .75rem));
+    padding: var(--rui-alert-padding-block, var(--rui-space-3, .75rem)) var(--rui-alert-padding-inline, var(--rui-space-4, 1rem));
+    border: 1px solid var(--_border);
+    border-radius: var(--rui-alert-radius, var(--rui-radius-md));
+    background: var(--_background);
+    color: var(--_foreground);
+    box-shadow: var(--rui-alert-shadow, none);
+  }
+  :where(.rui-alert[data-tone="info"]) {
+    --_background: var(--rui-color-info-soft);
+    --_border: var(--rui-color-info-border);
+    --_icon: var(--rui-color-info);
+  }
+  :where(.rui-alert[data-tone="success"]) {
+    --_background: var(--rui-color-success-soft);
+    --_border: var(--rui-color-success-border);
+    --_icon: var(--rui-color-success);
+  }
+  :where(.rui-alert[data-tone="warning"]) {
+    --_background: var(--rui-color-warning-soft);
+    --_border: var(--rui-color-warning-border);
+    --_icon: var(--rui-color-warning);
+  }
+  :where(.rui-alert[data-tone="danger"]) {
+    --_background: var(--rui-color-danger-soft);
+    --_border: var(--rui-color-danger-border);
+    --_icon: var(--rui-color-danger);
+  }
+  :where(.rui-alert__content) { min-inline-size: 0; }
+  :where(.rui-alert__icon) { color: var(--_icon); font-weight: 800; }
+  :where(.rui-alert__title) { display: block; color: var(--_foreground); font-weight: var(--rui-font-weight-semibold, 600); }
+  :where(.rui-alert__description) { display: block; margin-block-start: var(--rui-space-1, .25rem); color: var(--_muted); font-size: var(--rui-text-body-sm-size, .875rem); }
+  :where(.rui-alert__body) { margin-block-start: var(--rui-space-2, .5rem); }
+  :where(.rui-alert__close) { inline-size: 2rem; block-size: 2rem; margin: -.375rem -.5rem -.375rem 0; border: 0; border-radius: var(--rui-radius-sm); background: transparent; color: var(--rui-alert-close-color, var(--rui-color-text-muted)); cursor: pointer; }
+  :where(.rui-alert__close:hover) { background: var(--rui-alert-close-hover-background, var(--rui-color-surface-hover)); }
+  :where(.rui-alert__close:focus-visible) { outline: var(--rui-focus-width) solid var(--rui-color-focus); outline-offset: var(--rui-focus-offset, 2px); }
 }

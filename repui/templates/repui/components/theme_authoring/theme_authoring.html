@@ -1,0 +1,469 @@
+{% load repui repui_layout %}
+
+{% container %}
+  {% stack spacing="lg" %}
+    {% card width="full" %}
+      {% card_header %}
+        {% stack spacing="sm" %}
+          <div>
+            {% badge color="primary" %}{% icon "palette" %} Theme authoring{% endbadge %}
+            {% badge color="success" %}{% icon "folder-check" %} Folder-based{% endbadge %}
+          </div>
+          {% typography variant="heading-lg" tag="h1" %}Как создать новую тему RepUI{% endtypography %}
+          {% typography variant="body-lg" color="secondary" %}
+            Полноценная тема RepUI добавляется отдельной папкой и меняет только токены.
+            Компоненты, layout и runtime при этом остаются общими для всех тем.
+          {% endtypography %}
+        {% endstack %}
+      {% endcard_header %}
+      {% card_body %}
+        {% alert tone="info" title="Главный принцип" %}
+          Тема определяет визуальный язык через semantic и component tokens,
+          но не переписывает DOM, layout или поведение компонентов.
+        {% endalert %}
+              {% endcard_body %}
+          {% endcard %}
+
+    {% grid columns=3 spacing="lg" %}
+      {% container column=2 %}
+        {% stack spacing="lg" %}
+          {% card width="full" %}
+            {% card_header %}
+              {% typography variant="heading" tag="h2" %}1. Архитектура темы{% endtypography %}
+              {% typography variant="body" color="secondary" %}
+                Цепочка наследования должна быть одинаковой для каждого компонента.
+              {% endtypography %}
+            {% endcard_header %}
+            {% card_body %}
+              {% stack spacing="md" %}
+                {% code_block language="text" title="Token flow" copy=False %}Raw palette
+    ↓
+Semantic theme tokens
+    ↓
+Component token contract
+    ↓
+Optional theme component overrides
+    ↓
+Component CSS properties{% endcode_block %}
+
+                {% typography variant="body" %}
+                  Например, фон Card проходит путь
+                  {% inline_code %}--rui-core-slate-0{% endinline_code %} →
+                  {% inline_code %}--rui-color-surface{% endinline_code %} →
+                  {% inline_code %}--rui-card-background{% endinline_code %} →
+                  {% inline_code %}background{% endinline_code %}.
+                {% endtypography %}
+
+                {% alert tone="warning" title="Не связывайте компонент с темой" %}
+                  В CSS компонента не должно быть названий палитры, селекторов темы
+                  или конкретных цветов.
+                {% endalert %}
+              {% endstack %}
+            {% endcard_body %}
+          {% endcard %}
+
+          {% card width="full" %}
+            {% card_header %}
+              {% typography variant="heading" tag="h2" %}2. Создайте папку темы{% endtypography %}
+              {% typography variant="body" color="secondary" %}
+                Для примера создадим тему Ocean Studio.
+              {% endtypography %}
+            {% endcard_header %}
+            {% card_body %}
+              {% code_block language="text" title="Структура файлов" %}repui/
+├── themes/
+│   └── ocean/
+│       ├── __init__.py
+│       └── manifest.py
+└── static/repui/theme/ocean/
+    ├── palette.css
+    ├── light.css
+    ├── dark.css
+    └── components/
+        ├── card.css
+        ├── button.css
+        └── tooltip.css{% endcode_block %}
+
+              {% typography variant="body-sm" color="muted" %}
+                Папка {% inline_code %}components{% endinline_code %} необязательна.
+                Создавайте override-файл только тогда, когда semantic tokens недостаточно.
+              {% endtypography %}
+            {% endcard_body %}
+          {% endcard %}
+
+          {% card width="full" %}
+            {% card_header %}
+              {% typography variant="heading" tag="h2" %}3. Опишите manifest{% endtypography %}
+              {% typography variant="body" color="secondary" %}
+                Manifest сообщает registry имя темы и список её assets.
+              {% endtypography %}
+            {% endcard_header %}
+            {% card_body %}
+            {% stack spacing="md" %}
+              {% code_block language="python" title="repui/themes/ocean/manifest.py" %}THEME = {
+    "name": "ocean",
+    "title": "Ocean Studio",
+    "description": (
+        "Calm product theme with deep blue surfaces "
+        "and cyan interaction accents."
+    ),
+    "schemes": ("light", "dark"),
+    "styles": (
+        "repui/theme/ocean/palette.css",
+        "repui/theme/ocean/light.css",
+        "repui/theme/ocean/dark.css",
+    ),
+    "component_styles": {
+        "card": (
+            "repui/theme/ocean/components/card.css",
+        ),
+        "button": (
+            "repui/theme/ocean/components/button.css",
+        ),
+        "tooltip": (
+            "repui/theme/ocean/components/tooltip.css",
+        ),
+    },
+}{% endcode_block %}
+
+
+
+                {% alert tone="info" title="Стабильный идентификатор" %}
+                  Значение {% inline_code %}name{% endinline_code %} используется в settings,
+                  template tags, localStorage и {% inline_code %}data-rui-theme{% endinline_code %}.
+                  После публикации его нельзя переименовывать без миграции.
+                {% endalert %}
+              {% endstack %}
+              {% endcard_body %}
+
+          {% endcard %}
+
+          {% card width="full" %}
+            {% card_header %}
+              {% typography variant="heading" tag="h2" %}4. Создайте raw palette{% endtypography %}
+              {% typography variant="body" color="secondary" %}
+                Palette содержит только физические цвета. Компоненты её напрямую не используют.
+              {% endtypography %}
+            {% endcard_header %}
+            {% card_body %}
+              {% code_block language="css" title="palette.css" %}@layer repui.theme {
+  [data-rui-theme="ocean"] {
+    --rui-ocean-slate-0: oklch(99% 0.005 240);
+    --rui-ocean-slate-5: oklch(67% 0.028 240);
+    --rui-ocean-slate-9: oklch(19% 0.028 240);
+
+    --rui-ocean-blue-2: oklch(89% 0.055 245);
+    --rui-ocean-blue-5: oklch(56% 0.18 245);
+    --rui-ocean-blue-7: oklch(42% 0.15 245);
+
+    --rui-ocean-cyan-2: oklch(90% 0.06 195);
+    --rui-ocean-cyan-5: oklch(65% 0.13 195);
+  }
+}{% endcode_block %}
+
+              {% typography variant="body-sm" color="muted" %}
+                Используйте namespace темы, чтобы raw tokens разных палитр не пересекались.
+              {% endtypography %}
+            {% endcard_body %}
+          {% endcard %}
+
+          {% card width="full" %}
+            {% card_header %}
+              {% typography variant="heading" tag="h2" %}5. Определите light и dark{% endtypography %}
+              {% typography variant="body" color="secondary" %}
+                Обе схемы реализуют один и тот же semantic contract.
+              {% endtypography %}
+            {% endcard_header %}
+            {% card_body %}
+              {% tabs id="theme-scheme-examples" %}
+                {% tab_list aria_label="Примеры цветовых схем" %}
+                  {% tab panel="theme-light" selected=True %}Light{% endtab %}
+                  {% tab panel="theme-dark" %}Dark{% endtab %}
+                {% endtab_list %}
+
+                {% tab_panel id="theme-light" selected=True %}
+                  {% code_block language="css" title="light.css" %}@layer repui.theme {
+  [data-rui-theme="ocean"][data-rui-color-scheme="light"] {
+    color-scheme: light;
+
+    --rui-color-page: oklch(97% 0.008 240);
+    --rui-color-surface: var(--rui-ocean-slate-0);
+    --rui-color-surface-raised: white;
+    --rui-color-surface-sunken: oklch(94% 0.012 240);
+
+    --rui-color-text: var(--rui-ocean-slate-9);
+    --rui-color-text-secondary: oklch(39% 0.032 240);
+    --rui-color-text-muted: var(--rui-ocean-slate-5);
+
+    --rui-color-border-subtle: oklch(90% 0.014 240);
+    --rui-color-border: oklch(82% 0.022 240);
+    --rui-color-border-strong: oklch(65% 0.03 240);
+
+    --rui-color-primary: var(--rui-ocean-blue-5);
+    --rui-color-primary-hover: var(--rui-ocean-blue-7);
+    --rui-color-primary-soft: var(--rui-ocean-blue-2);
+    --rui-color-on-primary: white;
+
+    --rui-color-focus: var(--rui-ocean-cyan-5);
+    --rui-color-focus-outer: oklch(70% 0.11 195 / 30%);
+  }
+}{% endcode_block %}
+                {% endtab_panel %}
+
+                {% tab_panel id="theme-dark" %}
+                  {% code_block language="css" title="dark.css" %}@layer repui.theme {
+  [data-rui-theme="ocean"][data-rui-color-scheme="dark"] {
+    color-scheme: dark;
+
+    --rui-color-page: oklch(14% 0.025 245);
+    --rui-color-surface: oklch(18% 0.03 245);
+    --rui-color-surface-raised: oklch(22% 0.035 245);
+    --rui-color-surface-sunken: oklch(12% 0.022 245);
+
+    --rui-color-text: oklch(94% 0.012 240);
+    --rui-color-text-secondary: oklch(79% 0.021 240);
+    --rui-color-text-muted: oklch(65% 0.026 240);
+
+    --rui-color-border-subtle: oklch(27% 0.026 245);
+    --rui-color-border: oklch(35% 0.034 245);
+    --rui-color-border-strong: oklch(51% 0.04 245);
+
+    --rui-color-primary: oklch(73% 0.15 245);
+    --rui-color-primary-hover: oklch(79% 0.13 245);
+    --rui-color-primary-soft: oklch(28% 0.08 245);
+    --rui-color-on-primary: oklch(16% 0.03 245);
+
+    --rui-color-focus: oklch(78% 0.12 195);
+    --rui-color-focus-outer: oklch(76% 0.11 195 / 30%);
+  }
+}{% endcode_block %}
+                {% endtab_panel %}
+              {% endtabs %}
+            {% endcard_body %}
+          {% endcard %}
+
+          {% card width="full" %}
+            {% card_header %}
+              {% typography variant="heading" tag="h2" %}6. Добавляйте component overrides точечно{% endtypography %}
+              {% typography variant="body" color="secondary" %}
+                Override должен менять component tokens, а не CSS-геометрию компонента.
+              {% endtypography %}
+            {% endcard_header %}
+            {% card_body %}
+              {% grid columns=2 spacing="md" %}
+                  {% alert tone="success" title="Правильно" %}
+                    {% code_block language="css" title="components/card.css" copy=False %}@layer repui.theme {
+  [data-rui-theme="ocean"] {
+    --rui-card-background:
+      var(--rui-color-surface);
+    --rui-card-border-color:
+      var(--rui-color-border-subtle);
+    --rui-card-shadow:
+      var(--rui-shadow-xs);
+  }
+}{% endcode_block %}
+                  {% endalert %}
+
+
+                  {% alert tone="danger" title="Неправильно" %}
+                    {% code_block language="css" title="Не делайте так" copy=False %}[data-rui-theme="ocean"] .rui-card {
+  display: grid;
+  padding: 3rem;
+  border-radius: 2rem;
+}{% endcode_block %}
+                  {% endalert %}
+              {% endgrid %}
+            {% endcard_body %}
+          {% endcard %}
+
+          {% card width="full" %}
+            {% card_header %}
+              {% typography variant="heading" tag="h2" %}7. Подключите тему{% endtypography %}
+            {% endcard_header %}
+            {% card_body %}
+              {% stack spacing="md" %}
+                {% typography variant="title-sm" tag="h3" %}Глобально через settings{% endtypography %}
+                {% code_block language="python" title="settings.py" %}REPUI = {
+    "THEME": "ocean",
+}{% endcode_block %}
+
+                {% typography variant="title-sm" tag="h3" %}Явно в шаблоне{% endtypography %}
+                {% code_block language="django" title="base.html" %}{% verbatim %}{% repui_css card button select theme="ocean" %}{% endverbatim %}{% endcode_block %}
+
+                {% typography variant="title-sm" tag="h3" %}На корневом элементе{% endtypography %}
+                {% code_block language="html" title="document root" %}<html
+  data-rui-theme="ocean"
+  data-rui-theme-mode="system"
+  data-rui-color-scheme="light"
+>{% endcode_block %}
+
+                {% alert tone="warning" title="Не допускайте flash неправильной темы" %}
+                  {% inline_code %}repui_theme_head{% endinline_code %} должен выставить
+                  theme, mode и фактическую color scheme до загрузки основных stylesheet.
+                {% endalert %}
+              {% endstack %}
+            {% endcard_body %}
+          {% endcard %}
+
+          {% card width="full" %}
+            {% card_header %}
+              {% typography variant="heading" tag="h2" %}8. Проверьте overlays и portal{% endtypography %}
+              {% typography variant="body" color="secondary" %}
+                Глобальная тема наследуется через document root. Локальная тема требует переноса theme context.
+              {% endtypography %}
+            {% endcard_header %}
+            {% card_body %}
+              {% stack spacing="md" %}
+                {% code_block language="text" title="Компоненты с portal" %}Select
+Menu
+Tooltip
+Popover
+Dialog
+Autocomplete
+Combobox{% endcode_block %}
+
+                {% typography variant="body" %}
+                  Для scoped preview OverlayPortal должен определить ближайшие
+                  {% inline_code %}data-rui-theme{% endinline_code %} и
+                  {% inline_code %}data-rui-color-scheme{% endinline_code %}, затем применить
+                  их к portal wrapper.
+                {% endtypography %}
+
+                {% alert tone="info" title="Для глобальной темы дополнительный код не нужен" %}
+                  Если атрибуты темы находятся на {% inline_code %}html{% endinline_code %},
+                  overlay в {% inline_code %}body{% endinline_code %} продолжит наследовать токены.
+                {% endalert %}
+              {% endstack %}
+            {% endcard_body %}
+          {% endcard %}
+
+          {% card width="full" %}
+            {% card_header %}
+              {% typography variant="heading" tag="h2" %}9. Проведите визуальный аудит{% endtypography %}
+            {% endcard_header %}
+            {% card_body %}
+              {% accordion multiple=True %}
+                {% accordion_item label="Поверхности и текст" open=True %}
+                  Проверьте Page, Card, Panel, Typography, InlineCode и Divider в обеих схемах.
+                {% endaccordion_item %}
+                {% accordion_item label="Интерактивные состояния" %}
+                  Проверьте default, hover, focus-visible, active, selected и disabled у Button,
+                  Choice, Input, Select, Tabs и ListItemButton.
+                {% endaccordion_item %}
+                {% accordion_item label="Overlay family" %}
+                  Проверьте единый background, border и shadow у Menu, Select, Popover,
+                  Autocomplete и Dialog. Tooltip может использовать отдельную inverse surface.
+                {% endaccordion_item %}
+                {% accordion_item label="Статусные цвета" %}
+                  Success, warning, danger и info должны отличаться от primary и сохранять
+                  читаемый контраст в light и dark.
+                {% endaccordion_item %}
+                {% accordion_item label="Клавиатура" %}
+                  Focus ring должен быть видим на любой поверхности и не сливаться с selected state.
+                {% endaccordion_item %}
+              {% endaccordion %}
+            {% endcard_body %}
+          {% endcard %}
+
+          {% card width="full" %}
+            {% card_header %}
+              {% typography variant="heading" tag="h2" %}10. Добавьте автоматические проверки{% endtypography %}
+            {% endcard_header %}
+            {% card_body %}
+              {% code_block language="python" title="tests/test_themes.py" %}def test_theme_manifest_assets_exist():
+    theme = get_theme("ocean")
+
+    for asset in theme["styles"]:
+        assert static_asset_exists(asset)
+
+
+def test_theme_declares_both_schemes():
+    theme = get_theme("ocean")
+    assert set(theme["schemes"]) == {"light", "dark"}
+
+
+def test_component_overrides_reference_known_components():
+    theme = get_theme("ocean")
+
+    for component_name in theme["component_styles"]:
+        assert get_component_manifest(component_name)
+
+
+def test_theme_css_uses_repui_theme_layer():
+    for source in theme_css_sources("ocean"):
+        assert "@layer repui.theme" in source
+        assert "[data-theme=" not in source{% endcode_block %}
+            {% endcard_body %}
+          {% endcard %}
+        {% endstack %}
+      {% endcontainer %}
+
+      {% container column=1 %}
+        {% stack spacing="lg" %}
+          {% card width="full" %}
+            {% card_header %}
+              {% typography variant="title" tag="h2" %}Готовность темы{% endtypography %}
+            {% endcard_header %}
+            {% card_body %}
+              {% stack spacing="sm" %}
+                {% choice type="checkbox" name="theme-check" value="manifest" %}Manifest добавлен{% endchoice %}
+                {% choice type="checkbox" name="theme-check" value="palette" %}Palette имеет namespace{% endchoice %}
+                {% choice type="checkbox" name="theme-check" value="schemes" %}Light и dark реализованы{% endchoice %}
+                {% choice type="checkbox" name="theme-check" value="contract" %}Semantic contract покрыт{% endchoice %}
+                {% choice type="checkbox" name="theme-check" value="focus" %}Focus виден в обеих схемах{% endchoice %}
+                {% choice type="checkbox" name="theme-check" value="status" %}Primary отделён от success{% endchoice %}
+                {% choice type="checkbox" name="theme-check" value="overlays" %}Overlays согласованы{% endchoice %}
+                {% choice type="checkbox" name="theme-check" value="tests" %}Contract tests проходят{% endchoice %}
+              {% endstack %}
+            {% endcard_body %}
+          {% endcard %}
+
+          {% card width="full" %}
+            {% card_header %}
+              {% typography variant="title" tag="h2" %}Обязательный контракт{% endtypography %}
+            {% endcard_header %}
+            {% card_body %}
+              {% stack spacing="sm" %}
+                {% badge %}page{% endbadge %}
+                {% badge %}surface{% endbadge %}
+                {% badge %}text{% endbadge %}
+                {% badge %}border{% endbadge %}
+                {% badge color="primary" %}primary{% endbadge %}
+                {% badge color="success" %}success{% endbadge %}
+                {% badge color="warning" %}warning{% endbadge %}
+                {% badge color="danger" %}danger{% endbadge %}
+                {% badge color="primary" %}focus{% endbadge %}
+                {% badge %}inverse surface{% endbadge %}
+              {% endstack %}
+            {% endcard_body %}
+          {% endcard %}
+
+          {% card width="full" %}
+            {% card_header %}
+              {% typography variant="title" tag="h2" %}Запрещено теме{% endtypography %}
+            {% endcard_header %}
+            {% card_body %}
+              {% stack spacing="sm" %}
+                {% typography variant="body-sm" %}{% icon "x" %} Менять DOM компонентов{% endtypography %}
+                {% typography variant="body-sm" %}{% icon "x" %} Дублировать runtime{% endtypography %}
+                {% typography variant="body-sm" %}{% icon "x" %} Переопределять display и position{% endtypography %}
+                {% typography variant="body-sm" %}{% icon "x" %} Использовать raw color в component CSS{% endtypography %}
+                {% typography variant="body-sm" %}{% icon "x" %} Смешивать primary и success{% endtypography %}
+                {% typography variant="body-sm" %}{% icon "x" %} Использовать неправильный theme selector{% endtypography %}
+              {% endstack %}
+            {% endcard_body %}
+          {% endcard %}
+
+          {% card width="full" %}
+            {% card_header %}
+              {% typography variant="title" tag="h2" %}Команда проверки{% endtypography %}
+            {% endcard_header %}
+            {% card_body %}
+              {% code_block language="bash" copy=True %}python manage.py test repui workbench{% endcode_block %}
+            {% endcard_body %}
+          {% endcard %}
+        {% endstack %}
+      {% endcontainer %}
+    {% endgrid %}
+  {% endstack %}
+{% endcontainer %}

@@ -32,7 +32,7 @@
   :where(.rui-appbar[data-surface="glass-solid"]) {
     --rui-appbar-background: color-mix(in srgb, var(--rui-color-surface) 62%, transparent);
     --rui-appbar-border: 1px solid var(--rui-color-border);
-    --rui-appbar-shadow: 0 0.75rem 2rem rgb(0 0 0 / 0.16);
+    --rui-appbar-shadow: var(--rui-shadow-md);
     --rui-appbar-backdrop-filter: blur(1.25rem);
   }
   :where(.rui-appbar[data-surface="solid"]) {

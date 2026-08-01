@@ -23,5 +23,7 @@
     --rui-color-disabled-border: GrayText;
     --rui-color-disabled-control-bg: Canvas;
     --rui-focus-color: Highlight;
+    --rui-scrollbar-thumb: GrayText;
+    --rui-scrollbar-track: Canvas;
   }
 }

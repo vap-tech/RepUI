@@ -29,5 +29,23 @@
     --rui-color-inverse-surface: oklch(27% 0.035 292);
     --rui-color-on-inverse-surface: oklch(97% 0.01 80);
     --rui-color-inverse-border: oklch(40% 0.045 292);
+    --rui-color-success: oklch(48% 0.14 150);
+    --rui-color-success-soft: oklch(93% 0.045 150);
+    --rui-color-success-border: oklch(76% 0.09 150);
+    --rui-color-on-success: oklch(98% 0.005 150);
+    --rui-color-warning: oklch(58% 0.16 78);
+    --rui-color-warning-soft: oklch(94% 0.06 82);
+    --rui-color-warning-border: oklch(78% 0.11 80);
+    --rui-color-on-warning: oklch(22% 0.04 70);
+    --rui-color-danger: oklch(53% 0.19 25);
+    --rui-color-danger-soft: oklch(94% 0.045 25);
+    --rui-color-danger-border: oklch(76% 0.1 25);
+    --rui-color-on-danger: oklch(98% 0.005 25);
+    --rui-color-info: var(--rui-color-accent);
+    --rui-color-info-soft: var(--rui-color-accent-soft);
+    --rui-color-info-border: oklch(78% 0.085 190);
+    --rui-color-on-info: var(--rui-color-on-accent);
+    --rui-scrollbar-thumb: oklch(64% 0.055 292);
+    --rui-scrollbar-track: oklch(94% 0.022 78);
   }
 }

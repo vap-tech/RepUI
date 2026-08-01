@@ -2,8 +2,8 @@
   :root,
   [data-rui-color-scheme="light"] {
   --rui-choice-text: var(--rui-color-text);
-  --rui-choice-muted: var(--rui-color-text-muted, #71717a);
-  --rui-choice-disabled: var(--rui-color-text-muted, #a1a1aa);
+  --rui-choice-muted: var(--rui-color-text-muted);
+  --rui-choice-disabled: var(--rui-color-text-disabled);
   --rui-choice-border: var(--rui-color-border);
   --rui-choice-background: var(--rui-color-surface);
   --rui-choice-accent: var(--rui-color-primary);
@@ -15,8 +15,8 @@
 
   [data-rui-color-scheme="dark"] {
   --rui-choice-text: var(--rui-color-text);
-  --rui-choice-muted: var(--rui-color-text-muted, #a1a1aa);
-  --rui-choice-disabled: var(--rui-color-text-muted, #71717a);
+  --rui-choice-muted: var(--rui-color-text-muted);
+  --rui-choice-disabled: var(--rui-color-text-disabled);
   --rui-choice-border: var(--rui-color-border);
   --rui-choice-background: var(--rui-color-surface);
   --rui-choice-accent: var(--rui-color-primary);

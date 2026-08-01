@@ -1,0 +1,16 @@
+@layer repui.theme {
+  :root {
+    --rui-alert-background: var(--rui-color-surface);
+    --rui-alert-foreground: var(--rui-color-text);
+    --rui-alert-muted: var(--rui-color-text-secondary, var(--rui-color-text-muted));
+    --rui-alert-border-color: var(--rui-color-border);
+    --rui-alert-icon-color: var(--rui-color-text-secondary, var(--rui-color-text-muted));
+    --rui-alert-close-color: var(--rui-color-text-muted);
+    --rui-alert-close-hover-background: var(--rui-color-surface-hover);
+    --rui-alert-radius: var(--rui-radius-md, .75rem);
+    --rui-alert-shadow: none;
+    --rui-alert-padding-block: var(--rui-space-3, .75rem);
+    --rui-alert-padding-inline: var(--rui-space-4, 1rem);
+    --rui-alert-gap: var(--rui-space-3, .75rem);
+  }
+}

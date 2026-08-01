@@ -8,6 +8,12 @@
     min-block-size: 100%;
   }
 
+  :where(html) {
+    scrollbar-color: var(--rui-scrollbar-thumb, GrayText)
+      var(--rui-scrollbar-track, Canvas);
+    scrollbar-width: thin;
+  }
+
   :where(body) {
     min-block-size: 100dvh;
     margin: 0;

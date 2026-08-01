@@ -52,6 +52,16 @@ def component_catalog(request: HttpRequest) -> HttpResponse:
     )
 
 
+def theme_authoring(request: HttpRequest) -> HttpResponse:
+    return render(
+        request,
+        "workbench/themes.html",
+        {
+            "appbar_section": "themes",
+        },
+    )
+
+
 def component_partial(
     request: HttpRequest,
     component_name: str,

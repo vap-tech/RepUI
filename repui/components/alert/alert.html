@@ -7,8 +7,11 @@
         {% endcard_header %}
         {% card_body %}
             {% stack spacing="xs"%}
-                {% alert variant="info" title="Информация" description="Это inline-сообщение не покидает свою область." %}{% endalert %}
-                {% alert variant="success" title="Готово" description="Операция завершена успешно." dismissible=True %}{% endalert %}
+                {% alert tone="neutral" icon="•" title="Нейтральное сообщение" %}Обычная инструкция без статусного смысла.{% endalert %}
+                {% alert tone="info" icon="ⓘ" title="Информация" description="Это inline-сообщение не покидает свою область." %}{% endalert %}
+                {% alert tone="success" icon="✓" title="Готово" description="Операция завершена успешно." dismissible=True %}{% endalert %}
+                {% alert tone="warning" icon="!" title="Внимание" %}Проверьте данные перед продолжением.{% endalert %}
+                {% alert tone="danger" icon="×" title="Ошибка" %}Операцию не удалось завершить.{% endalert %}
             {% endstack %}
         {% endcard_body %}
     {% endcard %}

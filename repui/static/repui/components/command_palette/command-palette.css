@@ -1,6 +1,6 @@
 @layer repui.components {
   .rui-command { position: fixed; inset: 0; z-index: var(--rui-command-z-index, 1200); display: grid; place-items: start center; padding: 12vh 1rem 1rem; }
-  .rui-command__backdrop { position: absolute; inset: 0; background: rgb(0 0 0 / .5); }
+  .rui-command__backdrop { position: absolute; inset: 0; background: var(--rui-command-backdrop, color-mix(in srgb, var(--rui-color-text) 50%, transparent)); }
   .rui-command__panel { position: relative; inline-size: min(100%, 42rem); max-block-size: min(70dvh, 40rem); overflow: auto; padding: .75rem; border: 1px solid var(--rui-color-border); border-radius: var(--rui-radius-lg); background: var(--rui-color-surface); color: var(--rui-color-text); box-shadow: var(--rui-shadow-lg); }
   .rui-command__input { inline-size: 100%; padding: .8rem; border: 1px solid var(--rui-color-border); border-radius: var(--rui-radius-md); background: var(--rui-color-surface); color: inherit; font: inherit; }
   .rui-command__list { display: grid; gap: .15rem; margin-block-start: .5rem; }

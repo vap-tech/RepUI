@@ -1,9 +1,0 @@
-:root {
-  --rui-font-ui: "Roboto Flex", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --rui-font-content: "Roboto Flex", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --rui-font-display: "Manrope", "Roboto Flex", system-ui, sans-serif;
-  --rui-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --rui-text-xs: .75rem; --rui-text-sm: .875rem; --rui-text-md: 1rem; --rui-text-lg: 1.125rem;
-  --rui-text-xl: 1.375rem; --rui-text-2xl: clamp(1.75rem, 3vw, 2.5rem);
-  --rui-leading-tight: 1.15; --rui-leading-normal: 1.5; --rui-leading-relaxed: 1.7;
-}

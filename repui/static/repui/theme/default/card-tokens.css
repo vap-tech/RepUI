@@ -5,8 +5,7 @@
     --rui-card-foreground: var(--rui-color-text);
     --rui-card-border: 1px solid var(--rui-color-border);
     --rui-card-radius: var(--rui-radius-lg);
-    --rui-card-shadow:
-      0 0.5rem 1.5rem rgb(0 0 0 / 0.08);
+    --rui-card-shadow: var(--rui-shadow-xs);
 
     --rui-card-padding: var(--rui-space-4);
     --rui-card-gap: var(--rui-space-3);
@@ -23,8 +22,7 @@
     --rui-card-background: var(--rui-color-surface);
     --rui-card-foreground: var(--rui-color-text);
     --rui-card-border: 1px solid var(--rui-color-border);
-    --rui-card-shadow:
-      0 0.75rem 2rem rgb(0 0 0 / 0.22);
+    --rui-card-shadow: var(--rui-shadow-sm);
   }
 
   /*

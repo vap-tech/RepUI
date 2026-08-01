@@ -1,6 +1,0 @@
-<div class="rui-tabs">
-  <div class="rui-tabs__list" data-rui-tabs data-rui-tabs-list role="tablist">
-    {% for tab in tabs %}<button class="rui-tabs__trigger" id="rui-tab-{{ forloop.counter }}" data-rui-tab data-value="{{ tab.value }}" data-rui-panel="rui-tabs-panel-{{ forloop.counter }}">{{ tab.label }}</button>{% endfor %}
-  </div>
-  {% for tab in tabs %}<section class="rui-tabs__panel" id="rui-tabs-panel-{{ forloop.counter }}" aria-labelledby="rui-tab-{{ forloop.counter }}" role="tabpanel">{{ tab.content|safe }}</section>{% endfor %}
-</div>

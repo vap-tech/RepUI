@@ -7,6 +7,7 @@ app_name = "workbench"
 urlpatterns = [
     path("", views.workbench, name="home"),
     path("components/", views.component_catalog, name="components"),
+    path("themes/", views.theme_authoring, name="themes"),
     path(
         "component/<slug:component_name>/",
         views.workbench,

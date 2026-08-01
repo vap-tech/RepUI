@@ -4,7 +4,7 @@
     --rui-tooltip-background: var(--rui-color-inverse-surface);
     --rui-tooltip-color: var(--rui-color-on-inverse-surface);
     --rui-tooltip-border: var(--rui-color-inverse-border);
-    --rui-tooltip-shadow: var(--rui-shadow-overlay, 4px 4px 8px rgb(0 0 0 / .1));
+    --rui-tooltip-shadow: var(--rui-shadow-overlay);
     --rui-tooltip-backdrop-filter: none;
   }
 
@@ -12,7 +12,7 @@
     --rui-tooltip-background: var(--rui-color-inverse-surface);
     --rui-tooltip-color: var(--rui-color-on-inverse-surface);
     --rui-tooltip-border: var(--rui-color-inverse-border);
-    --rui-tooltip-shadow: var(--rui-shadow-overlay, 4px 3px 8px rgb(255 255 255 / .07));
+    --rui-tooltip-shadow: var(--rui-shadow-overlay);
     --rui-tooltip-backdrop-filter: none;
   }
 }

@@ -1,3 +1,0 @@
-<nav class="rui-breadcrumb" aria-label="Хлебные крошки">
-  {% for item in items %}{% if not forloop.first %}<span class="rui-breadcrumb__separator" aria-hidden="true">/</span>{% endif %}{% if item.url %}<a href="{{ item.url }}">{{ item.label }}</a>{% else %}<span aria-current="page">{{ item.label }}</span>{% endif %}{% endfor %}
-</nav>

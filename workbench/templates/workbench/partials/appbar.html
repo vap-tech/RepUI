@@ -24,6 +24,11 @@
       {% else %}
         {% nav_item href="/docs/components/" %}Components{% endnav_item %}
       {% endif %}
+      {% if appbar_section == "themes" %}
+        {% nav_item href="/docs/themes/" current=True %}Themes{% endnav_item %}
+      {% else %}
+        {% nav_item href="/docs/themes/" %}Themes{% endnav_item %}
+      {% endif %}
     {% endnavbar %}
 
     {% include "workbench/partials/theme_mode_select.html" %}

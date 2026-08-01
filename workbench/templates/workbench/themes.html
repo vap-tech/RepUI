@@ -1,0 +1,38 @@
+{% load static repui repui_theme repui_layout repui_css %}
+<!doctype html>
+<html lang="ru" data-rui-theme="default" data-rui-theme-mode="system" data-rui-color-scheme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/svg+xml" href="{% static 'workbench/favicon.svg' %}">
+  {% repui_theme_head %}
+  {% repui_css page appbar panel card button checkbox choice select listbox alert tabs typography tooltip badge code_block inline_code accordion icon navbar %}
+  <link rel="stylesheet" href="{% static 'repui/theme/mineral/palette.css' %}">
+  <link rel="stylesheet" href="{% static 'repui/theme/mineral/light.css' %}">
+  <link rel="stylesheet" href="{% static 'repui/theme/mineral/dark.css' %}">
+  <link rel="stylesheet" href="{% static 'workbench/docs.css' %}">
+  <link rel="stylesheet" href="{% static 'workbench/workbench.css' %}">
+  <title>RepUI Themes</title>
+</head>
+<body>
+{% page %}
+  {% include "workbench/partials/appbar.html" %}
+  {% page_content %}
+    {% include "repui/components/theme_authoring/theme_authoring.html" %}
+  {% endpage_content %}
+{% endpage %}
+
+<script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
+<script type="module" src="{% static 'repui/theme/default/theme.js' %}"></script>
+<script type="module">
+  import { mountNavbars } from "{% static 'repui/components/navbar/navbar.js' %}";
+  import { mountTooltips } from "{% static 'repui/components/tooltip/tooltip.js' %}";
+  import { mountCodeBlocks } from "{% static 'repui/components/code_block/code-block.js' %}";
+  import { mountAccordions } from "{% static 'repui/components/accordion/accordion.js' %}";
+  mountNavbars(document);
+  mountTooltips(document);
+  mountCodeBlocks(document);
+  mountAccordions(document);
+</script>
+</body>
+</html>

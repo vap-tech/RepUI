@@ -10,7 +10,7 @@
   .rui-dialog__backdrop {
     position: absolute;
     inset: 0;
-    background: var(--rui-dialog-backdrop, rgb(0 0 0 / .5));
+    background: var(--rui-dialog-backdrop, color-mix(in srgb, var(--rui-color-text) 50%, transparent));
   }
   .rui-dialog__panel {
     position: relative;
