@@ -95,46 +95,6 @@ Component manifest → default theme
 ```
 
 
-# Template tags — следующий источник будущей боли
-
-Почти каждый `tags.py` заново реализует:
-
-* разбор `name=value`;
-* `compile_filter`;
-* resolve;
-* проверку неизвестных аргументов;
-* преобразование bool;
-* aliases HTML-атрибутов;
-* вызов `render_to_string`.
-
-Из-за этого уже появились расхождения.
-
-Например `Choice` использует строгий `_as_bool`, а `Button`, `Checkbox` и `Select` делают:
-
-```python
-bool(value)
-```
-
-То есть:
-
-```django
-{% button disabled="false" %}
-```
-
-получит truthy-строку и станет disabled.
-
-Нужен маленький внутренний toolkit:
-
-```python
-compile_keyword_arguments()
-resolve_arguments()
-reject_unknown()
-resolve_bool()
-extract_html_attrs()
-```
-
-Важно: **не строить универсальный компонентный фреймворк**. Пять небольших функций дадут большую часть пользы без магии.
-
 # Уже применённые хорошие паттерны
 
 У тебя уже есть, пусть и не всегда формально названные:
@@ -185,11 +145,7 @@ JS-тесты удалось запустить:
 * очистить архив от generated files;
 * добавить проверки запрещённых legacy imports.
 
-## Этап 2. Унифицировать template tags
-
-Продолжить перенос оставшихся block tags на общие parsing helpers и закрепить единые aliases/errors.
-
-## Этап 3. Release engineering
+## Этап 2. Release engineering
 
 * CI matrix Python/Django;
 * browser tests;

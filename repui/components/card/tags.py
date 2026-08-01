@@ -8,6 +8,11 @@ from django.template import Context, Node, TemplateSyntaxError
 from django.template.loader import render_to_string
 
 from repui.layout import layout_attributes
+from repui.template_support.arguments import (
+    compile_keyword_arguments,
+    reject_unknown,
+    resolve_arguments,
+)
 
 
 _ALLOWED_SIZES = {"content", "full"}
@@ -47,17 +52,8 @@ class CardNode(Node):
         self.kwargs = kwargs
 
     def render(self, context: Context) -> str:
-        values = {
-            name: expression.resolve(context)
-            for name, expression in self.kwargs.items()
-        }
-
-        unknown = set(values) - _ALLOWED_CARD_ARGUMENTS
-        if unknown:
-            names = ", ".join(sorted(unknown))
-            raise TemplateSyntaxError(
-                f"Unknown card arguments: {names}"
-            )
+        values = resolve_arguments(self.kwargs, context)
+        reject_unknown(values, _ALLOWED_CARD_ARGUMENTS, component="card")
 
         surface = str(values.pop("surface", "card")).strip()
         width = str(values.pop("width", "content"))
@@ -143,17 +139,12 @@ class CardSectionNode(Node):
                 f"card_{self.section} must be used inside card"
             )
 
-        values = {
-            name: expression.resolve(context)
-            for name, expression in self.kwargs.items()
-        }
-
-        unknown = set(values) - _ALLOWED_SECTION_ARGUMENTS
-        if unknown:
-            names = ", ".join(sorted(unknown))
-            raise TemplateSyntaxError(
-                f"Unknown card_{self.section} arguments: {names}"
-            )
+        values = resolve_arguments(self.kwargs, context)
+        reject_unknown(
+            values,
+            _ALLOWED_SECTION_ARGUMENTS,
+            component=f"card_{self.section}",
+        )
 
         attrs = dict(values.pop("attrs", {}) or {})
         class_name = values.pop("class_name", None)
@@ -175,35 +166,8 @@ class CardSectionNode(Node):
         )
 
 
-def _compile_kwargs(parser, bits, *, tag_name):
-    kwargs = {}
-
-    for bit in bits:
-        if "=" not in bit:
-            raise TemplateSyntaxError(
-                f"{tag_name} arguments must use name=value"
-            )
-
-        name, value = bit.split("=", 1)
-
-        if name in kwargs:
-            raise TemplateSyntaxError(
-                f"{tag_name} argument {name} was provided twice"
-            )
-
-        kwargs[name] = parser.compile_filter(value)
-
-    return kwargs
-
-
 def _parse_block(parser, token, *, end_tag, node_factory):
-    bits = token.split_contents()
-    tag_name = bits[0]
-    kwargs = _compile_kwargs(
-        parser,
-        bits[1:],
-        tag_name=tag_name,
-    )
+    kwargs = compile_keyword_arguments(parser, token)
     nodelist = parser.parse((end_tag,))
     parser.delete_first_token()
     return node_factory(nodelist, kwargs)

@@ -2,7 +2,18 @@ from django import template
 from django.template import Node, TemplateSyntaxError
 from django.template.loader import render_to_string
 
+from repui.template_support.arguments import (
+    compile_keyword_arguments,
+    reject_unknown,
+    resolve_arguments,
+)
+
 register = template.Library()
+
+_ALLOWED = {
+    "menubar": {"label", "class_name", "attrs"},
+    "menubar_item": {"value", "label", "class_name", "attrs"},
+}
 
 
 class BlockNode(Node):
@@ -10,7 +21,8 @@ class BlockNode(Node):
         self.name, self.nodelist, self.kwargs = name, nodelist, kwargs
 
     def render(self, context):
-        values = {key: value.resolve(context) for key, value in self.kwargs.items()}
+        values = resolve_arguments(self.kwargs, context)
+        reject_unknown(values, _ALLOWED[self.name], component=self.name)
         if self.name == "menubar_item" and not values.get("value"):
             raise TemplateSyntaxError("menubar_item requires value")
         values["content"] = self.nodelist.render(context).strip()
@@ -22,13 +34,7 @@ class BlockNode(Node):
 
 
 def parse(parser, token, name, end):
-    bits = token.split_contents()
-    kwargs = {}
-    for bit in bits[1:]:
-        if "=" not in bit:
-            raise TemplateSyntaxError(f"{name} arguments must use name=value")
-        key, value = bit.split("=", 1)
-        kwargs[key] = parser.compile_filter(value)
+    kwargs = compile_keyword_arguments(parser, token)
     nodes = parser.parse((end,))
     parser.delete_first_token()
     return BlockNode(name, nodes, kwargs)

@@ -2,6 +2,12 @@ from django import template
 from django.template import Node, TemplateSyntaxError
 from django.template.loader import render_to_string
 
+from repui.template_support.arguments import (
+    compile_keyword_arguments,
+    reject_unknown,
+    resolve_arguments,
+)
+
 _SPECS = {
     "autocomplete": {
         "allowed": {
@@ -19,16 +25,8 @@ _SPECS = {
 
 def _parse_kwargs(parser, token, tag_name):
     spec = _SPECS[tag_name]
-    kwargs = {}
-    for bit in token.split_contents()[1:]:
-        if "=" not in bit:
-            raise TemplateSyntaxError(f"{tag_name} arguments must use name=value")
-        name, expression = bit.split("=", 1)
-        if name not in spec["allowed"]:
-            raise TemplateSyntaxError(f"Unknown {tag_name} argument: {name}")
-        if name in kwargs:
-            raise TemplateSyntaxError(f"Duplicate {tag_name} argument: {name}")
-        kwargs[name] = parser.compile_filter(expression)
+    kwargs = compile_keyword_arguments(parser, token)
+    reject_unknown(kwargs, spec["allowed"], component=tag_name)
     missing = spec["required"] - kwargs.keys()
     if missing:
         raise TemplateSyntaxError(f"{tag_name} requires: {', '.join(sorted(missing))}")
@@ -42,7 +40,7 @@ class AutocompleteNode(Node):
         self.kwargs = kwargs
 
     def render(self, context):
-        values = {name: value.resolve(context) for name, value in self.kwargs.items()}
+        values = resolve_arguments(self.kwargs, context)
         required_name = "name" if self.tag_name == "autocomplete" else "value"
         if values.get(required_name) in (None, ""):
             raise TemplateSyntaxError(f"{self.tag_name}.{required_name} cannot be empty")

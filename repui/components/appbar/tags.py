@@ -2,6 +2,12 @@ from django import template
 from django.template import Node, TemplateSyntaxError
 from django.template.loader import render_to_string
 
+from repui.template_support.arguments import (
+    compile_keyword_arguments,
+    reject_unknown,
+    resolve_arguments,
+)
+
 _ALLOWED_BEHAVIORS = {"static", "sticky"}
 
 class AppBarNode(Node):
@@ -10,7 +16,7 @@ class AppBarNode(Node):
         self.kwargs = kwargs
 
     def render(self, context):
-        values = {k: v.resolve(context) for k, v in self.kwargs.items()}
+        values = resolve_arguments(self.kwargs, context)
         behavior = str(values.pop("behavior", "static"))
         surface = str(values.pop("surface", "default")).strip()
         if behavior not in _ALLOWED_BEHAVIORS:
@@ -22,8 +28,7 @@ class AppBarNode(Node):
         element_id = values.pop("id", None)
         if element_id:
             attrs["id"] = element_id
-        if values:
-            raise TemplateSyntaxError(f"Unknown appbar arguments: {', '.join(sorted(values))}")
+        reject_unknown(values, set(), component="appbar")
         return render_to_string(
             "repui/components/appbar/appbar.html",
             {"content": self.nodelist.render(context), "behavior": behavior, "surface": surface, "class_name": class_name, "attrs": attrs},
@@ -31,12 +36,7 @@ class AppBarNode(Node):
         )
 
 def _appbar(parser, token):
-    bits = token.split_contents(); kwargs = {}
-    for bit in bits[1:]:
-        if "=" not in bit:
-            raise TemplateSyntaxError("appbar arguments must use name=value")
-        name, value = bit.split("=", 1)
-        kwargs[name] = parser.compile_filter(value)
+    kwargs = compile_keyword_arguments(parser, token)
     nodelist = parser.parse(("endappbar",)); parser.delete_first_token()
     return AppBarNode(nodelist, kwargs)
 

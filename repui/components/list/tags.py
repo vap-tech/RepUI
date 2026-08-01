@@ -2,21 +2,19 @@ from django import template
 from django.template import Node, TemplateSyntaxError
 from django.template.loader import render_to_string
 
+from repui.template_support.arguments import (
+    compile_keyword_arguments,
+    reject_unknown,
+    resolve_arguments,
+    resolve_bool,
+)
+
 _ALLOWED = {"ordered", "dense", "disable_padding", "class_name", "attrs"}
 
 
 def _parse_kwargs(parser, token, tag_name):
-    bits = token.split_contents()
-    kwargs = {}
-    for bit in bits[1:]:
-        if "=" not in bit:
-            raise TemplateSyntaxError(f"{tag_name} arguments must use name=value")
-        name, expression = bit.split("=", 1)
-        if name not in _ALLOWED:
-            raise TemplateSyntaxError(f"Unknown {tag_name} argument: {name}")
-        if name in kwargs:
-            raise TemplateSyntaxError(f"Duplicate {tag_name} argument: {name}")
-        kwargs[name] = parser.compile_filter(expression)
+    kwargs = compile_keyword_arguments(parser, token)
+    reject_unknown(kwargs, _ALLOWED, component=tag_name)
     return kwargs
 
 
@@ -26,7 +24,9 @@ class ListNode(Node):
         self.kwargs = kwargs
 
     def render(self, context):
-        values = {name: value.resolve(context) for name, value in self.kwargs.items()}
+        values = resolve_arguments(self.kwargs, context)
+        for name in {"ordered", "dense", "disable_padding"} & set(values):
+            values[name] = resolve_bool(values[name], name=name)
         return render_to_string(
             "repui/components/list/list_tag.html",
             {"content": self.nodelist.render(context).strip(), **values},

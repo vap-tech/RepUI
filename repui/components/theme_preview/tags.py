@@ -2,6 +2,13 @@ from django import template
 from django.template import Node, TemplateSyntaxError
 from django.template.loader import render_to_string
 
+from repui.template_support.arguments import (
+    compile_keyword_arguments,
+    reject_unknown,
+    resolve_arguments,
+    resolve_bool,
+)
+
 register = template.Library()
 _ALLOWED = {"name", "title", "description", "image", "image_dark", "atlas", "atlas_column", "image_alt", "image_position", "image_dark_position", "href", "selected", "badge", "id", "class_name", "attrs"}
 
@@ -12,10 +19,8 @@ class ThemePreviewNode(Node):
         self.kwargs = kwargs
 
     def render(self, context):
-        values = {key: value.resolve(context) for key, value in self.kwargs.items()}
-        unknown = set(values) - _ALLOWED
-        if unknown:
-            raise TemplateSyntaxError("Unknown theme_preview arguments: " + ", ".join(sorted(unknown)))
+        values = resolve_arguments(self.kwargs, context)
+        reject_unknown(values, _ALLOWED, component="theme_preview")
         name = str(values.get("name", "")).strip()
         title = str(values.get("title", "")).strip()
         if not name or not title:
@@ -30,20 +35,13 @@ class ThemePreviewNode(Node):
             "image_alt": values.get("image_alt", ""), "href": values.get("href"),
             "image_position": values.get("image_position", "center"),
             "image_dark_position": values.get("image_dark_position", values.get("image_position", "center")),
-            "selected": bool(values.get("selected")), "badge": values.get("badge"),
+            "selected": resolve_bool(values.get("selected"), name="selected"), "badge": values.get("badge"),
             "content": self.nodelist.render(context).strip(), "class_name": values.get("class_name"), "attrs": attrs,
         }, request=context.get("request"))
 
 
 def _theme_preview(parser, token):
-    kwargs = {}
-    for bit in token.split_contents()[1:]:
-        if "=" not in bit:
-            raise TemplateSyntaxError("theme_preview arguments must use name=value")
-        key, value = bit.split("=", 1)
-        if key in kwargs:
-            raise TemplateSyntaxError(f"theme_preview argument {key} was provided twice")
-        kwargs[key] = parser.compile_filter(value)
+    kwargs = compile_keyword_arguments(parser, token)
     nodes = parser.parse(("endtheme_preview",))
     parser.delete_first_token()
     return ThemePreviewNode(nodes, kwargs)

@@ -133,6 +133,11 @@ class TemplateTagContractTests(SimpleTestCase):
             "{% chip value='a' value='b' %}Django{% endchip %}",
             "{% accordion id='first' id='second' %}{% endaccordion %}",
             "{% toast title='One' title='Two' %}Text{% endtoast %}",
+            "{% dialog id='first' id='second' %}{% enddialog %}",
+            "{% tooltip title='One' title='Two' %}Text{% endtooltip %}",
+            "{% page id='first' id='second' %}{% endpage %}",
+            "{% card width='content' width='full' %}{% endcard %}",
+            "{% tabs id='first' id='second' %}{% endtabs %}",
         ):
             with self.subTest(source=source):
                 with self.assertRaisesRegex(
@@ -145,6 +150,21 @@ class TemplateTagContractTests(SimpleTestCase):
         for source in (
             "{% badge dot='false' %}New{% endbadge %}",
             "{% chip disabled='false' %}Django{% endchip %}",
+        ):
+            with self.subTest(source=source):
+                with self.assertRaisesRegex(
+                    TemplateSyntaxError,
+                    "must resolve to True or False",
+                ):
+                    Template("{% load repui %}" + source).render(Context())
+
+    def test_migrated_block_tags_reject_string_booleans(self):
+        for source in (
+            "{% code_block copy='false' %}code{% endcode_block %}",
+            "{% collapsible open='false' %}Text{% endcollapsible %}",
+            "{% list ordered='false' %}Text{% endlist %}",
+            "{% tab panel='details' selected='false' %}Details{% endtab %}",
+            "{% listbox_option value='one' disabled='false' %}One{% endlistbox_option %}",
         ):
             with self.subTest(source=source):
                 with self.assertRaisesRegex(

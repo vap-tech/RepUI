@@ -2,6 +2,13 @@ from django import template
 from django.template import Node, TemplateSyntaxError
 from django.template.loader import render_to_string
 
+from repui.template_support.arguments import (
+    compile_keyword_arguments,
+    reject_unknown,
+    resolve_arguments,
+    resolve_bool,
+)
+
 
 ALLOWED_TAGS = {
     "span", "p", "div", "label", "h1", "h2", "h3", "h4", "h5", "h6",
@@ -22,10 +29,7 @@ class TypographyNode(Node):
         self.kwargs = kwargs
 
     def render(self, context):
-        values = {
-            key: value.resolve(context)
-            for key, value in self.kwargs.items()
-        }
+        values = resolve_arguments(self.kwargs, context)
         variant = str(values.pop("variant", "body"))
         tag = str(values.pop("tag", "p"))
         color = values.pop("tone", values.pop("color", None))
@@ -50,17 +54,13 @@ class TypographyNode(Node):
         classes.extend(
             f"rui-typography--{name}"
             for name in _MODIFIERS
-            if values.pop(name, False)
+            if resolve_bool(values.pop(name, False), name=name)
         )
         if class_name:
             classes.append(str(class_name))
         attrs["class"] = " ".join(classes)
 
-        if values:
-            raise TemplateSyntaxError(
-                "Unknown typography arguments: "
-                + ", ".join(sorted(values))
-            )
+        reject_unknown(values, set(), component="typography")
 
         return render_to_string(
             "repui/components/typography/typography_tag.html",
@@ -74,14 +74,7 @@ class TypographyNode(Node):
 
 
 def _typography(parser, token):
-    kwargs = {}
-    for bit in token.split_contents()[1:]:
-        if "=" not in bit:
-            raise TemplateSyntaxError(
-                "typography arguments must use name=value"
-            )
-        name, value = bit.split("=", 1)
-        kwargs[name] = parser.compile_filter(value)
+    kwargs = compile_keyword_arguments(parser, token)
     nodelist = parser.parse(("endtypography",))
     parser.delete_first_token()
     return TypographyNode(nodelist, kwargs)

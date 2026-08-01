@@ -4,6 +4,12 @@ from django import template
 from django.template import Node, TemplateSyntaxError
 from django.template.loader import render_to_string
 
+from repui.template_support.arguments import (
+    compile_keyword_arguments,
+    reject_unknown,
+    resolve_arguments,
+)
+
 _ALLOWED_ARGUMENTS = {"id", "class_name", "attrs"}
 
 
@@ -14,17 +20,8 @@ class PageNode(Node):
         self.kwargs = kwargs
 
     def render(self, context):
-        values = {
-            name: expression.resolve(context)
-            for name, expression in self.kwargs.items()
-        }
-
-        unknown = set(values) - _ALLOWED_ARGUMENTS
-        if unknown:
-            names = ", ".join(sorted(unknown))
-            raise TemplateSyntaxError(
-                f"Unknown {self.kind} arguments: {names}"
-            )
+        values = resolve_arguments(self.kwargs, context)
+        reject_unknown(values, _ALLOWED_ARGUMENTS, component=self.kind)
 
         attrs = dict(values.get("attrs") or {})
         element_id = values.get("id")
@@ -45,16 +42,7 @@ class PageNode(Node):
 
 
 def _parse(parser, token, *, kind, end_tag):
-    bits = token.split_contents()
-    kwargs = {}
-
-    for bit in bits[1:]:
-        if "=" not in bit:
-            raise TemplateSyntaxError(
-                f"{kind} arguments must use name=value"
-            )
-        name, value = bit.split("=", 1)
-        kwargs[name] = parser.compile_filter(value)
+    kwargs = compile_keyword_arguments(parser, token)
 
     nodelist = parser.parse((end_tag,))
     parser.delete_first_token()

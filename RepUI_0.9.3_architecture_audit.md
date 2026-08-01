@@ -20,30 +20,6 @@ RepUI уже имеет здоровое ядро: самодостаточны�
 
 ## Критические проблемы
 
-### P1 — tags повторяют собственный мини-фреймворк
-
-Почти каждый `tags.py` заново реализует:
-
-- `split_contents`;
-- проверку `name=value`;
-- compile_filter;
-- resolve kwargs;
-- unknown arguments;
-- bool coercion;
-- aliases в HTML attrs;
-- render_to_string.
-
-Из-за этого API уже расходится: Choice строго валидирует bool, Checkbox/Button/Select используют `bool("false") == True`; Card ловит duplicate args, другие теги — нет.
-
-Нужен небольшой внутренний toolkit, не универсальный component framework:
-
-- `compile_keyword_arguments()`;
-- `resolve_arguments()`;
-- `reject_unknown()`;
-- `resolve_bool()`;
-- `extract_html_attrs()`;
-- `BlockComponentNode` как опциональная базовая реализация.
-
 ## SOLID-аудит
 
 ### SRP
@@ -158,12 +134,7 @@ repui/
 
 ## План миграции
 
-### Этап 1 — унификация tags
-
-- продолжить перенос оставшихся block tags на parsing helpers;
-- унифицировать aliases и duplicate-argument errors для оставшихся API.
-
-### Этап 2 — browser tests и release engineering
+### Этап 1 — browser tests и release engineering
 
 - CI matrix Python/Django;
 - visual snapshots Core/Mineral/Ocean.

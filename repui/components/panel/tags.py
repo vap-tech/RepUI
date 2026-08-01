@@ -5,6 +5,11 @@ from django.template import Node, TemplateSyntaxError
 from django.template.loader import render_to_string
 
 from repui.layout import layout_attributes
+from repui.template_support.arguments import (
+    compile_keyword_arguments,
+    reject_unknown,
+    resolve_arguments,
+)
 
 _ALLOWED_SIZES = {"content", "full"}
 
@@ -15,10 +20,7 @@ class PanelNode(Node):
         self.kwargs = kwargs
 
     def render(self, context):
-        values = {
-            name: expression.resolve(context)
-            for name, expression in self.kwargs.items()
-        }
+        values = resolve_arguments(self.kwargs, context)
 
         surface = str(values.pop("surface", "default")).strip()
         width = str(values.pop("width", "content"))
@@ -55,11 +57,7 @@ class PanelNode(Node):
                 row=row,
             )
 
-        if values:
-            unknown = ", ".join(sorted(values))
-            raise TemplateSyntaxError(
-                f"Unknown panel arguments: {unknown}"
-            )
+        reject_unknown(values, set(), component="panel")
 
         return render_to_string(
             "repui/components/panel/panel.html",
@@ -77,17 +75,7 @@ class PanelNode(Node):
 
 
 def _panel(parser, token):
-    bits = token.split_contents()
-    kwargs = {}
-
-    for bit in bits[1:]:
-        if "=" not in bit:
-            raise TemplateSyntaxError(
-                "panel arguments must use name=value"
-            )
-
-        name, value = bit.split("=", 1)
-        kwargs[name] = parser.compile_filter(value)
+    kwargs = compile_keyword_arguments(parser, token)
 
     nodelist = parser.parse(("endpanel",))
     parser.delete_first_token()

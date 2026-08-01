@@ -2,6 +2,12 @@ from django import template
 from django.template import Node, TemplateSyntaxError
 from django.template.loader import render_to_string
 
+from repui.template_support.arguments import (
+    compile_keyword_arguments,
+    reject_unknown,
+    resolve_arguments,
+)
+
 
 _ALLOWED = {"title", "class_name", "attrs"}
 
@@ -14,15 +20,8 @@ class TooltipNode(Node):
         self.kwargs = kwargs
 
     def render(self, context):
-        values = {
-            key: value.resolve(context)
-            for key, value in self.kwargs.items()
-        }
-        unknown = set(values) - _ALLOWED
-        if unknown:
-            raise TemplateSyntaxError(
-                "Unknown tooltip arguments: " + ", ".join(sorted(unknown))
-            )
+        values = resolve_arguments(self.kwargs, context)
+        reject_unknown(values, _ALLOWED, component="tooltip")
         title = str(values.get("title", "")).strip()
         if not title:
             raise TemplateSyntaxError("tooltip.title cannot be empty")
@@ -39,12 +38,7 @@ class TooltipNode(Node):
 
 
 def _tooltip(parser, token):
-    kwargs = {}
-    for bit in token.split_contents()[1:]:
-        if "=" not in bit:
-            raise TemplateSyntaxError("tooltip arguments must use name=value")
-        name, value = bit.split("=", 1)
-        kwargs[name] = parser.compile_filter(value)
+    kwargs = compile_keyword_arguments(parser, token)
     nodelist = parser.parse(("endtooltip",))
     parser.delete_first_token()
     return TooltipNode(nodelist, kwargs)

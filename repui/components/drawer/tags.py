@@ -2,6 +2,12 @@ from django import template
 from django.template import Node, TemplateSyntaxError
 from django.template.loader import render_to_string
 
+from repui.template_support.arguments import (
+    compile_keyword_arguments,
+    reject_unknown,
+    resolve_arguments,
+)
+
 _ALLOWED = {"id", "side", "variant", "open", "aria_label", "class_name", "attrs"}
 _REQUIRED = {"id"}
 _SIDES = {"left", "right"}
@@ -9,16 +15,8 @@ _VARIANTS = {"modal", "persistent"}
 
 
 def _parse_kwargs(parser, token):
-    kwargs = {}
-    for bit in token.split_contents()[1:]:
-        if "=" not in bit:
-            raise TemplateSyntaxError("drawer arguments must use name=value")
-        name, expression = bit.split("=", 1)
-        if name not in _ALLOWED:
-            raise TemplateSyntaxError(f"Unknown drawer argument: {name}")
-        if name in kwargs:
-            raise TemplateSyntaxError(f"Duplicate drawer argument: {name}")
-        kwargs[name] = parser.compile_filter(expression)
+    kwargs = compile_keyword_arguments(parser, token)
+    reject_unknown(kwargs, _ALLOWED, component="drawer")
     missing = _REQUIRED - kwargs.keys()
     if missing:
         raise TemplateSyntaxError("drawer requires id")
@@ -42,7 +40,7 @@ class DrawerNode(Node):
         self.kwargs = kwargs
 
     def render(self, context):
-        values = {name: value.resolve(context) for name, value in self.kwargs.items()}
+        values = resolve_arguments(self.kwargs, context)
         _validate(values)
         return render_to_string(
             "repui/components/drawer/drawer_tag.html",

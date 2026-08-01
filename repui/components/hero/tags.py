@@ -4,6 +4,12 @@ from django import template
 from django.template import Context, Node, TemplateSyntaxError
 from django.template.loader import render_to_string
 
+from repui.template_support.arguments import (
+    compile_keyword_arguments,
+    reject_unknown,
+    resolve_arguments,
+)
+
 register = template.Library()
 
 _ALLOWED = {"title", "image", "image_dark", "atlas", "atlas_column", "image_alt", "image_position", "image_dark_position", "size", "media_side", "id", "class_name", "attrs"}
@@ -23,10 +29,8 @@ class HeroNode(Node):
         self.kwargs = kwargs
 
     def render(self, context: Context):
-        values = {key: value.resolve(context) for key, value in self.kwargs.items()}
-        unknown = set(values) - _ALLOWED
-        if unknown:
-            raise TemplateSyntaxError("Unknown hero arguments: " + ", ".join(sorted(unknown)))
+        values = resolve_arguments(self.kwargs, context)
+        reject_unknown(values, _ALLOWED, component="hero")
         title = str(values.get("title", "")).strip()
         if not title:
             raise TemplateSyntaxError("hero title must not be empty")
@@ -73,15 +77,7 @@ class HeroSlotNode(Node):
 
 
 def _tag(parser, token):
-    bits = token.split_contents()
-    kwargs = {}
-    for bit in bits[1:]:
-        if "=" not in bit:
-            raise TemplateSyntaxError("hero arguments must use name=value")
-        key, value = bit.split("=", 1)
-        if key in kwargs:
-            raise TemplateSyntaxError(f"hero argument {key} was provided twice")
-        kwargs[key] = parser.compile_filter(value)
+    kwargs = compile_keyword_arguments(parser, token)
     nodes = parser.parse(("endhero",))
     parser.delete_first_token()
     return HeroNode(nodes, kwargs)

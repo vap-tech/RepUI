@@ -2,13 +2,21 @@ from django import template
 from django.template import Node, TemplateSyntaxError
 from django.template.loader import render_to_string
 
+from repui.template_support.arguments import (
+    compile_keyword_arguments,
+    reject_unknown,
+    resolve_arguments,
+)
+
+_ALLOWED = {"id", "label", "value", "keywords", "action", "href"}
+
 
 class BlockNode(Node):
     def __init__(self, kind, values, nodelist):
         self.kind, self.values, self.nodelist = kind, values, nodelist
 
     def render(self, context):
-        values = {key: value.resolve(context) for key, value in self.values.items()}
+        values = resolve_arguments(self.values, context)
         if self.kind == "command_item":
             for key in ("value", "keywords", "action", "href"):
                 values.setdefault(key, None)
@@ -20,14 +28,8 @@ class BlockNode(Node):
 
 
 def _parse(parser, token, kind, end_tag):
-    values = {}
-    for bit in token.split_contents()[1:]:
-        if "=" not in bit:
-            raise TemplateSyntaxError(f"{kind} arguments must use name=value")
-        key, value = bit.split("=", 1)
-        if key not in {"id", "label", "value", "keywords", "action", "href"}:
-            raise TemplateSyntaxError(f"Unknown {kind} argument: {key}")
-        values[key] = parser.compile_filter(value)
+    values = compile_keyword_arguments(parser, token)
+    reject_unknown(values, _ALLOWED, component=kind)
     if kind == "command" and "id" not in values:
         raise TemplateSyntaxError("command requires id")
     nodelist = parser.parse((end_tag,))
