@@ -9,4 +9,16 @@ THEME = {
         "repui/theme/mineral/dark.css",
     ),
     "component_styles": {},
+    "presentation": {
+        "hero": {
+            "alt": "Минералы и лабораторное стекло в палитре Mineral Laboratory",
+            "atlas": "repui/theme/media/hero-atlas.png",
+            "column": 1,
+        },
+        "preview": {
+            "alt": "Интерфейс RepUI в теме Mineral Laboratory",
+            "atlas": "repui/theme/media/preview-atlas.png",
+            "column": 1,
+        },
+    },
 }

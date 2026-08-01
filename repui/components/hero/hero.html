@@ -1,0 +1,45 @@
+{% load repui repui_layout %}
+{% container %}
+  {% stack spacing="lg" %}
+    {% card width="full" %}
+      {% card_header %}
+        <h1>Hero</h1>
+        <p>Вводная секция страницы с текстом, действиями и необязательной медиа-зоной.</p>
+      {% endcard_header %}
+      {% card_body %}
+        {% hero title="RepUI — серверные компоненты для Django" %}
+          {% hero_eyebrow %}RepUI Core{% endhero_eyebrow %}
+          {% hero_description %}
+            Самодостаточные компоненты, HTMX-интеграция и полноценный движок тем.
+          {% endhero_description %}
+          {% hero_actions %}
+            {% button %}Начать работу{% endbutton %}
+            {% button variant="outlined" %}Компоненты{% endbutton %}
+          {% endhero_actions %}
+        {% endhero %}
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}<h2>Публичный API</h2>{% endcard_header %}
+      {% card_body %}
+        <p>Обязателен только <code>title</code>. Контент передаётся слотами <code>hero_eyebrow</code>, <code>hero_description</code> и <code>hero_actions</code>.</p>
+        <p>Без изображений Hero показывает тематический placeholder. Для светлой и тёмной схем можно передать <code>image</code> и <code>image_dark</code>.</p>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}<h2>Проверка</h2>{% endcard_header %}
+      {% card_body %}
+        {% stack spacing="sm" %}
+          <label><input type="checkbox"> Заголовок и описание читаются.</label>
+          <label><input type="checkbox"> Placeholder занимает медиа-зону.</label>
+          <label><input type="checkbox"> Слоты отображаются в правильном порядке.</label>
+          <label><input type="checkbox"> Внутренние Button работают.</label>
+          <label><input type="checkbox"> Мобильная раскладка складывается в одну колонку.</label>
+          <label><input type="checkbox"> Light и dark scheme не ломают компонент.</label>
+        {% endstack %}
+      {% endcard_body %}
+    {% endcard %}
+  {% endstack %}
+{% endcontainer %}

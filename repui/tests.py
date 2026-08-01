@@ -48,3 +48,36 @@ class ThemeRegistryTests(SimpleTestCase):
             self.assertIn("@layer repui.theme", source)
             self.assertNotIn("[data-theme=", source)
             self.assertIn('data-rui-theme="ocean-deep"', source)
+
+
+class HeroAndThemePreviewTests(SimpleTestCase):
+    def test_hero_renders_slots_and_placeholder(self):
+        html = Template(
+            "{% load repui %}"
+            "{% hero title='Заголовок' %}"
+            "{% hero_eyebrow %}Eyebrow{% endhero_eyebrow %}"
+            "{% hero_description %}Описание{% endhero_description %}"
+            "{% hero_actions %}Действие{% endhero_actions %}"
+            "{% endhero %}"
+        ).render(Context())
+        self.assertIn('class="rui-hero"', html)
+        self.assertIn("Заголовок", html)
+        self.assertIn("Eyebrow", html)
+        self.assertIn("Описание", html)
+        self.assertIn("rui-hero__placeholder", html)
+
+    def test_hero_requires_title(self):
+        with self.assertRaises(Exception):
+            Template("{% load repui %}{% hero %}{% endhero %}").render(Context())
+
+    def test_theme_preview_renders_metadata(self):
+        html = Template(
+            "{% load repui %}"
+            "{% theme_preview name='ocean-deep' title='Ocean Deep' badge='Dark-first' %}"
+            "Действие"
+            "{% endtheme_preview %}"
+        ).render(Context())
+        self.assertIn('data-theme-name="ocean-deep"', html)
+        self.assertIn("Ocean Deep", html)
+        self.assertIn("Dark-first", html)
+        self.assertIn("Действие", html)

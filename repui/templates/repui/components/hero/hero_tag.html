@@ -1,0 +1,18 @@
+{% load static repui_attrs %}
+<section class="rui-hero{% if class_name %} {{ class_name }}{% endif %}" data-size="{{ size }}" data-media-side="{{ media_side }}" {% html_attrs attrs %}>
+  <div class="rui-hero__content">
+    {% if slots.eyebrow %}<div class="rui-hero__eyebrow">{{ slots.eyebrow|safe }}</div>{% endif %}
+    <h1 class="rui-hero__title">{{ title }}</h1>
+    {% if slots.description %}<div class="rui-hero__description">{{ slots.description|safe }}</div>{% endif %}
+    {% if body %}<div class="rui-hero__body">{{ body|safe }}</div>{% endif %}
+    {% if slots.actions %}<div class="rui-hero__actions">{{ slots.actions|safe }}</div>{% endif %}
+  </div>
+  <div class="rui-hero__media{% if atlas %} rui-hero__media--atlas{% endif %}"{% if atlas %} style="--rui-hero-atlas-column: {{ atlas_column }}; --rui-hero-atlas-image: url('{% static atlas %}');"{% else %} style="--rui-hero-image-position: {{ image_position }}; --rui-hero-image-dark-position: {{ image_dark_position }};"{% endif %}{% if image_alt %} role="img" aria-label="{{ image_alt }}"{% else %} aria-hidden="true"{% endif %}>
+    {% if atlas %}<span class="rui-hero__atlas" aria-hidden="true"></span>{% else %}
+    {% if slots.media %}{{ slots.media|safe }}{% else %}
+      {% if image %}<img class="rui-hero__image rui-hero__image--light" style="object-position: var(--rui-hero-image-position);" src="{% static image %}" alt="" width="960" height="640">{% endif %}
+      {% if image_dark %}<img class="rui-hero__image rui-hero__image--dark" style="object-position: var(--rui-hero-image-dark-position);" src="{% static image_dark %}" alt="" width="960" height="640">{% endif %}
+      {% if not image and not image_dark %}<span class="rui-hero__placeholder"></span>{% endif %}
+    {% endif %}{% endif %}
+  </div>
+</section>

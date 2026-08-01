@@ -19,5 +19,16 @@ THEME = {
             "autocomplete": "overlay.css", "popover": "overlay.css", "tooltip": "tooltip.css",
         }.items()
     },
+    "presentation": {
+        "hero": {
+            "alt": "Интерфейс RepUI в теме Ocean Deep",
+            "atlas": "repui/theme/media/hero-atlas.png",
+            "column": 2,
+        },
+        "preview": {
+            "alt": "Preview темы Ocean Deep",
+            "atlas": "repui/theme/media/preview-atlas.png",
+            "column": 2,
+        },
+    },
 }
-

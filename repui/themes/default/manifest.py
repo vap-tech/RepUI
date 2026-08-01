@@ -21,4 +21,16 @@ THEME = {
         "autocomplete": ("repui/theme/default/components/overlay.css",),
         "tooltip": ("repui/theme/default/components/tooltip.css",),
     },
+    "presentation": {
+        "hero": {
+            "alt": "Интерфейс RepUI в официальной теме",
+            "atlas": "repui/theme/media/hero-atlas.png",
+            "column": 0,
+        },
+        "preview": {
+            "alt": "Preview официальной темы RepUI",
+            "atlas": "repui/theme/media/preview-atlas.png",
+            "column": 0,
+        },
+    },
 }

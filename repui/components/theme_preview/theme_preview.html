@@ -1,0 +1,39 @@
+{% load repui repui_layout %}
+{% container %}
+  {% stack spacing="lg" %}
+    {% card width="full" %}
+      {% card_header %}
+        <h1>Theme Preview</h1>
+        <p>Карточка презентации темы с preview-зоной, описанием и действиями.</p>
+      {% endcard_header %}
+      {% card_body %}
+        <div style="max-width: 34rem;">
+          {% theme_preview name="ocean-deep" title="Ocean Deep" description="Глубокие графитово-синие поверхности и мягкая биолюминесценция." badge="Dark-first" %}
+            {% button variant="outlined" %}Открыть тему{% endbutton %}
+          {% endtheme_preview %}
+        </div>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}<h2>Публичный API</h2>{% endcard_header %}
+      {% card_body %}
+        <p>Обязательны <code>name</code> и <code>title</code>. Остальные параметры описывают preview и являются необязательными.</p>
+        <p>Действия передаются содержимым блока. Компонент не знает о Theme Registry и не содержит JavaScript.</p>
+      {% endcard_body %}
+    {% endcard %}
+
+    {% card width="full" %}
+      {% card_header %}<h2>Проверка</h2>{% endcard_header %}
+      {% card_body %}
+        {% stack spacing="sm" %}
+          <label><input type="checkbox"> Placeholder или изображение отображается.</label>
+          <label><input type="checkbox"> Badge не ломает заголовок.</label>
+          <label><input type="checkbox"> Действия остаются кликабельными.</label>
+          <label><input type="checkbox"> Состояние selected выделяет карточку.</label>
+          <label><input type="checkbox"> Light и dark scheme переключают media.</label>
+        {% endstack %}
+      {% endcard_body %}
+    {% endcard %}
+  {% endstack %}
+{% endcontainer %}
