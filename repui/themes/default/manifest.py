@@ -1,7 +1,7 @@
 THEME = {
     "name": "default",
     "title": "RepUI Core",
-    "description": "Official RepUI theme with slate surfaces, jade interactions and azure focus.",
+    "description": "Официальная тема RepUI с графитовыми поверхностями, нефритовыми взаимодействиями и голубым фокусом.",
     "version": "1.0",
     "schemes": ("light", "dark"),
     "styles": (
@@ -24,12 +24,12 @@ THEME = {
     "presentation": {
         "hero": {
             "alt": "Интерфейс RepUI в официальной теме",
-            "atlas": "repui/theme/media/hero-atlas.png",
+            "atlas": "repui/theme/media/hero-atlas.webp",
             "column": 0,
         },
         "preview": {
             "alt": "Preview официальной темы RepUI",
-            "atlas": "repui/theme/media/preview-atlas.png",
+            "atlas": "repui/theme/media/preview-atlas.webp",
             "column": 0,
         },
     },

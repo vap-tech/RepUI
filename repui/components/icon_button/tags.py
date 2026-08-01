@@ -21,6 +21,7 @@ class IconButtonNode(Node):
             "rui_menu_trigger": "data-rui-menu-trigger",
             "rui_menu_context": "data-rui-menu-context",
             "chat_id": "data-chat-id",
+            "rui_theme_toggle": "data-rui-theme-toggle",
         }.items():
             value = values.pop(key, None)
             if value is not None and value is not False:

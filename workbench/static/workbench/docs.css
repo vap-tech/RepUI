@@ -45,6 +45,20 @@
     border-radius: 0.5rem;
   }
 
+  .docs-theme-toggle {
+    inline-size: 2.5rem;
+    block-size: 2.5rem;
+    border: 1px solid var(--rui-color-border);
+    border-radius: var(--rui-radius-md);
+    background: transparent;
+    color: var(--rui-color-text);
+  }
+
+  .docs-theme-toggle:hover {
+    border-color: var(--rui-color-primary);
+    background: var(--rui-color-primary-soft);
+  }
+
   .docs-layout {
     min-block-size: calc(100vh - 4rem);
     display: grid;

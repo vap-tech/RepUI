@@ -1,21 +1,14 @@
-<label class="docs-theme-control">
-  <span class="docs-theme-control__label">Режим темы</span>
-  <select class="docs-theme-control__select"
-          data-rui-theme-select
-          aria-label="Режим темы">
-    <option value="system">Системный</option>
-    <option value="light">Светлый</option>
-    <option value="dark">Тёмный</option>
-  </select>
-</label>
+{% load repui %}
 
 <label class="docs-theme-control">
-  <span class="docs-theme-control__label">Палитра</span>
-  <select class="docs-theme-control__select"
-          data-rui-palette-select
-          aria-label="Палитра темы">
-    <option value="default">RepUI Core</option>
-    <option value="mineral">Mineral Laboratory</option>
-    <option value="ocean-deep">Ocean Deep</option>
-  </select>
+    {% icon_button aria_label="Переключить тему" class_name="docs-theme-toggle" rui_theme_toggle=True %}
+        <span data-rui-theme-icon="dark" aria-hidden="true">{% icon "moon" %}</span>
+        <span data-rui-theme-icon="light" aria-hidden="true" hidden>{% icon "sun" %}</span>
+    {% endicon_button %}
+
+    {% select name="docs_appbar_palette" width="content" rui_palette_select=True aria_label="Палитра темы" %}
+        {% select_option value="default" selected=True %}RepUI Core{% endselect_option %}
+        {% select_option value="mineral" %}Mineral Laboratory{% endselect_option %}
+        {% select_option value="ocean-deep" %}Ocean Deep{% endselect_option %}
+    {% endselect %}
 </label>

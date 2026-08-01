@@ -1,7 +1,7 @@
 THEME = {
     "name": "ocean-deep",
     "title": "Ocean Deep",
-    "description": "A calm deep-sea theme with graphite-blue surfaces, bioluminescent cyan focus and restrained teal interactions.",
+    "description": "Спокойная глубоководная тема с графитово-синими поверхностями, биолюминесцентным фокусом и сдержанными бирюзовыми акцентами.",
     "version": "1.0.0",
     "schemes": ("light", "dark"),
     "styles": (
@@ -22,12 +22,12 @@ THEME = {
     "presentation": {
         "hero": {
             "alt": "Интерфейс RepUI в теме Ocean Deep",
-            "atlas": "repui/theme/media/hero-atlas.png",
+            "atlas": "repui/theme/media/hero-atlas.webp",
             "column": 2,
         },
         "preview": {
             "alt": "Preview темы Ocean Deep",
-            "atlas": "repui/theme/media/preview-atlas.png",
+            "atlas": "repui/theme/media/preview-atlas.webp",
             "column": 2,
         },
     },

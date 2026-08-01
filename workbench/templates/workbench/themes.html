@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="{% static 'workbench/favicon.svg' %}">
   {% repui_theme_head %}
-  {% repui_css page appbar panel card button checkbox choice select listbox alert tabs typography tooltip badge code_block inline_code accordion icon navbar %}
+  {% repui_css page appbar panel card button checkbox choice select listbox alert tabs typography tooltip badge code_block inline_code accordion icon icon_button navbar hero theme_preview %}
   <link rel="stylesheet" href="{% static 'repui/theme/mineral/palette.css' %}">
   <link rel="stylesheet" href="{% static 'repui/theme/mineral/light.css' %}">
   <link rel="stylesheet" href="{% static 'repui/theme/mineral/dark.css' %}">
@@ -29,10 +29,12 @@
 <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
 <script type="module" src="{% static 'repui/theme/default/theme.js' %}"></script>
 <script type="module">
+  import { mountSelects } from "{% static 'repui/components/select/select.js' %}";
   import { mountNavbars } from "{% static 'repui/components/navbar/navbar.js' %}";
   import { mountTooltips } from "{% static 'repui/components/tooltip/tooltip.js' %}";
   import { mountCodeBlocks } from "{% static 'repui/components/code_block/code-block.js' %}";
   import { mountAccordions } from "{% static 'repui/components/accordion/accordion.js' %}";
+  mountSelects(document);
   mountNavbars(document);
   mountTooltips(document);
   mountCodeBlocks(document);

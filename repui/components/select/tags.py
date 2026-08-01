@@ -46,6 +46,7 @@ class SelectNode(Node):
             "hx_swap": "hx-swap",
             "rui_appbar_behavior_target": "data-rui-appbar-behavior-target",
             "rui_appbar_surface_target": "data-rui-appbar-surface-target",
+            "rui_palette_select": "data-rui-palette-select",
         }
         for key, html_name in aliases.items():
             value = resolved.pop(key, None)

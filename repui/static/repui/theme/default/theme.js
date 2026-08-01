@@ -75,6 +75,7 @@ function mountPaletteSelect(select) {
   if (select.dataset.ruiMounted === "true") return;
   select.dataset.ruiMounted = "true";
   select.value = getTheme();
+  select.dispatchEvent(new Event("input", { bubbles: true }));
 
   select.addEventListener("change", () => {
     setTheme(select.value);
@@ -82,12 +83,33 @@ function mountPaletteSelect(select) {
 
   document.addEventListener("repui:themechange", (event) => {
     select.value = event.detail.theme;
+    select.dispatchEvent(new Event("input", { bubbles: true }));
   });
+}
+
+function mountThemeToggle(button) {
+  if (button.dataset.ruiMounted === "true") return;
+  button.dataset.ruiMounted = "true";
+
+  const update = () => {
+    const dark = root.dataset.ruiColorScheme === "dark";
+    button.querySelector('[data-rui-theme-icon="dark"]')?.toggleAttribute("hidden", !dark);
+    button.querySelector('[data-rui-theme-icon="light"]')?.toggleAttribute("hidden", dark);
+    button.setAttribute("aria-label", dark ? "Включить светлую тему" : "Включить тёмную тему");
+    button.title = button.getAttribute("aria-label");
+  };
+
+  button.addEventListener("click", () => {
+    setThemeMode(root.dataset.ruiColorScheme === "dark" ? "light" : "dark");
+  });
+  document.addEventListener("repui:themechange", update);
+  update();
 }
 
 export function mountThemeControls(scope = document) {
   scope.querySelectorAll("[data-rui-theme-select]").forEach(mountThemeSelect);
   scope.querySelectorAll("[data-rui-palette-select]").forEach(mountPaletteSelect);
+  scope.querySelectorAll("[data-rui-theme-toggle]").forEach(mountThemeToggle);
 }
 
 media.addEventListener("change", () => {

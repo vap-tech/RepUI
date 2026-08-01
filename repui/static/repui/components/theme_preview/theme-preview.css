@@ -10,7 +10,7 @@
   :where([data-rui-color-scheme="dark"] .rui-theme-preview__image--light) { opacity: 0; }
   :where([data-rui-color-scheme="dark"] .rui-theme-preview__image--dark) { opacity: 1; }
   :where(.rui-theme-preview__placeholder) { background: var(--rui-theme-preview-placeholder-background); }
-  :where(.rui-theme-preview__atlas) { position: absolute; inset: 0; background-image: var(--rui-theme-preview-atlas-image); background-repeat: no-repeat; background-size: 300% 200%; background-position: calc(var(--rui-theme-preview-atlas-column, 0) * 50%) calc(var(--rui-theme-preview-atlas-row, 0) * 100%); }
+  :where(.rui-theme-preview__atlas) { position: absolute; inset: 0; background-image: var(--rui-theme-preview-atlas-image); background-repeat: no-repeat; background-size: 305% 205%; background-position: calc(var(--rui-theme-preview-atlas-column, 0) * 50%) calc(var(--rui-theme-preview-atlas-row, 0) * 100%); }
   :where([data-rui-color-scheme="dark"] .rui-theme-preview__atlas) { --rui-theme-preview-atlas-row: 1; }
   :where(.rui-theme-preview__content) { display: flex; min-width: 0; flex: 1; flex-direction: column; gap: var(--rui-space-2); padding: var(--rui-theme-preview-padding); }
   :where(.rui-theme-preview__heading) { display: flex; align-items: center; justify-content: space-between; gap: var(--rui-space-2); }
