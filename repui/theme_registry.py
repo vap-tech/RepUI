@@ -1,12 +1,14 @@
 """Discoverable RepUI theme manifests."""
 
 from importlib import import_module
+from pathlib import Path
 
 
 def get_theme(name="default"):
     normalized = str(name or "default").strip().lower()
+    module_name = normalized.replace("-", "_")
     try:
-        module = import_module(f"repui.themes.{normalized}.manifest")
+        module = import_module(f"repui.themes.{module_name}.manifest")
     except (ImportError, ModuleNotFoundError):
         return None
 
@@ -15,7 +17,14 @@ def get_theme(name="default"):
 
 
 def list_themes():
-    return ("default", "mineral")
+    root = Path(__file__).resolve().parent / "themes"
+    names = []
+    for directory in sorted(root.iterdir(), key=lambda item: item.name):
+        if (directory / "manifest.py").is_file():
+            theme = get_theme(directory.name)
+            if theme and theme.get("name"):
+                names.append(theme["name"])
+    return tuple(names)
 
 
 def get_theme_assets(name="default", components=()):

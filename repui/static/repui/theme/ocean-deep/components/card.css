@@ -1,0 +1,2 @@
+@layer repui.theme { [data-rui-theme="ocean-deep"] { --rui-card-background: var(--rui-color-surface); --rui-card-foreground: var(--rui-color-text); --rui-card-border-color: var(--rui-color-border-subtle); --rui-card-divider: var(--rui-color-border-subtle); --rui-card-shadow: var(--rui-shadow-xs); } [data-rui-theme="ocean-deep"][data-rui-color-scheme="dark"] { --rui-card-background: color-mix(in oklch, var(--rui-color-surface) 96%, var(--rui-color-primary-soft)); } }
+

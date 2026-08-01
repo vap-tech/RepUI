@@ -1,0 +1,2 @@
+@layer repui.theme { [data-rui-theme="ocean-deep"] { --rui-code-background: var(--rui-color-surface-sunken); --rui-code-foreground: var(--rui-color-text); --rui-code-comment: var(--rui-color-text-muted); --rui-code-keyword: var(--rui-color-accent); --rui-code-string: var(--rui-color-primary); --rui-code-number: var(--rui-color-warning); --rui-code-property: var(--rui-color-info); } }
+

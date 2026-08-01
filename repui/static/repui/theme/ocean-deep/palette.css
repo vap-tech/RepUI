@@ -1,0 +1,34 @@
+@layer repui.theme {
+  [data-rui-theme="ocean-deep"] {
+    --rui-ocean-abyss-0: oklch(99% .004 225);
+    --rui-ocean-abyss-1: oklch(97% .008 225);
+    --rui-ocean-abyss-2: oklch(94% .014 225);
+    --rui-ocean-abyss-5: oklch(68% .039 225);
+    --rui-ocean-abyss-8: oklch(30% .041 225);
+    --rui-ocean-abyss-10: oklch(16.5% .032 225);
+    --rui-ocean-abyss-12: oklch(9% .021 225);
+    --rui-ocean-current-1: oklch(96% .026 184);
+    --rui-ocean-current-3: oklch(84% .092 184);
+    --rui-ocean-current-4: oklch(75% .12 184);
+    --rui-ocean-current-6: oklch(57% .124 184);
+    --rui-ocean-current-7: oklch(48% .108 184);
+    --rui-ocean-current-8: oklch(39% .087 184);
+    --rui-ocean-biolume-1: oklch(97% .02 215);
+    --rui-ocean-biolume-3: oklch(85% .095 215);
+    --rui-ocean-biolume-4: oklch(78% .125 215);
+    --rui-ocean-biolume-6: oklch(61% .145 215);
+    --rui-ocean-biolume-7: oklch(51% .125 215);
+    --rui-ocean-coral-1: oklch(96% .032 24);
+    --rui-ocean-coral-3: oklch(82% .13 24);
+    --rui-ocean-coral-6: oklch(51% .19 24);
+    --rui-ocean-amber-1: oklch(96% .045 82);
+    --rui-ocean-amber-3: oklch(82% .14 78);
+    --rui-ocean-amber-5: oklch(62% .15 70);
+    --rui-ocean-kelp-1: oklch(96% .03 145);
+    --rui-ocean-kelp-2: oklch(90% .07 145);
+    --rui-ocean-kelp-3: oklch(81% .12 145);
+    --rui-ocean-kelp-5: oklch(58% .14 145);
+    --rui-ocean-kelp-6: oklch(49% .125 145);
+  }
+}
+

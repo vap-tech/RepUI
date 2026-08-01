@@ -1,0 +1,20 @@
+@layer repui.theme {
+  [data-rui-theme="ocean-deep"][data-rui-color-scheme="dark"] {
+    color-scheme: dark;
+    --rui-color-page: oklch(10.5% .024 225); --rui-color-surface: oklch(14.5% .034 225); --rui-color-surface-raised: oklch(18.5% .04 225); --rui-color-surface-sunken: oklch(8.5% .021 225);
+    --rui-color-surface-hover: oklch(21.5% .055 194); --rui-color-surface-pressed: oklch(25.5% .073 190); --rui-color-surface-selected: oklch(23.5% .078 190); --rui-color-surface-disabled: oklch(14% .025 225);
+    --rui-color-text: oklch(94% .016 215); --rui-color-text-secondary: oklch(79% .026 215); --rui-color-text-muted: oklch(65% .032 215); --rui-color-text-disabled: oklch(44% .028 215); --rui-color-text-inverse: oklch(12% .03 225);
+    --rui-color-border-subtle: oklch(23% .036 225); --rui-color-border: oklch(31% .05 225); --rui-color-border-strong: oklch(47% .068 220);
+    --rui-color-primary: var(--rui-ocean-current-4); --rui-color-primary-hover: var(--rui-ocean-current-3); --rui-color-primary-pressed: var(--rui-ocean-current-6); --rui-color-primary-soft: oklch(22.5% .075 184); --rui-color-primary-soft-hover: oklch(27% .09 184); --rui-color-on-primary: oklch(12% .036 184);
+    --rui-color-accent: var(--rui-ocean-biolume-4); --rui-color-accent-hover: var(--rui-ocean-biolume-3); --rui-color-accent-soft: oklch(21.5% .073 215); --rui-color-on-accent: oklch(11.5% .032 215);
+    --rui-color-focus: var(--rui-ocean-biolume-4); --rui-color-focus-outer: oklch(78% .125 215 / 26%); --rui-focus-color: var(--rui-color-focus);
+    --rui-color-inverse-surface: oklch(25% .037 225); --rui-color-on-inverse-surface: oklch(96% .012 215); --rui-color-inverse-border: oklch(39% .057 220);
+    --rui-color-success: var(--rui-ocean-kelp-3); --rui-color-success-hover: var(--rui-ocean-kelp-2); --rui-color-success-soft: oklch(21% .063 145); --rui-color-success-border: oklch(39% .092 145); --rui-color-on-success: oklch(13% .035 145);
+    --rui-color-warning: var(--rui-ocean-amber-3); --rui-color-warning-hover: var(--rui-ocean-amber-2, var(--rui-ocean-amber-3)); --rui-color-warning-soft: oklch(22% .055 75); --rui-color-warning-border: oklch(40% .095 76); --rui-color-on-warning: oklch(15% .04 70);
+    --rui-color-danger: var(--rui-ocean-coral-3); --rui-color-danger-hover: var(--rui-ocean-coral-2, var(--rui-ocean-coral-3)); --rui-color-danger-soft: oklch(21.5% .062 24); --rui-color-danger-border: oklch(39% .105 24); --rui-color-on-danger: oklch(13% .035 24);
+    --rui-color-info: var(--rui-ocean-biolume-3); --rui-color-info-hover: var(--rui-ocean-biolume-2, var(--rui-ocean-biolume-3)); --rui-color-info-soft: oklch(21.5% .068 215); --rui-color-info-border: oklch(40% .102 215); --rui-color-on-info: oklch(12% .035 215);
+    --rui-color-selection-background: oklch(31% .09 215); --rui-color-selection-text: oklch(96% .012 215);
+    --rui-shadow-xs: 0 1px 2px rgb(0 0 0 / 24%); --rui-shadow-sm: 0 6px 18px rgb(0 0 0 / 28%), 0 1px 2px rgb(0 0 0 / 20%); --rui-shadow-overlay: 0 28px 76px rgb(0 0 0 / 55%), 0 0 0 1px oklch(78% .08 215 / 7%);
+  }
+}
+

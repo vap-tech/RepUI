@@ -1,0 +1,2 @@
+@layer repui.theme { [data-rui-theme="ocean-deep"] { --rui-tooltip-background: var(--rui-color-inverse-surface); --rui-tooltip-foreground: var(--rui-color-on-inverse-surface); --rui-tooltip-border-color: var(--rui-color-inverse-border); --rui-tooltip-shadow: var(--rui-shadow-md); } }
+

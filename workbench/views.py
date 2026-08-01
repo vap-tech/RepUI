@@ -10,6 +10,7 @@ from .utils import (
     get_component,
     get_components,
 )
+from repui.theme_registry import get_theme_assets
 
 
 def workbench(
@@ -25,6 +26,10 @@ def workbench(
         raise Http404("Unknown RepUI component")
 
     components = get_components()
+    ocean_theme_component_styles = get_theme_assets(
+        "ocean-deep",
+        [component["name"] for component in components],
+    )
 
     return render(
         request,
@@ -34,6 +39,7 @@ def workbench(
             "component_styles": get_component_styles(components),
             "selected_component": selected,
             "appbar_section": "components" if component_name else "home",
+            "ocean_theme_component_styles": ocean_theme_component_styles,
         },
     )
 
@@ -41,6 +47,10 @@ def workbench(
 def component_catalog(request: HttpRequest) -> HttpResponse:
     """Render the static component catalog without Workbench HTMX behavior."""
     components = get_components()
+    ocean_theme_component_styles = get_theme_assets(
+        "ocean-deep",
+        [component["name"] for component in components],
+    )
     return render(
         request,
         "workbench/components.html",
@@ -48,6 +58,7 @@ def component_catalog(request: HttpRequest) -> HttpResponse:
             "components": components,
             "component_styles": get_component_styles(components),
             "appbar_section": "components",
+            "ocean_theme_component_styles": ocean_theme_component_styles,
         },
     )
 
@@ -58,6 +69,10 @@ def theme_authoring(request: HttpRequest) -> HttpResponse:
         "workbench/themes.html",
         {
             "appbar_section": "themes",
+            "ocean_theme_component_styles": get_theme_assets(
+                "ocean-deep",
+                [component["name"] for component in get_components()],
+            ),
         },
     )
 

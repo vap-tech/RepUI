@@ -10,6 +10,10 @@
   <link rel="stylesheet" href="{% static 'repui/theme/mineral/palette.css' %}">
   <link rel="stylesheet" href="{% static 'repui/theme/mineral/light.css' %}">
   <link rel="stylesheet" href="{% static 'repui/theme/mineral/dark.css' %}">
+  <link rel="stylesheet" href="{% static 'repui/theme/ocean-deep/palette.css' %}">
+  <link rel="stylesheet" href="{% static 'repui/theme/ocean-deep/light.css' %}">
+  <link rel="stylesheet" href="{% static 'repui/theme/ocean-deep/dark.css' %}">
+  {% for asset in ocean_theme_component_styles %}<link rel="stylesheet" href="{% static asset %}">{% endfor %}
   <link rel="stylesheet" href="{% static 'workbench/docs.css' %}">
   <link rel="stylesheet" href="{% static 'workbench/workbench.css' %}">
   <title>RepUI Themes</title>

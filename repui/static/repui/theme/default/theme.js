@@ -1,7 +1,7 @@
 const STORAGE_KEY = "rui-theme-mode";
 const THEME_STORAGE_KEY = "rui-theme";
 const MODES = new Set(["light", "dark", "system"]);
-const THEMES = new Set(["default", "mineral"]);
+const THEMES = new Set(["default", "mineral", "ocean-deep"]);
 const root = document.documentElement;
 const media = window.matchMedia("(prefers-color-scheme: dark)");
 

@@ -1,5 +1,6 @@
 from django import template
 from django.utils.safestring import mark_safe
+from repui.theme_registry import list_themes
 
 register = template.Library()
 
@@ -9,7 +10,7 @@ _BOOTSTRAP = r"""
   const key = "rui-theme-mode";
   const themeKey = "rui-theme";
   const allowed = new Set(["light", "dark", "system"]);
-  const themes = new Set(["default", "mineral"]);
+  const themes = new Set(%s);
   let mode = "system";
   let theme = "default";
 
@@ -33,7 +34,7 @@ _BOOTSTRAP = r"""
   root.dataset.ruiTheme = theme;
 })();
 </script>
-"""
+""" % repr(list(list_themes())).replace("'", '"')
 
 @register.simple_tag
 def repui_theme_head():

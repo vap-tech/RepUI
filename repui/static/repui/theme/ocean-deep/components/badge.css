@@ -1,0 +1,2 @@
+@layer repui.theme { [data-rui-theme="ocean-deep"] { --rui-badge-background: var(--rui-color-surface-sunken); --rui-badge-foreground: var(--rui-color-text-secondary); --rui-badge-border: var(--rui-color-border); } [data-rui-theme="ocean-deep"][data-rui-color-scheme="dark"] { --rui-badge-background: var(--rui-color-surface-sunken); } }
+

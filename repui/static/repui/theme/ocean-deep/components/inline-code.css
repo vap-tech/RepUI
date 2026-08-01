@@ -1,0 +1,2 @@
+@layer repui.theme { [data-rui-theme="ocean-deep"] { --rui-inline-code-background: var(--rui-color-surface-sunken); --rui-inline-code-border: var(--rui-color-border); --rui-inline-code-text: var(--rui-color-text-secondary); --rui-inline-code-radius: var(--rui-radius-xs); } }
+

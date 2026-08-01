@@ -1,0 +1,2 @@
+@layer repui.theme { [data-rui-theme="ocean-deep"] { --rui-divider-color: var(--rui-color-border-subtle); } [data-rui-theme="ocean-deep"][data-rui-color-scheme="dark"] { --rui-divider-color: color-mix(in oklch, var(--rui-color-border-subtle) 88%, var(--rui-color-accent) 12%); } }
+
