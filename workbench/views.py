@@ -10,7 +10,7 @@ from .utils import (
     get_component,
     get_components,
 )
-from repui.theme_registry import get_theme_assets
+from repui.theme_registry import get_theme, get_theme_assets, list_themes
 
 
 def workbench(
@@ -30,6 +30,8 @@ def workbench(
         "ocean-deep",
         [component["name"] for component in components],
     )
+    default_theme = get_theme("default") or {}
+    hero = default_theme.get("presentation", {}).get("hero", {})
 
     return render(
         request,
@@ -40,6 +42,11 @@ def workbench(
             "selected_component": selected,
             "appbar_section": "components" if component_name else "home",
             "ocean_theme_component_styles": ocean_theme_component_styles,
+            "home_hero": {
+                "atlas": hero.get("atlas"),
+                "atlas_column": hero.get("column", 0),
+                "image_alt": hero.get("alt", "Интерфейс RepUI"),
+            },
         },
     )
 
@@ -64,6 +71,19 @@ def component_catalog(request: HttpRequest) -> HttpResponse:
 
 
 def theme_authoring(request: HttpRequest) -> HttpResponse:
+    theme_cards = []
+    for name in list_themes():
+        theme = get_theme(name) or {}
+        presentation = theme.get("presentation", {}).get("preview", {})
+        theme_cards.append({
+            "name": name,
+            "title": theme.get("title", name),
+            "description": theme.get("description", ""),
+            "atlas": presentation.get("atlas"),
+            "atlas_column": presentation.get("column", 0),
+            "image_alt": presentation.get("alt", theme.get("title", name)),
+            "badge": "Default" if name == "default" else None,
+        })
     return render(
         request,
         "workbench/themes.html",
@@ -73,6 +93,7 @@ def theme_authoring(request: HttpRequest) -> HttpResponse:
                 "ocean-deep",
                 [component["name"] for component in get_components()],
             ),
+            "theme_cards": theme_cards,
         },
     )
 
