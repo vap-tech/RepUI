@@ -16,11 +16,11 @@
   Build modern interfaces with Django template tags, native HTML,
   minimal JavaScript and first-class HTMX support.
 </p>
-[![CI]()]()
+
 <p align="center">
-  <a href="https://github.com/vap-tech/RepUI/actions/workflows/ci.yml/badge.svg">
+  <a href="https://github.com/vap-tech/RepUI/actions/workflows/ci.yml">
     <img
-      src="https://github.com/vap-tech/RepUI/actions/workflows/ci.yml"
+      src="https://github.com/vap-tech/RepUI/actions/workflows/ci.yml/badge.svg"
       alt="Tests"
     >
   </a>
