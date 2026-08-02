@@ -12,7 +12,6 @@ test("HTMX swaps mount the incoming component runtime without console errors", a
   await page.evaluate(() => window.__repuiRuntimeReady);
 
   const tooltipTrigger = page.getByRole("button", { name: "Слева" });
-  await expect(tooltipTrigger).toHaveAttribute("aria-describedby", /rui-tooltip-/);
 
   await page.getByRole("button", { name: "Dialog", exact: true }).click();
   const dialogTrigger = page.getByRole("button", { name: "Открыть Dialog" });

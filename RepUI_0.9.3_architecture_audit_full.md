@@ -4,6 +4,21 @@
 
 [Скачать архитектурный аудит RepUI 0.9.3](sandbox:/mnt/data/RepUI_0.9.3_architecture_audit.md)
 
+## Статус аудита на 2026-08-02
+
+Этот документ сохраняет первоначальные наблюдения, но часть его критических замечаний уже устранена:
+
+- две конкурирующие runtime-архитектуры сведены к единому bootstrap;
+- HTMX lifecycle централизован в `installRuntime`;
+- component manifests проходят единый validator и system checks;
+- template tag parsing вынесен в общий toolkit;
+- Workbench использует theme registry и не является источником production runtime;
+- browser coverage расширен до 11 Playwright-сценариев;
+- CI проверяет Python 3.12 и 3.13;
+- Playwright хранит visual baseline для Core, Mineral и Ocean Deep.
+
+Разделы ниже следует читать как историю аудита и обоснование решений, а не как список открытых P0-проблем. Актуальная отложенная задача: выделение `NativeSelectAdapter` после появления второго устойчивого потребителя.
+
 ## Общий вывод
 
 У RepUI уже есть сильное ядро:

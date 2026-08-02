@@ -2,6 +2,21 @@
 
 Дата аудита: 2026-08-01
 
+## Актуализация 2026-08-02
+
+Переходные проблемы, описанные ниже в исходном аудите, закрыты последующими изменениями:
+
+- runtime централизован в `repui/static/repui/runtime/bootstrap.js`;
+- HTMX mount/cleanup выполняется через единый bootstrap lifecycle;
+- manifests проверяются через `validate_component_manifest` и Django system checks;
+- template tags используют общий toolkit аргументов;
+- Workbench не выбирает тему напрямую и использует registry;
+- Playwright покрывает Dialog, DropdownMenu, HTMX swap, Menubar, Select и Tooltip;
+- CI запускается на Python 3.12 и 3.13;
+- visual baseline проверяет Workbench в Core, Mineral и Ocean Deep.
+
+Оставшаяся архитектурная задача не является P0/P1-блокером: выделение `NativeSelectAdapter` откладывается до появления второго стабильного потребителя.
+
 ## Краткий вывод
 
 RepUI уже имеет здоровое ядро: самодостаточные компоненты, manifest-driven discovery, token contract, отдельный interaction layer, idempotent mount через WeakMap и native source of truth у Select. Главный риск не в неверной архитектуре, а в незакреплённых runtime- и template-tag контрактах: lifecycle HTMX размазан между компонентами и Workbench, а Django tags многократно повторяют парсинг и нормализацию аргументов.
