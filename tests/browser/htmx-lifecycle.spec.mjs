@@ -19,6 +19,8 @@ test("HTMX swaps mount the incoming component runtime without console errors", a
   await expect(dialogTrigger).toBeVisible();
   await dialogTrigger.click();
   await expect(page.getByRole("dialog")).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("dialog")).toBeHidden();
 
   await page.getByRole("button", { name: "Tooltip", exact: true }).click();
   await expect(tooltipTrigger).toBeVisible();
