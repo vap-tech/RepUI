@@ -1,4 +1,5 @@
 import { CollectionController } from "../../interaction/collection.js";
+import { createOverlayStackEntry } from "../../interaction/overlay-stack.js";
 
 const instances = new WeakMap();
 const normalize = (value) => value.toLocaleLowerCase("ru-RU").replace(/ё/g, "е").trim();
@@ -12,6 +13,7 @@ class CommandPaletteRuntime {
     this.collection = new CollectionController({ loop: true });
     this.abort = new AbortController();
     this.previousFocus = null;
+    this.overlayStack = createOverlayStackEntry({ element: root, onEscape: () => this.close() });
     this.bind();
     this.refresh();
   }
@@ -54,6 +56,7 @@ class CommandPaletteRuntime {
     this.previousFocus = trigger;
     this.root.hidden = false;
     this.root.dataset.open = "true";
+    this.overlayStack.activate();
     document.documentElement.dataset.ruiScrollLocked = "true";
     this.input.focus({ preventScroll: true });
     this.input.select();
@@ -65,6 +68,7 @@ class CommandPaletteRuntime {
   close() {
     if (this.root.hidden) return this;
     this.root.hidden = true;
+    this.overlayStack.deactivate();
     delete this.root.dataset.open;
     delete document.documentElement.dataset.ruiScrollLocked;
     this.previousFocus?.focus?.({ preventScroll: true });
@@ -92,7 +96,6 @@ class CommandPaletteRuntime {
 
   key(event) {
     if (this.root.hidden) return;
-    if (event.key === "Escape") { event.preventDefault(); this.close(); return; }
     if (event.key === "ArrowDown" || event.key === "ArrowUp") {
       event.preventDefault();
       this.setActive(this.collection.move(event.key === "ArrowDown" ? 1 : -1));
@@ -116,6 +119,7 @@ class CommandPaletteRuntime {
   destroy() {
     this.close();
     this.abort.abort();
+    this.overlayStack.destroy();
     instances.delete(this.root);
   }
 }

@@ -1,6 +1,7 @@
 import { CollectionController } from "../../interaction/collection.js";
 import { OverlayPortal } from "../../interaction/overlay-portal.js";
 import { createDismissLayer } from "../../interaction/dismiss-layer.js";
+import { createOverlayStackEntry } from "../../interaction/overlay-stack.js";
 
 const instances = new WeakMap();
 const ROOT_SELECTOR = "[data-rui-autocomplete]";
@@ -31,7 +32,8 @@ class AutocompleteRuntime {
     this.portal = new OverlayPortal(this.input, this.popup, {
       onAnchorHidden: () => this.close(),
     });
-    this.dismiss = createDismissLayer({ anchor: this.input, overlay: this.popup, onDismiss: () => this.close() });
+    this.dismiss = createDismissLayer({ anchor: this.input, overlay: this.popup, escape: false, onDismiss: () => this.close() });
+    this.overlayStack = createOverlayStackEntry({ element: this.popup, onEscape: () => this.close() });
     this.bind();
     this.refresh();
   }
@@ -64,6 +66,7 @@ class AutocompleteRuntime {
     }
     this.popup.hidden = false;
     this.portal.mount();
+    this.overlayStack.activate();
     this.input.setAttribute("aria-expanded", "true");
     this.portal.position();
     return this;
@@ -86,6 +89,7 @@ class AutocompleteRuntime {
   close() {
     if (this.popup.hidden) return this;
     this.popup.hidden = true;
+    this.overlayStack.deactivate();
     this.portal.unmount();
     this.input.setAttribute("aria-expanded", "false");
     this.input.removeAttribute("aria-activedescendant");
@@ -169,6 +173,7 @@ class AutocompleteRuntime {
     this.close();
     this.portal.destroy();
     this.dismiss.destroy();
+    this.overlayStack.destroy();
     this.abort.abort();
     instances.delete(this.element);
   }

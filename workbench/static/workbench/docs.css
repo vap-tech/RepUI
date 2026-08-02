@@ -36,15 +36,6 @@
     margin-inline-start: 0;
   }
 
-  .docs-appbar-control select {
-    min-inline-size: 7rem;
-    padding: 0.4rem 0.6rem;
-    color: var(--rui-color-text);
-    background: var(--rui-color-surface);
-    border: 1px solid var(--rui-color-border);
-    border-radius: 0.5rem;
-  }
-
   .docs-theme-toggle {
     inline-size: 2.5rem;
     block-size: 2.5rem;
@@ -77,12 +68,6 @@
     fill: currentColor;
     stroke: none;
     font-size: 1.35rem;
-  }
-
-  .docs-layout {
-    min-block-size: calc(100vh - 4rem);
-    display: grid;
-    grid-template-columns: minmax(14rem, 18rem) minmax(0, 1fr);
   }
 
   .docs-sidebar {
@@ -124,15 +109,6 @@
   }
 
   @media (max-width: 48rem) {
-    .docs-layout {
-      grid-template-columns: 1fr;
-    }
-
-    .docs-sidebar {
-      border-inline-end: 0;
-      border-block-end: 1px solid var(--rui-color-border);
-    }
-
     .docs-theme-control__label {
       display: none;
     }

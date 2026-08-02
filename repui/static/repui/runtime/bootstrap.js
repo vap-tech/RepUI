@@ -4,7 +4,7 @@ import { mountButtons } from "../components/button/button.js";
 import { mountChips } from "../components/chip/chip.js";
 import { mountCodeBlocks } from "../components/code_block/code-block.js";
 import { mountCollapsibles } from "../components/collapsible/collapsible.js";
-import { mountComboboxes } from "../components/combobox/component.js";
+import { mountComboboxes } from "../components/combobox/combobox.js";
 import { mountCommandPalettes } from "../components/command_palette/command-palette.js";
 import { mountDialogs } from "../components/dialog/dialog.js";
 import { mountDrawers } from "../components/drawer/drawer.js";

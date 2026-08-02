@@ -1,5 +1,6 @@
 import { OverlayPortal } from "../../interaction/overlay-portal.js";
 import { createDismissLayer } from "../../interaction/dismiss-layer.js";
+import { createOverlayStackEntry } from "../../interaction/overlay-stack.js";
 import { getMenu } from "../menu/menu.js";
 
 const instances = new WeakMap();
@@ -23,6 +24,10 @@ class DropdownMenuRuntime {
     this.menuRuntime = getMenu(this.menuRoot);
     this.opened = false;
     this.dismiss = null;
+    this.overlayStack = createOverlayStackEntry({
+      element: this.menu,
+      onEscape: () => this.close({ restoreFocus: true }),
+    });
     this.portal = new OverlayPortal(trigger, this.menu, {
       offset: 8,
       matchAnchorWidth: false,
@@ -93,8 +98,10 @@ class DropdownMenuRuntime {
     this.dismiss = createDismissLayer({
       anchor: this.trigger,
       overlay: this.menu,
-      onDismiss: ({ reason }) => this.close({ restoreFocus: reason === "escape" }),
+      escape: false,
+      onDismiss: () => this.close(),
     });
+    this.overlayStack.activate();
     if (focusPosition) queueMicrotask(() => this.focusItem(focusPosition));
     return this;
   }
@@ -104,6 +111,7 @@ class DropdownMenuRuntime {
     this.menu.hidden = true;
     this.dismiss?.destroy();
     this.dismiss = null;
+    this.overlayStack.deactivate();
     this.portal.unmount();
     this.trigger.setAttribute("aria-expanded", "false");
     this.opened = false;
@@ -122,6 +130,7 @@ class DropdownMenuRuntime {
     // Menu belongs to the shared runtime bootstrap. DropdownMenu only owns
     // its trigger, portal and dismiss layer.
     this.portal.destroy();
+    this.overlayStack.destroy();
     this.dismiss?.destroy();
     instances.delete(this.trigger);
   }

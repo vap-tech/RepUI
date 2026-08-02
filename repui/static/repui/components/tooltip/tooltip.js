@@ -1,5 +1,6 @@
 import { OverlayPortal } from "../../interaction/overlay-portal.js";
 import { createDismissLayer } from "../../interaction/dismiss-layer.js";
+import { createOverlayStackEntry } from "../../interaction/overlay-stack.js";
 
 const instances = new WeakMap();
 let uid = 0;
@@ -41,7 +42,8 @@ class TooltipRuntime {
       arrow: this.arrow,
       onAnchorHidden: () => this.close(),
     });
-    this.dismiss = createDismissLayer({ anchor: this.trigger, overlay: this.popup, outsidePointer: false, onDismiss: () => this.close() });
+    this.dismiss = createDismissLayer({ anchor: this.trigger, overlay: this.popup, outsidePointer: false, escape: false, onDismiss: () => this.close() });
+    this.overlayStack = createOverlayStackEntry({ element: this.popup, onEscape: () => this.close() });
     this.openDelay = 650;
     this.openTimer = 0;
     this.abort = new AbortController();
@@ -60,6 +62,7 @@ class TooltipRuntime {
       if (this.popup.hidden) {
         this.popup.hidden = false;
         this.portal.mount();
+        this.overlayStack.activate();
       }
     }, this.openDelay);
     return this;
@@ -70,6 +73,7 @@ class TooltipRuntime {
     this.openTimer = 0;
     if (this.popup.hidden) return this;
     this.popup.hidden = true;
+    this.overlayStack.deactivate();
     this.portal.unmount();
     return this;
   }
@@ -78,6 +82,7 @@ class TooltipRuntime {
     this.close();
     this.portal.destroy();
     this.dismiss.destroy();
+    this.overlayStack.destroy();
     this.abort.abort();
     instances.delete(this.element);
   }

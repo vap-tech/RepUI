@@ -1,6 +1,8 @@
 import { CollectionController } from "../../interaction/collection.js";
 import { OverlayPortal } from "../../interaction/overlay-portal.js";
 import { createDismissLayer } from "../../interaction/dismiss-layer.js";
+import { NativeSelectAdapter } from "../../interaction/native-select-adapter.js";
+import { createOverlayStackEntry } from "../../interaction/overlay-stack.js";
 
 const instances = new WeakMap();
 let generatedId = 0;
@@ -24,21 +26,11 @@ function collectRoots(root) {
   return elements;
 }
 
-function optionRecord(option, index) {
-  return {
-    id: option.dataset.ruiId || option.value || `option-${index}`,
-    index,
-    value: option.value,
-    label: option.textContent.trim(),
-    selected: option.selected,
-    disabled: option.disabled,
-  };
-}
-
 class SelectRuntime {
   constructor(select) {
     this.element = select;
     this.select = select;
+    this.native = new NativeSelectAdapter(select);
     this.collection = new CollectionController({
       loop: false,
       disabledItemsFocusable: false,
@@ -54,6 +46,10 @@ class SelectRuntime {
       onAnchorHidden: () => this.close(),
     });
     this.dismiss = null;
+    this.overlayStack = createOverlayStackEntry({
+      element: this.popup,
+      onEscape: () => this.close(true),
+    });
     this.bind();
     this.refresh();
   }
@@ -234,7 +230,7 @@ class SelectRuntime {
   renderOptions() {
     this.listbox.replaceChildren();
     this.optionNodes = [];
-    const options = [...this.select.options];
+    const options = this.native.options;
 
     options.forEach((option, index) => {
       const node = document.createElement("div");
@@ -263,13 +259,11 @@ class SelectRuntime {
       this.listbox.append(empty);
     }
 
-    this.collection.setItems(
-      options.map(optionRecord)
-    );
+    this.collection.setItems(this.native.records());
   }
 
   syncFromNative() {
-    const selected = [...this.select.selectedOptions];
+    const selected = this.native.selectedOptions;
     const placeholder =
       this.select.dataset.placeholder || "Выберите значение";
 
@@ -317,7 +311,7 @@ class SelectRuntime {
   }
 
   selectIndex(index, originalEvent = null) {
-    const option = this.select.options[index];
+    const option = this.native.optionAt(index);
     if (
       !option ||
       option.disabled ||
@@ -327,20 +321,11 @@ class SelectRuntime {
       return;
     }
 
-    if (this.select.multiple) {
-      option.selected = !option.selected;
-    } else {
-      this.select.selectedIndex = index;
-    }
+    this.native.selectIndex(index);
 
     this.syncFromNative();
 
-    this.select.dispatchEvent(
-      new Event("input", { bubbles: true })
-    );
-    this.select.dispatchEvent(
-      new Event("change", { bubbles: true })
-    );
+    this.native.emitChange();
 
     this.wrapper.dispatchEvent(
       new CustomEvent("rui:change", {
@@ -364,9 +349,7 @@ class SelectRuntime {
   }
 
   refreshCollectionOnly() {
-    this.collection.setItems(
-      [...this.select.options].map(optionRecord)
-    );
+    this.collection.setItems(this.native.records());
   }
 
   sizeToContent() {
@@ -394,8 +377,10 @@ class SelectRuntime {
     this.dismiss = createDismissLayer({
       anchor: this.trigger,
       overlay: this.popup,
-      onDismiss: ({ reason }) => this.close(reason === "escape"),
+      escape: false,
+      onDismiss: () => this.close(),
     });
+    this.overlayStack.activate();
     this.wrapper.dataset.open = "true";
     this.trigger.setAttribute("aria-expanded", "true");
 
@@ -420,6 +405,7 @@ class SelectRuntime {
     this.isOpen = false;
     this.dismiss?.destroy();
     this.dismiss = null;
+    this.overlayStack.deactivate();
     this.portal.unmount();
     this.popup.hidden = true;
     this.wrapper.dataset.open = "false";
@@ -475,6 +461,7 @@ class SelectRuntime {
   destroy() {
     this.close();
     this.portal.destroy();
+    this.overlayStack.destroy();
     this.dismiss?.destroy();
     this.abortController.abort();
     clearTimeout(this.typeaheadTimer);
@@ -515,22 +502,11 @@ class SelectRuntime {
   }
 
   get value() {
-    return this.select.multiple
-      ? [...this.select.selectedOptions].map(
-          (option) => option.value
-        )
-      : this.select.value;
+    return this.native.value;
   }
 
   set value(nextValue) {
-    const values = new Set(
-      (Array.isArray(nextValue) ? nextValue : [nextValue])
-        .map(String)
-    );
-
-    [...this.select.options].forEach((option) => {
-      option.selected = values.has(option.value);
-    });
+    this.native.setValue(nextValue);
 
     this.syncFromNative();
     this.refreshCollectionOnly();

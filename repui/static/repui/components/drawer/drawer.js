@@ -20,6 +20,7 @@ class DrawerRuntime {
     this.abort = new AbortController();
     this.returnFocus = null;
     if (!this.panel) throw new Error("Drawer requires .rui-drawer__panel");
+    this.overlayStack = createOverlayStackEntry({ element, onEscape: () => this.close() });
     this.bind();
     this.refresh();
   }
@@ -39,7 +40,7 @@ class DrawerRuntime {
   }
 
   activate(moveFocus = true) {
-    if (this.modal) document.body.dataset.ruiDrawerOpen = "true";
+    if (this.modal) { document.body.dataset.ruiDrawerOpen = "true"; this.overlayStack.activate(); }
     if (moveFocus) (this.focusables()[0] || this.panel).focus();
   }
 
@@ -55,6 +56,7 @@ class DrawerRuntime {
   close({ restoreFocus = true } = {}) {
     if (!this.openState || !this.modal) return this;
     this.element.hidden = true;
+    this.overlayStack.deactivate();
     delete document.body.dataset.ruiDrawerOpen;
     if (restoreFocus) this.returnFocus?.focus?.();
     this.element.dispatchEvent(new CustomEvent("rui:drawerclose", { bubbles: true }));
@@ -90,11 +92,8 @@ class DrawerRuntime {
       if (trigger?.dataset.ruiDrawerOpen === this.element.id) this.open(trigger);
     }, { signal });
     document.addEventListener("keydown", (event) => {
-      if (!this.openState) return;
-      if (event.key === "Escape" && this.modal) {
-        event.preventDefault();
-        this.close();
-      } else if (event.key === "Tab") {
+      if (!this.openState || !this.overlayStack.isTop()) return;
+      if (event.key === "Tab") {
         this.trap(event);
       }
     }, { signal });
@@ -102,6 +101,7 @@ class DrawerRuntime {
 
   destroy() {
     this.abort.abort();
+    this.overlayStack.destroy();
     if (this.openState && this.modal) delete document.body.dataset.ruiDrawerOpen;
     instances.delete(this.element);
   }
@@ -119,3 +119,4 @@ export function mountDrawers(root = document) {
     return instance;
   });
 }
+import { createOverlayStackEntry } from "../../interaction/overlay-stack.js";

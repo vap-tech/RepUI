@@ -1,5 +1,7 @@
+import { createOverlayStackEntry } from "../../interaction/overlay-stack.js";
+
 const instances = new WeakMap();
-const stack = [];
+const openDialogs = [];
 
 function focusable(root) {
   return [...root.querySelectorAll(
@@ -14,6 +16,10 @@ export class DialogController {
     this.backdrop = root.querySelector('[data-rui-dialog-close]');
     this.abort = new AbortController();
     this.restoreTarget = null;
+    this.overlayStack = createOverlayStackEntry({
+      element: root,
+      onEscape: () => this.close(),
+    });
     this.onKeydown = this.onKeydown.bind(this);
     const { signal } = this.abort;
     document.addEventListener('click', (event) => {
@@ -37,7 +43,8 @@ export class DialogController {
     this.restoreTarget = trigger instanceof HTMLElement ? trigger : null;
     this.root.hidden = false;
     this.root.setAttribute('aria-hidden', 'false');
-    stack.push(this);
+    openDialogs.push(this);
+    this.overlayStack.activate();
     document.body.dataset.ruiScrollLock = 'true';
     document.addEventListener('keydown', this.onKeydown, { signal: this.abort.signal });
     requestAnimationFrame(() => (focusable(this.panel)[0] || this.panel)?.focus?.());
@@ -46,23 +53,19 @@ export class DialogController {
   }
 
   close() {
-    if (!this.opened || stack.at(-1) !== this) return this;
+    if (!this.opened || !this.overlayStack.isTop()) return this;
     this.root.hidden = true;
     this.root.setAttribute('aria-hidden', 'true');
-    stack.splice(stack.lastIndexOf(this), 1);
-    if (!stack.length) delete document.body.dataset.ruiScrollLock;
+    openDialogs.splice(openDialogs.lastIndexOf(this), 1);
+    this.overlayStack.deactivate();
+    if (!openDialogs.length) delete document.body.dataset.ruiScrollLock;
     this.restoreTarget?.focus({ preventScroll: true });
     this.root.dispatchEvent(new CustomEvent('rui:dialogclose', { bubbles: true }));
     return this;
   }
 
   onKeydown(event) {
-    if (stack.at(-1) !== this) return;
-    if (event.key === 'Escape') {
-      event.preventDefault();
-      this.close();
-      return;
-    }
+    if (!this.overlayStack.isTop()) return;
     if (event.key !== 'Tab') return;
     const nodes = focusable(this.panel);
     if (!nodes.length) {
@@ -83,6 +86,7 @@ export class DialogController {
 
   destroy() {
     this.close();
+    this.overlayStack.destroy();
     this.abort.abort();
     instances.delete(this.root);
   }

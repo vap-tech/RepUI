@@ -47,9 +47,20 @@ class WorkbenchEngineTests(SimpleTestCase):
         html = render_to_string(
             "workbench/partials/sidebar.html",
             {"components": [
-                {"name": "button", "title": "Button", "enabled": True, "error": ""},
+                {
+                    "name": "button",
+                    "title": "Button",
+                    "enabled": True,
+                    "error": "",
+                    "navigation_attrs": {
+                        "hx-get": "/docs/partial/button/",
+                        "hx-target": "#component-panel",
+                        "hx-swap": "innerHTML",
+                    },
+                },
             ]},
         )
+        self.assertIn('class="rui-list-item-button"', html)
         self.assertIn('hx-swap="innerHTML"', html)
         self.assertNotIn("hx-push-url", html)
         self.assertNotIn("hx-replace-url", html)

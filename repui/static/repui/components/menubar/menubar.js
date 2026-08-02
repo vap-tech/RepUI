@@ -1,5 +1,6 @@
 import { OverlayPortal } from "../../interaction/overlay-portal.js";
 import { createDismissLayer } from "../../interaction/dismiss-layer.js";
+import { createOverlayStackEntry } from "../../interaction/overlay-stack.js";
 import { createRovingGroup } from "../../interaction/roving.js";
 import { getMenu } from "../menu/menu.js";
 
@@ -18,6 +19,7 @@ function mount(root) {
   let active = null;
   let portal = null;
   let dismiss = null;
+  const overlayStack = createOverlayStackEntry({ element: root, onEscape: () => close(true) });
   const close = (restore = false) => {
     const previous = active;
     items.forEach((item) => {
@@ -32,6 +34,7 @@ function mount(root) {
     }
     dismiss?.destroy();
     dismiss = null;
+    overlayStack.deactivate();
     if (restore) previous?.querySelector(".rui-menubar__trigger")?.focus({ preventScroll: true });
     active = null;
   };
@@ -58,7 +61,8 @@ function mount(root) {
     portals.set(item, portal);
     portal.mount();
     portal.activate();
-    dismiss = createDismissLayer({ anchor: trigger, overlay: menu, onDismiss: ({ reason }) => close(reason === "escape") });
+    dismiss = createDismissLayer({ anchor: trigger, overlay: menu, escape: false, onDismiss: () => close() });
+    overlayStack.activate();
     if (focusFirst) queueMicrotask(() => menuRuntime.focusFirst());
   };
   items.forEach((item, index) => {
@@ -75,7 +79,7 @@ function mount(root) {
       close(false);
     }, { signal: abort.signal });
   });
-  const api = { root, refresh() { roving.refresh(); return api; }, focusFirst() { roving.focusFirst(); return api; }, focusLast() { roving.focusLast(); return api; }, destroy() { close(); items.forEach((item) => portals.get(item)?.destroy()); roving.destroy(); abort.abort(); instances.delete(root); } };
+  const api = { root, refresh() { roving.refresh(); return api; }, focusFirst() { roving.focusFirst(); return api; }, focusLast() { roving.focusLast(); return api; }, destroy() { close(); overlayStack.destroy(); items.forEach((item) => portals.get(item)?.destroy()); roving.destroy(); abort.abort(); instances.delete(root); } };
   instances.set(root, api);
   return api;
 }

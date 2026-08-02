@@ -1,24 +1,24 @@
 {% load repui %}
 {% panel surface="sidebar" width="full" height="full" class_name="docs-sidebar" %}
   <nav aria-label="Компоненты RepUI">
-    {% for item in components %}
-      {% if item.enabled %}
-        <button type="button" class="workbench__nav-item"
-                hx-get="{% url 'workbench:component-partial' item.name %}"
-                hx-target="#component-panel" hx-swap="innerHTML">
-          {{ item.title }}
-        </button>
-      {% else %}
-        {% tooltip title=item.error|default:"Workbench-страница пока не добавлена" %}
-          <span class="workbench__nav-tooltip-trigger">
-            <button type="button" class="workbench__nav-item" disabled>
+    {% list disable_padding=True %}
+      {% for item in components %}
+        <li>
+          {% if item.enabled %}
+            {% list_item_button attrs=item.navigation_attrs %}
               {{ item.title }}
-            </button>
-          </span>
-        {% endtooltip %}
-      {% endif %}
-    {% empty %}
-      <p>Компоненты не найдены.</p>
-    {% endfor %}
+            {% endlist_item_button %}
+          {% else %}
+            {% tooltip title=item.error|default:"Workbench-страница пока не добавлена" %}
+              <span class="workbench__nav-tooltip-trigger">
+                {% list_item_button disabled=True %}{{ item.title }}{% endlist_item_button %}
+              </span>
+            {% endtooltip %}
+          {% endif %}
+        </li>
+      {% empty %}
+        <li>Компоненты не найдены.</li>
+      {% endfor %}
+    {% endlist %}
   </nav>
 {% endpanel %}

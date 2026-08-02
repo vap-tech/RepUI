@@ -6,7 +6,7 @@ COMPONENT = {
     "styles": (
         "repui/components/combobox/component.css",
     ),
-    "scripts": ("repui/components/combobox/component.js",),
+    "scripts": ("repui/components/combobox/combobox.js",),
     "template": "repui/components/combobox/combobox.html",
     "runtime": {
         "required": True,

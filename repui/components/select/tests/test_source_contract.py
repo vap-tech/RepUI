@@ -15,11 +15,16 @@ class SelectSourceContractTests(SimpleTestCase):
         self.assertIn("export function mountSelects", source)
 
     def test_native_events_are_dispatched(self):
-        source = (
+        select_source = (
             Path(__file__).resolve().parents[3]
             / "static/repui/components/select/select.js"
         ).read_text(encoding="utf-8")
+        adapter_source = (
+            Path(__file__).resolve().parents[3]
+            / "static/repui/interaction/native-select-adapter.js"
+        ).read_text(encoding="utf-8")
 
-        self.assertIn('new Event("input"', source)
-        self.assertIn('new Event("change"', source)
-        self.assertIn('"rui:change"', source)
+        self.assertIn("NativeSelectAdapter", select_source)
+        self.assertIn('"rui:change"', select_source)
+        self.assertIn('new Event("input"', adapter_source)
+        self.assertIn('new Event("change"', adapter_source)

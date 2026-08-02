@@ -26,13 +26,39 @@ class OverlayContractTests(SimpleTestCase):
         self.assertIn('reason: "escape"', source)
         self.assertIn("destroy()", source)
 
+    def test_overlay_stack_owns_escape_for_the_topmost_layer(self):
+        source = self.read("interaction/overlay-stack.js")
+        self.assertIn("createOverlayStackEntry", source)
+        self.assertIn('event.key !== "Escape"', source)
+        self.assertIn("entries.at(-1)", source)
+        self.assertIn("stopImmediatePropagation", source)
+
+    def test_overlay_consumers_delegate_escape_to_the_stack(self):
+        component_paths = (
+            "components/select/select.js",
+            "components/tooltip/tooltip.js",
+            "components/popover/popover.js",
+            "components/autocomplete/autocomplete.js",
+            "components/combobox/combobox.js",
+            "components/dropdown_menu/dropdown-menu.js",
+            "components/menubar/menubar.js",
+            "components/dialog/dialog.js",
+            "components/drawer/drawer.js",
+            "components/command_palette/command-palette.js",
+        )
+        for relative in component_paths:
+            source = self.read(relative)
+            self.assertIn("createOverlayStackEntry", source, relative)
+        for relative in component_paths[:7]:
+            self.assertIn("escape:false", self.read(relative).replace(" ", ""), relative)
+
     def test_overlay_consumers_no_longer_use_legacy_callback(self):
         component_paths = (
             "components/select/select.js",
             "components/tooltip/tooltip.js",
             "components/popover/popover.js",
             "components/autocomplete/autocomplete.js",
-            "components/combobox/component.js",
+            "components/combobox/combobox.js",
             "components/dropdown_menu/dropdown-menu.js",
         )
         for relative in component_paths:

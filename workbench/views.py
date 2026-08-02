@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from django.http import Http404, HttpRequest, HttpResponse
 from django.shortcuts import render
+from django.urls import reverse
 from django.template import engines
 
 from .utils import (
@@ -26,6 +27,15 @@ def workbench(
         raise Http404("Unknown RepUI component")
 
     components = get_components()
+    for component in components:
+        component["navigation_attrs"] = {
+            "hx-get": reverse(
+                "workbench:component-partial",
+                args=(component["name"],),
+            ),
+            "hx-target": "#component-panel",
+            "hx-swap": "innerHTML",
+        }
     default_theme = get_theme("default") or {}
     hero = default_theme.get("presentation", {}).get("hero", {})
 

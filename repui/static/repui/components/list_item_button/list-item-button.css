@@ -2,11 +2,29 @@
   .rui-list-item-button {
     display: block;
     inline-size: 100%;
+    padding: var(--rui-list-item-button-padding, var(--rui-space-3));
     border: var(--rui-list-item-button-border, 0);
     border-radius: var(--rui-list-item-button-radius, var(--rui-radius-md));
     background: var(--rui-list-item-button-background, transparent);
     color: inherit;
+    font: inherit;
     text-align: start;
+    text-decoration: none;
     cursor: pointer;
+  }
+
+  .rui-list-item-button:hover:not(:disabled):not([aria-disabled="true"]) {
+    background: var(--rui-list-item-button-hover-background, var(--rui-color-surface-hover));
+  }
+
+  .rui-list-item-button:focus-visible {
+    outline: var(--rui-focus-width) solid var(--rui-focus-color);
+    outline-offset: 2px;
+  }
+
+  .rui-list-item-button:disabled,
+  .rui-list-item-button[aria-disabled="true"] {
+    color: var(--rui-color-text-disabled);
+    cursor: not-allowed;
   }
 }
