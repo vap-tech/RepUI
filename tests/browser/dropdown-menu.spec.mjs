@@ -2,7 +2,8 @@ import { expect, test } from "@playwright/test";
 
 test.describe("DropdownMenu", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/docs/component/dropdown-menu/");
+    await page.goto("/docs/component/dropdown_menu/");
+    await page.evaluate(() => window.__repuiRuntimeReady);
   });
 
   test("opens, moves focus, and closes predictably", async ({ page }) => {
@@ -31,7 +32,10 @@ test.describe("DropdownMenu", () => {
     await trigger.click();
     await expect(menu).toBeVisible();
 
-    await page.getByRole("heading", { name: "DropdownMenu" }).click();
+    await page.getByRole("heading", {
+      name: "DropdownMenu",
+      exact: true,
+    }).click();
     await expect(menu).toBeHidden();
   });
 });
