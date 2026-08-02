@@ -8,6 +8,10 @@
     border-radius: var(--rui-menu-radius);
     background: var(--rui-menu-background);
     box-shadow: var(--rui-menu-shadow);
+    color: var(--rui-color-text);
+    font-family: var(--rui-font-family);
+    font-size: var(--rui-text-body-size);
+    line-height: var(--rui-text-body-line-height);
   }
 
   .rui-menu[data-orientation="horizontal"] {
@@ -20,6 +24,7 @@
     padding: var(--rui-menu-item-padding);
     background: transparent;
     color: inherit;
+    font: inherit;
     text-align: start;
     cursor: pointer;
   }

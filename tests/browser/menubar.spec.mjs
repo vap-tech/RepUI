@@ -39,3 +39,20 @@ test("Menubar keeps the section open after pointer hover and click", async ({
   await expect(page.getByRole("menuitem", { name: "Светлая тема" }))
     .toBeVisible();
 });
+
+test("Menubar menu keeps RepUI typography after portal mount", async ({
+  page,
+}) => {
+  await page.goto("/docs/component/menubar/");
+  await page.evaluate(() => window.__repuiRuntimeReady);
+  await page.getByRole("button", { name: "Файл" }).click();
+
+  await expect(page.getByRole("menuitem", { name: "Новый" })).toHaveCSS(
+    "font-family",
+    /Manrope/,
+  );
+  await expect(page.getByRole("menuitem", { name: "Новый" })).toHaveCSS(
+    "font-size",
+    "16px",
+  );
+});
