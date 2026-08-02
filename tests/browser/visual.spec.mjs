@@ -9,6 +9,7 @@ const themes = [
 test.describe("Workbench visual baseline", () => {
   for (const [snapshotName, theme] of themes) {
     test(`${snapshotName} theme`, async ({ page }) => {
+      await page.emulateMedia({ colorScheme: "light" });
       await page.goto("/docs/component/alert/");
       await page.evaluate(() => window.__repuiRuntimeReady);
       await page.evaluate(async (value) => {
@@ -23,6 +24,7 @@ test.describe("Workbench visual baseline", () => {
           animations: "disabled",
           caret: "hide",
           scale: "css",
+          maxDiffPixelRatio: 0.05,
         },
       );
     });

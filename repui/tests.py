@@ -5,6 +5,7 @@ from unittest.mock import patch
 
 from repui import component_registry, theme_registry
 from repui.component_manifest import validate_component_manifest
+from repui.theme_manifest import validate_theme_manifest
 from repui.component_registry import get_component_manifest, list_component_names
 from repui.templatetags.repui_css import _render_css
 from repui.theme_registry import get_theme, get_theme_assets, list_themes
@@ -18,6 +19,7 @@ class ThemeRegistryTests(SimpleTestCase):
         self.assertIn('"default"', html)
         self.assertIn('"mineral"', html)
         self.assertIn('"ocean-deep"', html)
+        self.assertIn("ruiAvailableThemes", html)
         self.assertEqual(list_themes(), ("default", "mineral", "ocean-deep"))
         self.assertEqual(get_theme("mineral")["name"], "mineral")
         self.assertEqual(get_theme("ocean-deep")["title"], "Ocean Deep")
@@ -53,6 +55,34 @@ class ThemeRegistryTests(SimpleTestCase):
                     ),
                     [],
                 )
+
+    def test_all_theme_manifests_follow_the_canonical_contract(self):
+        for name in list_themes():
+            with self.subTest(theme=name):
+                self.assertEqual(
+                    validate_theme_manifest(name, get_theme(name)),
+                    [],
+                )
+
+    def test_theme_manifest_rejects_invalid_presentation(self):
+        manifest = {
+            "name": "example",
+            "title": "Example",
+            "description": "Example theme",
+            "version": "1.0",
+            "schemes": ("light",),
+            "styles": (),
+            "component_styles": {},
+            "presentation": {
+                "hero": {"alt": "Hero", "atlas": "hero.webp", "column": -1},
+            },
+        }
+        errors = validate_theme_manifest("example", manifest)
+        self.assertIn(
+            "presentation.hero.column must be a non-negative integer",
+            errors,
+        )
+        self.assertIn("presentation.preview must be a dict", errors)
 
     def test_component_manifests_use_contract_styles_not_default_theme_paths(self):
         component_root = Path(__file__).resolve().parent / "components"

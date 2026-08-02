@@ -14,6 +14,17 @@ from .utils import (
 from repui.theme_registry import get_theme, list_themes
 
 
+def get_theme_choices():
+    return tuple(
+        {
+            "name": name,
+            "title": (get_theme(name) or {}).get("title", name),
+            "is_default": name == "default",
+        }
+        for name in list_themes()
+    )
+
+
 def workbench(
     request: HttpRequest,
     component_name: str | None = None,
@@ -47,6 +58,7 @@ def workbench(
             "component_styles": get_component_styles(components),
             "selected_component": selected,
             "appbar_section": "components" if component_name else "home",
+            "theme_choices": get_theme_choices(),
             "home_hero": {
                 "atlas": hero.get("atlas"),
                 "atlas_column": hero.get("column", 0),
@@ -63,6 +75,7 @@ def roadmap(request: HttpRequest) -> HttpResponse:
         "workbench/roadmap.html",
         {
             "appbar_section": "roadmap",
+            "theme_choices": get_theme_choices(),
             "components": components,
             "roadmap_phases": (
                 ("Укрепить существующие контракты", "Сейчас", "Клавиатура, HTMX lifecycle, portal context и baseline-проверки официальных тем."),
@@ -94,6 +107,7 @@ def theme_authoring(request: HttpRequest) -> HttpResponse:
         "workbench/themes.html",
         {
             "appbar_section": "themes",
+            "theme_choices": get_theme_choices(),
             "theme_cards": theme_cards,
         },
     )

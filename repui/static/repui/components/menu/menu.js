@@ -30,6 +30,7 @@ function mountMenu(root) {
   }, { signal: abort.signal });
 
   const api = {
+    element: root,
     root,
     refresh() {
       roving.refresh();

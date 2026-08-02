@@ -2,6 +2,7 @@ const instances = new WeakMap();
 
 class ToastManager {
   constructor(region, root = region) {
+    this.element = region;
     this.region = region;
     this.abort = new AbortController();
     root.addEventListener("click", (event) => {

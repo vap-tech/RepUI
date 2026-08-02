@@ -11,6 +11,7 @@ function focusable(root) {
 
 export class DialogController {
   constructor(root) {
+    this.element = root;
     this.root = root;
     this.panel = root.querySelector('[role="dialog"]');
     this.backdrop = root.querySelector('[data-rui-dialog-close]');

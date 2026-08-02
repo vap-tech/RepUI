@@ -79,7 +79,7 @@ function mount(root) {
       close(false);
     }, { signal: abort.signal });
   });
-  const api = { root, refresh() { roving.refresh(); return api; }, focusFirst() { roving.focusFirst(); return api; }, focusLast() { roving.focusLast(); return api; }, destroy() { close(); overlayStack.destroy(); items.forEach((item) => portals.get(item)?.destroy()); roving.destroy(); abort.abort(); instances.delete(root); } };
+  const api = { element: root, root, refresh() { roving.refresh(); return api; }, focusFirst() { roving.focusFirst(); return api; }, focusLast() { roving.focusLast(); return api; }, destroy() { close(); overlayStack.destroy(); items.forEach((item) => portals.get(item)?.destroy()); roving.destroy(); abort.abort(); instances.delete(root); } };
   instances.set(root, api);
   return api;
 }

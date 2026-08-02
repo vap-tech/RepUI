@@ -79,9 +79,15 @@ class OverlayContractTests(SimpleTestCase):
     def test_runtime_bootstrap_owns_htmx_lifecycle(self):
         source = self.read("runtime/bootstrap.js")
         self.assertIn("installRuntime", source)
+        self.assertIn("RUNTIME_ADAPTERS", source)
+        self.assertIn("const installations = new WeakMap()", source)
+        self.assertIn("installations.get(root)", source)
+        self.assertIn("installations.delete(root)", source)
         self.assertIn('"htmx:afterSwap"', source)
         self.assertIn('"htmx:beforeCleanupElement"', source)
         self.assertIn("destroyWithin", source)
+        self.assertIn("const node = instance?.element", source)
+        self.assertNotIn("function nodeFor", source)
 
         self_managing = (
             "components/autocomplete/autocomplete.js",

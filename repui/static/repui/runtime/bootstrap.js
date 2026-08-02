@@ -22,7 +22,11 @@ import { mountToasts } from "../components/toast/toast.js";
 import { mountTooltips } from "../components/tooltip/tooltip.js";
 import { mountTrees } from "../components/tree/tree.js";
 
-const ADAPTERS = [
+/**
+ * Official global runtime registry. Page-local enhancements may stay outside it.
+ * Keep primitive runtimes before composites that acquire their shared handles.
+ */
+export const RUNTIME_ADAPTERS = [
   ["accordion", mountAccordions],
   ["autocomplete", mountAutocompletes],
   ["button", mountButtons],
@@ -49,13 +53,7 @@ const ADAPTERS = [
   ["tree", mountTrees],
 ];
 
-function nodeFor(instance) {
-  return instance?.element
-    || instance?.root
-    || instance?.region
-    || instance?.trigger
-    || null;
-}
+const installations = new WeakMap();
 
 function isWithin(root, node) {
   return root instanceof Node
@@ -70,13 +68,16 @@ function isWithin(root, node) {
  * this bootstrap once instead of subscribing every component to HTMX directly.
  */
 export function installRuntime(root = document) {
+  const existing = installations.get(root);
+  if (existing) return existing;
+
   const instances = new Map(
-    ADAPTERS.map(([name]) => [name, new Set()]),
+    RUNTIME_ADAPTERS.map(([name]) => [name, new Set()]),
   );
   const abort = new AbortController();
 
   function mount(scope = root) {
-    for (const [name, adapter] of ADAPTERS) {
+    for (const [name, adapter] of RUNTIME_ADAPTERS) {
       for (const instance of adapter(scope) || []) {
         instances.get(name).add(instance);
       }
@@ -87,7 +88,7 @@ export function installRuntime(root = document) {
   function destroyWithin(scope) {
     for (const values of instances.values()) {
       for (const instance of [...values]) {
-        const node = nodeFor(instance);
+        const node = instance?.element;
         if (!isWithin(scope, node)) continue;
         instance?.destroy?.();
         values.delete(instance);
@@ -103,9 +104,11 @@ export function installRuntime(root = document) {
   function destroy() {
     destroyWithin(root);
     abort.abort();
+    installations.delete(root);
   }
 
   const api = { mount, destroyWithin, first, destroy };
+  installations.set(root, api);
   mount(root);
 
   document.addEventListener("htmx:afterSwap", (event) => {

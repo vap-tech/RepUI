@@ -29,6 +29,7 @@ _BOOTSTRAP = r"""
     : mode;
 
   const root = document.documentElement;
+  root.dataset.ruiAvailableThemes = JSON.stringify([...themes]);
   root.dataset.ruiThemeMode = mode;
   root.dataset.ruiColorScheme = scheme;
   root.dataset.ruiTheme = theme;

@@ -7,6 +7,7 @@
 * **Observer** — DOM-события `change`, `activate` и HTMX lifecycle. Отдельный Event Bus не нужен, пока DOM-событий достаточно.
 * **Strategy** — разные алгоритмы позиционирования, выбора, закрытия или typeahead только при наличии двух реальных вариантов.
 * **Factory** — bootstrap централизованно создаёт runtime по manifest; не строить иерархию фабрик без необходимости.
+* **Runtime Registry** — `RUNTIME_ADAPTERS` является единственной точкой глобального mount; примитивы располагаются раньше composite runtime.
 * **Facade** — простой публичный API поверх сложного interaction-слоя.
 * **State Machine** — Dialog, Select, Drawer, Autocomplete: применять при сложных переходах `open/closed/loading/error`, а не для простого boolean-state.
 * **Overlay Stack** — верхний открытый overlay единолично обрабатывает Escape; нижние слои не конкурируют глобальными listener’ами.

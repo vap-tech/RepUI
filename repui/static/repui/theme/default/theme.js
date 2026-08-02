@@ -1,9 +1,21 @@
 const STORAGE_KEY = "rui-theme-mode";
 const THEME_STORAGE_KEY = "rui-theme";
 const MODES = new Set(["light", "dark", "system"]);
-const THEMES = new Set(["default", "mineral", "ocean-deep"]);
 const root = document.documentElement;
 const media = window.matchMedia("(prefers-color-scheme: dark)");
+
+function configuredThemes() {
+  try {
+    const themes = JSON.parse(root.dataset.ruiAvailableThemes || "[]");
+    if (Array.isArray(themes) && themes.every((theme) => typeof theme === "string")) {
+      return new Set(["default", ...themes]);
+    }
+  } catch (_) {}
+
+  return new Set(["default"]);
+}
+
+const THEMES = configuredThemes();
 
 function normalize(mode) {
   return MODES.has(mode) ? mode : "system";

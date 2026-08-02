@@ -11,6 +11,7 @@ function collect(root) {
 
 class TreeRuntime {
   constructor(root) {
+    this.element = root;
     this.root = root;
     this.abort = new AbortController();
     this.bind();

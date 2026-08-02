@@ -63,6 +63,7 @@ function mountTabsRoot(root) {
   }, { signal: abort.signal });
 
   const api = {
+    element: root,
     root,
     select,
     refresh() {

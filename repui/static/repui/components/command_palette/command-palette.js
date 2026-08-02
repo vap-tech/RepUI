@@ -6,6 +6,7 @@ const normalize = (value) => value.toLocaleLowerCase("ru-RU").replace(/ё/g, "е
 
 class CommandPaletteRuntime {
   constructor(root) {
+    this.element = root;
     this.root = root;
     this.input = root.querySelector("[data-rui-command-input]");
     this.list = root.querySelector("[data-rui-command-list]");

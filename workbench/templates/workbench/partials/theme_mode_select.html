@@ -1,7 +1,7 @@
 {% load repui %}
 
 <div class="docs-theme-control">
-    {% icon_button href="https://github.com/vap-tech/rui-core" aria_label="RepUI на GitHub" class_name="docs-github-link" %}
+    {% icon_button href="https://github.com/vap-tech/RepUI" aria_label="RepUI на GitHub" class_name="docs-github-link" %}
         {% icon "github" %}
     {% endicon_button %}
 
@@ -11,8 +11,8 @@
     {% endicon_button %}
 
     {% select name="docs_appbar_palette" width="content" rui_palette_select=True aria_label="Палитра темы" %}
-        {% select_option value="default" selected=True %}RepUI Core{% endselect_option %}
-        {% select_option value="mineral" %}Mineral Laboratory{% endselect_option %}
-        {% select_option value="ocean-deep" %}Ocean Deep{% endselect_option %}
+        {% for theme in theme_choices %}
+            {% select_option value=theme.name selected=theme.is_default %}{{ theme.title }}{% endselect_option %}
+        {% endfor %}
     {% endselect %}
 </div>

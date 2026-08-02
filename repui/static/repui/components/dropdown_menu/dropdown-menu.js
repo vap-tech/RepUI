@@ -14,6 +14,7 @@ function collect(root) {
 
 class DropdownMenuRuntime {
   constructor(trigger) {
+    this.element = trigger;
     this.trigger = trigger;
     this.menu = document.getElementById(trigger.dataset.ruiMenuTrigger);
     if (!this.menu) throw new Error("DropdownMenu trigger target not found");
