@@ -40,6 +40,8 @@ jobs:
           npx playwright install --with-deps chromium
 
       - name: Browser interaction tests
+        env:
+          RUI_PYTHON: python
         run: npm run test:browser
 
       - name: JavaScript syntax
